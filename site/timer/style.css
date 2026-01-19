@@ -372,4 +372,11 @@ body {
         max-width: min(360px, 94vw);
         border-radius: 18px;
     }
+    .secondary-timer-note {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    margin-top: 8px;
+    font-style: italic;
+    text-align: center;
+    }
 } 
