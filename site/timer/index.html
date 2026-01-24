@@ -25,11 +25,10 @@
         </div>
 
         <div class="secondary-timer">
-            <div class="secondary-timer-label">До 12 января 2026 года осталось:</div>
+            <div class="secondary-timer-label">До 14 февраля 2026 года осталось:</div>
             <div id="secondary-timer" class="timer-display secondary">Загрузка...</div>
-            <div class="secondary-timer-note" style="color: #888; margin-top: 5px; font-size: 0.9em;">Я говорил примерно</div>
+            <div class="secondary-timer-note" style="color: #888; margin-top: 5px; font-size: 0.9em;">Я говорил примерно - PolimerS</div>
         </div>
-    </div>
 
     <button id="back-btn" class="back-btn" title="Вернуться на главную" onclick="window.location.href='/'">⬅</button>
     
@@ -45,7 +44,8 @@
     <script src="info_script.js?v=3"></script>
     <script>
         let startDate = null;
-        const secondaryEndDate = new Date('2026-01-12T13:00:00');
+        const fallbackDate = new Date('2025-12-23T12:00:00Z');
+        const secondaryEndDate = new Date('2026-02-14T14:00:00Z');
         let secondaryInterval = null;
 
         async function fetchLastVideoDate() {
