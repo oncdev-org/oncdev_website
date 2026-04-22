@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Сводка канала PolimerS - OnCube</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="moving-gradient" id="gradient1"></div>
+    <div class="moving-gradient" id="gradient2"></div>
+    <div class="moving-gradient" id="gradient3"></div>
+
+    <aside class="edge-marquee edge-marquee-left" aria-hidden="true">
+        <div id="left-marquee-track" class="marquee-track"></div>
+    </aside>
+
+    <aside class="edge-marquee edge-marquee-right" aria-hidden="true">
+        <div id="right-marquee-track" class="marquee-track"></div>
+    </aside>
+
+    <main class="content">
+        <section class="glass-card summary-card">
+            <div class="channel-header">
+                <img id="channel-avatar" class="channel-avatar" alt="Аватар канала" src="../resources/plat-photo.png">
+                <h1 id="channel-title" class="channel-title">Загрузка канала...</h1>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span class="stat-label">Подписчиков</span>
+                    <span id="subs-count" class="stat-value">...</span>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-label">Просмотров на канале</span>
+                    <span id="views-count" class="stat-value">...</span>
+                </article>
+            </div>
+
+            <article class="latest-video-card">
+                <h2>Последнее видео</h2>
+                <a id="latest-video-link" class="latest-video-link" href="https://www.youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">
+                    <img id="latest-video-thumb" class="latest-video-thumb" alt="Превью последнего видео" src="../resources/plat-photo.png">
+                    <div class="latest-video-info">
+                        <h3 id="latest-video-title">Загрузка...</h3>
+                        <p id="latest-video-date">Дата публикации загружается...</p>
+                    </div>
+                </a>
+            </article>
+        </section>
+    </main>
+
+    <button id="back-btn" class="back-btn" title="Вернуться на главную" onclick="window.location.href='/'">⬅</button>
+
+    <footer class="footer-note">
+        <div style="color:#888;">
+            Все права на представленный контент принадлежат <a href="https://github.com/oncube-dev" target="_blank" style="text-decoration:underline; color:#f59e0b">OnCube</a> ⋅ Сайт сделали <a href="https://youtube.com/@PolimerS" target="_blank" style="color:#f59e0b">PoliSours</a> & <a href="https://vobi.bio.link" target="_blank" style="color:#f59e0b">Vobi</a> с любовью 🧡
+        </div>
+        <div style="font-size:0.85em; color:#888; margin-top:13px; font-style: italic;">
+            [2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="info_script.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
