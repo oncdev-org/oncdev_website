@@ -188,20 +188,20 @@ h1 {
 .preview-card {
     position: relative;
     z-index: 1;
-    display: grid;
-    grid-template-columns: 132px 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 14px;
-    align-items: center;
     padding: 12px;
     background: var(--surface-strong);
 }
 
 .preview-card img {
-    width: 132px;
-    height: 86px;
-    object-fit: cover;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
     border-radius: 6px;
     border: 1px solid var(--line);
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .preview-card span {
