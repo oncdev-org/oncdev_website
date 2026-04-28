@@ -2,67 +2,93 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О создателях - OnCube</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="../resources/shared.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="moving-gradient" id="gradient1"></div>
-    <div class="moving-gradient" id="gradient2"></div>
-    <div class="moving-gradient" id="gradient3"></div>
-    
-    <div class="content">
-        <div class="glass-row">
-            <div class="glass-card header">
-                <h1>О создателях</h1>
-                <p>Объединение OnCube было основано двумя талантливыми разработчиками, которые приложили свои усилия для создания инновационных проектов</p>
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand-link" href="/" aria-label="OnCube">
+                <span class="brand-mark">OC</span>
+                <span>OnCube</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Основная навигация">
+                <a href="/timer">Таймер</a>
+                <a href="/">Главная</a>
+                <a href="/about" class="active" aria-current="page">О нас</a>
+            </nav>
+
+            <div class="social-links" aria-label="Социальные ссылки">
+                <a href="https://t.me/polisour/68" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                    <img src="../resources/tg.png" alt="">
+                </a>
+                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" aria-label="Boosty">
+                    <img src="../resources/boosty.png" alt="">
+                </a>
             </div>
-            
-            <div class="creators-container">
-                <div class="glass-card creator-card">
-                    <div class="creator-avatar">
-                        <img src="vobi-photo.jpg" alt="Vobi" class="avatar-image">
-                    </div>
-                    <h2>Vobi</h2>
-                    <p class="aka">AKA sup, sunny / meforr</p>
-                    <div class="creator-info">
-                        <p>Основатель объединения OnCube.<br>Специализируется на веб-разработке и прикладном ПО. Хорошо видит, что в интерфейсе выглядит некрасиво, и умеет это исправить. Больше IT-специалист, чем креативный человек.</p>
-                        <div class="creator-links">
-                            <a href="https://vobi.bio.link" target="_blank" class="creator-link">Больше информации</a>
+        </header>
+
+        <main>
+            <section class="section creators-hero">
+                <div class="section-heading">
+                    <p class="eyebrow">Команда</p>
+                    <h1>О создателях</h1>
+                </div>
+                <p class="section-subtitle">
+                    Объединение OnCube было основано двумя разработчиками, объединившими свои усилия для создания экспериментальных проектов и инструментов.
+                </p>
+            </section>
+
+            <section class="section creators-grid">
+                <article class="creator-card">
+                    <div class="creator-header">
+                        <div class="creator-avatar">
+                            <img src="vobi-photo.jpg" alt="Vobi">
+                        </div>
+                        <div class="creator-title">
+                            <h2>Vobi</h2>
+                            <p class="aka">AKA sup, sunny / meforr</p>
                         </div>
                     </div>
-                </div>
-                
-                <div class="glass-card creator-card">
-                    <div class="creator-avatar">
-                        <img src="polimer-photo.jpg" alt="Polimer" class="avatar-image">
+                    <div class="creator-body">
+                        <p>Основатель объединения OnCube. Специализируется на веб-разработке и прикладном ПО. Хорошо видит, что в интерфейсе выглядит некрасиво, и умеет это исправить. Больше IT-специалист, чем креативный человек.</p>
+                        <a href="https://vobi.bio.link" target="_blank" class="button secondary">Больше информации</a>
                     </div>
-                    <h2>Polimer</h2>
-                    <p class="aka">AKA PolimerS / PoliSours</p>
-                    <div class="creator-info">
-                        <p>Основатель объединения OnCube.<br>Контент-мейкер и главным образом backand разработчик. Специализирутся на ИИ, данных и прикладной математике. Приносит уникальный взгляд на техническую состовляющую проетов объединения.</p>
-                        <div class="creator-links">
-                            <a href="https://t.me/polisour/68" target="_blank" class="creator-link">Больше информации</a>
+                </article>
+
+                <article class="creator-card">
+                    <div class="creator-header">
+                        <div class="creator-avatar">
+                            <img src="polimer-photo.jpg" alt="Polimer">
+                        </div>
+                        <div class="creator-title">
+                            <h2>Polimer</h2>
+                            <p class="aka">AKA PolimerS / PoliSours</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <div class="creator-body">
+                        <p>Основатель объединения OnCube. Контент-мейкер и главным образом backend разработчик. Специализируется на ИИ, данных и прикладной математике. Приносит уникальный взгляд на техническую составляющую проектов объединения.</p>
+                        <a href="https://t.me/polisour/68" target="_blank" class="button secondary">Больше информации</a>
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>
+                Права на представленный контент принадлежат
+                <a href="https://github.com/oncube-dev" target="_blank" rel="noopener noreferrer">OnCube</a>.
+                Сайт сделали
+                <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
+                и
+                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
+                с любовью.
+            </p>
+            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All rights reserved.</p>
+        </footer>
     </div>
-
-    <button id="back-btn" class="back-btn" title="Вернуться на главную" onclick="window.location.href='/'">⬅</button>
-
-    <footer class="footer-note">
-        <div style="color:#888;">
-            Все права на представленный контент принадлежат <a href="https://github.com/oncube-dev" target="_blank" style="text-decoration:underline; color:#f59e0b">OnСube</a> ⋅ Сайт сделали <a href="https://youtube.com/@PolimerS" target="_blank" style="color:#f59e0b">PoliSours</a> & <a href="https://vobi.bio.link" target="_blank" style="color:#f59e0b">Vobi</a> с любовью 🧡
-        </div>
-        <div style="font-size:0.85em; color:#888; margin-top:13px; font-style: italic;">
-            [2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All rights reserved.
-        </div>
-    </footer>
-    
-    <script src="script.js"></script>
-</body>
-</html>
 </body>
 </html>

@@ -2,64 +2,92 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сводка канала PolimerS - OnCube</title>
+    <link rel="stylesheet" href="../resources/shared.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="moving-gradient" id="gradient1"></div>
-    <div class="moving-gradient" id="gradient2"></div>
-    <div class="moving-gradient" id="gradient3"></div>
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand-link" href="/" aria-label="OnCube">
+                <span class="brand-mark">OC</span>
+                <span>OnCube</span>
+            </a>
 
-    <aside class="edge-marquee edge-marquee-left" aria-hidden="true">
-        <div id="left-marquee-track" class="marquee-track"></div>
-    </aside>
+            <nav class="main-nav" aria-label="Основная навигация">
+                <a href="/timer">Таймер</a>
+                <a href="/">Главная</a>
+                <a href="/about">О нас</a>
+            </nav>
 
-    <aside class="edge-marquee edge-marquee-right" aria-hidden="true">
-        <div id="right-marquee-track" class="marquee-track"></div>
-    </aside>
-
-    <main class="content">
-        <section class="glass-card summary-card">
-            <div class="channel-header">
-                <img id="channel-avatar" class="channel-avatar" alt="Аватар канала" src="../resources/plat-photo.png">
-                <h1 id="channel-title" class="channel-title">Загрузка канала...</h1>
-            </div>
-
-            <div class="stats-grid">
-                <article class="stat-card">
-                    <span class="stat-label">Подписчиков</span>
-                    <span id="subs-count" class="stat-value">...</span>
-                </article>
-                <article class="stat-card">
-                    <span class="stat-label">Просмотров на канале</span>
-                    <span id="views-count" class="stat-value">...</span>
-                </article>
-            </div>
-
-            <article class="latest-video-card">
-                <h2>Последнее видео</h2>
-                <a id="latest-video-link" class="latest-video-link" href="https://www.youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">
-                    <img id="latest-video-thumb" class="latest-video-thumb" alt="Превью последнего видео" src="../resources/plat-photo.png">
-                    <div class="latest-video-info">
-                        <h3 id="latest-video-title">Загрузка...</h3>
-                        <p id="latest-video-date">Дата публикации загружается...</p>
-                    </div>
+            <div class="social-links" aria-label="Social links">
+                <a href="https://t.me/polisour/68" target="_blank" rel="noopener noreferrer">
+                    <img src="../resources/tg.png" alt="Telegram">
                 </a>
-            </article>
-        </section>
-    </main>
+                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer">
+                    <img src="../resources/boosty.png" alt="Boosty">
+                </a>
+            </div>
+        </header>
 
-    <button id="back-btn" class="back-btn" title="Вернуться на главную" onclick="window.location.href='/'">⬅</button>
+        <main>
+            <section class="section summary-hero">
+                <div class="channel-header">
+                    <img id="channel-avatar" class="channel-avatar" alt="Avatar" src="../resources/plat-photo.png">
+                    <div class="channel-info">
+                        <p class="eyebrow">YouTube Канал</p>
+                        <h1 id="channel-title">PolimerS</h1>
+                    </div>
+                </div>
+            </section>
 
-    <footer class="footer-note">
-        <div style="color:#888;">
-            Все права на представленный контент принадлежат <a href="https://github.com/oncube-dev" target="_blank" style="text-decoration:underline; color:#f59e0b">OnCube</a> ⋅ Сайт сделали Александр С., Владимир Р. и Богдан С.
-        </div>
-        <div style="font-size:0.85em; color:#888; margin-top:13px; font-style: italic;">
-            [2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All rights reserved.
-        </div>
-    </footer>
+            <section class="section summary-content">
+                <div class="summary-grid">
+                    <div class="stats-overview">
+                        <article class="stat-box featured">
+                            <span class="stat-label">Подписчиков</span>
+                            <strong id="subs-count">...</strong>
+                        </article>
+                        <article class="stat-box">
+                            <span class="stat-label">Всего просмотров</span>
+                            <strong id="views-count">...</strong>
+                        </article>
+                    </div>
+
+                    <article class="latest-video-panel">
+                        <div class="panel-header">
+                            <p class="eyebrow">Свежее видео</p>
+                            <h2>Последняя публикация</h2>
+                        </div>
+                        <a id="latest-video-link" class="video-card" href="#" target="_blank">
+                            <div class="video-thumb-wrapper">
+                                <img id="latest-video-thumb" src="../resources/plat-photo.png" alt="Thumbnail">
+                                <span class="video-play-btn">▶</span>
+                            </div>
+                            <div class="video-info">
+                                <h3 id="latest-video-title">Загрузка...</h3>
+                                <p id="latest-video-date">Дата загружается...</p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>
+                Права на представленный контент принадлежат
+                <a href="https://github.com/oncube-dev" target="_blank" rel="noopener noreferrer">OnCube</a>.
+                Сайт сделали
+                <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
+                и
+                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
+                с любовью.
+            </p>
+            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All rights reserved.</p>
+        </footer>
+    </div>
 
     <script src="info_script.js"></script>
     <script src="script.js"></script>
