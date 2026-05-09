@@ -1,4 +1,4 @@
-Business Source License 1.1 — Modified Edition (View and Local Test Only)
+Business Source License 1.1 — Modified Edition
 
 Parameters
 Licensor: VobiCode & oncdev
@@ -13,6 +13,8 @@ The Licensed Work is subject to the Business Source License 1.1 (“BSL”), wit
 1. You are granted a limited, non-exclusive, non-transferable, revocable license to:
    - View the source code in this repository.
    - Run the code locally for personal review and testing purposes only.
+   - Use all ideas, algorithms, and code snippets strictly for educational use. Any reproduction or display of these materials must include a clear reference to actual name of owner company.
+
 
 2. You may NOT, under any circumstances:
    - Use the code or any portion thereof in any project, whether commercial or non-commercial.
@@ -23,13 +25,12 @@ The Licensed Work is subject to the Business Source License 1.1 (“BSL”), wit
 
 3. Borderline cases (also prohibited):
    - Implementing similar functions or algorithms based directly on this code.
-   - Using the code or its concepts in hackathons, research, competitions, educational projects, or startups — even without profit.
+   - Using the code, its concepts, author's names in hackathons, competitions(except educational without profit), or startups — even without profit.
 
 4. After the Change Date:
-   On or after 2115-08-11, this code will be made available under the Apache License, Version 2.0 (full text attached below).
+   On or after 2115-08-11, this code will be made available under the Apache License, Version 2.0.
 
 Disclaimer:
 This code is provided “AS IS” without warranty of any kind. The Licensor is not liable for any damages resulting from use or inability to use this code.
 
 ---
-
