@@ -2,182 +2,166 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Главная - OnCube</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная - oncdev</title>
+    <link rel="stylesheet" href="../resources/shared.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            background-color: #000 !important;
-            color: white !important;
-        }
-        
-        body::before {
-            background: rgba(0,0,0,0.3) !important;
-        }
-        
-        .moving-gradient {
-            position: absolute;
-            width: 1000px;
-            height: 1000px;
-            background: radial-gradient(circle, rgba(95, 46, 209, 0.7), transparent 70%);
-            mix-blend-mode: screen;
-            filter: blur(120px);
-            border-radius: 50%;
-            animation: randomMove 20s infinite ease-in-out;
-            z-index: 0;
-            left: 50%;
-            top: 80%;
-            transform: translate(-50%, -50%);
-        }
-        
-        .hero-section {
-            position: relative;
-            overflow: visible;
-            padding: 4rem 0;
-            margin: 2rem 0;
-        }
-        
-        .hero-title, .hero-subtitle {
-            position: relative;
-            z-index: 2;
-        }
-        
-        @keyframes randomMove {
-            0%   { transform: translate(-50%, -50%) translate(0px, 0px) scale(1); }
-            8%   { transform: translate(-50%, -50%) translate(30px, -20px) scale(1.05); }
-            16%  { transform: translate(-50%, -50%) translate(-25px, 40px) scale(0.95); }
-            24%  { transform: translate(-50%, -50%) translate(50px, 15px) scale(1.1); }
-            32%  { transform: translate(-50%, -50%) translate(-15px, -50px) scale(0.9); }
-            40%  { transform: translate(-50%, -50%) translate(40px, 25px) scale(1.05); }
-            48%  { transform: translate(-50%, -50%) translate(-35px, -35px) scale(0.95); }
-            56%  { transform: translate(-50%, -50%) translate(20px, 45px) scale(1.1); }
-            64%  { transform: translate(-50%, -50%) translate(-40px, 20px) scale(0.9); }
-            72%  { transform: translate(-50%, -50%) translate(35px, -40px) scale(1.05); }
-            80%  { transform: translate(-50%, -50%) translate(-20px, 35px) scale(0.95); }
-            88%  { transform: translate(-50%, -50%) translate(45px, -25px) scale(1.1); }
-            96%  { transform: translate(-50%, -50%) translate(-30px, -30px) scale(0.95); }
-            100% { transform: translate(-50%, -50%) translate(0px, 0px) scale(1); }
-        }
-        
-        .container {
-            z-index: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .hero-section {
-                padding: 3rem 0;
-                margin: 1.5rem 0;
-            }
-            
-            .moving-gradient {
-                width: 800px;
-                height: 800px;
-                filter: blur(100px);
-                background: radial-gradient(circle, rgba(95, 46, 209, 0.9), transparent 70%);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero-section {
-                padding: 2rem 0;
-                margin: 1rem 0;
-            }
-            
-            .moving-gradient {
-                width: 600px;
-                height: 600px;
-                filter: blur(80px);
-                background: radial-gradient(circle, rgba(95, 46, 209, 0.9), transparent 70%);
-            }
-        }
-        
-        @media (max-width: 360px) {
-            .hero-section {
-                padding: 1.5rem 0;
-                margin: 0.8rem 0;
-            }
-
-            .moving-gradient {
-                width: 500px;
-                height: 500px;
-                filter: blur(60px);
-            }
-        }
-        
-    </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="header-content">
-                <nav class="nav">
-                    <a href="https://oncdev.ru/timer" class="nav-link">Таймер</a>
-                    <a href="https://oncdev.ru/" class="nav-link active">Главная</a>
-                    <a href="https://oncdev.ru/about" class="nav-link">О нас</a>
-                </nav>
-                <div class="social-links">
-                    <a href="https://t.me/polisour/68" target="_blank" class="social-link">
-                        <img src="resources/tg.png" alt="Telegram" class="social-icon">
-                    </a>
-                    <a href="https://boosty.to/polimers" target="_blank" class="social-link">
-                        <img src="resources/boosty.png" alt="Boosty" class="social-icon">
-                    </a>
-                </div>
+    <div class="bg-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob-interactive" id="interactive-blob"></div>
+    </div>
+
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand-link" href="/" aria-label="oncdev - главная страница">
+                <span class="brand-mark">OC</span>
+                <span>oncdev</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Основная навигация">
+                <a href="/timer">Таймер</a>
+                <a href="/" class="active" aria-current="page">Главная</a>
+                <a href="/about">О нас</a>
+            </nav>
+
+            <div class="social-links" aria-label="Социальные ссылки">
+                <a href="https://t.me/OnCube_DEV/30" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                    <img src="../resources/tg.png" alt="">
+                </a>
+                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" aria-label="Boosty">
+                    <img src="../resources/boosty.png" alt="">
+                </a>
             </div>
         </header>
 
-        <main class="main-content">
-            <div class="hero-section">
-                <div class="moving-gradient"></div>
-                <h1 class="hero-title">OnCube</h1>
-                <p class="hero-subtitle">Команда разработчиков с уникальными идеями и проектами</p>
-            </div>
-            
-            <h2 class="features-title">Наши возможности</h2>
-            <div class="features-row">
-                <div class="feature-card glass-card">
-                    <h4>⏰ Таймер видео</h4>
-                    <p>Отслеживайте время с момента выхода последнего видео PolimerS</p>
+        <main>
+            <section class="hero-section" aria-labelledby="hero-title">
+                <div class="hero-copy">
+                    <p class="eyebrow">Команда разработчиков и экспериментальных проектов</p>
+                    <h1 id="hero-title">oncdev</h1>
+                    <p class="hero-subtitle">
+                        Делаем небольшие, но живые веб-проекты: от таймеров и визуализаций до инструментов для сообщества PolimerS.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button primary" href="/timer">Открыть таймер</a>
+                        <a class="button secondary" href="/about">Познакомиться с командой</a>
+                    </div>
                 </div>
-                <div class="feature-card glass-card">
-                    <h4>🔨Мультизадачность</h4>
-                    <p>Мы создаём проекты различного характера и сложности в одной экосистеме</p>
-                </div>
-                <div class="feature-card glass-card">
-                    <h4>✨ Качество</h4>
-                    <p>Мы ставим на первое место качество и точность, чтобы наши проекты были на высшем уровне!</p>
-                </div>
-            </div>
 
-            <div class="glass-card news">
-                <h2>Последние новости</h2>
-                <div class="news-divider"></div>
-                <div class="news-grid">
-                    <article class="news-card">
-                        <h4>Обновление таймера</h4>
-                        <p>Из-за новых слов PolimerS, мы обновили таймер видео и добавили вторичный таймер по дате выхода видео.</span></p>
-                        <span class="news-date">07-01-2026</span>
+                <div class="hero-panel" aria-label="Кратко о проектах oncdev">
+                    <div class="status-card">
+                        <span class="status-dot"></span>
+                        <span>Экспериментальная главная</span>
+                    </div>
+                    <div class="hero-metrics">
+                        <article>
+                            <strong>4</strong>
+                            <span>активных раздела</span>
+                        </article>
+                        <article>
+                            <strong>2026</strong>
+                            <span>актуальные обновления</span>
+                        </article>
+                    </div>
+                    <div class="preview-card">
+                        <div>
+                            <span>Свежий контент</span>
+                            <p>Таймеры и сводки помогают следить за активностью канала без лишней суеты.</p>
+                        </div>
+                        <img src="../resources/plat-photo.png" alt="Сообщение о выходе видео PolimerS">
+                    </div>
+                </div>
+            </section>
+
+            <section class="section projects-section" aria-labelledby="projects-title">
+                <div class="section-heading">
+                    <p class="eyebrow">Проекты</p>
+                    <h2 id="projects-title">Что уже можно открыть</h2>
+                </div>
+
+                <div class="projects-grid">
+                    <a class="project-card featured" href="/timer">
+                        <span class="project-kicker">Видео PolimerS</span>
+                        <h3>Таймер</h3>
+                        <p>Показывает, сколько времени прошло с момента последнего видео, и хранит маленькую историю ожидания.</p>
+                    </a>
+
+                    <a class="project-card" href="/about">
+                        <span class="project-kicker">Команда</span>
+                        <h3>О нас</h3>
+                        <p>Кто стоит за oncdev, чем занимается каждый участник и куда ведут личные ссылки.</p>
+                    </a>
+
+                    <a class="project-card" href="/city">
+                        <span class="project-kicker">Визуализация</span>
+                        <h3>Город подписчиков</h3>
+                        <p>Интерактивная сцена, где рост сообщества превращается в городскую статистику.</p>
+                    </a>
+
+                    <a class="project-card" href="/channel-summary">
+                        <span class="project-kicker">Данные канала</span>
+                        <h3>Сводка канала</h3>
+                        <p>Компактная витрина с основными показателями и последним видео PolimerS.</p>
+                    </a>
+                </div>
+            </section>
+
+            <section class="section news-section" aria-labelledby="news-title">
+                <div class="section-heading">
+                    <p class="eyebrow">Журнал</p>
+                    <h2 id="news-title">Последние новости</h2>
+                </div>
+
+                <div class="news-list">
+                    <article class="news-item">
+                        <time datetime="2026-04-29">04-05-2026</time>
+                        <div>
+                            <h3>Новое видео!</h3>
+                            <p>
+                                А вот и новое видео! Те самые <= ~5 дней прошли, и вот оно. <a href="https://youtu.be/uMNjDHgnnH0" target="_blank" rel="noopener noreferrer">Смотреть</a>
+                            </p>
+                        </div>
                     </article>
-                    <div class="news-divider"></div>
-                    <article class="news-card">
-                        <h4>Новое видео</h4>
-                        <p>Наконец-то он выпустил новое видео!<br>(но оно даже не по pepeland 10)<br><a href="https://www.youtube.com/watch?v=jlNAD7Kqnok" target="_blank" style="color: rgb(204, 0, 0); font-weight: bold;">Смотреть</a></p>
-                        <span class="news-date">23-12-2025</span>
+
+                    <article class="news-item">
+                        <time datetime="2026-01-07">02-05-2026</time>
+                        <div>
+                            <h3>Редизайн главной страницы</h3>
+                            <p>Мы полностью обновили дизайн главной страницы, сделав её более современной, приятной и информативной.</p>
+                        </div>
+                    </article>
+
+                    <article class="news-item">
+                        <time datetime="2025-12-23">07-01-2026</time>
+                        <div>
+                            <h3>Обновление таймера</h3>
+                            <p>
+                                После новых слов PolimerS мы обновили таймер видео и добавили вторичный отсчёт по ожидаемой дате выхода.
+                            </p>
+                        </div>
                     </article>
                 </div>
-            </div>
+            </section>
         </main>
 
-        
-        <footer class="footer-note">
-            Права на представленный контент принадлежат <a href="https://github.com/oncube-dev" target="_blank" style="text-decoration:underline;
-            color: white;">OnСube</a><br>
-            Сайт сделали <a href="https://youtube.com/@PolimerS" target="_blank" 
-            style="color: white;">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" 
-            style="text-decoration:underline; color: white;">Vobi</a> с любовью 💜
+        <footer class="site-footer">
+            <p>
+                Права на представленный контент принадлежат
+                <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>.
+                Сайт сделали
+                <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
+                и
+                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
+                с любовью.
+            </p>
+            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All rights reserved.</p>
         </footer>
-        <div id="auth-copyright">[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition.<br>All rights <a href="https://github.com/oncube-dev" target="_blank" style="text-decoration:underline; color: white;">reserved</a>.</div>
     </div>
+
 
     <script src="theme.js"></script>
 </body>

@@ -2,49 +2,84 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Полимер, когда видео? - OnCube</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таймер PolimerS - oncdev</title>
+    <link rel="stylesheet" href="../resources/shared.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="moving-gradient" id="gradient1"></div>
-    <div class="moving-gradient" id="gradient2"></div>
-    <div class="moving-gradient" id="gradient3"></div>
-    
-    <div class="content">
-        <div class="glass-row">
-            <div class="glass-card main">
-                <h2>С момента выхода последнего видео PolimerS прошло:</h2>
-                <div id="timer" class="timer-display">Загрузка...</div>
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand-link" href="/" aria-label="oncdev">
+                <span class="brand-mark">OC</span>
+                <span>oncdev</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Основная навигация">
+                <a href="/timer" class="active" aria-current="page">Таймер</a>
+                <a href="/">Главная</a>
+                <a href="/about">О нас</a>
+            </nav>
+
+            <div class="social-links" aria-label="Social links">
+                <a href="https://t.me/polisour/68" target="_blank" rel="noopener noreferrer">
+                    <img src="../resources/tg.png" alt="Telegram">
+                </a>
+                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer">
+                    <img src="../resources/boosty.png" alt="Boosty">
+                </a>
             </div>
-        </div>
+        </header>
 
-        <div class="platform-photo-wrapper">
-            <img src="../resources/plat-photo.png" alt="Полимер и платформа" class="platform-photo">
-            <div class="platform-photo-caption">фото от 7 января 2026 года</div>
-        </div>
+        <main>
+            <section class="section timer-hero">
+                <div class="section-heading">
+                    <p class="eyebrow">Видео PolimerS</p>
+                    <h1>Таймер ожидания</h1>
+                </div>
+                
+                <div class="timer-container main-timer">
+                    <p class="timer-label">С момента выхода последнего видео прошло:</p>
+                    <div id="timer" class="timer-display">Загрузка...</div>
+                </div>
+            </section>
 
-        <div class="secondary-timer">
-            <div class="secondary-timer-label">До 14 февраля 2026 года осталось:</div>
-            <div id="secondary-timer" class="timer-display secondary">Загрузка...</div>
-            <div class="secondary-timer-note" style="color: #888; margin-top: 5px; font-size: 0.9em;">Я говорил примерно - PolimerS</div>
-        </div>
+            <section class="section secondary-content">
+                <div class="timer-panel secondary-timer">
+                    <div class="panel-info">
+                        <p class="eyebrow">Ожидаемая дата</p>
+                        <h3>До 14 февраля 2026 осталось:</h3>
+                        <div id="secondary-timer" class="timer-display secondary">Загрузка...</div>
+                        <p class="panel-note">«Я говорил примерно» — PolimerS</p>
+                    </div>
+                    
+                    <div class="panel-visual">
+                        <div class="photo-card">
+                            <img src="../resources/plat-photo.png" alt="PolimerS Photo">
+                            <span class="photo-date">7 января 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-    <button id="back-btn" class="back-btn" title="Вернуться на главную" onclick="window.location.href='/'">⬅</button>
-    
-    <footer class="footer-note">
-        <div style="color:#888;">
-            Все права на представленный контент принадлежат <a href="https://github.com/oncube-dev" target="_blank" style="text-decoration:underline; color:#f59e0b">OnCube</a> ⋅ Сайт сделали <a href="https://youtube.com/@PolimerS" target="_blank" style="color:#f59e0b">PoliSours</a> & <a href="https://vobi.bio.link" target="_blank" style="color:#f59e0b">Vobi</a> с любовью 🧡
-        </div>
-        <div style="font-size:0.85em; color:#888; margin-top:13px; font-style: italic;">
-            [2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All rights reserved.
-        </div>
-    </footer>
+        <footer class="site-footer">
+            <p>
+                Права на представленный контент принадлежат
+                <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>.
+                Сайт сделали
+                <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
+                и
+                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
+                с любовью.
+            </p>
+            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All rights reserved.</p>
+        </footer>
+    </div>
 
-    <script src="info_script.js?v=3"></script>
+    <script src="info_script.js"></script>
     <script>
         let startDate = null;
-        const fallbackDate = new Date('2025-12-23T12:00:00Z');
         const secondaryEndDate = new Date('2026-02-14T14:00:00Z');
         let secondaryInterval = null;
 
@@ -52,51 +87,16 @@
             try {
                 const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`;
                 const response = await fetch(apiUrl);
-                
-                if (!response.ok) {
-                    if (response.status === 403) {
-                        throw new Error('API ключ недействителен или превышен лимит запросов');
-                    } else {
-                        throw new Error(`Ошибка запроса к YouTube API: ${response.status}`);
-                    }
-                }
-                
                 const data = await response.json();
-                
-                if (data.error) {
-                    throw new Error(`YouTube API ошибка: ${data.error.message}`);
-                }
                 
                 const video = data.items && data.items[0];
                 if (video && video.snippet && video.snippet.publishedAt) {
                     startDate = new Date(video.snippet.publishedAt);
                 } else {
-                    throw new Error('Не удалось получить дату видео');
+                    throw new Error('Fallback');
                 }
             } catch (e) {
-                console.error('Ошибка YouTube API:', e);
-                
-                
-                const fallbackDate = new Date('2025-12-23T12:00:00Z');
-                startDate = fallbackDate;
-                
-                console.log('Используется резервная дата:', fallbackDate.toISOString());
-                document.getElementById('timer').textContent = 'Используется резервная дата';
-                
-                
-                setTimeout(() => {
-                    document.getElementById('timer').textContent = 'Таймер работает в режиме резервной даты';
-                }, 2000);
-                
-                
-                console.log('Детали ошибки API:', {
-                    message: e.message,
-                    status: e.message.includes('403') ? '403 Forbidden' : 'Unknown',
-                    suggestion: 'Проверьте API ключ в Google Cloud Console',
-                    apiKey: API_KEY.substring(0, 10) + '...',
-                    channelId: CHANNEL_ID,
-                    timestamp: new Date().toISOString()
-                });
+                startDate = new Date('2025-12-23T12:00:00Z');
             }
         }
 
@@ -109,43 +109,7 @@
             return five;
         }
 
-        function updateTimer() {
-            if (!startDate) return;
-            const now = new Date();
-            let diff = now - startDate;
-            if (diff < 0) diff = 0;
-            let seconds = Math.floor(diff / 1000);
-            const days = Math.floor(seconds / (24 * 3600));
-            seconds %= 24 * 3600;
-            const hours = Math.floor(seconds / 3600);
-            seconds %= 3600;
-            const minutes = Math.floor(seconds / 60);
-            seconds %= 60;
-            const daysText = plural(days, 'день', 'дня', 'дней');
-            const hoursText = plural(hours, 'час', 'часа', 'часов');
-            const minutesText = plural(minutes, 'минута', 'минуты', 'минут');
-            const secondsText = plural(seconds, 'секунда', 'секунды', 'секунд');
-            document.getElementById('timer').textContent = `${days} ${daysText} ${hours} ${hoursText} ${minutes} ${minutesText} ${seconds} ${secondsText}`;
-        }
-
-        function updateSecondaryTimer() {
-            const el = document.getElementById('secondary-timer');
-            if (!el) return;
-
-            const now = new Date();
-            let diff = secondaryEndDate - now;
-
-            if (diff <= 0) {
-                clearInterval(secondaryInterval);
-                const zero = '0';
-                const daysText = plural(0, 'день', 'дня', 'дней');
-                const hoursText = plural(0, 'час', 'часа', 'часов');
-                const minutesText = plural(0, 'минута', 'минуты', 'минут');
-                const secondsText = plural(0, 'секунда', 'секунды', 'секунд');
-                el.textContent = `${zero} ${daysText} ${zero} ${hoursText} ${zero} ${minutesText} ${zero} ${secondsText}`;
-                return;
-            }
-
+        function formatTime(diff) {
             let seconds = Math.floor(diff / 1000);
             const days = Math.floor(seconds / (24 * 3600));
             seconds %= 24 * 3600;
@@ -154,112 +118,39 @@
             const minutes = Math.floor(seconds / 60);
             seconds %= 60;
 
-            const daysText = plural(days, 'день', 'дня', 'дней');
-            const hoursText = plural(hours, 'час', 'часа', 'часов');
-            const minutesText = plural(minutes, 'минута', 'минуты', 'минут');
-            const secondsText = plural(seconds, 'секунда', 'секунды', 'секунд');
+            const d = plural(days, 'день', 'дня', 'дней');
+            const h = plural(hours, 'час', 'часа', 'часов');
+            const m = plural(minutes, 'минута', 'минуты', 'минут');
+            const s = plural(seconds, 'секунда', 'секунды', 'секунд');
 
-            el.textContent = `${days} ${daysText} ${hours} ${hoursText} ${minutes} ${minutesText} ${seconds} ${secondsText}`;
+            return `<span>${days}</span> ${d} <span>${hours}</span> ${h} <span>${minutes}</span> ${m} <span>${seconds}</span> ${s}`;
         }
 
-        async function initTimer() {
-            document.getElementById('timer').textContent = 'Загрузка даты видео...';
-            await fetchLastVideoDate();
+        function updateTimers() {
+            const now = new Date();
+            
+            // Main timer
             if (startDate) {
-                updateTimer();
-                setInterval(updateTimer, 1000);
+                const diff = Math.max(0, now - startDate);
+                document.getElementById('timer').innerHTML = formatTime(diff);
             }
 
-            const secondaryEl = document.getElementById('secondary-timer');
-            if (secondaryEl) {
-                secondaryEl.textContent = 'Загрузка таймера...';
-                updateSecondaryTimer();
-                secondaryInterval = setInterval(updateSecondaryTimer, 1000);
+            // Secondary timer
+            const secDiff = secondaryEndDate - now;
+            if (secDiff <= 0) {
+                document.getElementById('secondary-timer').innerHTML = "Время вышло!";
+            } else {
+                document.getElementById('secondary-timer').innerHTML = formatTime(secDiff);
             }
         }
-        initTimer();
 
-        
-        function createDynamicGradients() {
-            const gradients = [
-                document.getElementById('gradient1'),
-                document.getElementById('gradient2'),
-                document.getElementById('gradient3')
-            ];
-
-            const isMobile = window.innerWidth <= 768;
-            
-            if (isMobile) {
-                gradients[1].style.display = 'none';
-                gradients[2].style.display = 'none';
-            }
-
-            let time = 0;
-            let lastTime = 0;
-            const frameRate = isMobile ? 30 : 60;
-            const frameInterval = 1000 / frameRate;
-
-            function interpolateColor(color1, color2, factor) {
-                return {
-                    r: Math.round(color1.r + (color2.r - color1.r) * factor),
-                    g: Math.round(color1.g + (color2.g - color1.g) * factor),
-                    b: Math.round(color1.b + (color2.b - color1.b) * factor)
-                };
-            }
-
-            function updateGradients(currentTime) {
-                if (isMobile && currentTime - lastTime < frameInterval) {
-                    requestAnimationFrame(updateGradients);
-                    return;
-                }
-                lastTime = currentTime;
-
-                time += isMobile ? 0.002 : 0.005;
-                
-                gradients.forEach((gradient, index) => {
-                    if (isMobile && index > 0) return;
-                    
-                    const phase = time + index * Math.PI / 3;
-                    
-                    const orange = { r: 255, g: 165, b: 0 };
-                    const purple = { r: 147, g: 51, b: 234 };
-                    
-                    const transition = (Math.sin(phase * 0.5) + 1) / 2;
-                    const currentColor = interpolateColor(orange, purple, transition);
-                    const oppositeColor = interpolateColor(purple, orange, transition);
-                    
-                    const opacity1 = isMobile ? 0.6 : 0.7;
-                    const opacity2 = isMobile ? 0.4 : 0.5;
-                    const opacity3 = isMobile ? 0.5 : 0.6;
-                    
-                    const angle = (phase * (isMobile ? 5 : 10)) % 360;
-                    
-                    const pos1 = 35 + (isMobile ? 3 : 5) * Math.sin(phase * (isMobile ? 0.2 : 0.3));
-                    const pos2 = 65 + (isMobile ? 3 : 5) * Math.cos(phase * (isMobile ? 0.2 : 0.3));
-                    
-                    gradient.style.background = `
-                        radial-gradient(circle at ${pos1}% ${pos2}%, 
-                            rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, ${opacity1}) 0%, 
-                            rgba(${oppositeColor.r}, ${oppositeColor.g}, ${oppositeColor.b}, ${opacity2 * 0.2}) 50%, 
-                            transparent 70%),
-                        radial-gradient(circle at ${pos2}% ${pos1}%, 
-                            rgba(${oppositeColor.r}, ${oppositeColor.g}, ${oppositeColor.b}, ${opacity2}) 0%, 
-                            rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, ${opacity1 * 0.2}) 50%, 
-                            transparent 70%),
-                        conic-gradient(from ${angle}deg, 
-                            rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, ${opacity3}) 0deg, 
-                            rgba(${oppositeColor.r}, ${oppositeColor.g}, ${oppositeColor.b}, ${opacity3}) 180deg, 
-                            rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, ${opacity3}) 360deg)
-                    `;
-                });
-                
-                requestAnimationFrame(updateGradients);
-            }
-            
-            requestAnimationFrame(updateGradients);
+        async function init() {
+            await fetchLastVideoDate();
+            updateTimers();
+            setInterval(updateTimers, 1000);
         }
 
-        window.addEventListener('load', createDynamicGradients);
+        init();
     </script>
 </body>
 </html>
