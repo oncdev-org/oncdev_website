@@ -42,10 +42,9 @@
 }
 
 .timer-panel {
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 24px;
-    align-items: center;
+    display: block;
+    max-width: 720px;
+    margin-inline: auto;
 }
 
 .panel-info {
@@ -66,6 +65,14 @@
     font-size: clamp(1.2rem, 3vw, 1.8rem);
 }
 
+.secondary-caption {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
 .timer-display.secondary span {
     color: var(--accent-warm);
 }
@@ -75,6 +82,10 @@
     color: var(--subtle);
     font-size: 0.9rem;
     font-style: italic;
+}
+
+.panel-visual {
+    margin-top: 24px;
 }
 
 .photo-card {
@@ -87,8 +98,11 @@
 
 .photo-card img {
     width: 100%;
-    height: 240px;
-    object-fit: cover;
+    height: auto;
+    max-height: min(70vh, 520px);
+    object-fit: contain;
+    object-position: top center;
+    background: var(--surface-strong);
     opacity: 0.8;
     transition: opacity 0.3s ease;
 }
@@ -108,20 +122,6 @@
     font-size: 0.75rem;
     font-weight: 700;
     color: var(--accent-warm);
-}
-
-@media (max-width: 900px) {
-    .timer-panel {
-        grid-template-columns: 1fr;
-    }
-    
-    .panel-visual {
-        order: -1;
-    }
-    
-    .photo-card img {
-        height: 200px;
-    }
 }
 
 @media (max-width: 640px) {
