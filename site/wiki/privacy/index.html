@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - oncdev</title>
+    <link rel="stylesheet" href="../../resources/shared.css">
+    <style>
+        .legal-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .legal-card {
+            max-width: 900px;
+            width: 100%;
+            padding: 48px;
+            box-sizing: border-box;
+        }
+
+        .legal-card h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 32px;
+            line-height: 1.2;
+            color: var(--text);
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 16px;
+        }
+
+        .legal-card h2 {
+            font-size: 1.5rem;
+            font-weight: 850;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            color: var(--accent-cyan);
+        }
+
+        .legal-card h3 {
+            font-size: 1.2rem;
+            font-weight: 750;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .legal-card p {
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .legal-card ul, .legal-card ol {
+            margin-bottom: 20px;
+            padding-left: 24px;
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .legal-card li {
+            margin-bottom: 8px;
+        }
+
+        .contact-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-top: 32px;
+        }
+
+        .contact-box h3 {
+            margin-top: 0;
+            color: var(--accent-cyan);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--subtle);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand-link" href="/">
+                <span class="brand-mark">OC</span>
+                <span>oncdev</span>
+            </a>
+            <div class="social-links">
+                <a href="https://t.me/oncubedev" target="_blank" rel="noopener noreferrer">
+                    <img src="../../resources/tg.png" alt="Telegram">
+                </a>
+            </div>
+        </header>
+
+        <main class="legal-container">
+            <div class="glass-card legal-card">
+                <a href="/" class="back-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>На главную / Main</span>
+                </a>
+                
+                <h1 id="dynamic-title"
+                    data-title-rus-rf="Политика конфиденциальности"
+                    data-title-rus-intl="Политика конфиденциальности"
+                    data-title-eng-rf="Privacy Policy"
+                    data-title-eng-intl="Privacy Policy">
+                    Privacy Policy
+                </h1>
+
+                <!-- ==================== RUSSIAN - RF ==================== -->
+                <div class="legal-content lang-rus region-rf">
+                    <p>Настоящая Политика конфиденциальности (далее — «Политика») объясняет, как проект <strong>oncdev</strong> (далее — «Оператор», «Мы») обрабатывает, собирает и защищает информацию о пользователях (далее — «Пользователь») при использовании Telegram-бота <a href="https://t.me/oncdevbot" target="_blank">@oncdevbot</a> и сайтов <a href="https://oncdev.online" target="_blank">oncdev.online</a>, <a href="https://oncdev.ru" target="_blank">oncdev.ru</a>.</p>
+                    <p>Политика составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
+
+                    <h2>1. Какие данные мы собираем</h2>
+                    <p>Мы собираем и обрабатываем только те данные, которые технически необходимы для функционирования бота, предоставления VPN-сервиса и проверки оплаты:</p>
+                    <ul>
+                        <li><strong>Идентификатор Telegram (Telegram ID):</strong> уникальный числовой код, используемый для связи учетной записи в боте с вашим аккаунтом.</li>
+                        <li><strong>Имя пользователя (Username) и имя (First Name):</strong> для персонализации обращений и ведения чата с поддержкой.</li>
+                        <li><strong>Квитанции об оплате (скриншоты):</strong> содержат детали перевода, которые присылает сам Пользователь для подтверждения ручной оплаты. Мы не храним ваши банковские реквизиты, кроме информации, указанной на самом чеке.</li>
+                        <li><strong>Техническая информация VPN:</strong> объем потребленного трафика, лимиты, дата окончания подписки, уникальный идентификатор VPN-ключа.</li>
+                    </ul>
+
+                    <h2>2. Политика отсутствия логов (No-Logs Policy)</h2>
+                    <p>Мы ценим вашу конфиденциальность. Наш VPN-сервис спроектирован так, чтобы не вести учет действий пользователей в сети:</p>
+                    <ul>
+                        <li>Мы <strong>не собираем и не храним</strong> логи посещенных вами сайтов, IP-адреса назначения, поисковые запросы или содержимое переданных данных.</li>
+                        <li>Мы не логируем ваш реальный IP-адрес при подключении к VPN (он используется только во время сессии для маршрутизации трафика и не сохраняется на дисках серверов).</li>
+                    </ul>
+
+                    <h2>3. Цели и правовые основания обработки данных</h2>
+                    <p>Обработка персональных данных Пользователя осуществляется на основании его согласия, выражаемого фактом начала использования Telegram-бота. Данные обрабатываются исключительно для выполнения условий Пользовательского соглашения и Публичной оферты (т.е. для предоставления доступа к VPN и разбора технических инцидентов).</p>
+
+                    <h2>4. Передача данных третьим лицам</h2>
+                    <p>Мы не продаем, не обмениваем и не передаем ваши личные данные третьим лицам. Исключением являются официальные запросы правоохранительных органов РФ, оформленные строго в соответствии с законодательством Российской Федерации.</p>
+
+                    <h2>5. Хранение и удаление данных</h2>
+                    <p>Данные хранятся на защищенных серверах на территории РФ и других юрисдикций до тех пор, пока это необходимо для оказания услуг. Пользователь имеет право в любой момент запросить удаление своего аккаунта и связанных с ним данных, обратившись к администрации в Telegram: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a> или на электронную почту <a href="mailto:support@oncdev.ru">support@oncdev.ru</a>.</p>
+
+                    <h2>6. Изменение Политики конфиденциальности</h2>
+                    <p>6.1. Мы оставляем за собой право изменять условия настоящей Политики конфиденциальности в любое время в одностороннем порядке без предварительного уведомления Пользователя. Актуальная версия документа всегда опубликована на этой странице.</p>
+                    <p>6.2. Продолжение использования VPN-сервиса, Telegram-бота, сайта или мессенджера после изменения Политики означает ваше согласие с обновленными условиями обработки и защиты персональных данных.</p>
+
+                    <div class="contact-box">
+                        <h3>Контакты ответственного за конфиденциальность</h3>
+                        <p>По всем вопросам, касающимся обработки и удаления ваших персональных данных, обращайтесь на электронную почту <a href="mailto:contact@oncdev.ru">contact@oncdev.ru</a> или в Telegram к администрации: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a>.</p>
+                    </div>
+                </div>
+
+                <!-- ==================== RUSSIAN - INTL ==================== -->
+                <div class="legal-content lang-rus region-intl">
+                    <p>Настоящая Политика конфиденциальности описывает правила сбора, использования и защиты личной информации пользователей (далее — «Пользователь») проекта <strong>oncdev</strong> (далее — «Мы»), находящихся за пределами РФ.</p>
+                    <p>Мы стремимся защищать вашу конфиденциальность в соответствии со стандартом GDPR (General Data Protection Regulation).</p>
+
+                    <h2>1. Сбор и обработка данных</h2>
+                    <p>Мы собираем только минимальный набор данных для предоставления услуг:</p>
+                    <ul>
+                        <li>Telegram ID, Username и Имя профиля.</li>
+                        <li>Снимки экрана с платежными документами (для ручной проверки оплаты).</li>
+                        <li>Техническая статистика подписки (объем трафика, дата окончания).</li>
+                    </ul>
+
+                    <h2>2. Безопасность трафика (No-Logs Policy)</h2>
+                    <p>Мы придерживаемся строгой политики «без логов». Мы не отслеживаем, не записываем и не передаем информацию о том, какие сайты вы посещаете, какие файлы скачиваете и какие приложения используете через наше VPN-соединение.</p>
+
+                    <h2>3. Права пользователей в соответствии с GDPR</h2>
+                    <p>Пользователи, находящиеся на территории Европейского Союза, имеют право:</p>
+                    <ul>
+                        <li>Запросить доступ к своим данным и получить их копию.</li>
+                        <li>Потребовать исправления неточных данных.</li>
+                        <li>Потребовать полного удаления («право быть забытым») всех данных из нашей базы.</li>
+                        <li>Ограничить или возразить против обработки данных.</li>
+                    </ul>
+                    <p>Для реализации этих прав свяжитесь с нами по электронной почте <a href="mailto:support@oncdev.ru">support@oncdev.ru</a> или через поддержку в Telegram: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a>.</p>
+
+                    <h2>4. Изменение Политики конфиденциальности</h2>
+                    <p>4.1. Мы оставляем за собой право вносить изменения в настоящую Политику конфиденциальности в любое время в одностороннем порядке без предварительного уведомления. Новая редакция вступает в силу с момента публикации.</p>
+                    <p>4.2. Продолжение использования наших сервисов после изменения Политики означает согласие на обработку ваших персональных данных в соответствии с новой редакцией документа.</p>
+
+                    <div class="contact-box">
+                        <h3>Контакты поддержки</h3>
+                        <p>Telegram: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a>, email: <a href="mailto:contact@oncdev.ru">contact@oncdev.ru</a>.</p>
+                    </div>
+                </div>
+
+                <!-- ==================== ENGLISH - RF ==================== -->
+                <div class="legal-content lang-eng region-rf">
+                    <p>This Privacy Policy (the "Policy") explains how the <strong>oncdev</strong> project ("Operator", "We", "Us") processes, collects, and protects information about users ("User") when using the Telegram bot <a href="https://t.me/oncdevbot" target="_blank">@oncdevbot</a> and websites <a href="https://oncdev.online" target="_blank">oncdev.online</a>, <a href="https://oncdev.ru" target="_blank">oncdev.ru</a>.</p>
+                    <p>This Policy is compliant with the requirements of Russian Federal Law No. 152-FZ "On Personal Data".</p>
+
+                    <h2>1. What Data We Collect</h2>
+                    <p>We collect and process only the data that is technically necessary to operate the bot, provide the VPN service, and verify payments:</p>
+                    <ul>
+                        <li><strong>Telegram ID:</strong> A unique numerical identifier used to link the bot account to your Telegram account.</li>
+                        <li><strong>Username and First Name:</strong> Used to personalize communications and handle support requests.</li>
+                        <li><strong>Payment Receipts (Screenshots):</strong> Contain transfer details provided voluntarily by the User to confirm manual payment. We do not store your bank details other than what is visible on the receipt itself.</li>
+                        <li><strong>Technical VPN Statistics:</strong> Total bandwidth consumed, active limits, subscription expiration dates, and the unique identifier of the VPN key.</li>
+                    </ul>
+
+                    <h2>2. No-Logs Policy</h2>
+                    <p>We value your privacy. Our VPN service is designed from the ground up not to record user activities on the network:</p>
+                    <ul>
+                        <li>We <strong>do not collect, log, or store</strong> the history of the websites you visit, destination IP addresses, DNS queries, or the content of the data transmitted.</li>
+                        <li>We do not log your real IP address during connection sessions (it is used in-memory solely for routing and is not saved to server storage).</li>
+                    </ul>
+
+                    <h2>3. Purposes and Legal Basis of Processing</h2>
+                    <p>The processing of the User's personal data is carried out based on their consent, expressed by starting the Telegram bot. The data is processed exclusively to fulfill the terms of the User Agreement and the Public Offer (i.e., providing access to the VPN and resolving technical issues).</p>
+
+                    <h2>4. Data Sharing and Disclosure</h2>
+                    <p>We do not sell, trade, or transfer your personal data to third parties. An exception is official requests from Russian law enforcement authorities, provided they are issued in strict accordance with the laws of the Russian Federation.</p>
+
+                    <h2>5. Data Retention and Deletion</h2>
+                    <p>Data is stored on secure servers located in the RF and other jurisdictions as long as necessary to provide services. The User has the right to request the deletion of their account and associated data at any time by contacting the administration via Telegram: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a> or via email <a href="mailto:support@oncdev.ru">support@oncdev.ru</a>.</p>
+
+                    <h2>6. Modification of the Privacy Policy</h2>
+                    <p>6.1. We reserve the right to unilaterally modify the terms of this Privacy Policy at any time without prior notice. The current version of the document is always available on this page.</p>
+                    <p>6.2. The User's continued use of the VPN service, Telegram bot, website, or messenger after any modifications constitutes consent to the processing of personal data in accordance with the updated Privacy Policy.</p>
+
+                    <div class="contact-box">
+                        <h3>Privacy Contact</h3>
+                        <p>For all questions regarding the processing and deletion of your personal data, please contact us via email <a href="mailto:contact@oncdev.ru">contact@oncdev.ru</a> or on Telegram: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a>.</p>
+                    </div>
+                </div>
+
+                <!-- ==================== ENGLISH - INTL ==================== -->
+                <div class="legal-content lang-eng region-intl">
+                    <p>This Privacy Policy describes how the <strong>oncdev</strong> project ("We", "Us", "Our") collects, uses, and protects personal information of users ("User") located outside of the Russian Federation.</p>
+                    <p>We are committed to protecting your privacy in compliance with the General Data Protection Regulation (GDPR).</p>
+
+                    <h2>1. Data Collection and Processing</h2>
+                    <p>We collect only the minimum necessary data to deliver our services:</p>
+                    <ul>
+                        <li>Telegram ID, Username, and profile First Name.</li>
+                        <li>Payment receipt screenshots (provided voluntarily for manual transaction verification).</li>
+                        <li>Technical subscription details (bandwidth usage, expiration timestamp).</li>
+                    </ul>
+
+                    <h2>2. Security and No-Logs Policy</h2>
+                    <p>We enforce a strict no-logs policy. We do not monitor, record, log, or share information about the websites you visit, the files you download, or the applications you run while connected to our VPN network.</p>
+
+                    <h2>3. User Rights Under GDPR</h2>
+                    <p>Users residing in the European Union have the following rights regarding their data:</p>
+                    <ul>
+                        <li>The right to access and obtain a copy of your personal data.</li>
+                        <li>The right to rectify inaccurate data.</li>
+                        <li>The right to erasure ("right to be forgotten").</li>
+                        <li>The right to restrict or object to the processing of your data.</li>
+                    </ul>
+                    <p>To exercise any of these rights, please contact us via email <a href="mailto:support@oncdev.ru">support@oncdev.ru</a> or via Telegram: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a>.</p>
+
+                    <h2>4. Modification of the Privacy Policy</h2>
+                    <p>4.1. We reserve the right to unilaterally modify the terms of this Privacy Policy at any time without prior notice. The current version of the document is always available on this page.</p>
+                    <p>4.2. Your continued use of our services after any updates constitutes your consent to the processing of personal data in accordance with the updated Policy.</p>
+
+                    <div class="contact-box">
+                        <h3>Support and Privacy Contact</h3>
+                        <p>Telegram: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a>, email: <a href="mailto:contact@oncdev.ru">contact@oncdev.ru</a>.</p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>
+                Права на представленный контент принадлежат
+                <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>.
+            </p>
+            <p>[2025-2026] © oncdev Development Team</p>
+        </footer>
+    </div>
+
+    <script src="../../resources/legal.js"></script>
+</body>
+</html>

@@ -246,6 +246,11 @@ h1 {
     color: var(--text);
     text-decoration: none;
     transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .project-card:hover {
@@ -268,12 +273,12 @@ h1 {
 }
 
 .project-card h3 {
-    margin-top: 54px;
+    margin: 0;
     font-size: 1.55rem;
 }
 
 .project-card p {
-    margin-top: 14px;
+    margin: 10px 0 0;
     color: var(--muted);
     font-size: 0.98rem;
 }
@@ -366,10 +371,6 @@ h1 {
 
     .project-card {
         min-height: 210px;
-    }
-
-    .project-card h3 {
-        margin-top: 42px;
     }
 
     .section {

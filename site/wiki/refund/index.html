@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refund Policy - oncdev</title>
+    <link rel="stylesheet" href="../../resources/shared.css">
+    <style>
+        .legal-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .legal-card {
+            max-width: 900px;
+            width: 100%;
+            padding: 48px;
+            box-sizing: border-box;
+        }
+
+        .legal-card h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 32px;
+            line-height: 1.2;
+            color: var(--text);
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 16px;
+        }
+
+        .legal-card h2 {
+            font-size: 1.5rem;
+            font-weight: 850;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            color: var(--accent-cyan);
+        }
+
+        .legal-card h3 {
+            font-size: 1.2rem;
+            font-weight: 750;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .legal-card p {
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .legal-card ul, .legal-card ol {
+            margin-bottom: 20px;
+            padding-left: 24px;
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .legal-card li {
+            margin-bottom: 8px;
+        }
+
+        .contact-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-top: 32px;
+        }
+
+        .contact-box h3 {
+            margin-top: 0;
+            color: var(--accent-cyan);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--subtle);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand-link" href="/">
+                <span class="brand-mark">OC</span>
+                <span>oncdev</span>
+            </a>
+            <div class="social-links">
+                <a href="https://t.me/oncubedev" target="_blank" rel="noopener noreferrer">
+                    <img src="../../resources/tg.png" alt="Telegram">
+                </a>
+            </div>
+        </header>
+
+        <main class="legal-container">
+            <div class="glass-card legal-card">
+                <a href="/" class="back-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>На главную / Main</span>
+                </a>
+                
+                <h1 id="dynamic-title"
+                    data-title-rus-rf="Публичная оферта и правила возврата"
+                    data-title-rus-intl="Правила возврата средств (Refund Policy)"
+                    data-title-eng-rf="Public Offer & Refund Policy"
+                    data-title-eng-intl="Refund Policy">
+                    Refund Policy
+                </h1>
+
+                <!-- ==================== RUSSIAN - RF ==================== -->
+                <div class="legal-content lang-rus region-rf">
+                    <p>Настоящий документ является публичной офертой (предложением) проекта <strong>oncdev</strong> (далее — «Исполнитель») о заключении договора возмездного оказания услуг по предоставлению доступа к VPN-сервису на условиях, изложенных ниже.</p>
+                    <p>Акцептом настоящей оферты (принятием условий договора) является совершение Пользователем оплаты в Telegram-боте <a href="https://t.me/oncdevbot" target="_blank">@oncdevbot</a>.</p>
+                    <p>К инфраструктуре и ресурсам Исполнителя относятся:</p>
+                    <ul>
+                        <li>Сайты и доменные имена: <a href="https://oncdev.online" target="_blank">oncdev.online</a>, <a href="https://oncdev.ru" target="_blank">oncdev.ru</a></li>
+                        <li>Telegram-каналы: <a href="https://t.me/OnCube_DEV" target="_blank">OnCube_DEV</a>, <a href="https://t.me/oncubedev" target="_blank">oncubedev</a></li>
+                        <li>Официальный Telegram-бот: <a href="https://t.me/oncdevbot" target="_blank">@oncdevbot</a></li>
+                        <li>Репозитории на GitHub: <a href="https://github.com/oncdev-org" target="_blank">github.com/oncdev-org</a></li>
+                        <li>Все адреса электронной почты с доменом @oncdev.ru</li>
+                    </ul>
+
+                    <h2>1. Предмет договора и порядок предоставления услуг</h2>
+                    <p>1.1. Исполнитель обязуется предоставить Пользователю временный доступ к VPN-сервису (посредством генерации уникального ключа подписки), а Пользователь обязуется оплатить услуги согласно выбранному тарифному плану.</p>
+                    <p>1.2. Доступ к услугам предоставляется в цифровом виде сразу после подтверждения факта оплаты администратором бота (в ручном режиме проверки чеков) либо автоматически при оплате с виртуального баланса.</p>
+                    <p>1.3. Период бесплатного тестирования («Пробный день») предоставляется на срок 24 часа. Повторное получение пробного доступа тем же лицом с использованием других аккаунтов признается нарушением и влечет за собой постоянную блокировку.</p>
+
+                    <h2>2. Стабильность сервиса и технические сбои</h2>
+                    <p>2.1. Исполнитель прилагает все разумные усилия для обеспечения круглосуточной и бесперебойной работы VPN-серверов.</p>
+                    <p>2.2. В случае возникновения сбоев, аварий на стороне провайдеров инфраструктуры или блокировок серверов, Исполнитель обязуется оперативно принять все меры по восстановлению работоспособности (включая миграцию на новые серверы и смену IP-адресов) и уведомить пользователей о возникших неполадках и сроках их устранения в Telegram-канале <a href="https://t.me/oncubedev" target="_blank">oncubedev</a>.</p>
+
+                    <h2>3. Условия и порядок возврата денежных средств</h2>
+                    <p>3.1. В связи с тем, что услуга имеет цифровой характер и предоставляется в полном объеме сразу после активации ключа подписки, возврат средств за уже использованный период времени не производится.</p>
+                    <p>3.2. Если у Пользователя возникают технические проблемы с подключением по вине Исполнителя, которые не могут быть устранены технической поддержкой в течение 72 часов с момента обращения, Пользователь имеет право на пропорциональный возврат стоимости неиспользованных дней подписки.</p>
+                    <p>3.3. <strong>Особый порядок при приостановке или прекращении деятельности сервиса:</strong><br>
+                    В случае если проект <strong>oncdev</strong> будет вынужден полностью прекратить или временно приостановить свою деятельность (включая закрытие сервиса по любым техническим, финансовым или юридическим причинам), Пользователи с активными (не истекшими) на момент приостановки подписками имеют право обратиться в службу поддержки Telegram: <a href="https://t.me/polisours" target="_blank">@polisours</a>, <a href="https://t.me/vobimngr" target="_blank">@vobimngr</a> или на электронную почту <a href="mailto:support@oncdev.ru">support@oncdev.ru</a> для запроса возврата средств за неиспользованные дни.</p>
+                    <p>3.4. При наступлении обстоятельств, указанных в п. 3.3, Исполнитель оставляет за собой право производить возврат средств <strong>не в полном объеме (в размере 50% и менее от остаточной стоимости подписки) либо полностью отказать в возврате</strong>, ссылаясь на текущее финансовое положение проекта, затраты на аренду серверов и форс-мажорные обстоятельства. Данное ограничение обусловлено некоммерческим/инди-характером проекта и высокими расходами на поддержание сетевой инфраструктуры. Акцептуя данную оферту, Пользователь безоговорочно соглашается с этим условием и обязуется не предъявлять дополнительных претензий.</p>
+
+                    <h2>4. Мошенничество и предоставление ложных сведений</h2>
+                    <p>4.1. Предоставление поддельных квитанций/скриншотов об оплате, обман администрации или использование уязвимостей платежной системы бота расценивается как мошенничество. В этом случае профиль пользователя блокируется навсегда, доступ к VPN аннулируется, а денежные средства возврату не подлежат.</p>
+ 
+                    <h2>5. Изменение условий оферты</h2>
+                    <p>5.1. Исполнитель оставляет за собой право в одностороннем порядке изменять условия настоящей оферты (Правил возврата средств) в любое время без предварительного уведомления Пользователя. Новая редакция вступает в силу с момента ее публикации на сайте.</p>
+                    <p>5.2. Продолжение использования услуг и осуществление платежей после внесения изменений означает полное и безоговорочное согласие Пользователя с обновленными Правилами.</p>
+
+                    <div class="contact-box">
+                        <h3>Поддержка по вопросам платежей</h3>
+                        <p>По всем вопросам оплаты, сбоев и оформления возвратов пишите в Telegram к администрации: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a> или на электронную почту <a href="mailto:contact@oncdev.ru">contact@oncdev.ru</a>.</p>
+                    </div>
+                </div>
+
+                <!-- ==================== RUSSIAN - INTL ==================== -->
+                <div class="legal-content lang-rus region-intl">
+                    <p>Настоящие Правила возврата средств (далее — «Правила») определяют порядок возврата платежей за услуги VPN-сервиса <strong>oncdev</strong> (далее — «Исполнитель») для международных пользователей.</p>
+                    <p>Приобретая подписку в Telegram-боте <a href="https://t.me/oncdevbot" target="_blank">@oncdevbot</a>, вы соглашаетесь с условиями настоящего документа.</p>
+
+                    <h2>1. Характер услуг и предоставление доступа</h2>
+                    <p>1.1. Доступ к VPN предоставляется немедленно после подтверждения оплаты.</p>
+                    <p>1.2. Услуга считается оказанной в момент генерации и передачи ключа доступа. В связи с этим возврат средств за работоспособный и использованный сервис не предусмотрен.</p>
+
+                    <h2>2. Доступность сервиса и устранение неполадок</h2>
+                    <p>2.1. Мы стремимся обеспечить стабильное качество соединения. В случае сбоев мы обязуемся предпринять усилия по восстановлению работоспособности и проинформировать об этом пользователей в нашем канале <a href="https://t.me/oncubedev" target="_blank">oncubedev</a>.</p>
+
+                    <h2>3. Условия возврата при форс-мажоре и закрытии проекта</h2>
+                    <p>3.1. Пользователь имеет право на возврат средств за неиспользованные дни подписки, если сервис не работает по вине Исполнителя непрерывно более 72 часов.</p>
+                    <p>3.2. В случае прекращения работы сервиса или закрытия проекта по любым причинам, пользователи с оплаченным периодом могут запросить возврат через поддержку <a href="https://t.me/polisours" target="_blank">@polisours</a>, <a href="https://t.me/vobimngr" target="_blank">@vobimngr</a> или по электронной почте <a href="mailto:support@oncdev.ru">support@oncdev.ru</a>.</p>
+                    <p>3.3. Исполнитель оставляет за собой право производить такие возвраты <strong>в частичном объеме (50% и менее) или отказать в возврате</strong> в зависимости от доступного бюджета проекта и затрат на оплату хостинг-провайдеров. Пользователь принимает данный риск при покупке подписки.</p>
+ 
+                    <h2>4. Изменение Правил возврата средств</h2>
+                    <p>4.1. Исполнитель оставляет за собой право в одностороннем порядке изменять условия настоящих Правил возврата средств в любое время без предварительного уведомления Пользователя. Новая редакция вступает в силу с момента ее публикации на сайте.</p>
+                    <p>4.2. Продолжение использования услуг и совершение платежей после изменения Правил означает согласие Пользователя с обновленной редакцией.</p>
+
+                    <div class="contact-box">
+                        <h3>Контакты поддержки</h3>
+                        <p>Связь с администрацией в Telegram: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a> или по электронной почте <a href="mailto:contact@oncdev.ru">contact@oncdev.ru</a>.</p>
+                    </div>
+                </div>
+
+                <!-- ==================== ENGLISH - RF ==================== -->
+                <div class="legal-content lang-eng region-rf">
+                    <p>This document constitutes a Public Offer (the "Offer") of the <strong>oncdev</strong> project (the "Provider") to enter into a paid services agreement for providing access to the VPN service under the terms specified below.</p>
+                    <p>Acceptance of this offer occurs when the User makes a payment within the Telegram bot <a href="https://t.me/oncdevbot" target="_blank">@oncdevbot</a>.</p>
+                    <p>The Provider's infrastructure and resources include:</p>
+                    <ul>
+                        <li>Websites and domain names: <a href="https://oncdev.online" target="_blank">oncdev.online</a>, <a href="https://oncdev.ru" target="_blank">oncdev.ru</a></li>
+                        <li>Telegram channels: <a href="https://t.me/OnCube_DEV" target="_blank">OnCube_DEV</a>, <a href="https://t.me/oncubedev" target="_blank">oncubedev</a></li>
+                        <li>Official Telegram bot: <a href="https://t.me/oncdevbot" target="_blank">@oncdevbot</a></li>
+                        <li>GitHub repositories: <a href="https://github.com/oncdev-org" target="_blank">github.com/oncdev-org</a></li>
+                        <li>All email addresses with the @oncdev.ru domain</li>
+                    </ul>
+
+                    <h2>1. Subject of the Agreement and Service Delivery</h2>
+                    <p>1.1. The Provider agrees to supply the User with temporary access to the VPN service (via a unique subscription key), and the User agrees to pay for the services according to the chosen tariff plan.</p>
+                    <p>1.2. Access to services is delivered digitally immediately after the admin verifies the payment (for manual payment methods) or instantly when paid from the virtual balance.</p>
+                    <p>1.3. A free trial ("Trial Day") is provided for 24 hours. Attempting to get multiple free trials using different accounts is a violation of this agreement and will result in a permanent ban.</p>
+
+                    <h2>2. Service Stability and Outages</h2>
+                    <p>2.1. The Provider uses reasonable efforts to ensure 24/7 uninterrupted operation of the VPN servers.</p>
+                    <p>2.2. In the event of network outages, infrastructure failures, or server blocks by regulatory bodies, the Provider will act diligently to restore operations (including migrating to new servers or changing IP addresses) and will post status updates on the Telegram channel <a href="https://t.me/oncubedev" target="_blank">oncubedev</a>.</p>
+
+                    <h2>3. Refund Policy and Conditions</h2>
+                    <p>3.1. Due to the digital nature of the service, which is fully delivered upon the activation of the subscription key, refunds for already used subscription periods are not provided.</p>
+                    <p>3.2. If the User experiences technical connection issues due to the Provider's fault that cannot be resolved by technical support within 72 hours of reporting, the User is entitled to a pro-rata refund for the remaining unused days.</p>
+                    <p>3.3. <strong>Special terms for service suspension or termination:</strong><br>
+                    If the <strong>oncdev</strong> project is forced to permanently close or temporarily suspend its services for any reason (technical, financial, or legal), Users with active (non-expired) subscriptions at the time of suspension may contact Telegram support: <a href="https://t.me/polisours" target="_blank">@polisours</a>, <a href="https://t.me/vobimngr" target="_blank">@vobimngr</a> or email <a href="mailto:support@oncdev.ru">support@oncdev.ru</a> to request a refund for their remaining days.</p>
+                    <p>3.4. Under the circumstances described in Section 3.3, the Provider reserves the right to issue refunds **partially (50% or less of the remaining value) or deny refunds entirely**, depending on the current financial situation of the project, server leasing obligations, and force majeure events. This limitation is due to the non-commercial/indie nature of the project and high infrastructure maintenance costs. By accepting this Public Offer, the User unconditionally agrees to this limitation and waives further claims.</p>
+
+                    <h2>4. Fraud and Forgery</h2>
+                    <p>4.1. Submitting forged or edited payment screenshots, attempting to deceive the administration, or exploiting the bot's payment system is strictly prohibited. This will result in an immediate permanent ban without any refund.</p>
+ 
+                    <h2>5. Modification of the Offer</h2>
+                    <p>5.1. The Provider reserves the right to unilaterally modify the terms of this Public Offer (Refund Policy) at any time without prior notice. The new version becomes effective upon publication.</p>
+                    <p>5.2. Continued use of services and making payments after changes are made constitutes full and unconditional acceptance of the updated Refund Policy.</p>
+
+                    <div class="contact-box">
+                        <h3>Payment Support</h3>
+                        <p>For any payment, billing, or refund queries, contact the administration on Telegram: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a> or via email <a href="mailto:contact@oncdev.ru">contact@oncdev.ru</a>.</p>
+                    </div>
+                </div>
+
+                <!-- ==================== ENGLISH - INTL ==================== -->
+                <div class="legal-content lang-eng region-intl">
+                    <p>This Refund Policy (the "Policy") defines the terms for requesting refunds for the <strong>oncdev</strong> VPN services ("Provider") by international users.</p>
+                    <p>By purchasing a subscription through the Telegram bot <a href="https://t.me/oncdevbot" target="_blank">@oncdevbot</a>, you agree to the terms of this Policy.</p>
+
+                    <h2>1. Nature of Services and Delivery</h2>
+                    <p>1.1. Access to the VPN is provided immediately after payment verification.</p>
+                    <p>1.2. The service is considered fully delivered upon the generation and delivery of the access credentials. Therefore, refunds for a functioning and used service are not available.</p>
+
+                    <h2>2. Availability and Support</h2>
+                    <p>2.1. We aim to provide stable connection quality. In the event of outages, we will make efforts to restore service and keep users informed via our Telegram channel <a href="https://t.me/oncubedev" target="_blank">oncubedev</a>.</p>
+
+                    <h2>3. Refunds on Service Termination or Force Majeure</h2>
+                    <p>3.1. Users are eligible for a refund of unused days if the service is non-functional due to our fault for more than 72 consecutive hours.</p>
+                    <p>3.2. If the project is terminated or suspended for any reason, users with active plans can contact support at <a href="https://t.me/polisours" target="_blank">@polisours</a>, <a href="https://t.me/vobimngr" target="_blank">@vobimngr</a> or via email at <a href="mailto:support@oncdev.ru">support@oncdev.ru</a> to request a refund.</p>
+                    <p>3.3. The Provider reserves the right to issue refunds **partially (50% or less of the unused value) or deny refunds entirely** based on the project's financial capabilities and prior server leasing obligations. The User accepts this risk upon purchase.</p>
+ 
+                    <h2>4. Modification of the Refund Policy</h2>
+                    <p>4.1. The Provider reserves the right to unilaterally modify the terms of this Refund Policy at any time without prior notice. The new version becomes effective upon publication.</p>
+                    <p>4.2. The User's continued use of the services and making payments after modifications constitutes acceptance of the updated Policy.</p>
+
+                    <div class="contact-box">
+                        <h3>Support Contacts</h3>
+                        <p>Contact the administration on Telegram: <a href="https://t.me/polisours">@polisours</a>, <a href="https://t.me/vobimngr">@vobimngr</a> or via email <a href="mailto:contact@oncdev.ru">contact@oncdev.ru</a>.</p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>
+                Права на представленный контент принадлежат
+                <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>.
+            </p>
+            <p>[2025-2026] © oncdev Development Team</p>
+        </footer>
+    </div>
+
+    <script src="../../resources/legal.js"></script>
+</body>
+</html>
