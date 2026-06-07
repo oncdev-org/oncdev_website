@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN - oncdev</title>
+    <link rel="stylesheet" href="../resources/shared.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="bg-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob-interactive" id="interactive-blob"></div>
+    </div>
+
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand-link" href="/" aria-label="oncdev - главная страница">
+                <span class="brand-mark">OC</span>
+                <span>oncdev</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Основная навигация">
+                <a href="/timer">Таймер</a>
+                <a href="/">Главная</a>
+                <a href="/vpn" class="active" aria-current="page">VPN</a>
+                <a href="/about">О нас</a>
+            </nav>
+
+            <div class="social-links" aria-label="Социальные ссылки">
+                <a href="https://t.me/OnCube_DEV/30" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                    <img src="../resources/tg.png" alt="">
+                </a>
+                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" aria-label="Boosty">
+                    <img src="../resources/boosty.png" alt="">
+                </a>
+            </div>
+        </header>
+
+        <main>
+            <!-- TAB CONTAINER WITH LOCAL SWITCHING -->
+            <div class="vpn-tabs">
+                <button id="tab-btn-buy" class="nav-tab active" onclick="switchTab('buy')">Оформить</button>
+                <button id="tab-btn-check" class="nav-tab" onclick="switchTab('check')">Забрать ключ</button>
+            </div>
+
+            <!-- TAB 1: Buy / Renew -->
+            <section id="tab-content-buy" class="tab-pane active animate-fade-in">
+                <div class="glass-card page-card">
+                    <div class="card-heading">
+                        <p class="eyebrow">VPN ДОСТУП</p>
+                        <h2>Оформить подписку</h2>
+                    </div>
+                    
+                    <!-- Steps navigation progress -->
+                    <div class="steps-progress">
+                        <div id="progress-line" class="progress-line"></div>
+                        <div class="step-dot active" data-step="1">1<span>Тариф</span></div>
+                        <div class="step-dot" data-step="2">2<span>Аккаунт</span></div>
+                        <div class="step-dot" data-step="3">3<span>Оплата</span></div>
+                        <div class="step-dot" data-step="4">4<span>Готово</span></div>
+                    </div>
+
+                    <!-- Step 1: Select Plan -->
+                    <div id="step-1" class="step-content active animate-fade-in">
+                        <h3 class="step-title">Выберите тарифный план:</h3>
+                        
+                        <div id="plans-container" class="plans-grid">
+                            <div class="plans-skeleton">
+                                <div class="skeleton-card"></div>
+                                <div class="skeleton-card"></div>
+                                <div class="skeleton-card"></div>
+                                <div class="skeleton-card"></div>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button id="btn-goto-step-2" class="button primary btn-wide" disabled onclick="goToStep(2)">
+                                Продолжить <i class="fa-solid fa-arrow-right icon-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Account details -->
+                    <div id="step-2" class="step-content animate-fade-in">
+                        <h3 class="step-title">Укажите ваш Telegram аккаунт:</h3>
+                        
+                        <div class="form-group">
+                            <label for="buy-username" class="input-label">Юзернейм в Telegram:</label>
+                            <div class="input-container">
+                                <span class="input-prefix">@</span>
+                                <input type="text" id="buy-username" placeholder="vobimngr" required autocomplete="off" oninput="validateStep2()" />
+                            </div>
+                            <span class="field-hint">Никнейм должен быть указан без ошибок — по нему привязывается VPN.</span>
+                        </div>
+
+                        <div class="form-group promo-group">
+                            <label for="buy-promo" class="input-label">Промокод (если есть):</label>
+                            <div class="promo-input-wrapper">
+                                <input type="text" id="buy-promo" placeholder="Введите промокод" autocomplete="off" />
+                                <button type="button" class="button secondary" onclick="applyPromoCode()">Применить</button>
+                            </div>
+                            <div id="promo-status" class="promo-feedback"></div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button class="button secondary" onclick="goToStep(1)">
+                                <i class="fa-solid fa-arrow-left icon-left"></i> Назад
+                            </button>
+                            <button id="btn-goto-step-3" class="button primary" disabled onclick="goToStep(3)">
+                                Далее <i class="fa-solid fa-arrow-right icon-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Payment details & File upload -->
+                    <div id="step-3" class="step-content animate-fade-in">
+                        <h3 class="step-title">Совершите перевод и загрузите чек:</h3>
+                        
+                        <div class="order-summary-box">
+                            <h4>Итого к оплате:</h4>
+                            <div class="price-display">
+                                <span id="summary-old-price" class="old-price text-muted hidden">50 руб.</span>
+                                <span id="summary-price" class="current-price text-highlight">50 руб.</span>
+                            </div>
+                            <p class="summary-details">Тариф: <span id="summary-plan" class="font-weight-bold">1 месяц (30 дней)</span> для аккаунта: <span id="summary-username" class="text-highlight font-weight-bold">@vobimngr</span></p>
+                        </div>
+
+                        <div class="payment-details-box">
+                            <h4>Реквизиты для оплаты:</h4>
+                            <div class="requisites-list">
+                                <div class="requisite-item">
+                                    <div class="req-label">
+                                        <i class="fa-solid fa-phone"></i> СБП (Получатель: <span id="req-receiver-sbp" class="font-weight-bold">Платон П.</span>)
+                                    </div>
+                                    <div class="req-value-row">
+                                        <code id="req-phone">+79525908980</code>
+                                        <button class="btn-copy-small" onclick="copyText('req-phone')"><i class="fa-regular fa-copy"></i></button>
+                                    </div>
+                                    <span class="bank-tag"><i class="fa-solid fa-building-columns"></i> Т-Банк</span>
+                                </div>
+                                <div class="requisite-item">
+                                    <div class="req-label">
+                                        <i class="fa-solid fa-credit-card"></i> Номер карты (Получатель: <span id="req-receiver-card" class="font-weight-bold">Платон П.</span>)
+                                    </div>
+                                    <div class="req-value-row">
+                                        <code id="req-card">2200701378078007</code>
+                                        <button class="btn-copy-small" onclick="copyText('req-card')"><i class="fa-regular fa-copy"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment-warning">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span><b>ВНИМАНИЕ:</b> В комментарии к платежу <b>НИЧЕГО НЕ ПИШИТЕ</b>! Оставьте поле комментария пустым.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="input-label">Загрузите скриншот/квитанцию оплаты:</label>
+                            <div id="dropzone" class="upload-dropzone" onclick="triggerFileInput()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+                                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                                <span class="upload-text">Нажмите или перетащите скриншот сюда</span>
+                                <span class="upload-subtext">PNG, JPG, JPEG до 10 МБ</span>
+                                <input type="file" id="receipt-file" accept="image/*" class="hidden" onchange="handleFileSelect(event)" />
+                            </div>
+                            <div id="file-preview-container" class="file-preview hidden">
+                                <div class="file-info">
+                                    <i class="fa-regular fa-image file-icon"></i>
+                                    <div class="file-details">
+                                        <span id="preview-filename" class="filename">receipt.jpg</span>
+                                        <span id="preview-filesize" class="filesize">1.2 MB</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-remove-file" onclick="removeSelectedFile()" title="Удалить">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Error alert -->
+                        <div id="submit-error" class="alert alert-danger hidden">
+                            <i class="fa-solid fa-circle-exclamation"></i> <span id="error-message-text">Ошибка при отправке</span>
+                        </div>
+
+                        <div class="step-actions">
+                            <button class="button secondary" onclick="goToStep(2)">
+                                <i class="fa-solid fa-arrow-left icon-left"></i> Назад
+                            </button>
+                            <button id="btn-submit-order" class="button primary btn-wide" disabled onclick="submitOrder()">
+                                <span id="submit-btn-text">Отправить квитанцию</span>
+                                <i class="fa-solid fa-paper-plane icon-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Finished success screen -->
+                    <div id="step-4" class="step-content text-center animate-fade-in">
+                        <div class="success-animation">
+                            <i class="fa-solid fa-circle-check success-icon"></i>
+                        </div>
+                        <h3 class="success-title">Заявка успешно отправлена!</h3>
+                        <p class="success-desc">
+                            Ваша квитанция получена и передана администраторам для проверки платежа.<br>
+                            Обычно подтверждение занимает <b>от 5 до 30 минут</b>.
+                        </p>
+                        <div class="success-actions-box">
+                            <p><b>Обязательно сохраните код заказа!</b> По нему вы сможете забрать ссылку на VPN:</p>
+                            <div class="saved-username-box">
+                                <code id="success-saved-code">XXXXXX</code>
+                                <button class="btn-copy-small" onclick="copyText('success-saved-code')"><i class="fa-regular fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="step-actions justify-center">
+                            <button class="button primary" onclick="goToCheckOrderTab()">
+                                <i class="fa-solid fa-magnifying-glass icon-left"></i> Проверить готовность
+                            </button>
+                            <button class="button secondary" onclick="resetForm()">
+                                <i class="fa-solid fa-arrow-rotate-left icon-left"></i> Новый заказ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: Check Order Status -->
+            <section id="tab-content-check" class="tab-pane">
+                <div class="glass-card page-card">
+                    <div class="card-heading">
+                        <p class="eyebrow">ПРОВЕРКА</p>
+                        <h2>Забрать VPN ключ</h2>
+                    </div>
+                    <p class="card-desc">Введите ваш уникальный 6-значный код заказа, чтобы проверить статус оплаты и скопировать ссылку подключения.</p>
+                    
+                    <form id="check-order-form" onsubmit="handleCheckOrder(event)">
+                        <div class="input-group">
+                            <span class="input-prefix"><i class="fa-solid fa-key"></i></span>
+                            <input type="text" id="check-order-code" placeholder="Например: A4F9X2" required autocomplete="off" style="text-transform: uppercase;" />
+                            <button type="submit" id="check-order-btn" class="button primary">
+                                <span>Проверить</span>
+                                <i class="fa-solid fa-arrow-right icon-right"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Loading State -->
+                    <div id="check-loading" class="spinner-container hidden">
+                        <div class="spinner"></div>
+                        <p>Запрашиваем статус заказа...</p>
+                    </div>
+
+                    <!-- Result Container -->
+                    <div id="check-results" class="results-container hidden">
+                        <!-- Order found, approved -->
+                        <div id="result-approved" class="result-block hidden">
+                            <div class="status-badge status-active">
+                                <i class="fa-solid fa-circle-check"></i> Оплата подтверждена
+                            </div>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="label">Аккаунт Telegram:</span>
+                                    <span id="res-username" class="value text-highlight">@username</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Тариф:</span>
+                                    <span id="res-plan" class="value">1 месяц</span>
+                                </div>
+                            </div>
+                            
+                            <div class="key-card">
+                                <div class="key-header">
+                                    <span>Ваша ссылка на подписку VLESS:</span>
+                                    <span class="badge badge-accent">VLESS Link</span>
+                                }
+                                </div>
+                                <div class="key-body">
+                                    <code id="vless-link">vless://...</code>
+                                    <button class="btn-copy" onclick="copyVlessLink()" title="Скопировать">
+                                        <i id="copy-icon" class="fa-regular fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Setup instructions -->
+                            <div class="instructions-section">
+                                <h3><i class="fa-solid fa-book-open"></i> Инструкции по установке:</h3>
+                                <div class="instructions-grid">
+                                    <a href="https://telegra.ph/Instrukciya-po-podklyucheniyu-v2ray-OncDev-04-29" target="_blank" class="instruction-card">
+                                        <i class="fa-brands fa-android instruction-icon"></i>
+                                        <span>Android (v2rayNG)</span>
+                                        <i class="fa-solid fa-chevron-right arrow"></i>
+                                    </a>
+                                    <a href="https://telegra.ph/Instrukciya-po-podklyucheniyu-v2rayN-OncDev-04-29" target="_blank" class="instruction-card">
+                                        <i class="fa-brands fa-windows instruction-icon"></i>
+                                        <span>Windows (v2rayN)</span>
+                                        <i class="fa-solid fa-chevron-right arrow"></i>
+                                    </a>
+                                    <a href="https://t.me/oncubedev/7" target="_blank" class="instruction-card">
+                                        <i class="fa-brands fa-apple instruction-icon"></i>
+                                        <span>iOS / Apple (V2Box)</span>
+                                        <i class="fa-solid fa-chevron-right arrow"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order found, pending -->
+                        <div id="result-pending" class="pending-card hidden">
+                            <div class="status-badge status-pending">
+                                <i class="fa-solid fa-clock"></i> Платеж проверяется
+                            </div>
+                            <p class="pending-text">
+                                Заказ <b><span id="pending-code">XXXXXX</span></b> для аккаунта <b><span id="pending-username">@username</span></b> находится на проверке у администраторов.<br>
+                                Проверка обычно занимает от 5 до 30 минут. Как только оплата подтвердится, здесь появится ссылка на ваш VPN-ключ.
+                            </p>
+                        </div>
+
+                        <!-- Order found, declined -->
+                        <div id="result-declined" class="no-sub-card hidden">
+                            <div class="status-badge status-expired">
+                                <i class="fa-solid fa-circle-xmark"></i> Заказ отклонен
+                            </div>
+                            <p class="no-sub-text">
+                                Оплата по коду <b><span id="declined-code">XXXXXX</span></b> была отклонена администратором.<br>
+                                <span id="decline-reason-wrapper" class="hidden">Причина: <b id="declined-reason">Неверная сумма</b><br></span>
+                                Пожалуйста, обратитесь в поддержку за разъяснениями: <b>@polisours</b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>
+                Права на представленный контент принадлежат
+                <a href="https://github.com/oncube-dev" target="_blank" rel="noopener noreferrer">OnCube</a>.
+                Сайт сделали
+                <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
+                и
+                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
+                с любовью.
+            </p>
+            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden">
+        <i class="fa-solid fa-circle-check toast-icon"></i>
+        <span id="toast-message">Текст скопирован</span>
+    </div>
+
+    <!-- Custom Script -->
+    <script src="app.js"></script>
+</body>
+</html>
