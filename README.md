@@ -1,6 +1,7 @@
 <div align="center">
 <a href="https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg"></a>
 </div>
+
 # oncdev — объединение
 
 Этот проект представляет собой веб-сайт, посвящённый объединению oncdev. Сайт содержит информацию о деятельности объединения, его участниках, мероприятиях и других важных аспектах жизни сообщества.
