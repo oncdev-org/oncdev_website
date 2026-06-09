@@ -1,14 +1,7 @@
-<<<<<<< Updated upstream
 // Конфигурация API: для тестов локально, для продакшена - домен с HTTPS на VPS
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
     ? 'http://localhost:8080' 
     : 'https://api.oncdev.online:8021'; // Используем поддомен с HTTPS на порту 8021
-=======
-// Конфигурация API: для тестов локально, для продакшена - поддомен с HTTPS на VPS
-const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-    ? 'http://localhost:8080' 
-    : 'https://api.oncdev.online'; // Ваш домен для API на VPS с поддержкой HTTPS
->>>>>>> Stashed changes
 
 let currentTab = 'buy';
 
@@ -133,10 +126,6 @@ function renderRequisites() {
 }
 
 // Select plan handler
-<<<<<<< Updated upstream
-=======
-// Select plan handler
->>>>>>> Stashed changes
 function selectPlan(planId) {
     // Deselect previous
     if (selectedPlanId) {
@@ -167,10 +156,7 @@ function validateStep2() {
     btn.disabled = (username.length < 3);
 }
 
-<<<<<<< Updated upstream
 // Validation for Step 3
-=======
->>>>>>> Stashed changes
 function validateStep3() {
     const btn = document.getElementById('btn-submit-order');
     if (btn) btn.disabled = (selectedFile === null);
@@ -285,28 +271,19 @@ function triggerFileInput() {
     document.getElementById('receipt-file').click();
 }
 
-<<<<<<< Updated upstream
 // Drag over dropzone
-=======
->>>>>>> Stashed changes
 function handleDragOver(e) {
     e.preventDefault();
     document.getElementById('dropzone').classList.add('dragover');
 }
 
-<<<<<<< Updated upstream
 // Drag leave dropzone
-=======
->>>>>>> Stashed changes
 function handleDragLeave(e) {
     e.preventDefault();
     document.getElementById('dropzone').classList.remove('dragover');
 }
 
-<<<<<<< Updated upstream
 // Drop file
-=======
->>>>>>> Stashed changes
 function handleDrop(e) {
     e.preventDefault();
     document.getElementById('dropzone').classList.remove('dragover');
@@ -316,32 +293,22 @@ function handleDrop(e) {
     }
 }
 
-<<<<<<< Updated upstream
 // File input select
-=======
->>>>>>> Stashed changes
 function handleFileSelect(e) {
     if (e.target.files.length > 0) {
         processFile(e.target.files[0]);
     }
 }
 
-<<<<<<< Updated upstream
 // Validate and show preview of image
 function processFile(file) {
-=======
-function processFile(file) {
     // Validate is image
->>>>>>> Stashed changes
     if (!file.type.startsWith('image/')) {
         showToast('Пожалуйста, выберите файл изображения (скриншот/чек)', 'error');
         return;
     }
     
-<<<<<<< Updated upstream
-=======
     // Validate size (< 10MB)
->>>>>>> Stashed changes
     const maxSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxSize) {
         showToast('Файл слишком большой. Максимальный размер 10 МБ', 'error');
@@ -350,10 +317,7 @@ function processFile(file) {
     
     selectedFile = file;
     
-<<<<<<< Updated upstream
-=======
     // Update preview
->>>>>>> Stashed changes
     document.getElementById('preview-filename').textContent = file.name;
     document.getElementById('preview-filesize').textContent = formatBytes(file.size);
     
@@ -363,10 +327,7 @@ function processFile(file) {
     validateStep3();
 }
 
-<<<<<<< Updated upstream
 // Remove uploaded image preview
-=======
->>>>>>> Stashed changes
 function removeSelectedFile() {
     selectedFile = null;
     document.getElementById('receipt-file').value = '';
@@ -389,10 +350,7 @@ async function submitOrder() {
     const errorAlert = document.getElementById('submit-error');
     const errorText = document.getElementById('error-message-text');
     
-<<<<<<< Updated upstream
-=======
     // Loading state
->>>>>>> Stashed changes
     btn.disabled = true;
     btnText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Отправка...';
     errorAlert.classList.add('hidden');
@@ -412,10 +370,7 @@ async function submitOrder() {
         const data = await response.json();
         
         if (response.ok && data.success) {
-<<<<<<< Updated upstream
-=======
             // Setup step 4 (Success page)
->>>>>>> Stashed changes
             document.getElementById('success-saved-code').textContent = data.payment_code;
             goToStep(4);
         } else {
@@ -426,10 +381,7 @@ async function submitOrder() {
         errorText.textContent = error.message || 'Ошибка отправки. Пожалуйста, проверьте интернет-соединение.';
         errorAlert.classList.remove('hidden');
         
-<<<<<<< Updated upstream
-=======
         // Reset button
->>>>>>> Stashed changes
         btn.disabled = false;
         btnText.textContent = 'Отправить квитанцию';
     }
@@ -437,10 +389,7 @@ async function submitOrder() {
 
 // Reset form wizard
 function resetForm() {
-<<<<<<< Updated upstream
-=======
     // Reset wizard variables
->>>>>>> Stashed changes
     selectedPlanId = null;
     selectedFile = null;
     promoApplied = false;
@@ -457,10 +406,7 @@ function resetForm() {
     
     removeSelectedFile();
     
-<<<<<<< Updated upstream
-=======
     // Reset steps
->>>>>>> Stashed changes
     currentStep = 1;
     const dots = document.querySelectorAll('.step-dot');
     dots.forEach((dot, index) => {
@@ -477,27 +423,18 @@ function resetForm() {
     renderPlans();
 }
 
-<<<<<<< Updated upstream
 // Trigger check order action from success screen
-=======
->>>>>>> Stashed changes
 function goToCheckOrderTab() {
     const code = document.getElementById('success-saved-code').textContent;
     document.getElementById('check-order-code').value = code;
     resetForm();
     switchTab('check');
     
-<<<<<<< Updated upstream
-    document.getElementById('check-order-form').dispatchEvent(new Event('submit'));
-}
-
-// Request status of the purchase by unique order code
-=======
     // Submit query immediately
     document.getElementById('check-order-form').dispatchEvent(new Event('submit'));
 }
 
->>>>>>> Stashed changes
+// Request status of the purchase by unique order code
 async function handleCheckOrder(event) {
     event.preventDefault();
     
@@ -569,10 +506,7 @@ async function handleCheckOrder(event) {
     }
 }
 
-<<<<<<< Updated upstream
 // Copy VLESS link helper
-=======
->>>>>>> Stashed changes
 function copyVlessLink() {
     const linkEl = document.getElementById('vless-link');
     if (!linkEl) return;
@@ -594,10 +528,7 @@ function copyVlessLink() {
     }
 }
 
-<<<<<<< Updated upstream
 // Copy text helper
-=======
->>>>>>> Stashed changes
 function copyText(elementId) {
     const el = document.getElementById(elementId);
     if (!el) return;
@@ -636,11 +567,7 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-<<<<<<< Updated upstream
-// Bytes formatter utility
-=======
 // Utilities: Bytes formatting
->>>>>>> Stashed changes
 function formatBytes(bytes, decimals = 2) {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;

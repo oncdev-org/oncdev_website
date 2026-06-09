@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="../resources/shared.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="page-shell">
         <header class="site-header">
@@ -38,7 +40,7 @@
                     <p class="eyebrow">Видео PolimerS</p>
                     <h1>Таймер ожидания</h1>
                 </div>
-                
+
                 <div class="timer-container main-timer">
                     <p class="timer-label">С момента выхода последнего видео прошло:</p>
                     <div id="timer" class="timer-display">Загрузка...</div>
@@ -49,11 +51,11 @@
                 <div class="timer-panel secondary-timer">
                     <div class="panel-info">
                         <p class="eyebrow">Ожидаемая дата</p>
-                        <h3>До 8 июня 2026 осталось:</h3>
+                        <h3>До 2 июля 2026 осталось:</h3>
                         <div id="secondary-timer" class="timer-display secondary">Загрузка...</div>
                         <p class="panel-note">«Я говорил примерно» — PolimerS</p>
                     </div>
-                    
+
                     <div class="panel-visual">
                         <div class="photo-card">
                             <img src="../resources/plat-photo.png" alt="PolimerS Photo">
@@ -74,14 +76,15 @@
                 <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
                 с любовью.
             </p>
-            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All rights reserved.</p>
+            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All
+                rights reserved.</p>
         </footer>
     </div>
 
     <script src="info_script.js"></script>
     <script>
         let startDate = null;
-        const secondaryEndDate = new Date('2026-06-08T14:00:00Z');
+        const secondaryEndDate = new Date('2026-07-02T14:00:00Z');
         let secondaryInterval = null;
 
         async function fetchLastVideoDate() {
@@ -89,7 +92,7 @@
                 const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`;
                 const response = await fetch(apiUrl);
                 const data = await response.json();
-                
+
                 const video = data.items && data.items[0];
                 if (video && video.snippet && video.snippet.publishedAt) {
                     startDate = new Date(video.snippet.publishedAt);
@@ -129,7 +132,7 @@
 
         function updateTimers() {
             const now = new Date();
-            
+
             // Main timer
             if (startDate) {
                 const diff = Math.max(0, now - startDate);
@@ -155,4 +158,5 @@
     </script>
     <script src="../resources/legal-consent.js"></script>
 </body>
+
 </html>
