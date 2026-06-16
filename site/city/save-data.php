@@ -1,10 +1,13 @@
 <?php
 /**
- * Скрипт для сохранения данных города в JSON файл
- * Разместите этот файл в папке site/city/ на сервере
- */
+ *  * ПОДРОБНЕЕ В ./README-BACKEND.md
+ *  * ПОДРОБНЕЕ В ./README-BACKEND.md
+ *  * ПОДРОБНЕЕ В ./README-BACKEND.md
+ *  * ПОДРОБНЕЕ В ./README-BACKEND.md
+ *  * ПОДРОБНЕЕ В ./README-BACKEND.md
+*/
 
-// Разрешаем запросы с любого домена (можно ограничить для безопасности)
+/* // Разрешаем запросы с любого домена (можно ограничить для безопасности)
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
@@ -69,4 +72,4 @@ echo json_encode([
     'lastUpdate' => $data['lastUpdate']
 ]);
 ?>
-
+ */

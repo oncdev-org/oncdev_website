@@ -1,3 +1,12 @@
+
+/**
+ * ПОДРОБНЕЕ В ./README-BACKEND.md
+ * ПОДРОБНЕЕ В ./README-BACKEND.md
+ * ПОДРОБНЕЕ В ./README-BACKEND.md
+ * ПОДРОБНЕЕ В ./README-BACKEND.md
+ * ПОДРОБНЕЕ В ./README-BACKEND.md
+*/
+/* 
 // Конфигурация
 const UPDATE_INTERVAL = 600000; // Обновление каждые 10 минут
 const DATA_FILE_PATH = '../resources/city-data.json';
@@ -1078,4 +1087,4 @@ async function init() {
 
 // Запуск при загрузке страницы
 window.addEventListener('load', init);
-
+    */
