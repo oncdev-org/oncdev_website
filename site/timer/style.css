@@ -128,8 +128,9 @@
     .timer-hero {
         padding-top: 30px;
     }
-    
-    .timer-container, .panel-info {
+
+    .timer-container,
+    .panel-info {
         padding: 24px;
     }
 }

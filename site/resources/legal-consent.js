@@ -1,6 +1,6 @@
 (function() {
     // Check if consent has already been accepted
-    if (localStorage.getItem('oncdev_consent_accepted') === 'true') {
+    if (localStorage.getItem('oncdev_consent_accepted_v2') === 'true') {
         return;
     }
 
@@ -172,7 +172,7 @@
 
         btnConfirm.addEventListener('click', () => {
             if (!btnConfirm.disabled) {
-                localStorage.setItem('oncdev_consent_accepted', 'true');
+                localStorage.setItem('oncdev_consent_accepted_v2', 'true');
                 document.body.classList.remove('oncdev-consent-active');
                 overlay.remove();
             }
