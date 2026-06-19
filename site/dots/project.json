@@ -1,0 +1,174 @@
+{
+	"contentrating" : "Everyone",
+	"description" : "Interactive particles background simulation with custom physics, adjustable density, and multiple color gradients for Light and Dark modes.",
+	"file" : "index.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"autopilot" : 
+			{
+				"index" : 0,
+				"order" : 100,
+				"text" : "Autopilot Mode",
+				"type" : "bool",
+				"value" : true
+			},
+			"color1" : 
+			{
+				"index" : 1,
+				"order" : 101,
+				"text" : "Color 1",
+				"type" : "color",
+				"value" : "0.44 0.53 1.0"
+			},
+			"color2" : 
+			{
+				"index" : 2,
+				"order" : 102,
+				"text" : "Color 2",
+				"type" : "color",
+				"value" : "0.18 0.45 0.97"
+			},
+			"color3" : 
+			{
+				"index" : 3,
+				"order" : 103,
+				"text" : "Color 3",
+				"type" : "color",
+				"value" : "0.0 0.0 0.0"
+			},
+			"cursorDelay" : 
+			{
+				"index" : 4,
+				"max" : 100,
+				"min" : 0,
+				"order" : 104,
+				"step" : 1,
+				"text" : "Cursor Delay / Lag",
+				"type" : "slider",
+				"value" : 50
+			},
+			"density" : 
+			{
+				"index" : 5,
+				"max" : 300,
+				"min" : 100,
+				"order" : 105,
+				"step" : 10,
+				"text" : "Particle Density",
+				"type" : "slider",
+				"value" : 200
+			},
+			"enableOrb" : 
+			{
+				"index" : 6,
+				"order" : 106,
+				"text" : "Enable Orb (Interaction Center)",
+				"type" : "bool",
+				"value" : true
+			},
+			"orbOffsetX" : 
+			{
+				"index" : 7,
+				"max" : 2,
+				"min" : -2,
+				"order" : 107,
+				"step" : 0.05,
+				"text" : "Orb Position X Offset",
+				"type" : "slider",
+				"value" : 0
+			},
+			"orbOffsetY" : 
+			{
+				"index" : 8,
+				"max" : 2,
+				"min" : -2,
+				"order" : 108,
+				"step" : 0.05,
+				"text" : "Orb Position Y Offset",
+				"type" : "slider",
+				"value" : 0
+			},
+			"particlesScale" : 
+			{
+				"index" : 9,
+				"max" : 2,
+				"min" : 0.2,
+				"order" : 109,
+				"step" : 0.05,
+				"text" : "Particle Size",
+				"type" : "slider",
+				"value" : 0.75
+			},
+			"ringDisplacement" : 
+			{
+				"index" : 10,
+				"max" : 0.5,
+				"min" : 0.01,
+				"order" : 110,
+				"step" : 0.01,
+				"text" : "Displacement Force",
+				"type" : "slider",
+				"value" : 0.15
+			},
+			"ringRadius" : 
+			{
+				"index" : 11,
+				"max" : 0.25,
+				"min" : 0.01,
+				"order" : 111,
+				"step" : 0.005,
+				"text" : "Interaction Radius",
+				"type" : "slider",
+				"value" : 0.11
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"showUI" : 
+			{
+				"index" : 12,
+				"order" : 112,
+				"text" : "Show Control UI Card",
+				"type" : "bool",
+				"value" : false
+			},
+			"theme" : 
+			{
+				"index" : 13,
+				"options" : 
+				[
+					{
+						"label" : "Dark Theme",
+						"value" : "dark"
+					},
+					{
+						"label" : "Light Theme",
+						"value" : "light"
+					}
+				],
+				"order" : 113,
+				"text" : "Theme Mode",
+				"type" : "combo",
+				"value" : "dark"
+			}
+		}
+	},
+	"preview" : "preview.jpg",
+	"ratingsex" : "none",
+	"ratingviolence" : "none",
+	"snapshotformat" : -1,
+	"snapshotoverlay" : "",
+	"tags" : [ "Abstract" ],
+	"title" : "oncdev Dots",
+	"type" : "web",
+	"version" : 1,
+	"visibility" : "public",
+	"workshopid" : "3747829160",
+	"workshopurl" : "steam://url/CommunityFilePage/3747829160"
+}

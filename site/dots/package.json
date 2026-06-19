@@ -1,0 +1,18 @@
+{
+  "name": "antigravity-dots-background",
+  "version": "1.0.0",
+  "description": "Interactive recreation of the Google Antigravity background dots effect in light and dark themes.",
+  "main": "app.js",
+  "scripts": {
+    "start": "npx -y http-server . -p 8080"
+  },
+  "keywords": [
+    "threejs",
+    "gpgpu",
+    "particles",
+    "poisson-disk",
+    "google-antigravity"
+  ],
+  "author": "Antigravity Agent",
+  "license": "MIT"
+}
