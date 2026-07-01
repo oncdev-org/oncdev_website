@@ -1,6 +1,6 @@
 // Конфигурация API: для тестов локально, для продакшена - домен с HTTPS на VPS
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-    ? 'http://localhost:8080' 
+    ? 'http://localhost:8021' 
     : 'https://api.oncdev.online:8021'; // Используем поддомен с HTTPS на порту 8021
 
 let currentTab = 'buy';
@@ -150,10 +150,41 @@ function validateStep1() {
 function validateStep2() {
     const usernameInput = document.getElementById('buy-username');
     const btn = document.getElementById('btn-goto-step-3');
+    const checkbox = document.getElementById('no-username-checkbox');
     if (!usernameInput || !btn) return;
     
-    const username = usernameInput.value.trim();
-    btn.disabled = (username.length < 3);
+    let val = usernameInput.value.trim();
+    if (checkbox && checkbox.checked) {
+        // Strip non-digit characters in real-time
+        const cleanVal = val.replace(/\D/g, '');
+        if (val !== cleanVal) {
+            usernameInput.value = cleanVal;
+            val = cleanVal;
+        }
+        btn.disabled = (val.length < 5);
+    } else {
+        btn.disabled = (val.length < 3);
+    }
+}
+
+function toggleUsernameField(checkbox) {
+    const usernameInput = document.getElementById('buy-username');
+    const prefix = document.getElementById('username-prefix');
+    const hint = document.getElementById('username-hint');
+    if (!usernameInput || !prefix || !hint) return;
+    
+    if (checkbox.checked) {
+        prefix.textContent = 'ID';
+        usernameInput.placeholder = '5123456789';
+        usernameInput.value = '';
+        hint.innerHTML = 'Укажите ваш цифровой Telegram ID. Его можно узнать в ботах <a href="https://t.me/userinfobot" target="_blank" style="color: #2dd4bf; text-decoration: underline;">@userinfobot</a> или <a href="https://t.me/raw_data_bot" target="_blank" style="color: #2dd4bf; text-decoration: underline;">@raw_data_bot</a>.';
+    } else {
+        prefix.textContent = '@';
+        usernameInput.placeholder = 'vobimngr';
+        usernameInput.value = '';
+        hint.textContent = 'Никнейм должен быть указан без ошибок — по нему привязывается VPN.';
+    }
+    validateStep2();
 }
 
 // Validation for Step 3
@@ -238,7 +269,10 @@ function applyPromoCode() {
 
 // Prepare Step 3 Order Summary
 function prepareStep3Summary() {
-    const username = document.getElementById('buy-username').value.trim().replace(/^@/, '');
+    const usernameInput = document.getElementById('buy-username');
+    const checkbox = document.getElementById('no-username-checkbox');
+    let username = usernameInput.value.trim();
+    
     const plan = plans.find(p => p.id === selectedPlanId);
     if (!plan) return;
     
@@ -259,7 +293,12 @@ function prepareStep3Summary() {
     
     priceEl.textContent = `${finalPrice} руб.`;
     planEl.textContent = `${plan.name} (${plan.days} дней)`;
-    usernameEl.textContent = `@${username}`;
+    
+    if (checkbox && checkbox.checked) {
+        usernameEl.textContent = `Telegram ID: ${username}`;
+    } else {
+        usernameEl.textContent = `@${username.replace(/^@/, '')}`;
+    }
 }
 
 // Drag & Drop / File Upload Logic
@@ -300,31 +339,134 @@ function handleFileSelect(e) {
     }
 }
 
+// Compress image using HTML5 Canvas helper
+function compressImage(file, maxWidth = 1600, maxHeight = 1600, quality = 0.85) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = () => {
+                let width = img.width;
+                let height = img.height;
+                
+                if (width > height) {
+                    if (width > maxWidth) {
+                        height = Math.round((height * maxWidth) / width);
+                        width = maxWidth;
+                    }
+                } else {
+                    if (height > maxHeight) {
+                        width = Math.round((width * maxHeight) / height);
+                        height = maxHeight;
+                    }
+                }
+                
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                
+                canvas.toBlob((blob) => {
+                    if (blob) {
+                        const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+                            type: 'image/jpeg',
+                            lastModified: Date.now()
+                        });
+                        resolve(compressedFile);
+                    } else {
+                        reject(new Error('Canvas toBlob returned null'));
+                    }
+                }, 'image/jpeg', quality);
+            };
+            img.onerror = (err) => reject(err);
+        };
+        reader.onerror = (err) => reject(err);
+    });
+}
+
 // Validate and show preview of image
 function processFile(file) {
-    // Validate is image
-    if (!file.type.startsWith('image/')) {
-        showToast('Пожалуйста, выберите файл изображения (скриншот/чек)', 'error');
+    const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endswith('.pdf');
+    const isImage = file.type.startsWith('image/');
+    
+    if (!isPdf && !isImage) {
+        showToast('Пожалуйста, выберите файл изображения или PDF (скриншот/чек)', 'error');
         return;
     }
     
-    // Validate size (< 10MB)
-    const maxSize = 10 * 1024 * 1024; // 10MB
+    // Validate size (< 15MB)
+    const maxSize = 15 * 1024 * 1024; // 15MB
     if (file.size > maxSize) {
-        showToast('Файл слишком большой. Максимальный размер 10 МБ', 'error');
+        showToast('Файл слишком большой. Максимальный размер 15 МБ', 'error');
         return;
     }
     
-    selectedFile = file;
-    
-    // Update preview
-    document.getElementById('preview-filename').textContent = file.name;
-    document.getElementById('preview-filesize').textContent = formatBytes(file.size);
-    
-    document.getElementById('dropzone').classList.add('hidden');
-    document.getElementById('file-preview-container').classList.remove('hidden');
-    
-    validateStep3();
+    if (isPdf) {
+        selectedFile = file;
+        
+        const fileIcon = document.querySelector('.file-preview .file-icon');
+        if (fileIcon) {
+            fileIcon.className = 'fa-regular fa-file-pdf file-icon';
+            fileIcon.style.color = '#ef4444';
+        }
+        
+        // Update preview
+        document.getElementById('preview-filename').textContent = file.name;
+        document.getElementById('preview-filesize').textContent = formatBytes(file.size);
+        
+        document.getElementById('dropzone').classList.add('hidden');
+        document.getElementById('file-preview-container').classList.remove('hidden');
+        
+        validateStep3();
+    } else {
+        const dropzone = document.getElementById('dropzone');
+        const uploadText = dropzone.querySelector('.upload-text');
+        const originalText = uploadText.textContent;
+        uploadText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Сжатие изображения...';
+        
+        compressImage(file).then(compressedFile => {
+            selectedFile = compressedFile;
+            
+            const fileIcon = document.querySelector('.file-preview .file-icon');
+            if (fileIcon) {
+                fileIcon.className = 'fa-regular fa-image file-icon';
+                fileIcon.style.color = '';
+            }
+            
+            // Update preview
+            document.getElementById('preview-filename').textContent = compressedFile.name;
+            document.getElementById('preview-filesize').textContent = formatBytes(compressedFile.size) + ' (сжато)';
+            
+            document.getElementById('dropzone').classList.add('hidden');
+            document.getElementById('file-preview-container').classList.remove('hidden');
+            
+            uploadText.textContent = originalText;
+            validateStep3();
+        }).catch(err => {
+            console.error('Compression failed, using original:', err);
+            selectedFile = file;
+            
+            const fileIcon = document.querySelector('.file-preview .file-icon');
+            if (fileIcon) {
+                fileIcon.className = 'fa-regular fa-image file-icon';
+                fileIcon.style.color = '';
+            }
+            
+            // Update preview
+            document.getElementById('preview-filename').textContent = file.name;
+            document.getElementById('preview-filesize').textContent = formatBytes(file.size);
+            
+            document.getElementById('dropzone').classList.add('hidden');
+            document.getElementById('file-preview-container').classList.remove('hidden');
+            
+            uploadText.textContent = originalText;
+            validateStep3();
+        });
+    }
 }
 
 // Remove uploaded image preview
@@ -335,6 +477,12 @@ function removeSelectedFile() {
     document.getElementById('file-preview-container').classList.add('hidden');
     document.getElementById('dropzone').classList.remove('hidden');
     
+    const fileIcon = document.querySelector('.file-preview .file-icon');
+    if (fileIcon) {
+        fileIcon.className = 'fa-regular fa-image file-icon';
+        fileIcon.style.color = '';
+    }
+    
     validateStep3();
 }
 
@@ -342,7 +490,17 @@ function removeSelectedFile() {
 async function submitOrder() {
     if (!selectedPlanId || !selectedFile) return;
     
-    const username = document.getElementById('buy-username').value.trim().replace(/^@/, '');
+    const usernameInput = document.getElementById('buy-username');
+    const checkbox = document.getElementById('no-username-checkbox');
+    let username = usernameInput.value.trim();
+    if (checkbox && checkbox.checked) {
+        if (/^\d+$/.test(username)) {
+            username = 'id' + username;
+        }
+    } else {
+        username = username.replace(/^@/, '');
+    }
+    
     const promoCode = document.getElementById('buy-promo').value.trim();
     
     const btn = document.getElementById('btn-submit-order');
@@ -470,7 +628,11 @@ async function handleCheckOrder(event) {
         }
         
         if (data.status === 'approved') {
-            document.getElementById('res-username').textContent = `@${data.username}`;
+            if (data.username.startsWith('id') && /^\d+$/.test(data.username.substring(2))) {
+                document.getElementById('res-username').textContent = `Telegram ID: ${data.username.substring(2)}`;
+            } else {
+                document.getElementById('res-username').textContent = `@${data.username}`;
+            }
             document.getElementById('res-plan').textContent = data.plan_name;
             
             const vlessLink = document.getElementById('vless-link');
@@ -484,7 +646,11 @@ async function handleCheckOrder(event) {
             resApproved.classList.remove('hidden');
         } else if (data.status === 'pending') {
             document.getElementById('pending-code').textContent = code;
-            document.getElementById('pending-username').textContent = `@${data.username}`;
+            if (data.username.startsWith('id') && /^\d+$/.test(data.username.substring(2))) {
+                document.getElementById('pending-username').textContent = `Telegram ID: ${data.username.substring(2)}`;
+            } else {
+                document.getElementById('pending-username').textContent = `@${data.username}`;
+            }
             resPending.classList.remove('hidden');
         } else if (data.status === 'declined') {
             document.getElementById('declined-code').textContent = code;

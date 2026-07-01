@@ -81,7 +81,7 @@
 
                         <div class="step-actions">
                             <button id="btn-goto-step-2" class="button primary btn-wide" disabled onclick="goToStep(2)">
-                                Продолжить <i class="fa-solid fa-arrow-right icon-right"></i>
+                                Продолжить
                             </button>
                         </div>
                     </div>
@@ -93,11 +93,17 @@
                         <div class="form-group">
                             <label for="buy-username" class="input-label">Юзернейм в Telegram:</label>
                             <div class="input-container">
-                                <span class="input-prefix">@</span>
+                                <span class="input-prefix" id="username-prefix">@</span>
                                 <input type="text" id="buy-username" placeholder="vobimngr" required autocomplete="off"
                                     oninput="validateStep2()" />
                             </div>
-                            <span class="field-hint">Никнейм должен быть указан без ошибок — по нему привязывается
+                            <div class="checkbox-group" style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="no-username-checkbox" onchange="toggleUsernameField(this)" style="width: auto; cursor: pointer;" />
+                                <label for="no-username-checkbox" style="font-size: 0.85rem; color: var(--muted); cursor: pointer; user-select: none;">
+                                    У меня нет юзернейма в Telegram (нет @username)
+                                </label>
+                            </div>
+                            <span class="field-hint" id="username-hint">Никнейм должен быть указан без ошибок — по нему привязывается
                                 VPN.</span>
                         </div>
 
@@ -113,10 +119,10 @@
 
                         <div class="step-actions">
                             <button class="button secondary" onclick="goToStep(1)">
-                                <i class="fa-solid fa-arrow-left icon-left"></i> Назад
+                                Назад
                             </button>
                             <button id="btn-goto-step-3" class="button primary" disabled onclick="goToStep(3)">
-                                Далее <i class="fa-solid fa-arrow-right icon-right"></i>
+                                Далее
                             </button>
                         </div>
                     </div>
@@ -176,9 +182,9 @@
                                 ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)"
                                 ondrop="handleDrop(event)">
                                 <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
-                                <span class="upload-text">Нажмите или перетащите скриншот сюда</span>
-                                <span class="upload-subtext">PNG, JPG, JPEG до 10 МБ</span>
-                                <input type="file" id="receipt-file" accept="image/*" class="hidden"
+                                <span class="upload-text">Нажмите или перетащите скриншот/PDF сюда</span>
+                                <span class="upload-subtext">PNG, JPG, JPEG, PDF до 10 МБ</span>
+                                <input type="file" id="receipt-file" accept="image/*,application/pdf" class="hidden"
                                     onchange="handleFileSelect(event)" />
                             </div>
                             <div id="file-preview-container" class="file-preview hidden">
@@ -204,12 +210,11 @@
 
                         <div class="step-actions">
                             <button class="button secondary" onclick="goToStep(2)">
-                                <i class="fa-solid fa-arrow-left icon-left"></i> Назад
+                                Назад
                             </button>
                             <button id="btn-submit-order" class="button primary btn-wide" disabled
                                 onclick="submitOrder()">
                                 <span id="submit-btn-text">Отправить квитанцию</span>
-                                <i class="fa-solid fa-paper-plane icon-right"></i>
                             </button>
                         </div>
                     </div>
@@ -234,10 +239,10 @@
                         </div>
                         <div class="step-actions justify-center">
                             <button class="button primary" onclick="goToCheckOrderTab()">
-                                <i class="fa-solid fa-magnifying-glass icon-left"></i> Проверить готовность
+                                Проверить готовность
                             </button>
                             <button class="button secondary" onclick="resetForm()">
-                                <i class="fa-solid fa-arrow-rotate-left icon-left"></i> Новый заказ
+                                Новый заказ
                             </button>
                         </div>
                     </div>
@@ -261,7 +266,6 @@
                                 autocomplete="off" style="text-transform: uppercase;" />
                             <button type="submit" id="check-order-btn" class="button primary">
                                 <span>Проверить</span>
-                                <i class="fa-solid fa-arrow-right icon-right"></i>
                             </button>
                         </div>
                     </form>
@@ -311,18 +315,15 @@
                                         target="_blank" class="instruction-card">
                                         <i class="fa-brands fa-android instruction-icon"></i>
                                         <span>Android (v2rayNG)</span>
-                                        <i class="fa-solid fa-chevron-right arrow"></i>
                                     </a>
                                     <a href="https://telegra.ph/Instrukciya-po-podklyucheniyu-v2rayN-OncDev-04-29"
                                         target="_blank" class="instruction-card">
                                         <i class="fa-brands fa-windows instruction-icon"></i>
                                         <span>Windows (v2rayN)</span>
-                                        <i class="fa-solid fa-chevron-right arrow"></i>
                                     </a>
                                     <a href="https://t.me/oncubedev/7" target="_blank" class="instruction-card">
                                         <i class="fa-brands fa-apple instruction-icon"></i>
                                         <span>iOS / Apple (V2Box)</span>
-                                        <i class="fa-solid fa-chevron-right arrow"></i>
                                     </a>
                                 </div>
                             </div>
