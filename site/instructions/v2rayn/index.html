@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инструкция по подключению v2rayN - oncdev</title>
+    <link rel="stylesheet" href="../../resources/shared.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .instructions-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .instructions-card {
+            max-width: 1000px;
+            width: 100%;
+            padding: 48px;
+            box-sizing: border-box;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--subtle);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .instructions-card h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            line-height: 1.2;
+            color: var(--text);
+        }
+
+        .update-date {
+            color: var(--subtle);
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+            display: block;
+        }
+
+        /* Tabs styling */
+        .guide-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 16px;
+        }
+
+        .guide-tab {
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-tab:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text);
+        }
+
+        .guide-tab.active {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.15), rgba(139, 92, 246, 0.15));
+            border-color: rgba(45, 212, 191, 0.4);
+            color: var(--text);
+            box-shadow: 0 4px 20px rgba(45, 212, 191, 0.1);
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .pricing-section h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .price-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .price-card:hover {
+            border-color: rgba(45, 212, 191, 0.3);
+        }
+
+        .price-card .period {
+            font-size: 0.85rem;
+            color: var(--subtle);
+            margin-bottom: 8px;
+        }
+
+        .price-card .amount {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .price-card .discount {
+            font-size: 0.75rem;
+            color: var(--accent-warm);
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        /* Client download cards */
+        .downloads-container {
+            background: rgba(139, 92, 246, 0.03);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .downloads-container h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .downloads-container p {
+            color: var(--muted);
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+
+        .download-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .dl-btn {
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--line);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .dl-btn:hover {
+            border-color: var(--accent);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        /* Steps */
+        .step-section {
+            margin-bottom: 48px;
+        }
+
+        .step-item {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+            padding: 32px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .step-item:first-of-type {
+            border-top: none;
+        }
+
+        .step-badge {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent));
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(45, 212, 191, 0.3);
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .step-text {
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .step-text strong {
+            color: var(--text);
+        }
+
+        .step-text code {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 0.9em;
+            color: var(--accent-warm);
+        }
+
+        /* Step image */
+        .step-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .step-img {
+            max-width: 100%;
+            max-height: 250px;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Mockup desktop window */
+        .mockup-window {
+            width: 300px;
+            background: #1c2128;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-size: 0.75rem;
+            user-select: none;
+        }
+
+        .window-titlebar {
+            background: #2d333b;
+            padding: 6px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .window-title {
+            font-weight: 600;
+            color: #adbac7;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .window-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .window-dot.close { background: #ff5f56; }
+        .window-dot.minimize { background: #ffbd2e; }
+        .window-dot.maximize { background: #27c93f; }
+
+        .window-menu {
+            background: #22272e;
+            padding: 4px 10px;
+            display: flex;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .menu-item {
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #adbac7;
+            font-weight: 500;
+        }
+
+        .menu-item.active {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        /* Mock Dropdown menu */
+        .mock-dropdown {
+            position: absolute;
+            top: 24px;
+            left: 10px;
+            background: #22272e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            width: 220px;
+            z-index: 10;
+            padding: 4px 0;
+        }
+
+        .dropdown-opt {
+            padding: 8px 12px;
+            color: #adbac7;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dropdown-opt.active {
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .click-pointer-win {
+            position: absolute;
+            right: 8px;
+            bottom: -5px;
+            font-size: 1.1rem;
+            color: var(--accent-cyan);
+            transform: rotate(-15deg);
+            animation: pointer-tap 1.5s infinite;
+        }
+
+        @keyframes pointer-tap {
+            0% { transform: scale(1) rotate(-15deg); }
+            50% { transform: scale(0.85) rotate(-10deg); }
+            100% { transform: scale(1) rotate(-15deg); }
+        }
+
+        .window-content {
+            background: #1c2128;
+            padding: 12px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Servers list mock */
+        .mock-servers-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mock-server-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 8px;
+            border-radius: 4px;
+            color: #adbac7;
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255,255,255,0.02);
+            position: relative;
+        }
+
+        .mock-server-row.active {
+            background: rgba(45, 212, 191, 0.08);
+            border-color: rgba(45, 212, 191, 0.3);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Context menu */
+        .mock-context-menu {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            background: #2d333b;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            width: 180px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            padding: 4px 0;
+            z-index: 10;
+        }
+
+        .context-opt {
+            padding: 6px 12px;
+            color: #adbac7;
+        }
+
+        .context-opt.active {
+            background: var(--accent-cyan);
+            color: #06070b;
+            font-weight: 600;
+            position: relative;
+        }
+
+        /* Status bar bottom mockup */
+        .window-statusbar {
+            background: #22272e;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 8px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .vpn-toggle-row {
+            background: rgba(255,255,255,0.02);
+            padding: 6px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .mock-toggle {
+            width: 32px;
+            height: 18px;
+            background: #10b981;
+            border-radius: 9px;
+            position: relative;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+        }
+
+        .mock-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 14px;
+            height: 14px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .mock-select {
+            background: #2d333b;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 3px 6px;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .mock-select.active {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 8px rgba(45, 212, 191, 0.2);
+        }
+
+        /* Troubleshooting Section */
+        .troubleshoot-box {
+            border-top: 1px solid var(--line);
+            padding-top: 40px;
+            margin-top: 48px;
+        }
+
+        .troubleshoot-box h2 {
+            font-size: 1.6rem;
+            font-weight: 850;
+            color: var(--text);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .troubleshoot-box ol {
+            padding-left: 20px;
+        }
+
+        .troubleshoot-box li {
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .troubleshoot-box li strong {
+            color: var(--text);
+        }
+
+        .important-quote {
+            background: rgba(139, 92, 246, 0.05);
+            border-left: 4px solid var(--accent);
+            border-radius: 4px;
+            padding: 16px 20px;
+            margin: 24px 0;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .support-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin-top: 48px;
+            text-align: center;
+        }
+
+        .support-box h3 {
+            margin-top: 0;
+            color: var(--accent-cyan);
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .support-box p {
+            color: var(--muted);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 860px) {
+            .step-item {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .instructions-card {
+                padding: 24px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob-interactive" id="interactive-blob"></div>
+    </div>
+
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand-link" href="/" aria-label="oncdev - главная страница">
+                <span class="brand-mark">OC</span>
+                <span>oncdev</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Основная навигация">
+                <a href="/timer">Таймер</a>
+                <a href="/">Главная</a>
+                <a href="/vpn">VPN</a>
+                <a href="/about">О нас</a>
+            </nav>
+
+            <div class="social-links" aria-label="Социальные ссылки">
+                <a href="https://t.me/oncubedev" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                    <img src="../../resources/tg.png" alt="">
+                </a>
+                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" aria-label="Boosty">
+                    <img src="../../resources/boosty.png" alt="">
+                </a>
+            </div>
+        </header>
+
+        <main class="instructions-container">
+            <div class="glass-card instructions-card">
+                <a href="/vpn" class="back-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Назад в кабинет VPN</span>
+                </a>
+
+                <h1>Инструкция по подключению</h1>
+                <span class="update-date">Дата обновления: 29 июня 2026 г.</span>
+
+                <div class="guide-tabs">
+                    <a href="../v2ray/" class="guide-tab">
+                        <i class="fa-solid fa-mobile-screen-button"></i> Смартфоны (Android & iOS)
+                    </a>
+                    <button class="guide-tab active">
+                        <i class="fa-solid fa-laptop"></i> Компьютеры (Windows)
+                    </button>
+                </div>
+
+                <div class="pricing-section">
+                    <h3><i class="fa-solid fa-tags"></i> Стоимость подписки</h3>
+                    <div class="pricing-grid">
+                        <div class="price-card">
+                            <div class="period">1 Месяц</div>
+                            <div class="amount">50 руб.</div>
+                        </div>
+                        <div class="price-card">
+                            <div class="period">3 Месяца</div>
+                            <div class="amount">145 руб.</div>
+                            <div class="discount">Скидка 5%</div>
+                        </div>
+                        <div class="price-card">
+                            <div class="period">Полгода</div>
+                            <div class="amount">270 руб.</div>
+                            <div class="discount">Скидка 10%</div>
+                        </div>
+                        <div class="price-card">
+                            <div class="period">1 Год</div>
+                            <div class="amount">510 руб.</div>
+                            <div class="discount">Скидка 15%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="downloads-container">
+                    <h3><i class="fa-solid fa-circle-down"></i> Шаг 1: Скачивание клиента для Windows</h3>
+                    <p>Для ОС Windows мы рекомендуем использовать клиент <strong>v2rayN</strong>. Настоятельно рекомендуем скачать архив с уже преднастроенными параметрами от нашей команды:</p>
+                    <div class="download-links">
+                        <a href="https://e.pcloud.link/publink/show?code=XZrjhGZJnmbb4jXqD7slLnrAoN4l8d8BvaV" target="_blank" class="dl-btn">
+                            <i class="fa-solid fa-cloud"></i> Скачать с pCloud
+                        </a>
+                        <a href="https://mega.nz/file/VMZGHJSS#wkGFkzHeA5E4Mnd8WbBv-5mlgJmLsVDDzrYXTVhoXLI" target="_blank" class="dl-btn">
+                            <i class="fa-solid fa-hard-drive"></i> Скачать с Mega
+                        </a>
+                        <a href="https://www.dropbox.com/scl/fi/9039qlpxe0konk2lh8i1l/v2rayN-LifeHosting.zip?rlkey=i7l3r61p1iugxj1nkgxlnq0ar&st=sw4l22t6&dl=1" target="_blank" class="dl-btn">
+                            <i class="fa-brands fa-dropbox"></i> Скачать с Dropbox
+                        </a>
+                    </div>
+                </div>
+
+                <div class="step-section">
+                    <!-- STEP 1 -->
+                    <div class="step-item">
+                        <div>
+                            <div class="step-badge">1</div>
+                            <h2 class="step-title">Запуск от имени администратора</h2>
+                            <p class="step-text">Распакуйте скачанный ZIP-архив в любую удобную папку на компьютере (например, в корень диска <code>C:\v2rayN</code>).<br><br>
+                            Кликните правой кнопкой мыши по файлу <strong>v2rayN.exe</strong>, перейдите в <strong>«Свойства»</strong> -> вкладка <strong>«Совместимость»</strong>, установите галочку <strong>«Запуск от имени администратора»</strong> и нажмите «ОК». Это необходимо для правильной маршрутизации трафика в системе.</p>
+                        </div>
+                        <div class="step-image-container">
+                            <img src="2.png" alt="Запуск от имени администратора" class="step-img">
+                        </div>
+                    </div>
+
+                    <!-- STEP 2 -->
+                    <div class="step-item">
+                        <div>
+                            <div class="step-badge">2</div>
+                            <h2 class="step-title">Копирование ссылки подписки</h2>
+                            <p class="step-text">Скопируйте ссылку подписки, которую вам выдали после оплаты в нашем Telegram-боте. 
+                            Она содержит ваши персональные ключи шифрования.</p>
+                        </div>
+                        <div class="mockup-container">
+                            <div style="text-align: center; color: var(--subtle); padding: 20px; border: 1px dashed var(--line); border-radius: var(--radius); background: rgba(255,255,255,0.01); width: 100%;">
+                                <i class="fa-regular fa-copy" style="font-size: 2.2rem; color: var(--accent-cyan); margin-bottom: 10px;"></i>
+                                <div style="font-size: 0.8rem; font-family: monospace; word-break: break-all; color: var(--accent-warm);">https://oncdev.duckdns.org:8012/...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3 -->
+                    <div class="step-item">
+                        <div>
+                            <div class="step-badge">3</div>
+                            <h2 class="step-title">Запуск v2rayN</h2>
+                            <p class="step-text">Запустите <strong>v2rayN.exe</strong>. При первом запуске приложение свернется в трей (панель задач рядом с часами). Найдите иконку с синей или красной буквой «V» в трее и нажмите на неё дважды, чтобы открыть главное окно.</p>
+                        </div>
+                        <div class="mockup-container">
+                            <div style="text-align: center; color: var(--subtle);">
+                                <i class="fa-solid fa-play" style="font-size: 3rem; color: var(--accent-cyan); margin-bottom: 12px;"></i>
+                                <div style="font-size: 0.85rem;">Запуск приложения</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4 -->
+                    <div class="step-item">
+                        <div>
+                            <div class="step-badge">4</div>
+                            <h2 class="step-title">Импорт подписки</h2>
+                            <p class="step-text">В верхнем меню приложения нажмите на вкладку <strong>«Серверы»</strong> (Servers) и выберите пункт <strong>«Импорт массива URL из буфера обмена»</strong> (Import bulk URL from clipboard).</p>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mockup-window">
+                                <div class="window-titlebar">
+                                    <span class="window-title">v2rayN - Серверы</span>
+                                    <div class="window-controls">
+                                        <div class="window-dot"></div>
+                                        <div class="window-dot maximize"></div>
+                                        <div class="window-dot close"></div>
+                                    </div>
+                                </div>
+                                <div class="window-menu">
+                                    <div class="menu-item active">Серверы</div>
+                                    <div class="menu-item">Группа подписки</div>
+                                    <div class="mock-dropdown">
+                                        <div class="dropdown-opt">Добавить сервер [VMess]</div>
+                                        <div class="dropdown-opt active">
+                                            Импорт массива URL
+                                            <i class="fa-solid fa-hand-pointer click-pointer-win"></i>
+                                        </div>
+                                        <div class="dropdown-opt">Сканировать QR-код</div>
+                                    </div>
+                                </div>
+                                <div class="window-content"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5 -->
+                    <div class="step-item">
+                        <div>
+                            <div class="step-badge">5</div>
+                            <h2 class="step-title">Обновление конфигураций</h2>
+                            <p class="step-text">Для загрузки актуальных адресов серверов нажмите на вкладку <strong>«Группа подписки»</strong> (Subscription group) в верхнем меню и нажмите кнопку <strong>«Обновить подписку без прокси»</strong> (Update subscription without proxy).</p>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mockup-window">
+                                <div class="window-titlebar">
+                                    <span class="window-title">v2rayN - Обновление</span>
+                                    <div class="window-controls">
+                                        <div class="window-dot"></div>
+                                        <div class="window-dot"></div>
+                                        <div class="window-dot close"></div>
+                                    </div>
+                                </div>
+                                <div class="window-menu">
+                                    <div class="menu-item">Серверы</div>
+                                    <div class="menu-item active">Группа подписки</div>
+                                    <div class="mock-dropdown" style="left: 60px;">
+                                        <div class="dropdown-opt">Настройка группы подписки</div>
+                                        <div class="dropdown-opt active">
+                                            Обновить подписку без прокси
+                                            <i class="fa-solid fa-hand-pointer click-pointer-win"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="window-content"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 6 -->
+                    <div class="step-item">
+                        <div>
+                            <div class="step-badge">6</div>
+                            <h2 class="step-title">Выбор активного сервера</h2>
+                            <p class="step-text">В центральной части окна появится список доступных локаций.<br> 
+                            Чтобы выбрать сервер, кликните по нему дважды левой кнопкой мыши (строка окрасится в синий цвет), либо нажмите на него правой кнопкой мыши (ПКМ) и выберите <strong>«Установить как активный сервер»</strong>.</p>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mockup-window">
+                                <div class="window-titlebar">
+                                    <span class="window-title">v2rayN - Список серверов</span>
+                                    <div class="window-controls">
+                                        <div class="window-dot"></div>
+                                        <div class="window-dot"></div>
+                                        <div class="window-dot close"></div>
+                                    </div>
+                                </div>
+                                <div class="window-menu">
+                                    <div class="menu-item">Серверы</div>
+                                    <div class="menu-item">Группа подписки</div>
+                                </div>
+                                <div class="window-content">
+                                    <div class="mock-servers-list">
+                                        <div class="mock-server-row active">
+                                            <span>🇳🇱 Netherlands - Server 1</span>
+                                            <span>[Active]</span>
+                                            <div class="mock-context-menu">
+                                                <div class="context-opt active">
+                                                    Установить как активный
+                                                    <i class="fa-solid fa-hand-pointer click-pointer-win"></i>
+                                                </div>
+                                                <div class="context-opt">Тест пинга (Ctrl+P)</div>
+                                            </div>
+                                        </div>
+                                        <div class="mock-server-row">
+                                            <span>🇩🇪 Germany - Server 2</span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 7 -->
+                    <div class="step-item">
+                        <div>
+                            <div class="step-badge">7</div>
+                            <h2 class="step-title">Включение VPN-режима</h2>
+                            <p class="step-text">В нижней части окна программы настройте режим работы:
+                            <ol>
+                                <li>Переведите ползунок <strong>«Режим VPN»</strong> (VPN Mode) в положение <strong>ВКЛ</strong> (кнопка загорится зеленым цветом).</li>
+                                <li>Убедитесь, что параметр <strong>«Системный прокси»</strong> установлен в значение <strong>«Не менять системный прокси»</strong>.</li>
+                            </ol>
+                            Для отключения VPN просто переведите ползунок «Режим VPN» в положение <strong>ВЫКЛ</strong>.</p>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mockup-window">
+                                <div class="window-titlebar">
+                                    <span class="window-title">v2rayN - Статус</span>
+                                    <div class="window-controls">
+                                        <div class="window-dot"></div>
+                                        <div class="window-dot"></div>
+                                        <div class="window-dot close"></div>
+                                    </div>
+                                </div>
+                                <div class="window-content" style="min-height: 40px;">
+                                    <div style="text-align: center; color: var(--subtle);">Подключено к Netherlands</div>
+                                </div>
+                                <div class="window-statusbar">
+                                    <div class="status-row vpn-toggle-row">
+                                        <span>Режим VPN</span>
+                                        <div class="mock-toggle"></div>
+                                    </div>
+                                    <div class="status-row">
+                                        <span>Системный прокси:</span>
+                                        <div class="mock-select active">Не менять прокси</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 8 -->
+                    <div class="step-item">
+                        <div>
+                            <div class="step-badge">8</div>
+                            <h2 class="step-title">Настройка маршрутизации</h2>
+                            <p class="step-text">В нижнем поле <strong>«Маршрутизация»</strong> выберите профиль работы:</p>
+                            <p class="step-text">
+                                • <strong>[RU] VPN на ЗАБЛОКИРОВАННОЕ</strong> (Рекомендуется) — VPN будет включаться автоматически только при открытии заблокированных ресурсов (например, запрещенных сайтов, Instagram и др.). Обычный трафик будет идти на полной скорости напрямую.<br><br>
+                                • <strong>VPN на ВСЁ</strong> — весь трафик компьютера перенаправляется через шифрованный туннель VPN.
+                            </p>
+                        </div>
+                        <div class="mockup-container">
+                            <div class="mockup-window">
+                                <div class="window-titlebar">
+                                    <span class="window-title">v2rayN - Маршрутизация</span>
+                                    <div class="window-controls">
+                                        <div class="window-dot"></div>
+                                        <div class="window-dot"></div>
+                                        <div class="window-dot close"></div>
+                                    </div>
+                                </div>
+                                <div class="window-content" style="min-height: 40px;"></div>
+                                <div class="window-statusbar">
+                                    <div class="status-row">
+                                        <span>Маршрутизация:</span>
+                                        <div class="mock-select active">
+                                            VPN на ЗАБЛОКИРОВАННОЕ
+                                            <i class="fa-solid fa-hand-pointer click-pointer-win" style="right: -10px; bottom: -8px;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="important-quote">
+                    <strong>Обратите внимание:</strong> Если при использовании профиля <em>«[RU] VPN на ЗАБЛОКИРОВАННОЕ»</em> какой-то необходимый вам ресурс или IP-адрес не открывается, пожалуйста, обратитесь в нашу поддержку — мы оперативно добавим его в списки маршрутизации.
+                </div>
+
+                <div class="troubleshoot-box">
+                    <h2><i class="fa-solid fa-circle-question"></i> Что делать, если не работает?</h2>
+                    <ol>
+                        <li><strong>Обновите подписку:</strong> Попробуйте еще раз выполнить пункт <strong>№5</strong> — возможно, конфигурации серверов на нашей стороне были обновлены, и вам нужно получить свежие ключи.</li>
+                        <li><strong>Брандмауэр Windows:</strong> Попробуйте временно отключить системный брандмауэр или антивирус, которые могут блокировать сетевые запросы программы.</li>
+                        <li><strong>Защитник Windows:</strong> Добавьте всю директорию клиента (папку <code>v2rayN</code>) в исключения Защитника Windows и антивирусов.</li>
+                        <li><strong>Конфликт ПО:</strong> Проверьте, не запущены ли в системе программы Radmin VPN или Hamachi. Они создают свои виртуальные адаптеры и часто конфликтуют с клиентом — удалите их.</li>
+                        <li><strong>Сетевые TAP-адаптеры:</strong> Откройте Диспетчер устройств -> Сетевые адаптеры. Если вы видите TAP-адаптеры от других VPN-клиентов, удалите их, выбрав пункт «Удалить программное обеспечение драйвера».</li>
+                        <li><strong>Zapret / Goodbyedpi:</strong> Если вы ранее настраивали обход блокировок с помощью утилиты Zapret или аналогичных скриптов, обязательно остановите их службу через файл <code>service.bat</code>, так как они вызывают несовместимость.</li>
+                        <li><strong>Путь к клиенту:</strong> Убедитесь, что папка с программой не расположена внутри OneDrive (это ломает доступ к файлам настроек). Также путь к папке не должен содержать кириллических букв — переместите папку в корень диска <code>C:\</code>.</li>
+                        <li><strong>Синхронизация времени:</strong> Перейдите в параметры даты и времени Windows и нажмите «Синхронизировать сейчас». Если системное время расходится с сервером более чем на 90 секунд, сетевой протокол отклонит подключение.</li>
+                    </ol>
+                </div>
+
+                <div class="support-box">
+                    <h3>Всё еще нужна помощь?</h3>
+                    <p>Наша техническая поддержка поможет разобраться с любой ошибкой при установке или использовании VPN.</p>
+                    <a href="https://t.me/polisours" target="_blank" class="button primary">
+                        <i class="fa-brands fa-telegram"></i> Написать в поддержку
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>
+                Права на представленный контент принадлежат
+                <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>.
+                Сайт сделали
+                <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
+                и
+                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
+                с любовью.
+            </p>
+            <p>
+                <a href="/wiki/tos/" target="_blank">ToS (Условия)</a> •
+                <a href="/wiki/refund/" target="_blank">Оферта и возврат</a> •
+                <a href="/wiki/privacy/" target="_blank">Конфиденциальность</a>
+            </p>
+            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All
+                rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="../../resources/legal-consent.js"></script>
+</body>
+
+</html>
