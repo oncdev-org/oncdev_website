@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База знаний - oncdev</title>
+    <link rel="stylesheet" href="../resources/shared.css">
+    <link rel="stylesheet" href="wiki-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .wiki-portal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .portal-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .portal-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .portal-card i {
+            font-size: 2.2rem;
+            color: var(--accent-cyan);
+        }
+
+        .portal-card h3 {
+            font-size: 1.4rem;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .portal-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .portal-links-list {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .portal-link-item {
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.15s;
+        }
+
+        .portal-link-item:hover {
+            color: var(--accent-cyan);
+        }
+
+        @media (max-width: 768px) {
+            .wiki-portal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob-interactive" id="interactive-blob"></div>
+    </div>
+
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand-link" href="/" aria-label="oncdev - главная страница">
+                <span class="brand-mark">OC</span>
+                <span>oncdev</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Основная навигация">
+                <a href="/timer">Таймер</a>
+                <a href="/">Главная</a>
+                <a href="/vpn">VPN</a>
+                <a href="/about">О нас</a>
+            </nav>
+
+            <div class="social-links" aria-label="Социальные ссылки">
+                <a href="https://t.me/oncubedev" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                    <img src="../resources/tg.png" alt="">
+                </a>
+                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" aria-label="Boosty">
+                    <img src="../resources/boosty.png" alt="">
+                </a>
+            </div>
+        </header>
+
+        <main class="wiki-container">
+            <div class="wiki-layout">
+                <!-- Sidebar navigation -->
+                <aside class="wiki-sidebar">
+                    <div class="wiki-sidebar-header">
+                        <i class="fa-solid fa-book"></i>
+                        <span>База знаний</span>
+                    </div>
+
+                    <div class="wiki-menu-section">
+                        <div class="wiki-menu-title">Инструкции</div>
+                        <ul class="wiki-menu-list">
+                            <li class="wiki-menu-item"><a href="v2ray/"><i class="fa-solid fa-mobile-screen-button"></i> Смартфоны</a></li>
+                            <li class="wiki-menu-item"><a href="v2rayn/"><i class="fa-solid fa-laptop"></i> Компьютеры</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="wiki-menu-section">
+                        <div class="wiki-menu-title">Документы</div>
+                        <ul class="wiki-menu-list">
+                            <li class="wiki-menu-item"><a href="tos/"><i class="fa-solid fa-file-contract"></i> Соглашение (ToS)</a></li>
+                            <li class="wiki-menu-item"><a href="privacy/"><i class="fa-solid fa-shield-halved"></i> Конфиденциальность</a></li>
+                            <li class="wiki-menu-item"><a href="refund/"><i class="fa-solid fa-file-invoice-dollar"></i> Оферта и возврат</a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <!-- Main Portal Content -->
+                <div class="wiki-card" style="backdrop-filter: blur(10px);">
+                    <h1>База знаний oncdev</h1>
+                    <p>Добро пожаловать в нашу базу знаний и документации. Здесь вы найдёте подробные пошаговые инструкции по настройке и использованию наших сервисов, а также юридические соглашения.</p>
+                    
+                    <div class="wiki-portal-grid">
+                        <div class="portal-card">
+                            <i class="fa-solid fa-square-rss"></i>
+                            <h3>Настройка VPN</h3>
+                            <p>Пошаговые руководства по подключению нашего VPN-сервиса к смартфонам и компьютерам.</p>
+                            <div class="portal-links-list">
+                                <a href="v2ray/" class="portal-link-item">
+                                    <i class="fa-solid fa-mobile-screen-button"></i> Подключение на смартфонах
+                                </a>
+                                <a href="v2rayn/" class="portal-link-item">
+                                    <i class="fa-solid fa-laptop"></i> Подключение на Windows
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="portal-card">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                            <h3>Документы</h3>
+                            <p>Правила использования нашего сервиса, политика конфиденциальности и условия возврата средств.</p>
+                            <div class="portal-links-list">
+                                <a href="tos/" class="portal-link-item">
+                                    <i class="fa-solid fa-file-contract"></i> Пользовательское соглашение
+                                </a>
+                                <a href="privacy/" class="portal-link-item">
+                                    <i class="fa-solid fa-shield-halved"></i> Политика конфиденциальности
+                                </a>
+                                <a href="refund/" class="portal-link-item">
+                                    <i class="fa-solid fa-file-invoice-dollar"></i> Публичная оферта и возврат
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>
+                Права на представленный контент принадлежат
+                <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>.
+                Сайт сделали
+                <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
+                и
+                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
+                с любовью.
+            </p>
+            <p>
+                <a href="tos/" target="_blank">ToS (Условия)</a> •
+                <a href="refund/" target="_blank">Оферта и возврат</a> •
+                <a href="privacy/" target="_blank">Конфиденциальность</a>
+            </p>
+            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All
+                rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="../resources/legal-consent.js"></script>
+</body>
+
+</html>

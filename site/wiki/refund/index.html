@@ -6,96 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Refund Policy - oncdev</title>
     <link rel="stylesheet" href="../../resources/shared.css">
-    <style>
-        .legal-container {
-            min-height: calc(100vh - 200px);
-            display: flex;
-            justify-content: center;
-            padding: 40px 0;
-        }
-
-        .legal-card {
-            max-width: 900px;
-            width: 100%;
-            padding: 48px;
-            box-sizing: border-box;
-        }
-
-        .legal-card h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 32px;
-            line-height: 1.2;
-            color: var(--text);
-            border-bottom: 1px solid var(--line);
-            padding-bottom: 16px;
-        }
-
-        .legal-card h2 {
-            font-size: 1.5rem;
-            font-weight: 850;
-            margin-top: 32px;
-            margin-bottom: 16px;
-            color: var(--accent-cyan);
-        }
-
-        .legal-card h3 {
-            font-size: 1.2rem;
-            font-weight: 750;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            color: var(--text);
-        }
-
-        .legal-card p {
-            color: var(--muted);
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 16px;
-            text-align: justify;
-        }
-
-        .legal-card ul,
-        .legal-card ol {
-            margin-bottom: 20px;
-            padding-left: 24px;
-            color: var(--muted);
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-
-        .legal-card li {
-            margin-bottom: 8px;
-        }
-
-        .contact-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            padding: 24px;
-            margin-top: 32px;
-        }
-
-        .contact-box h3 {
-            margin-top: 0;
-            color: var(--accent-cyan);
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--subtle);
-            font-weight: 700;
-            font-size: 0.95rem;
-            margin-bottom: 24px;
-            transition: color 0.2s ease;
-        }
-
-        .back-link:hover {
-            color: var(--text);
-        }
-    </style>
+    <link rel="stylesheet" href="../wiki-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -112,8 +24,34 @@
             </div>
         </header>
 
-        <main class="legal-container">
-            <div class="glass-card legal-card">
+        <main class="wiki-container">
+            <div class="wiki-layout">
+                <!-- Sidebar navigation -->
+                <aside class="wiki-sidebar">
+                    <div class="wiki-sidebar-header">
+                        <i class="fa-solid fa-book"></i>
+                        <span>База знаний</span>
+                    </div>
+
+                    <div class="wiki-menu-section">
+                        <div class="wiki-menu-title">Инструкции</div>
+                        <ul class="wiki-menu-list">
+                            <li class="wiki-menu-item"><a href="../v2ray/"><i class="fa-solid fa-mobile-screen-button"></i> Смартфоны</a></li>
+                            <li class="wiki-menu-item"><a href="../v2rayn/"><i class="fa-solid fa-laptop"></i> Компьютеры</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="wiki-menu-section">
+                        <div class="wiki-menu-title">Документы</div>
+                        <ul class="wiki-menu-list">
+                            <li class="wiki-menu-item"><a href="../tos/"><i class="fa-solid fa-file-contract"></i> Соглашение (ToS)</a></li>
+                            <li class="wiki-menu-item"><a href="../privacy/"><i class="fa-solid fa-shield-halved"></i> Конфиденциальность</a></li>
+                            <li class="wiki-menu-item active"><a href="../refund/"><i class="fa-solid fa-file-invoice-dollar"></i> Оферта и возврат</a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <div class="wiki-card">
                 <a href="/" class="back-link">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -393,7 +331,6 @@
                                 href="mailto:contact@oncdev.ru">contact@oncdev.ru</a>.</p>
                     </div>
                 </div>
-
             </div>
         </main>
 
