@@ -151,7 +151,13 @@ function validateStep2() {
     const usernameInput = document.getElementById('buy-username');
     const btn = document.getElementById('btn-goto-step-3');
     const checkbox = document.getElementById('no-username-checkbox');
+    const noTgCheckbox = document.getElementById('no-tg-access-checkbox');
     if (!usernameInput || !btn) return;
+    
+    if (noTgCheckbox && noTgCheckbox.checked) {
+        btn.disabled = false;
+        return;
+    }
     
     let val = usernameInput.value.trim();
     if (checkbox && checkbox.checked) {
@@ -171,9 +177,14 @@ function toggleUsernameField(checkbox) {
     const usernameInput = document.getElementById('buy-username');
     const prefix = document.getElementById('username-prefix');
     const hint = document.getElementById('username-hint');
+    const noTgCheckbox = document.getElementById('no-tg-access-checkbox');
     if (!usernameInput || !prefix || !hint) return;
     
     if (checkbox.checked) {
+        if (noTgCheckbox) noTgCheckbox.checked = false;
+        const noTgWarning = document.getElementById('no-tg-warning');
+        if (noTgWarning) noTgWarning.classList.add('hidden');
+        usernameInput.disabled = false;
         prefix.textContent = 'ID';
         usernameInput.placeholder = '5123456789';
         usernameInput.value = '';
@@ -183,6 +194,31 @@ function toggleUsernameField(checkbox) {
         usernameInput.placeholder = 'vobimngr';
         usernameInput.value = '';
         hint.textContent = 'Никнейм должен быть указан без ошибок — по нему привязывается VPN.';
+    }
+    validateStep2();
+}
+
+function toggleNoTgAccessField(checkbox) {
+    const usernameInput = document.getElementById('buy-username');
+    const noUsernameCheckbox = document.getElementById('no-username-checkbox');
+    const prefix = document.getElementById('username-prefix');
+    const hint = document.getElementById('username-hint');
+    const noTgWarning = document.getElementById('no-tg-warning');
+    if (!usernameInput || !prefix || !hint) return;
+
+    if (checkbox.checked) {
+        if (noUsernameCheckbox) noUsernameCheckbox.checked = false;
+        usernameInput.disabled = true;
+        usernameInput.value = '';
+        prefix.textContent = '@';
+        usernameInput.placeholder = 'Временный аккаунт';
+        hint.textContent = 'Подписка будет оформлена как временный аккаунт. Вы привяжете её в Telegram-боте позже.';
+        if (noTgWarning) noTgWarning.classList.remove('hidden');
+    } else {
+        usernameInput.disabled = false;
+        usernameInput.placeholder = 'vobimngr';
+        hint.textContent = 'Никнейм должен быть указан без ошибок — по нему привязывается VPN.';
+        if (noTgWarning) noTgWarning.classList.add('hidden');
     }
     validateStep2();
 }
@@ -294,7 +330,10 @@ function prepareStep3Summary() {
     priceEl.textContent = `${finalPrice} руб.`;
     planEl.textContent = `${plan.name} (${plan.days} дней)`;
     
-    if (checkbox && checkbox.checked) {
+    const noTgCheckbox = document.getElementById('no-tg-access-checkbox');
+    if (noTgCheckbox && noTgCheckbox.checked) {
+        usernameEl.textContent = 'Временный аккаунт (привязка в боте)';
+    } else if (checkbox && checkbox.checked) {
         usernameEl.textContent = `Telegram ID: ${username}`;
     } else {
         usernameEl.textContent = `@${username.replace(/^@/, '')}`;
@@ -492,8 +531,11 @@ async function submitOrder() {
     
     const usernameInput = document.getElementById('buy-username');
     const checkbox = document.getElementById('no-username-checkbox');
+    const noTgCheckbox = document.getElementById('no-tg-access-checkbox');
     let username = usernameInput.value.trim();
-    if (checkbox && checkbox.checked) {
+    if (noTgCheckbox && noTgCheckbox.checked) {
+        username = 'tmp_pending';
+    } else if (checkbox && checkbox.checked) {
         if (/^\d+$/.test(username)) {
             username = 'id' + username;
         }
@@ -530,6 +572,14 @@ async function submitOrder() {
         if (response.ok && data.success) {
             // Setup step 4 (Success page)
             document.getElementById('success-saved-code').textContent = data.payment_code;
+            const noTgNotice = document.getElementById('no-tg-success-notice');
+            if (noTgNotice) {
+                if (noTgCheckbox && noTgCheckbox.checked) {
+                    noTgNotice.classList.remove('hidden');
+                } else {
+                    noTgNotice.classList.add('hidden');
+                }
+            }
             goToStep(4);
         } else {
             throw new Error(data.error || 'Неизвестная ошибка на сервере');
@@ -628,7 +678,11 @@ async function handleCheckOrder(event) {
         }
         
         if (data.status === 'approved') {
-            if (data.username.startsWith('id') && /^\d+$/.test(data.username.substring(2))) {
+            if (data.tg_username) {
+                document.getElementById('res-username').textContent = `${data.tg_username} (привязан)`;
+            } else if (data.username.startsWith('tmp_')) {
+                document.getElementById('res-username').textContent = 'Временный аккаунт (привязка в боте @oncdevbot)';
+            } else if (data.username.startsWith('id') && /^\d+$/.test(data.username.substring(2))) {
                 document.getElementById('res-username').textContent = `Telegram ID: ${data.username.substring(2)}`;
             } else {
                 document.getElementById('res-username').textContent = `@${data.username}`;
@@ -646,7 +700,11 @@ async function handleCheckOrder(event) {
             resApproved.classList.remove('hidden');
         } else if (data.status === 'pending') {
             document.getElementById('pending-code').textContent = code;
-            if (data.username.startsWith('id') && /^\d+$/.test(data.username.substring(2))) {
+            if (data.tg_username) {
+                document.getElementById('pending-username').textContent = `${data.tg_username} (привязан)`;
+            } else if (data.username.startsWith('tmp_')) {
+                document.getElementById('pending-username').textContent = 'Временный аккаунт (привязка в боте @oncdevbot)';
+            } else if (data.username.startsWith('id') && /^\d+$/.test(data.username.substring(2))) {
                 document.getElementById('pending-username').textContent = `Telegram ID: ${data.username.substring(2)}`;
             } else {
                 document.getElementById('pending-username').textContent = `@${data.username}`;

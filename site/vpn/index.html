@@ -98,14 +98,26 @@
                                 <input type="text" id="buy-username" placeholder="vobimngr" required autocomplete="off"
                                     oninput="validateStep2()" />
                             </div>
-                            <div class="checkbox-group" style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
-                                <input type="checkbox" id="no-username-checkbox" onchange="toggleUsernameField(this)" style="width: auto; cursor: pointer;" />
-                                <label for="no-username-checkbox" style="font-size: 0.85rem; color: var(--muted); cursor: pointer; user-select: none;">
-                                    У меня нет юзернейма в Telegram (нет @username)
-                                </label>
+                            <div class="checkbox-group" style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="checkbox" id="no-username-checkbox" onchange="toggleUsernameField(this)" style="width: auto; cursor: pointer;" />
+                                    <label for="no-username-checkbox" style="font-size: 0.85rem; color: var(--muted); cursor: pointer; user-select: none;">
+                                        У меня нет юзернейма в Telegram (нет @username)
+                                    </label>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="checkbox" id="no-tg-access-checkbox" onchange="toggleNoTgAccessField(this)" style="width: auto; cursor: pointer;" />
+                                    <label for="no-tg-access-checkbox" style="font-size: 0.85rem; color: var(--accent-orange, #f59e0b); cursor: pointer; user-select: none; font-weight: 600;">
+                                        Telegram не работает / не знаю ID (привязать позже)
+                                    </label>
+                                </div>
                             </div>
                             <span class="field-hint" id="username-hint">Никнейм должен быть указан без ошибок — по нему привязывается
                                 VPN.</span>
+                            
+                            <div id="no-tg-warning" class="alert alert-danger hidden" style="display: block; margin-top: 12px; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 12px 16px; border-radius: 8px; font-size: 0.85rem; line-height: 1.4;">
+                                <b>ВНИМАНИЕ:</b> Обязательно запишите и сохраните ваш 6-значный код заказа на финальном шаге! Без доступа к Telegram забрать ваш VPN-ключ можно будет только по этому коду на вкладке «Забрать ключ», а затем привязать его в боте <a href="https://t.me/oncdevbot" target="_blank" style="color: #6366f1; text-decoration: underline; font-weight: bold;">@oncdevbot</a>.
+                            </div>
                         </div>
 
                         <div class="form-group promo-group">
@@ -146,34 +158,37 @@
                         <div class="payment-details-box">
                             <h4>Реквизиты для оплаты:</h4>
                             <div class="requisites-list">
-                                <div class="requisite-item">
-                                    <div class="req-label">
+                                <div class="requisite-item" style="border: 1px solid rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.04);">
+                                    <div class="req-label" style="font-size: 0.88rem; color: var(--text);">
                                         <i class="fa-solid fa-phone"></i> СБП (Получатель: <span id="req-receiver-sbp"
-                                            class="font-weight-bold">Платон П.</span>)
+                                            class="font-weight-bold" style="color: var(--accent-cyan);">Платон П.</span>)
                                     </div>
-                                    <div class="req-value-row">
-                                        <code id="req-phone">+79525908980</code>
+                                    <div class="req-value-row" style="margin-top: 4px;">
+                                        <code id="req-phone" style="font-size: 1.15rem; color: var(--accent-cyan);">+79525908980</code>
                                         <button class="btn-copy-small" onclick="copyText('req-phone')"><i
                                                 class="fa-regular fa-copy"></i></button>
                                     </div>
-                                    <span class="bank-tag"><i class="fa-solid fa-building-columns"></i> Т-Банк</span>
-                                </div>
-                                <div class="requisite-item">
-                                    <div class="req-label">
-                                        <i class="fa-solid fa-credit-card"></i> Номер карты (Получатель: <span
-                                            id="req-receiver-card" class="font-weight-bold">Платон П.</span>)
+                                    <div style="margin-top: 8px; font-weight: 800; font-size: 0.95rem; color: #fbbf24;">
+                                        БАНК: Ozon Банк (ОЗОН БАНК)
                                     </div>
-                                    <div class="req-value-row">
-                                        <code id="req-card">2200701378078007</code>
+                                </div>
+                                <div class="requisite-item" style="border: 1px solid rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.04);">
+                                    <div class="req-label" style="font-size: 0.88rem; color: var(--text);">
+                                        <i class="fa-solid fa-credit-card"></i> Номер карты (Получатель: <span
+                                            id="req-receiver-card" class="font-weight-bold" style="color: var(--accent-cyan);">Платон П.</span>)
+                                    </div>
+                                    <div class="req-value-row" style="margin-top: 4px;">
+                                        <code id="req-card" style="font-size: 1.15rem; color: var(--accent-cyan);">2204320380053084</code>
                                         <button class="btn-copy-small" onclick="copyText('req-card')"><i
                                                 class="fa-regular fa-copy"></i></button>
                                     </div>
+                                    <div style="margin-top: 8px; font-weight: 800; font-size: 0.95rem; color: #fbbf24;">
+                                        БАНК: Ozon Банк (ОЗОН БАНК)
+                                    </div>
                                 </div>
                             </div>
-                            <div class="payment-warning">
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                                <span><b>ВНИМАНИЕ:</b> В комментарии к платежу <b>НИЧЕГО НЕ ПИШИТЕ</b>! Оставьте поле
-                                    комментария пустым.</span>
+                            <div class="payment-warning" style="display: block; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); color: #fbbf24; padding: 12px 14px; border-radius: 8px; font-size: 0.88rem; line-height: 1.4;">
+                                <b>ВНИМАНИЕ:</b> В комментарии к платежу <b>НИЧЕГО НЕ ПИШИТЕ</b> — оставьте поле комментария пустым.
                             </div>
                         </div>
 
@@ -238,6 +253,9 @@
                                         class="fa-regular fa-copy"></i></button>
                             </div>
                         </div>
+                        <div id="no-tg-success-notice" class="hidden" style="margin-top: 16px; padding: 14px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 10px; color: #fbbf24; font-size: 0.88rem; text-align: left; line-height: 1.4;">
+                            <b>ОБЯЗАТЕЛЬНО СОХРАНИТЕ КОД ЗАКАЗА:</b> Вы оформили подписку без доступа к Telegram. По коду выше вы сможете забрать VPN-ключ на вкладке «Забрать ключ». После подключения к VPN откройте наш Telegram-бот и нажмите кнопку <b>«Привязать покупку»</b>, чтобы привязать подписку к вашему аккаунту!
+                        </div>
                         <div class="step-actions justify-center">
                             <button class="button primary" onclick="goToCheckOrderTab()">
                                 Проверить готовность
@@ -271,20 +289,6 @@
                         </div>
                     </form>
 
-                    <div class="quick-instructions" style="margin-top: 32px; border-top: 1px solid var(--line); padding-top: 24px;">
-                        <h4 style="margin-bottom: 12px; color: var(--text); font-size: 0.95rem; font-weight: 700;"><i class="fa-solid fa-book-open" style="color: var(--accent-cyan); margin-right: 6px;"></i> Инструкции по настройке:</h4>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                            <a href="/wiki/v2ray/" target="_blank" class="instruction-card" style="font-size: 0.85rem; padding: 10px 14px;">
-                                <i class="fa-solid fa-mobile-screen-button instruction-icon" style="font-size: 1.1rem; width: 24px;"></i>
-                                <span>Для смартфонов</span>
-                            </a>
-                            <a href="/wiki/v2rayn/" target="_blank" class="instruction-card" style="font-size: 0.85rem; padding: 10px 14px;">
-                                <i class="fa-solid fa-laptop instruction-icon" style="font-size: 1.1rem; width: 24px;"></i>
-                                <span>Для Windows</span>
-                            </a>
-                        </div>
-                    </div>
-
                     <!-- Loading State -->
                     <div id="check-loading" class="spinner-container hidden">
                         <div class="spinner"></div>
@@ -295,7 +299,7 @@
                     <div id="check-results" class="results-container hidden">
                         <!-- Order found, approved -->
                         <div id="result-approved" class="result-block hidden">
-                            <div class="status-badge status-active">
+                            <div class="status-badge status-active" style="font-size: 1.25rem; padding: 10px 20px; font-weight: 700; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px;">
                                 <i class="fa-solid fa-circle-check"></i> Оплата подтверждена
                             </div>
                             <div class="info-grid">
@@ -312,7 +316,6 @@
                             <div class="key-card">
                                 <div class="key-header">
                                     <span>Ваша ссылка на подписку VLESS:</span>
-                                    <span class="badge badge-accent">VLESS Link</span>
                                 </div>
                                 <div class="key-body">
                                     <code id="vless-link">vless://...</code>
