@@ -1,7 +1,3 @@
-<div align="center">
-<a href="https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg"></a>
-</div>
-
 Check work:
 [![aislop](https://badges.scanaislop.com/score/oncdev-org/oncdev_website.svg)](https://scanaislop.com)
 
