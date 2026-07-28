@@ -184,9 +184,81 @@
         });
     }
 
+    // 4. Smooth 3D Parallax Tilt Engine (Applied strictly to Project Cards)
+    function setup3DTiltEffect() {
+        // Target strictly Project Showcase Cards
+        const projectCards = document.querySelectorAll('.bento-section .bento-card, .project-card');
+        const MAX_TILT_DEGREE = 5.5; // Subtle, elegant tilt angle
+
+        projectCards.forEach(card => {
+            let reqId = null;
+            const popElements = card.querySelectorAll('h2, h3, p, .button, .tech-pill, .bento-header-tag, .timer-preview-box, .bento-sublinks, .bento-svg-graphic');
+
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease';
+                popElements.forEach(el => {
+                    el.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.45s ease, filter 0.45s ease';
+                });
+            });
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const normX = (x - centerX) / centerX;
+                const normY = (y - centerY) / centerY;
+
+                const rotateX = -1 * normY * MAX_TILT_DEGREE;
+                const rotateY = normX * MAX_TILT_DEGREE;
+
+                const popX = normX * 6;
+                const popY = normY * 6;
+
+                if (reqId) cancelAnimationFrame(reqId);
+                reqId = requestAnimationFrame(() => {
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.015, 1.015, 1.015)`;
+
+                    popElements.forEach(el => {
+                        const isTitle = el.tagName === 'H2' || el.tagName === 'H3';
+                        const isPrimary = el.classList.contains('button');
+                        const depthMultiplier = isPrimary ? 1.4 : (isTitle ? 1.1 : 0.8);
+
+                        const shiftX = (popX * depthMultiplier).toFixed(1);
+                        const shiftY = (popY * depthMultiplier).toFixed(1);
+
+                        el.style.transform = `translate3d(${shiftX}px, ${shiftY}px, 20px) scale(1.02)`;
+                        if (isTitle || el.tagName === 'P') {
+                            el.style.textShadow = `0 ${(8 + Math.abs(popY)).toFixed(0)}px 16px rgba(0, 0, 0, 0.85)`;
+                        }
+                    });
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                if (reqId) cancelAnimationFrame(reqId);
+                // Ultra-smooth return transition
+                card.style.transition = 'transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease';
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+
+                popElements.forEach(el => {
+                    el.style.transition = 'transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.75s ease, filter 0.75s ease';
+                    el.style.transform = `translate3d(0px, 0px, 0px) scale(1)`;
+                    el.style.textShadow = 'none';
+                });
+            });
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         injectCommandPaletteHTML();
         setupCommandPalette();
         setupScrollReveal();
+        setup3DTiltEffect();
     });
 })();

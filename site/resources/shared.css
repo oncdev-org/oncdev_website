@@ -566,3 +566,29 @@ pre {
     white-space: pre-wrap;
     word-break: break-word;
 }
+
+/* ==========================================================================
+   3D PARALLAX TILT & SPATIAL FLOATING ELEVATION SYSTEM (PROJECTS ONLY)
+   ========================================================================== */
+.bento-section .bento-card,
+.project-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    will-change: transform;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bento-section .bento-card h2,
+.bento-section .bento-card h3,
+.bento-section .bento-card p,
+.bento-section .bento-card .button,
+.bento-section .bento-card .bento-header-tag,
+.bento-section .bento-card .tech-pill,
+.bento-section .bento-card .timer-preview-box,
+.bento-section .bento-card .wiki-tag-list,
+.bento-section .bento-card .bento-sublinks,
+.project-card h2,
+.project-card p {
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.45s ease, filter 0.45s ease;
+    will-change: transform;
+}
