@@ -1,0 +1,187 @@
+/* KLTZQU Monochrome Studio Global CSS */
+
+:root {
+  --bg: #050505;
+  --bg-elevated: #0a0a0a;
+  --line: #1c1c1c;
+  --line-hover: #333333;
+  --text: #ffffff;
+  --muted: #888888;
+  --subtle: #555555;
+  --accent: #ffffff;
+  --accent-light: #e5e5e5;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* KLTZQU Top HUD Header */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(5, 5, 5, 0.95);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.main-nav {
+  display: flex;
+  gap: 24px;
+}
+
+.main-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 150ms ease;
+  position: relative;
+  padding: 4px 0;
+}
+
+.main-nav a:hover, .main-nav a.active {
+  color: #ffffff;
+}
+
+.main-nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #ffffff;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cmd-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--bg-elevated);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.cmd-trigger:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.cmd-trigger kbd {
+  background: #1c1c1c;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+
+/* Reference Button Hover Style */
+.btn-kltzqu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 250ms ease;
+}
+
+.btn-kltzqu:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Page Shell & Container */
+.page-shell {
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+.section {
+  padding: 48px 32px;
+}
+
+.site-footer {
+  padding: 32px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-footer a {
+  color: #ffffff;
+  text-decoration: underline;
+}

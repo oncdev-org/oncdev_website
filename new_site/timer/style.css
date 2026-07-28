@@ -1,0 +1,172 @@
+/* Linear / Raycast Timer Styles */
+
+main {
+    padding-top: 40px;
+}
+
+.timer-hero {
+    padding: 30px 0 20px;
+}
+
+.page-title {
+    font-size: clamp(3.2rem, 8vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: #ffffff;
+    background: linear-gradient(180deg, #ffffff 40%, rgba(255, 255, 255, 0.65) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.page-title .dot {
+    color: var(--accent);
+    -webkit-text-fill-color: var(--accent);
+}
+
+.section-subtitle {
+    max-width: 620px;
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.main-timer-card {
+    margin-top: 36px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.timer-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timer-label {
+    color: var(--muted);
+    font-size: 1.05rem;
+}
+
+.timer-display {
+    font-size: clamp(1.6rem, 4.2vw, 2.8rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+    padding: 20px 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.timer-display .num {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: #ffffff;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 12px rgba(94, 106, 210, 0.4);
+}
+
+.timer-display .unit {
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.8em;
+    margin-right: 12px;
+}
+
+.secondary-content {
+    padding: 20px 0 80px;
+}
+
+.secondary-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+.secondary-timer-card {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+}
+
+.secondary-timer-card h3 {
+    font-size: 1.25rem;
+    color: var(--text);
+}
+
+.timer-display.secondary {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    padding: 16px 20px;
+}
+
+.timer-display.secondary .num {
+    color: var(--amber);
+    text-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+}
+
+.quote-note {
+    color: var(--subtle);
+    font-size: 0.88rem;
+    font-style: italic;
+}
+
+.photo-panel {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.9) contrast(1.05);
+}
+
+.photo-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(13, 14, 18, 0.85);
+    backdrop-filter: blur(8px);
+}
+
+@media (max-width: 860px) {
+    .secondary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .main-timer-card,
+    .secondary-timer-card {
+        padding: 20px;
+    }
+
+    .timer-display {
+        padding: 14px 16px;
+        font-size: 1.35rem;
+    }
+
+    .timer-display .unit {
+        margin-right: 6px;
+    }
+}

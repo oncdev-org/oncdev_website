@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таймер ожидания — oncdev</title>
+    <meta name="description" content="Точный таймер ожидания выхода следующего видео PolimerS и архив дат.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin href="../assets/shared-BNd13ojG-BNd13ojG.css">
+</head>
+
+<body class="bg-[#070709] text-slate-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200 min-h-screen">
+
+    <!-- Ambient Top Glow -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[400px] bg-gradient-to-b from-indigo-500/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+
+    <div class="max-w-5xl mx-auto px-6 py-6">
+        <!-- Floating Glass Header -->
+        <header class="sticky top-4 z-50 backdrop-blur-xl bg-slate-950/70 border border-slate-800/60 rounded-full px-6 py-3 flex items-center justify-between shadow-2xl transition-all">
+            <a href="/new_site/main/" class="flex items-center gap-3 font-bold text-base tracking-tight hover:text-indigo-400 transition-colors">
+                <span class="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-500 to-sky-400 flex items-center justify-center text-xs font-mono font-bold text-white shadow-md shadow-indigo-500/30">OC</span>
+                <span>oncdev</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-1">
+                <a href="/new_site/main/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">Главная</a>
+                <a href="/new_site/timer/" class="px-4 py-1.5 rounded-full text-sm font-medium bg-slate-800/60 text-white shadow-inner">Таймер</a>
+                <a href="/new_site/vpn/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">VPN</a>
+                <a href="/new_site/wiki/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">База знаний</a>
+                <a href="/new_site/about/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">О нас</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button class="cmd-trigger inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900/60 text-xs text-slate-400 hover:text-white hover:border-slate-700 transition-all cursor-pointer">
+                    <span>Поиск</span>
+                    <kbd class="font-mono text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">⌘K</kbd>
+                </button>
+            </div>
+        </header>
+
+        <main class="mt-16 sm:mt-20 space-y-16">
+            <!-- Header Section -->
+            <section class="space-y-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-xs font-mono text-indigo-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>REAL-TIME TELEMETRY</span>
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white">Таймер ожидания<span class="text-indigo-500">.</span></h1>
+                <p class="text-lg text-slate-400 max-w-xl">Мониторинг интервала с момента релиза последнего ролика на YouTube-канале PolimerS.</p>
+            </section>
+
+            <!-- Main Countdown Display -->
+            <section class="space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+                    <span class="font-mono text-xs text-slate-400 font-medium">С МОМЕНТА ВЫХОДА ПОСЛЕДНЕГО РОЛИКА:</span>
+                    <span class="font-mono text-xs text-indigo-400">YOUTUBE API LIVE</span>
+                </div>
+
+                <div id="timer" class="py-8 text-3xl sm:text-5xl font-mono font-bold tracking-tight text-white flex flex-wrap items-baseline gap-x-4 gap-y-2">
+                    Загрузка данных...
+                </div>
+            </section>
+
+            <!-- Secondary Milestone & Photo -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8 border-t border-slate-800/60">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-xs font-mono text-amber-400">
+                        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                        <span>ЦЕЛЕВАЯ ДАТА</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">До 2 июля 2026 года осталось:</h3>
+                    <div id="secondary-timer" class="text-2xl sm:text-3xl font-mono font-bold text-amber-400">
+                        Загрузка...
+                    </div>
+                    <p class="text-sm italic text-slate-500 pt-2">«Я говорил примерно» — PolimerS</p>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="relative rounded-2xl overflow-hidden border border-slate-800/80 bg-slate-950 max-h-72">
+                        <img src="../assets/plat-photo-CmtS6RJU-CmtS6RJU.png" alt="PolimerS Photo" class="w-full h-full object-cover object-top opacity-85 hover:opacity-100 transition-opacity">
+                        <span class="absolute bottom-3 right-3 font-mono text-[11px] bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-300 border border-slate-800">АРХИВ • 7 ЯНВАРЯ 2026</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-32 pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <p>© 2025–2026 oncdev. Разработка <a href="/new_site/polisours/" class="text-slate-400 hover:text-white underline">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" class="text-slate-400 hover:text-white underline">Vobi</a>.</p>
+        </footer>
+    </div>
+
+    <script src="../resources/command-palette.js"></script>
+    <script src="info_script.js"></script>
+    <script>
+        let startDate = null;
+        const secondaryEndDate = new Date('2026-07-02T14:00:00Z');
+
+        async function fetchLastVideoDate() {
+            try {
+                const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`;
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                const video = data.items && data.items[0];
+                if (video && video.snippet && video.snippet.publishedAt) {
+                    startDate = new Date(video.snippet.publishedAt);
+                } else {
+                    throw new Error('Fallback');
+                }
+            } catch (e) {
+                startDate = new Date('2025-12-23T12:00:00Z');
+            }
+        }
+
+        function plural(n, one, two, five) {
+            n = Math.abs(n) % 100;
+            let n1 = n % 10;
+            if (n > 10 && n < 20) return five;
+            if (n1 > 1 && n1 < 5) return two;
+            if (n1 == 1) return one;
+            return five;
+        }
+
+        function formatTime(diff) {
+            let seconds = Math.floor(diff / 1000);
+            const days = Math.floor(seconds / (24 * 3600));
+            seconds %= 24 * 3600;
+            const hours = Math.floor(seconds / 3600);
+            seconds %= 3600;
+            const minutes = Math.floor(seconds / 60);
+            seconds %= 60;
+
+            const d = plural(days, 'день', 'дня', 'дней');
+            const h = plural(hours, 'час', 'часа', 'часов');
+            const m = plural(minutes, 'минута', 'минуты', 'минут');
+            const s = plural(seconds, 'секунда', 'секунды', 'секунд');
+
+            return `<span class="text-white">${days}</span> <span class="text-slate-500 font-normal text-2xl sm:text-3xl">${d}</span> <span class="text-white">${hours}</span> <span class="text-slate-500 font-normal text-2xl sm:text-3xl">${h}</span> <span class="text-white">${minutes}</span> <span class="text-slate-500 font-normal text-2xl sm:text-3xl">${m}</span> <span class="text-white">${seconds}</span> <span class="text-slate-500 font-normal text-2xl sm:text-3xl">${s}</span>`;
+        }
+
+        function updateTimers() {
+            const now = new Date();
+
+            if (startDate) {
+                const diff = Math.max(0, now - startDate);
+                document.getElementById('timer').innerHTML = formatTime(diff);
+            }
+
+            const secDiff = secondaryEndDate - now;
+            if (secDiff <= 0) {
+                document.getElementById('secondary-timer').innerHTML = "Время вышло!";
+            } else {
+                document.getElementById('secondary-timer').innerHTML = formatTime(secDiff);
+            }
+        }
+
+        async function init() {
+            await fetchLastVideoDate();
+            updateTimers();
+            setInterval(updateTimers, 1000);
+        }
+
+        init();
+    </script>
+    <script src="../resources/legal-consent.js"></script>
+</body>
+
+</html>

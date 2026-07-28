@@ -1,0 +1,2 @@
+const API_KEY = YOUR_API_KEY_HERE; 
+const CHANNEL_ID = 'UCACwRQLU0Bq5yxijfnBPRfQ';

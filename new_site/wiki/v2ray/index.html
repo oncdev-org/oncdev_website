@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инструкция по подключению на смартфонах - oncdev</title>
+    <link rel="stylesheet" href="../../resources/shared.css">
+    <link rel="stylesheet" href="../wiki-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Specific phone mockup styles only used on this page */
+        .mockup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mockup-phone {
+            width: 230px;
+            height: 420px;
+            border: 8px solid #1a202c;
+            border-radius: 28px;
+            background: #0d1117;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #e6edf3;
+            user-select: none;
+            border-bottom-width: 10px;
+        }
+
+        .mockup-phone::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 12px;
+            background: #1a202c;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            padding: 18px 12px 12px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .phone-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+        }
+
+        .phone-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .btn-plus-mock {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            color: #06070b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 0 10px var(--accent-cyan);
+            font-size: 0.85rem;
+            animation: pulse-plus 2s infinite;
+        }
+
+        .btn-plus-mock.static {
+            animation: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text);
+            box-shadow: none;
+        }
+
+        @keyframes pulse-plus {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.6); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(45, 212, 191, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+        }
+
+        .phone-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--subtle);
+            font-size: 0.75rem;
+        }
+
+        .phone-empty-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .bottom-sheet-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .bottom-sheet {
+            background: #161b22;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            padding: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sheet-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-align: left;
+            color: var(--text);
+        }
+
+        .sheet-options {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .sheet-opt {
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sheet-opt.highlighted {
+            background: rgba(45, 212, 191, 0.1);
+            border-color: rgba(45, 212, 191, 0.4);
+            color: #fff;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .click-pointer {
+            position: absolute;
+            right: 12px;
+            bottom: -3px;
+            font-size: 1rem;
+            color: var(--accent-cyan);
+            transform: rotate(-15deg);
+            animation: pointer-tap 1.5s infinite;
+        }
+
+        @keyframes pointer-tap {
+            0% { transform: scale(1) rotate(-15deg); }
+            50% { transform: scale(0.85) rotate(-10deg); }
+            100% { transform: scale(1) rotate(-15deg); }
+        }
+
+        .phone-content.connected-state {
+            justify-content: flex-start;
+            align-items: stretch;
+            text-align: left;
+        }
+
+        .power-btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 12px 0 16px;
+        }
+
+        .power-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: glow-green 2.5s infinite;
+        }
+
+        @keyframes glow-green {
+            0% { box-shadow: 0 0 12px rgba(16, 185, 129, 0.5); }
+            50% { box-shadow: 0 0 28px rgba(16, 185, 129, 0.8); }
+            100% { box-shadow: 0 0 12px rgba(16, 185, 129, 0.5); }
+        }
+
+        .power-status {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .locations-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 6px;
+        }
+
+        .loc-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--subtle);
+            padding: 2px 6px 6px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 2px;
+        }
+
+        .loc-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-bottom: 2px;
+        }
+
+        .loc-item.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .loc-flag-name {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .loc-check {
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
+        }
+
+        .guide-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 12px;
+        }
+
+        .guide-tab {
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .guide-tab:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text);
+        }
+
+        .guide-tab.active {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.15), rgba(139, 92, 246, 0.15));
+            border-color: rgba(45, 212, 191, 0.4);
+            color: var(--text);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 18px;
+        }
+
+        .info-card h3 {
+            font-size: 1rem;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-card p {
+            color: var(--muted);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .info-card a {
+            color: var(--accent-cyan);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .step-section {
+            margin-bottom: 32px;
+        }
+
+        .step-item {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 32px;
+            align-items: center;
+            padding: 24px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .step-item:first-of-type {
+            border-top: none;
+        }
+
+        .step-badge {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent));
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 10px rgba(45, 212, 191, 0.3);
+        }
+
+        .step-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .step-text {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .step-text code {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 0.9em;
+            color: var(--accent-warm);
+        }
+
+        .step-text ol {
+            padding-left: 18px;
+            margin-top: 8px;
+        }
+
+        .step-text li {
+            margin-bottom: 6px;
+        }
+
+        .support-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .support-box h3 {
+            margin-top: 0;
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .support-box p {
+            color: var(--muted);
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .step-item {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob-interactive" id="interactive-blob"></div>
+    </div>
+
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand-link" href="/" aria-label="oncdev - главная страница">
+                <span class="brand-mark">OC</span>
+                <span>oncdev</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Основная навигация">
+                <a href="/timer">Таймер</a>
+                <a href="/">Главная</a>
+                <a href="/vpn">VPN</a>
+                <a href="/about">О нас</a>
+            </nav>
+
+            <div class="social-links" aria-label="Социальные ссылки">
+                <a href="https://t.me/oncubedev" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                    <img src="../../resources/tg.png" alt="">
+                </a>
+                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" aria-label="Boosty">
+                    <img src="../../resources/boosty.png" alt="">
+                </a>
+            </div>
+        </header>
+
+        <main class="wiki-container">
+            <div class="wiki-layout">
+                <!-- Sidebar navigation -->
+                <aside class="wiki-sidebar">
+                    <div class="wiki-sidebar-header">
+                        <i class="fa-solid fa-book"></i>
+                        <span>База знаний</span>
+                    </div>
+
+                    <div class="wiki-menu-section">
+                        <div class="wiki-menu-title">Инструкции</div>
+                        <ul class="wiki-menu-list">
+                            <li class="wiki-menu-item active"><a href="../v2ray/"><i class="fa-solid fa-mobile-screen-button"></i> Смартфоны</a></li>
+                            <li class="wiki-menu-item"><a href="../v2rayn/"><i class="fa-solid fa-laptop"></i> Компьютеры</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="wiki-menu-section">
+                        <div class="wiki-menu-title">Документы</div>
+                        <ul class="wiki-menu-list">
+                            <li class="wiki-menu-item"><a href="../tos/"><i class="fa-solid fa-file-contract"></i> Соглашение (ToS)</a></li>
+                            <li class="wiki-menu-item"><a href="../privacy/"><i class="fa-solid fa-shield-halved"></i> Конфиденциальность</a></li>
+                            <li class="wiki-menu-item"><a href="../refund/"><i class="fa-solid fa-file-invoice-dollar"></i> Оферта и возврат</a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <!-- Content area -->
+                <div class="wiki-card">
+                    <a href="/vpn" class="back-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        <span>Назад в кабинет VPN</span>
+                    </a>
+
+                    <h1>Настройка на смартфонах</h1>
+                    <span class="update-date">Дата обновления: 29 июня 2026 г.</span>
+
+                    <div class="guide-tabs">
+                        <button class="guide-tab active">
+                            <i class="fa-solid fa-mobile-screen-button"></i> Смартфоны (Android & iOS)
+                        </button>
+                        <a href="../v2rayn/" class="guide-tab">
+                            <i class="fa-solid fa-laptop"></i> Компьютеры (Windows)
+                        </a>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3><i class="fa-brands fa-android"></i> Шаг 1a: Клиент для Android</h3>
+                            <p>Для Android рекомендуется установить приложение <strong>v2rayTun</strong> из Google Play. 
+                            Если оно недоступно, вы можете использовать Happ, v2rayNG или любые их аналоги.<br>
+                            <a href="https://play.google.com/store/apps/details?id=com.v2raytun.android" target="_blank">
+                                <i class="fa-brands fa-google-play"></i> Установить v2rayTun
+                            </a></p>
+                        </div>
+                        <div class="info-card">
+                            <h3><i class="fa-brands fa-apple"></i> Шаг 1b: Клиент для iOS</h3>
+                            <p>Для устройств Apple (iPhone/iPad) подходят приложения <strong>V2Box</strong>, <strong>Happ</strong>, 
+                            <strong>v2rayTun</strong> или <strong>Streisand</strong>. Все они бесплатно доступны в App Store. 
+                            Дальнейший процесс настройки для iOS и Android полностью идентичен.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-section">
+                        <!-- STEP 1 -->
+                        <div class="step-item">
+                            <div>
+                                <div class="step-badge">1</div>
+                                <h2 class="step-title">Установка клиента</h2>
+                                <p class="step-text">Установите выбранное приложение (например, v2rayTun) на свой смартфон по ссылкам выше.</p>
+                            </div>
+                            <div class="mockup-container">
+                                <div style="text-align: center; color: var(--subtle);">
+                                    <i class="fa-solid fa-download" style="font-size: 2.5rem; color: var(--accent-cyan); margin-bottom: 8px;"></i>
+                                    <div style="font-size: 0.8rem;">Установите приложение</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2 -->
+                        <div class="step-item">
+                            <div>
+                                <div class="step-badge">2</div>
+                                <h2 class="step-title">Копирование ссылки подписки</h2>
+                                <p class="step-text">Скопируйте ссылку на вашу личную подписку, которую вам выдали после оформления покупки. 
+                                Она имеет следующий формат: 
+                                <code>https://oncdev.duckdns.org:8012/sub/&lt;ВАШ_УНИКАЛЬНЫЙ_КОД&gt;</code></p>
+                            </div>
+                            <div class="mockup-container" style="width: 100%;">
+                                <div style="text-align: center; color: var(--subtle); padding: 16px; border: 1px dashed var(--line); border-radius: var(--radius); background: rgba(255,255,255,0.01); width: 100%; box-sizing: border-box;">
+                                    <i class="fa-regular fa-copy" style="font-size: 2rem; color: var(--accent-cyan); margin-bottom: 8px;"></i>
+                                    <div style="font-size: 0.75rem; font-family: monospace; word-break: break-all; color: var(--accent-warm);">https://oncdev.duckdns.org:8012/...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3 -->
+                        <div class="step-item">
+                            <div>
+                                <div class="step-badge">3</div>
+                                <h2 class="step-title">Импорт в приложение</h2>
+                                <p class="step-text">Запустите приложение <strong>v2rayTun</strong>. Найдите и нажмите на круглую кнопку со знаком плюс <code>+</code>, которая расположена в правом верхнем углу главного экрана.</p>
+                            </div>
+                            <div class="mockup-container">
+                                <div class="mockup-phone">
+                                    <div class="phone-screen">
+                                        <div class="phone-header">
+                                            <span class="phone-title">v2rayTun</span>
+                                            <div class="btn-plus-mock">+</div>
+                                        </div>
+                                        <div class="phone-content">
+                                            <i class="fa-solid fa-folder-open phone-empty-icon"></i>
+                                            <div>Список пуст.<br>Нажмите на плюс вверху.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 4 -->
+                        <div class="step-item">
+                            <div>
+                                <div class="step-badge">4</div>
+                                <h2 class="step-title">Импорт из буфера обмена</h2>
+                                <p class="step-text">В открывшемся контекстном меню выберите пункт <strong>"Импорт из буфера обмена"</strong> (Import from clipboard). Ваша ссылка подписки будет автоматически добавлена в приложение.</p>
+                            </div>
+                            <div class="mockup-container">
+                                <div class="mockup-phone">
+                                    <div class="phone-screen">
+                                        <div class="phone-header">
+                                            <span class="phone-title">v2rayTun</span>
+                                            <div class="btn-plus-mock static">+</div>
+                                        </div>
+                                        <div class="phone-content">
+                                            <i class="fa-solid fa-folder-open phone-empty-icon"></i>
+                                        </div>
+                                        <div class="bottom-sheet-overlay">
+                                            <div class="bottom-sheet">
+                                                <div class="sheet-title">Добавить конфигурацию</div>
+                                                <div class="sheet-options">
+                                                    <div class="sheet-opt">
+                                                        <i class="fa-solid fa-qrcode"></i> Сканировать QR-код
+                                                    </div>
+                                                    <div class="sheet-opt highlighted">
+                                                        <i class="fa-solid fa-clipboard"></i> Импорт из буфера
+                                                        <i class="fa-solid fa-hand-pointer click-pointer"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 5 -->
+                        <div class="step-item">
+                            <div>
+                                <div class="step-badge">5</div>
+                                <h2 class="step-title">Выбор локации и запуск</h2>
+                                <p class="step-text">После импорта у вас отобразится список доступных стран и серверов. 
+                                <ol>
+                                    <li>Кликните по локации, к которой вы хотите подключиться (например, Netherlands).</li>
+                                    <li>Нажмите на большую кнопку включения питания (круглая кнопка по центру).</li>
+                                </ol>
+                                При первом запуске операционная система смартфона может запросить разрешение на создание VPN-соединения — подтвердите его нажатием «ОК» или «Разрешить».</p>
+                            </div>
+                            <div class="mockup-container">
+                                <div class="mockup-phone">
+                                    <div class="phone-screen">
+                                        <div class="phone-header">
+                                            <span class="phone-title">v2rayTun</span>
+                                            <div class="btn-plus-mock static">+</div>
+                                        </div>
+                                        <div class="phone-content connected-state">
+                                            <div class="power-btn-container">
+                                                <div class="power-btn">
+                                                    <i class="fa-solid fa-power-off"></i>
+                                                </div>
+                                                <span class="power-status">Подключено</span>
+                                            </div>
+                                            <div class="locations-box">
+                                                <div class="loc-title">Доступные локации</div>
+                                                <div class="loc-item active">
+                                                    <div class="loc-flag-name">🇳🇱 Netherlands (NL)</div>
+                                                    <i class="fa-solid fa-check loc-check"></i>
+                                                </div>
+                                                <div class="loc-item">
+                                                    <div class="loc-flag-name">🇩🇪 Germany (DE)</div>
+                                                </div>
+                                                <div class="loc-item">
+                                                    <div class="loc-flag-name">🇺🇸 United States (US)</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="support-box">
+                        <h3>Возникли трудности?</h3>
+                        <p>Если у вас не получается настроить подключение или возникли дополнительные вопросы, наша служба поддержки готова вам помочь.</p>
+                        <a href="https://t.me/polisours" target="_blank" class="button primary">
+                            <i class="fa-brands fa-telegram"></i> Написать в поддержку
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>
+                Права на представленный контент принадлежат
+                <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>.
+                Сайт сделали
+                <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
+                and
+                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
+                с любовью.
+            </p>
+            <p>
+                <a href="../tos/" target="_blank">ToS (Условия)</a> •
+                <a href="../refund/" target="_blank">Оферта и возврат</a> •
+                <a href="../privacy/" target="_blank">Конфиденциальность</a>
+            </p>
+            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All
+                rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="../../resources/legal-consent.js"></script>
+</body>
+
+</html>

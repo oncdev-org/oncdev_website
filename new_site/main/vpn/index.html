@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oncdev VPN — Защищенный доступ в интернет</title>
+    <meta name="description" content="Высокоскоростной VPN-сервис от oncdev. Протоколы VLESS, V2Ray, поддержка iOS, Android, Windows, macOS.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" crossorigin href="../assets/vpn-CtKl617l.css">
+  <link rel="stylesheet" crossorigin href="../assets/shared-BNd13ojG-BNd13ojG.css">
+</head>
+
+<body class="bg-[#070709] text-slate-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200 min-h-screen">
+
+    <!-- Ambient Top Glow -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[400px] bg-gradient-to-b from-indigo-500/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+
+    <div class="max-w-5xl mx-auto px-6 py-6">
+        <!-- Floating Glass Header -->
+        <header class="sticky top-4 z-50 backdrop-blur-xl bg-slate-950/70 border border-slate-800/60 rounded-full px-6 py-3 flex items-center justify-between shadow-2xl transition-all">
+            <a href="/new_site/main/" class="flex items-center gap-3 font-bold text-base tracking-tight hover:text-indigo-400 transition-colors">
+                <span class="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-500 to-sky-400 flex items-center justify-center text-xs font-mono font-bold text-white shadow-md shadow-indigo-500/30">OC</span>
+                <span>oncdev</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-1">
+                <a href="/new_site/main/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">Главная</a>
+                <a href="/new_site/timer/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">Таймер</a>
+                <a href="/new_site/vpn/" class="px-4 py-1.5 rounded-full text-sm font-medium bg-slate-800/60 text-white shadow-inner">VPN</a>
+                <a href="/new_site/wiki/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">База знаний</a>
+                <a href="/new_site/about/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">О нас</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button class="cmd-trigger inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900/60 text-xs text-slate-400 hover:text-white hover:border-slate-700 transition-all cursor-pointer">
+                    <span>Поиск</span>
+                    <kbd class="font-mono text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">⌘K</kbd>
+                </button>
+            </div>
+        </header>
+
+        <main class="mt-12 space-y-8">
+            <!-- TAB CONTAINER WITH LOCAL SWITCHING -->
+            <div class="flex justify-center">
+                <div class="inline-flex p-1 bg-slate-900/80 border border-slate-800 rounded-full">
+                    <button id="tab-btn-buy" class="nav-tab px-6 py-2 rounded-full text-sm font-semibold text-white bg-slate-800 shadow-md transition-all cursor-pointer" onclick="switchTab('buy')">Оформить подписку</button>
+                    <button id="tab-btn-check" class="nav-tab px-6 py-2 rounded-full text-sm font-semibold text-slate-400 hover:text-white transition-all cursor-pointer" onclick="switchTab('check')">Забрать ключ</button>
+                </div>
+            </div>
+
+            <!-- TAB 1: Buy / Renew -->
+            <section id="tab-content-buy" class="tab-pane active animate-fade-in space-y-8">
+                <div class="space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-xs font-mono text-indigo-300">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span>VLESS PROTOCOL</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Оформить подписку</h2>
+                </div>
+
+                <!-- Steps progress bar -->
+                <div class="steps-progress flex items-center justify-between relative max-w-xl mx-auto my-8">
+                    <div id="progress-line" class="progress-line absolute top-4 left-4 right-4 h-0.5 bg-slate-800 -z-0"></div>
+                    <div class="step-dot active z-10 w-8 h-8 rounded-full border-2 border-indigo-500 bg-slate-950 flex items-center justify-center font-mono text-xs font-bold text-white shadow-lg shadow-indigo-500/30" data-step="1">1<span class="absolute top-9 left-1/2 -translate-x-1/2 text-xs font-sans text-slate-400 font-medium">Тариф</span></div>
+                    <div class="step-dot z-10 w-8 h-8 rounded-full border-2 border-slate-800 bg-slate-950 flex items-center justify-center font-mono text-xs font-bold text-slate-500" data-step="2">2<span class="absolute top-9 left-1/2 -translate-x-1/2 text-xs font-sans text-slate-500">Аккаунт</span></div>
+                    <div class="step-dot z-10 w-8 h-8 rounded-full border-2 border-slate-800 bg-slate-950 flex items-center justify-center font-mono text-xs font-bold text-slate-500" data-step="3">3<span class="absolute top-9 left-1/2 -translate-x-1/2 text-xs font-sans text-slate-500">Оплата</span></div>
+                    <div class="step-dot z-10 w-8 h-8 rounded-full border-2 border-slate-800 bg-slate-950 flex items-center justify-center font-mono text-xs font-bold text-slate-500" data-step="4">4<span class="absolute top-9 left-1/2 -translate-x-1/2 text-xs font-sans text-slate-500">Готово</span></div>
+                </div>
+
+                <div class="pt-6">
+                    <!-- Step 1: Select Plan -->
+                    <div id="step-1" class="step-content active space-y-6">
+                        <h3 class="text-xl font-semibold text-white">Выберите тарифный план:</h3>
+                        <div id="plans-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="plans-skeleton grid grid-cols-1 sm:grid-cols-2 gap-4 col-span-2">
+                                <div class="h-28 bg-slate-900/60 animate-pulse rounded-xl border border-slate-800"></div>
+                                <div class="h-28 bg-slate-900/60 animate-pulse rounded-xl border border-slate-800"></div>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <button id="btn-goto-step-2" class="w-full py-3.5 rounded-full bg-gradient-to-b from-indigo-500 to-indigo-600 text-white font-semibold text-sm shadow-lg shadow-indigo-500/25 disabled:opacity-40 disabled:pointer-events-none transition-all cursor-pointer" disabled onclick="goToStep(2)">
+                                Продолжить
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Account details -->
+                    <div id="step-2" class="step-content space-y-6">
+                        <h3 class="text-xl font-semibold text-white">Укажите ваш Telegram аккаунт:</h3>
+                        <div class="space-y-4 max-w-md">
+                            <label for="buy-username" class="block text-sm font-medium text-slate-300">Юзернейм в Telegram:</label>
+                            <div class="flex items-center rounded-xl bg-slate-900 border border-slate-800 px-3 py-2.5 focus-within:border-indigo-500 transition-colors">
+                                <span class="text-slate-500 font-semibold pr-1" id="username-prefix">@</span>
+                                <input type="text" id="buy-username" placeholder="vobimngr" required autocomplete="off" oninput="validateStep2()" class="bg-transparent border-none outline-none text-white w-full text-sm font-mono" />
+                            </div>
+                            <div class="space-y-2 pt-1">
+                                <div class="flex items-center gap-2">
+                                    <input type="checkbox" id="no-username-checkbox" onchange="toggleUsernameField(this)" class="w-4 h-4 rounded bg-slate-900 border-slate-800 text-indigo-600 focus:ring-0 cursor-pointer" />
+                                    <label for="no-username-checkbox" class="text-xs text-slate-400 cursor-pointer select-none">У меня нет юзернейма в Telegram (нет @username)</label>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <input type="checkbox" id="no-tg-access-checkbox" onchange="toggleNoTgAccessField(this)" class="w-4 h-4 rounded bg-slate-900 border-slate-800 text-indigo-600 focus:ring-0 cursor-pointer" />
+                                    <label for="no-tg-access-checkbox" class="text-xs text-amber-400 font-medium cursor-pointer select-none">Telegram не работает / привязать позже</label>
+                                </div>
+                            </div>
+                            <span class="block text-xs text-slate-500" id="username-hint">Никнейм привязывается к подписке VPN.</span>
+                            
+                            <div id="no-tg-warning" class="hidden p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs leading-relaxed">
+                                <b>ВНИМАНИЕ:</b> Обязательно сохраните ваш 6-значный код заказа на финальном шаге! Без Telegram забрать ваш VPN-ключ можно будет только по этому коду.
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 max-w-md pt-2">
+                            <label for="buy-promo" class="block text-sm font-medium text-slate-300">Промокод (если есть):</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="buy-promo" placeholder="Введите промокод" autocomplete="off" class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-white outline-none focus:border-indigo-500 transition-colors" />
+                                <button type="button" class="px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-800 text-xs font-semibold text-white hover:bg-slate-700 transition-colors cursor-pointer" onclick="applyPromoCode()">Применить</button>
+                            </div>
+                            <div id="promo-status" class="text-xs font-mono font-medium"></div>
+                        </div>
+
+                        <div class="flex items-center justify-between gap-4 pt-4">
+                            <button class="px-6 py-3 rounded-full border border-slate-800 bg-slate-900 text-sm font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer" onclick="goToStep(1)">Назад</button>
+                            <button id="btn-goto-step-3" class="px-8 py-3 rounded-full bg-indigo-600 text-white text-sm font-semibold shadow-lg disabled:opacity-40 disabled:pointer-events-none transition-all cursor-pointer" disabled onclick="goToStep(3)">Далее</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Payment details & File upload -->
+                    <div id="step-3" class="step-content space-y-6">
+                        <h3 class="text-xl font-semibold text-white">Совершите перевод и загрузите чек:</h3>
+
+                        <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-2">
+                            <span class="text-xs font-mono text-slate-400 uppercase">Итого к оплате</span>
+                            <div class="flex items-baseline gap-3">
+                                <span id="summary-old-price" class="line-through text-slate-500 text-base hidden">50 руб.</span>
+                                <span id="summary-price" class="text-3xl font-extrabold text-white">50 руб.</span>
+                            </div>
+                            <p class="text-xs text-slate-400">Тариф: <span id="summary-plan" class="font-semibold text-white">1 месяц</span> для аккаунта: <span id="summary-username" class="font-semibold text-indigo-400">@vobimngr</span></p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h4 class="text-sm font-semibold text-slate-300">Реквизиты для оплаты:</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="p-4 rounded-xl bg-slate-900/60 border border-amber-500/30 space-y-2">
+                                    <div class="text-xs font-medium text-slate-300 flex items-center gap-2">
+                                        <i class="fa-solid fa-phone text-indigo-400"></i> СБП (<span id="req-receiver-sbp" class="text-indigo-300 font-semibold">Платон П.</span>)
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <code id="req-phone" class="font-mono text-base font-bold text-indigo-300">+79525908980</code>
+                                        <button class="text-slate-400 hover:text-white p-1" onclick="copyText('req-phone')"><i class="fa-regular fa-copy"></i></button>
+                                    </div>
+                                    <div class="text-xs text-amber-400 font-semibold">ОЗОН БАНК</div>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-slate-900/60 border border-amber-500/30 space-y-2">
+                                    <div class="text-xs font-medium text-slate-300 flex items-center gap-2">
+                                        <i class="fa-solid fa-credit-card text-indigo-400"></i> Карта (<span id="req-receiver-card" class="text-indigo-300 font-semibold">Платон П.</span>)
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <code id="req-card" class="font-mono text-base font-bold text-indigo-300">2204320380053084</code>
+                                        <button class="text-slate-400 hover:text-white p-1" onclick="copyText('req-card')"><i class="fa-regular fa-copy"></i></button>
+                                    </div>
+                                    <div class="text-xs text-amber-400 font-semibold">ОЗОН БАНК</div>
+                                </div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs">
+                                <b>ВНИМАНИЕ:</b> В комментарии к платежу <b>НИЧЕГО НЕ ПИШИТЕ</b> — оставьте поле пустым.
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <label class="block text-sm font-medium text-slate-300">Загрузите скриншот/квитанцию оплаты:</label>
+                            <div id="dropzone" class="border-2 border-dashed border-slate-800 hover:border-indigo-500/50 rounded-2xl p-8 text-center bg-slate-900/30 cursor-pointer transition-all space-y-2" onclick="triggerFileInput()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+                                <i class="fa-solid fa-cloud-arrow-up text-3xl text-indigo-400"></i>
+                                <div class="text-sm font-medium text-slate-200">Нажмите или перетащите файл сюда</div>
+                                <div class="text-xs text-slate-500">PNG, JPG, PDF до 10 МБ</div>
+                                <input type="file" id="receipt-file" accept="image/*,application/pdf" class="hidden" onchange="handleFileSelect(event)" />
+                            </div>
+                            <div id="file-preview-container" class="hidden flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-regular fa-image text-indigo-400"></i>
+                                    <span id="preview-filename" class="text-xs font-mono text-slate-200">receipt.jpg</span>
+                                </div>
+                                <button type="button" class="text-slate-500 hover:text-red-400" onclick="removeSelectedFile()"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </div>
+
+                        <div id="submit-error" class="hidden p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs">
+                            <i class="fa-solid fa-circle-exclamation"></i> <span id="error-message-text">Ошибка при отправке</span>
+                        </div>
+
+                        <div class="flex items-center justify-between gap-4 pt-4">
+                            <button class="px-6 py-3 rounded-full border border-slate-800 bg-slate-900 text-sm font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer" onclick="goToStep(2)">Назад</button>
+                            <button id="btn-submit-order" class="px-8 py-3 rounded-full bg-indigo-600 text-white text-sm font-semibold shadow-lg disabled:opacity-40 disabled:pointer-events-none transition-all cursor-pointer" disabled onclick="submitOrder()">
+                                <span id="submit-btn-text">Отправить квитанцию</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Finished success screen -->
+                    <div id="step-4" class="step-content space-y-6 text-center">
+                        <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-400 text-2xl">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-white">Заявка успешно отправлена!</h3>
+                        <p class="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
+                            Ваша квитанция получена. Проверка обычно занимает <b>от 5 до 30 минут</b>.
+                        </p>
+                        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 max-w-md mx-auto space-y-2">
+                            <span class="text-xs text-slate-400">Код заказа:</span>
+                            <div class="flex items-center justify-center gap-3">
+                                <code id="success-saved-code" class="font-mono text-2xl font-bold text-indigo-400">XXXXXX</code>
+                                <button class="text-slate-400 hover:text-white" onclick="copyText('success-saved-code')"><i class="fa-regular fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="flex justify-center gap-4 pt-4">
+                            <button class="px-6 py-3 rounded-full bg-indigo-600 text-white text-sm font-semibold shadow-lg cursor-pointer" onclick="goToCheckOrderTab()">Проверить готовность</button>
+                            <button class="px-6 py-3 rounded-full border border-slate-800 bg-slate-900 text-sm font-semibold text-slate-300 hover:text-white cursor-pointer" onclick="resetForm()">Новый заказ</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: Check Order Status -->
+            <section id="tab-content-check" class="tab-pane space-y-8">
+                <div class="space-y-3">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-xs font-mono text-indigo-300">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span>CHECK STATUS</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Забрать VPN ключ</h2>
+                    <p class="text-sm text-slate-400">Введите 6-значный код заказа, чтобы проверить статус оплаты и скопировать ссылку VLESS.</p>
+                </div>
+
+                <form id="check-order-form" onsubmit="handleCheckOrder(event)" class="max-w-md space-y-4">
+                    <div class="flex gap-2">
+                        <input type="text" id="check-order-code" placeholder="Например: A4F9X2" required autocomplete="off" style="text-transform: uppercase;" class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white font-mono outline-none focus:border-indigo-500 transition-colors" />
+                        <button type="submit" id="check-order-btn" class="px-6 py-3 rounded-xl bg-indigo-600 text-white text-sm font-semibold shadow-lg hover:bg-indigo-500 transition-colors cursor-pointer">Проверить</button>
+                    </div>
+                </form>
+
+                <div id="check-results" class="results-container hidden pt-4">
+                    <div id="result-approved" class="result-block hidden space-y-6">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-semibold text-sm">
+                            <i class="fa-solid fa-circle-check"></i> Оплата подтверждена
+                        </div>
+                        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 max-w-xl">
+                            <span class="text-xs font-mono text-slate-400">Ссылка на подписку VLESS:</span>
+                            <div class="flex items-center justify-between gap-3 p-3 bg-slate-950 rounded-xl border border-slate-800">
+                                <code id="vless-link" class="font-mono text-xs text-indigo-300 truncate">vless://...</code>
+                                <button class="text-slate-400 hover:text-white p-1" onclick="copyVlessLink()"><i class="fa-regular fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-32 pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <p>© 2025–2026 oncdev. Разработка <a href="/new_site/polisours/" class="text-slate-400 hover:text-white underline">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" class="text-slate-400 hover:text-white underline">Vobi</a>.</p>
+        </footer>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden">
+        <i class="fa-solid fa-circle-check toast-icon"></i>
+        <span id="toast-message">Текст скопирован</span>
+    </div>
+
+    <script src="../resources/command-palette.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сводка канала PolimerS — oncdev</title>
+    <meta name="description" content="Статистика, подписчики и последнее видео YouTube-канала PolimerS.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin href="../assets/shared-BNd13ojG-BNd13ojG.css">
+</head>
+
+<body class="bg-[#070709] text-slate-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200 min-h-screen">
+
+    <!-- Ambient Top Glow -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[400px] bg-gradient-to-b from-indigo-500/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+
+    <div class="max-w-5xl mx-auto px-6 py-6">
+        <!-- Floating Glass Header -->
+        <header class="sticky top-4 z-50 backdrop-blur-xl bg-slate-950/70 border border-slate-800/60 rounded-full px-6 py-3 flex items-center justify-between shadow-2xl transition-all">
+            <a href="/new_site/main/" class="flex items-center gap-3 font-bold text-base tracking-tight hover:text-indigo-400 transition-colors">
+                <span class="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-500 to-sky-400 flex items-center justify-center text-xs font-mono font-bold text-white shadow-md shadow-indigo-500/30">OC</span>
+                <span>oncdev</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-1">
+                <a href="/new_site/main/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">Главная</a>
+                <a href="/new_site/timer/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">Таймер</a>
+                <a href="/new_site/vpn/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">VPN</a>
+                <a href="/new_site/wiki/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">База знаний</a>
+                <a href="/new_site/about/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">О нас</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button class="cmd-trigger inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900/60 text-xs text-slate-400 hover:text-white hover:border-slate-700 transition-all cursor-pointer">
+                    <span>Поиск</span>
+                    <kbd class="font-mono text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">⌘K</kbd>
+                </button>
+            </div>
+        </header>
+
+        <main class="mt-16 sm:mt-20 space-y-16">
+            <!-- Channel Header -->
+            <section class="flex flex-col sm:flex-row sm:items-center gap-6">
+                <img id="channel-avatar" src="../assets/plat-photo-CmtS6RJU-CmtS6RJU.png" alt="PolimerS Avatar" class="w-24 h-24 rounded-full object-cover border-2 border-indigo-500/30 shadow-2xl">
+                <div class="space-y-2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-xs font-mono text-indigo-300">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span>YOUTUBE CHANNEL STATS</span>
+                    </div>
+                    <h1 id="channel-title" class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">PolimerS<span class="text-indigo-500">.</span></h1>
+                    <p class="text-base text-slate-400">Официальный YouTube-канал с видео, модами и технологическими обзорами.</p>
+                </div>
+            </section>
+
+            <!-- Stats Metrics Section -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-4 border-t border-slate-800/60">
+                <div class="space-y-2">
+                    <span class="font-mono text-xs text-slate-500 uppercase">ПОДПИСЧИКИ</span>
+                    <strong id="subs-count" class="block font-mono text-4xl sm:text-5xl font-bold text-white tracking-tight">...</strong>
+                </div>
+                <div class="space-y-2">
+                    <span class="font-mono text-xs text-slate-500 uppercase">ВСЕГО ПРОСМОТРОВ</span>
+                    <strong id="views-count" class="block font-mono text-4xl sm:text-5xl font-bold text-slate-300 tracking-tight">...</strong>
+                </div>
+            </section>
+
+            <!-- Latest Video Showcase -->
+            <section class="space-y-6 pt-6 border-t border-slate-800/60">
+                <div class="flex items-center justify-between">
+                    <span class="font-mono text-xs text-indigo-400 font-semibold tracking-wider">СВЕЖАЯ ПУБЛИКАЦИЯ</span>
+                    <span class="font-mono text-xs text-slate-500">YOUTUBE API</span>
+                </div>
+
+                <a id="latest-video-link" href="#" target="_blank" rel="noopener noreferrer" class="group grid grid-cols-1 md:grid-cols-3 gap-6 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/40 transition-all">
+                    <div class="relative rounded-xl overflow-hidden aspect-video bg-slate-950">
+                        <img id="latest-video-thumb" src="../assets/plat-photo-CmtS6RJU-CmtS6RJU.png" alt="Thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-3xl transition-opacity">
+                            ▶
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 space-y-3 flex flex-col justify-center">
+                        <h3 id="latest-video-title" class="text-xl sm:text-2xl font-bold text-white group-hover:text-indigo-300 transition-colors leading-snug">Загрузка...</h3>
+                        <p id="latest-video-date" class="font-mono text-xs text-slate-400">Дата загружается...</p>
+                    </div>
+                </a>
+            </section>
+        </main>
+
+        <footer class="mt-32 pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <p>© 2025–2026 oncdev. Разработка <a href="/new_site/polisours/" class="text-slate-400 hover:text-white underline">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" class="text-slate-400 hover:text-white underline">Vobi</a>.</p>
+        </footer>
+    </div>
+
+    <script src="../resources/command-palette.js"></script>
+    <script src="info_script.js"></script>
+    <script src="script.js"></script>
+    <script src="../resources/legal-consent.js"></script>
+</body>
+
+</html>
