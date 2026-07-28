@@ -1,4 +1,17 @@
-// Raycast Style Command Palette (⌘K) for oncdev
+function resolveCmdPath(targetPath) {
+    if (window.location.protocol === 'file:') {
+        const isSubfolder = window.location.pathname.includes('/vpn/') || 
+                            window.location.pathname.includes('/timer/') || 
+                            window.location.pathname.includes('/about/') || 
+                            window.location.pathname.includes('/wiki/') || 
+                            window.location.pathname.includes('/polisours/') || 
+                            window.location.pathname.includes('/channel-summary/') || 
+                            window.location.pathname.includes('/main/');
+        return (isSubfolder ? '../' : './') + targetPath;
+    } else {
+        return '/' + targetPath;
+    }
+}
 
 const commandPaletteHTML = `
 <div id="cmd-palette-modal" class="cmd-modal-overlay hidden" role="dialog" aria-modal="true">
@@ -11,37 +24,37 @@ const commandPaletteHTML = `
         <div class="cmd-body">
             <div class="cmd-group-title">Разделы oncdev</div>
             <div class="cmd-list" id="cmd-results">
-                <a href="/new_site/main/" class="cmd-item active">
+                <a href="#" data-target="main/index.html" class="cmd-item active">
                     <span class="cmd-icon">🏠</span>
                     <div class="cmd-text"><strong>Главная страница</strong><small>Обзор экосистемы oncdev</small></div>
                     <span class="cmd-badge">Перейти</span>
                 </a>
-                <a href="/new_site/timer/" class="cmd-item">
+                <a href="#" data-target="timer/index.html" class="cmd-item">
                     <span class="cmd-icon">⏱️</span>
                     <div class="cmd-text"><strong>Таймер ожидания</strong><small>Мониторинг выходов ролика PolimerS</small></div>
                     <span class="cmd-badge">⌘T</span>
                 </a>
-                <a href="/new_site/vpn/" class="cmd-item">
+                <a href="#" data-target="vpn/index.html" class="cmd-item">
                     <span class="cmd-icon">🛡️</span>
                     <div class="cmd-text"><strong>VPN Сервис</strong><small>Подписка и получение VLESS ключей</small></div>
                     <span class="cmd-badge">⌘V</span>
                 </a>
-                <a href="/new_site/wiki/" class="cmd-item">
+                <a href="#" data-target="wiki/index.html" class="cmd-item">
                     <span class="cmd-icon">📚</span>
                     <div class="cmd-text"><strong>База знаний & Документы</strong><small>Инструкции по настройке и соглашения</small></div>
                     <span class="cmd-badge">⌘D</span>
                 </a>
-                <a href="/new_site/about/" class="cmd-item">
+                <a href="#" data-target="about/index.html" class="cmd-item">
                     <span class="cmd-icon">👥</span>
                     <div class="cmd-text"><strong>О создателях</strong><small>Информация о Vobi и Polimer</small></div>
                     <span class="cmd-badge">⌘A</span>
                 </a>
-                <a href="/new_site/channel-summary/" class="cmd-item">
+                <a href="#" data-target="channel-summary/index.html" class="cmd-item">
                     <span class="cmd-icon">📊</span>
                     <div class="cmd-text"><strong>Сводка канала</strong><small>Статистика и просмотры PolimerS</small></div>
                     <span class="cmd-badge">⌘S</span>
                 </a>
-                <a href="/new_site/polisours/" class="cmd-item">
+                <a href="#" data-target="polisours/index.html" class="cmd-item">
                     <span class="cmd-icon">⚡</span>
                     <div class="cmd-text"><strong>PoliSours Corner</strong><small>Игры, моды Minecraft и медиа</small></div>
                     <span class="cmd-badge">⌘P</span>
@@ -64,6 +77,13 @@ function initCommandPalette() {
     const input = document.getElementById('cmd-search-input');
     const results = document.getElementById('cmd-results');
     const items = results.querySelectorAll('.cmd-item');
+
+    items.forEach(item => {
+        const rawTarget = item.getAttribute('data-target');
+        if (rawTarget) {
+            item.setAttribute('href', resolveCmdPath(rawTarget));
+        }
+    });
 
     function openModal() {
         modal.classList.remove('hidden');

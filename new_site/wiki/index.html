@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>База знаний — ONCDEV</title>
-    <meta name="description" content="Инструкции по настройке VPN, пользовательские соглашения и официальная документация oncdev.">
+    <title>База знаний & Инструкции — ONCDEV</title>
+    <meta name="description" content="Удобная база знаний: пошаговые инструкции по настройке VLESS VPN для iOS, Android, Windows, macOS и официальные документы.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -61,78 +61,229 @@
             </div>
         </header>
 
-        <main class="p-8 lg:p-14 space-y-16 flex-1">
+        <main class="p-8 lg:p-14 space-y-12 flex-1">
             <!-- Header Section -->
             <section class="space-y-6 border-b border-[#1c1c1c] pb-10">
-                <div class="flex items-center gap-3 font-mono text-xs text-neutral-500 tracking-widest uppercase">
-                    <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
-                    <span>| DOCUMENTATION HUB v2.0</span>
+                <div class="flex items-center justify-between flex-wrap gap-4">
+                    <div class="flex items-center gap-3 font-mono text-xs text-neutral-500 tracking-widest uppercase">
+                        <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                        <span>| DOCUMENTATION & SETUP KNOWLEDGE BASE</span>
+                    </div>
+                    <div class="font-mono text-xs text-neutral-400">
+                        ВЕРСИЯ 2.4 • ОБНОВЛЕНО 2026
+                    </div>
                 </div>
                 <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tighter text-white uppercase">База знаний<span class="text-neutral-600">.</span></h1>
-                <p class="text-xs font-mono text-neutral-400 max-w-xl uppercase tracking-wider">Интерактивные руководства по настройке VLESS VPN и официальная документация oncdev.</p>
-            </section>
+                <p class="text-xs font-mono text-neutral-400 max-w-2xl uppercase tracking-wider leading-relaxed">Быстрые и наглядные руководства по настройке VLESS VPN для смартфонов и ПК, а также правовые документы oncdev.</p>
 
-            <!-- Wiki Sections (KLTZQU Split-Screen Layout) -->
-            <section class="divide-y divide-[#1c1c1c]">
-                <!-- Section 01: Setup Guides -->
-                <div class="py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <div class="lg:col-span-4 space-y-2 font-mono">
-                        <span class="text-xs text-neutral-500 tracking-widest">/01 INSTRUCTIONS</span>
-                        <h2 class="text-3xl font-extrabold text-white uppercase">Настройка VPN</h2>
+                <!-- Search & Filter Controls -->
+                <div class="pt-4 space-y-4 max-w-3xl">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500"></i>
+                        <input type="text" id="wiki-search" oninput="filterWiki()" placeholder="Быстрый поиск по базе знаний (например: iOS, Android, Windows, v2ray, offer...)" class="w-full bg-[#0a0a0a] border border-[#1c1c1c] focus:border-white text-white font-mono text-xs pl-11 pr-4 py-3.5 outline-none transition-colors" />
                     </div>
-                    <div class="lg:col-span-8 space-y-4 font-mono">
-                        <p class="text-xs text-neutral-400 uppercase">Пошаговые руководства по установке клиентов V2Ray / VLESS для любых платформ.</p>
-                        <div class="space-y-3">
-                            <a href="v2ray/index.html" class="group flex items-center justify-between p-5 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all">
-                                <div class="flex items-center gap-4">
-                                    <i class="fa-solid fa-mobile-screen-button text-white text-lg"></i>
-                                    <span class="text-sm font-bold text-white uppercase group-hover:translate-x-1 transition-transform">Смартфоны (iOS / Android)</span>
-                                </div>
-                                <span class="text-xs text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ↗</span>
-                            </a>
-                            <a href="v2rayn/index.html" class="group flex items-center justify-between p-5 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all">
-                                <div class="flex items-center gap-4">
-                                    <i class="fa-solid fa-laptop text-white text-lg"></i>
-                                    <span class="text-sm font-bold text-white uppercase group-hover:translate-x-1 transition-transform">Компьютеры (Windows / macOS)</span>
-                                </div>
-                                <span class="text-xs text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ↗</span>
-                            </a>
-                        </div>
+                    <div class="flex flex-wrap gap-2 font-mono text-[11px]">
+                        <button onclick="setCategory('all')" class="cat-btn active px-4 py-1.5 border border-white bg-white text-black font-bold uppercase transition-all">ВСЕ</button>
+                        <button onclick="setCategory('mobile')" class="cat-btn px-4 py-1.5 border border-[#1c1c1c] bg-[#0a0a0a] text-neutral-400 hover:text-white uppercase transition-all">📱 СМАРТФОНЫ</button>
+                        <button onclick="setCategory('desktop')" class="cat-btn px-4 py-1.5 border border-[#1c1c1c] bg-[#0a0a0a] text-neutral-400 hover:text-white uppercase transition-all">💻 КОМПЬЮТЕРЫ</button>
+                        <button onclick="setCategory('legal')" class="cat-btn px-4 py-1.5 border border-[#1c1c1c] bg-[#0a0a0a] text-neutral-400 hover:text-white uppercase transition-all">📜 ДОКУМЕНТЫ</button>
                     </div>
                 </div>
+            </section>
 
-                <!-- Section 02: Legal Agreements -->
-                <div class="py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <div class="lg:col-span-4 space-y-2 font-mono">
-                        <span class="text-xs text-neutral-500 tracking-widest">/02 LEGAL DOCUMENTS</span>
-                        <h2 class="text-3xl font-extrabold text-white uppercase">Правовая информация</h2>
-                    </div>
-                    <div class="lg:col-span-8 space-y-4 font-mono">
-                        <p class="text-xs text-neutral-400 uppercase">Официальные соглашения, политика конфиденциальности и условия оферты.</p>
-                        <div class="space-y-3">
-                            <a href="tos/index.html" class="group flex items-center justify-between p-5 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all">
-                                <div class="flex items-center gap-4">
-                                    <i class="fa-solid fa-file-contract text-white text-lg"></i>
-                                    <span class="text-sm font-bold text-white uppercase group-hover:translate-x-1 transition-transform">Пользовательское соглашение (ToS)</span>
+            <!-- Quick Express VPN Installation Cards -->
+            <section class="space-y-6">
+                <div class="flex items-center justify-between font-mono text-xs">
+                    <span class="text-neutral-500 uppercase tracking-widest">/ EXPRESS QUICK-START GUIDES</span>
+                    <span class="text-emerald-400 font-bold">● VLESS READY</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="guides-grid">
+                    
+                    <!-- Guide Card 1: iOS -->
+                    <div class="wiki-card mobile p-6 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all space-y-6" data-tags="ios iphone ipad v2ray v2raytun v2box vless mobile">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 border border-[#222] bg-[#0d0d0d] flex items-center justify-center text-white text-lg">
+                                    <i class="fa-brands fa-apple"></i>
                                 </div>
-                                <span class="text-xs text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ↗</span>
-                            </a>
-                            <a href="privacy/index.html" class="group flex items-center justify-between p-5 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all">
-                                <div class="flex items-center gap-4">
-                                    <i class="fa-solid fa-shield-halved text-white text-lg"></i>
-                                    <span class="text-sm font-bold text-white uppercase group-hover:translate-x-1 transition-transform">Политика конфиденциальности</span>
+                                <div>
+                                    <h3 class="text-base font-bold text-white font-mono uppercase">iOS (iPhone / iPad)</h3>
+                                    <span class="text-[10px] font-mono text-neutral-500">Клиенты: v2rayTun, V2Box, Streisand</span>
                                 </div>
-                                <span class="text-xs text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ↗</span>
-                            </a>
-                            <a href="refund/index.html" class="group flex items-center justify-between p-5 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all">
-                                <div class="flex items-center gap-4">
-                                    <i class="fa-solid fa-file-invoice-dollar text-white text-lg"></i>
-                                    <span class="text-sm font-bold text-white uppercase group-hover:translate-x-1 transition-transform">Публичная оферта и возврат</span>
-                                </div>
-                                <span class="text-xs text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ↗</span>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold">ПОПУЛЯРНОЕ</span>
+                        </div>
+
+                        <ol class="space-y-2.5 font-mono text-xs text-neutral-300">
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                                <span>Скопируйте полученную VLESS ссылку из бота или сайта.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                                <span>Установите бесплатное приложение <b>v2rayTun</b> в App Store.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                                <span>Нажмите значок <b>«+»</b> и выберите <b>«Вставить из буфера»</b>.</span>
+                            </li>
+                        </ol>
+
+                        <div class="pt-2 flex items-center justify-between border-t border-[#1c1c1c]">
+                            <a href="v2ray/index.html" class="inline-flex items-center gap-2 text-xs font-mono font-bold text-white hover:text-neutral-300 uppercase transition-colors">
+                                <span>Полный иллюстрированный гайд ↗</span>
                             </a>
                         </div>
                     </div>
+
+                    <!-- Guide Card 2: Android -->
+                    <div class="wiki-card mobile p-6 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all space-y-6" data-tags="android samsung xiaomi v2ray v2raytun nekobox vless mobile">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 border border-[#222] bg-[#0d0d0d] flex items-center justify-center text-white text-lg">
+                                    <i class="fa-brands fa-android"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-bold text-white font-mono uppercase">Android (Смартфоны)</h3>
+                                    <span class="text-[10px] font-mono text-neutral-500">Клиенты: v2rayTun, NekoBox, v2rayNG</span>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold">ПОПУЛЯРНОЕ</span>
+                        </div>
+
+                        <ol class="space-y-2.5 font-mono text-xs text-neutral-300">
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                                <span>Скопируйте ключ подписки VLESS.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                                <span>Скачайте <b>v2rayTun</b> из Google Play или APK со страницы релиза.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                                <span>Импортируйте профиль из буфера обмена и нажмите кнопку подключения.</span>
+                            </li>
+                        </ol>
+
+                        <div class="pt-2 flex items-center justify-between border-t border-[#1c1c1c]">
+                            <a href="v2ray/index.html" class="inline-flex items-center gap-2 text-xs font-mono font-bold text-white hover:text-neutral-300 uppercase transition-colors">
+                                <span>Полный иллюстрированный гайд ↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Guide Card 3: Windows -->
+                    <div class="wiki-card desktop p-6 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all space-y-6" data-tags="windows pc laptop v2rayn nekoray hiddify vless desktop">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 border border-[#222] bg-[#0d0d0d] flex items-center justify-center text-white text-lg">
+                                    <i class="fa-brands fa-windows"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-bold text-white font-mono uppercase">Windows (ПК / Ноутбуки)</h3>
+                                    <span class="text-[10px] font-mono text-neutral-500">Клиенты: v2rayN, Nekoray, Hiddify</span>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-mono bg-white/10 border border-white/20 text-white font-bold">БЫСТРЫЙ СТАРТ</span>
+                        </div>
+
+                        <ol class="space-y-2.5 font-mono text-xs text-neutral-300">
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                                <span>Загрузите и распакуйте архиватор <b>v2rayN</b>.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                                <span>Скопируйте VLESS ссылку и нажмите <b>Ctrl+V</b> в главном окне.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                                <span>Включите пункт <b>«Системный прокси»</b> внизу программы.</span>
+                            </li>
+                        </ol>
+
+                        <div class="pt-2 flex items-center justify-between border-t border-[#1c1c1c]">
+                            <a href="v2rayn/index.html" class="inline-flex items-center gap-2 text-xs font-mono font-bold text-white hover:text-neutral-300 uppercase transition-colors">
+                                <span>Полный гайд для Windows ↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Guide Card 4: macOS -->
+                    <div class="wiki-card desktop p-6 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all space-y-6" data-tags="mac macos macbook foxray v2box nekoray vless desktop">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 border border-[#222] bg-[#0d0d0d] flex items-center justify-center text-white text-lg">
+                                    <i class="fa-brands fa-apple"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-bold text-white font-mono uppercase">macOS (MacBook / iMac)</h3>
+                                    <span class="text-[10px] font-mono text-neutral-500">Клиенты: FoXray, V2Box, Nekoray</span>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-mono bg-white/10 border border-white/20 text-white font-bold">БЫСТРЫЙ СТАРТ</span>
+                        </div>
+
+                        <ol class="space-y-2.5 font-mono text-xs text-neutral-300">
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                                <span>Установите <b>FoXray</b> или <b>V2Box</b> из Mac App Store.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                                <span>Скопируйте VLESS ссылку в буфер обмена.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-5 h-5 bg-[#121212] border border-[#222] text-neutral-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                                <span>Импортируйте ссылку и разрешите добавление VPN конфигурации в macOS.</span>
+                            </li>
+                        </ol>
+
+                        <div class="pt-2 flex items-center justify-between border-t border-[#1c1c1c]">
+                            <a href="v2rayn/index.html" class="inline-flex items-center gap-2 text-xs font-mono font-bold text-white hover:text-neutral-300 uppercase transition-colors">
+                                <span>Полный гайд для macOS ↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Legal Documents Section -->
+            <section class="space-y-6 pt-6 border-t border-[#1c1c1c]" id="legal-section">
+                <div class="font-mono text-xs text-neutral-500 uppercase tracking-widest">
+                    / 02 LEGAL DOCUMENTS & POLICIES
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="tos/index.html" class="wiki-card legal p-6 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all space-y-4 block group" data-tags="tos terms service соглашение правила legal">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-file-contract text-white text-xl"></i>
+                            <h4 class="text-sm font-bold text-white font-mono uppercase group-hover:translate-x-1 transition-transform">Пользовательское соглашение</h4>
+                        </div>
+                        <p class="text-xs font-mono text-neutral-400 leading-relaxed uppercase">Правила использования сервиса oncdev VPN, обязанности сторон и порядок оказания услуг.</p>
+                        <div class="pt-2 text-xs font-mono text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ДОКУМЕНТ ↗</div>
+                    </a>
+
+                    <a href="privacy/index.html" class="wiki-card legal p-6 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all space-y-4 block group" data-tags="privacy policy конфиденциальность данные no-logs legal">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-shield-halved text-white text-xl"></i>
+                            <h4 class="text-sm font-bold text-white font-mono uppercase group-hover:translate-x-1 transition-transform">Конфиденциальность</h4>
+                        </div>
+                        <p class="text-xs font-mono text-neutral-400 leading-relaxed uppercase">Политика шифрования, отсутствие логов трафика (No-Logs Policy) и защита данных.</p>
+                        <div class="pt-2 text-xs font-mono text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ДОКУМЕНТ ↗</div>
+                    </a>
+
+                    <a href="refund/index.html" class="wiki-card legal p-6 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all space-y-4 block group" data-tags="refund offer оферта возврат оплата sbp legal">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-file-invoice-dollar text-white text-xl"></i>
+                            <h4 class="text-sm font-bold text-white font-mono uppercase group-hover:translate-x-1 transition-transform">Публичная оферта & Возврат</h4>
+                        </div>
+                        <p class="text-xs font-mono text-neutral-400 leading-relaxed uppercase">Условия публичной оферты, способы оплаты СБП / Картами и регламент возврата средств.</p>
+                        <div class="pt-2 text-xs font-mono text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ДОКУМЕНТ ↗</div>
+                    </a>
                 </div>
             </section>
         </main>
@@ -144,7 +295,48 @@
     </div>
 
     <script src="../resources/command-palette.js"></script>
+    <script src="../resources/3d-tilt.js"></script>
     <script src="../resources/legal-consent.js"></script>
+    
+    <script>
+        let currentCat = 'all';
+        
+        function setCategory(cat) {
+            currentCat = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('active', 'border-white', 'bg-white', 'text-black', 'font-bold');
+                btn.classList.add('border-[#1c1c1c]', 'bg-[#0a0a0a]', 'text-neutral-400');
+            });
+            event.currentTarget.classList.add('active', 'border-white', 'bg-white', 'text-black', 'font-bold');
+            event.currentTarget.classList.remove('border-[#1c1c1c]', 'bg-[#0a0a0a]', 'text-neutral-400');
+            filterWiki();
+        }
+
+        function filterWiki() {
+            const query = (document.getElementById('wiki-search').value || '').toLowerCase().trim();
+            const cards = document.querySelectorAll('.wiki-card');
+
+            cards.forEach(card => {
+                const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+                const isMobile = card.classList.contains('mobile');
+                const isDesktop = card.classList.contains('desktop');
+                const isLegal = card.classList.contains('legal');
+
+                let matchCat = (currentCat === 'all') ||
+                               (currentCat === 'mobile' && isMobile) ||
+                               (currentCat === 'desktop' && isDesktop) ||
+                               (currentCat === 'legal' && isLegal);
+
+                let matchQuery = !query || tags.includes(query) || card.innerText.toLowerCase().includes(query);
+
+                if (matchCat && matchQuery) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

@@ -28,84 +28,88 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body class="bg-[#070709] text-slate-100 font-sans antialiased selection:bg-cyan-500/30 selection:text-cyan-200 min-h-screen">
+<body class="bg-[#050505] text-[#e5e5e5] font-sans antialiased selection:bg-white selection:text-black min-h-screen relative">
 
-    <!-- Subtle Cyan Ambient Top Glow -->
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[450px] bg-gradient-to-b from-sky-500/10 via-cyan-500/5 to-transparent blur-3xl pointer-events-none -z-10"></div>
+    <!-- Technical Blueprint Grid Background -->
+    <div class="fixed inset-0 bg-[linear-gradient(to_right,#121212_1px,transparent_1px),linear-gradient(to_bottom,#121212_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10 opacity-70"></div>
 
-    <div class="max-w-5xl mx-auto px-6 py-6">
-        <!-- Floating Glass Header with Restrained Color Touches -->
-        <header class="sticky top-4 z-50 backdrop-blur-xl bg-slate-950/80 border border-slate-800/80 rounded-full px-6 py-3 flex items-center justify-between shadow-2xl transition-all">
-            <a href="/new_site/main/index.html" class="flex items-center gap-3 font-bold text-base tracking-tight hover:text-cyan-400 transition-colors">
-                <span class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-sky-600 flex items-center justify-center text-xs font-mono font-extrabold text-slate-950 shadow-md shadow-cyan-500/20">OC</span>
-                <span class="text-white">oncdev</span>
-            </a>
+    <div class="max-w-[1400px] mx-auto min-h-screen border-x border-[#1c1c1c] flex flex-col justify-between">
+        <!-- KLTZQU Top HUD Bar -->
+        <header class="border-b border-[#1c1c1c] bg-[#050505]/95 backdrop-blur-md sticky top-0 z-40">
+            <div class="px-6 h-16 flex items-center justify-between text-xs font-mono tracking-widest uppercase">
+                <a href="../main/index.html" class="font-extrabold text-lg tracking-tighter text-white hover:opacity-80 transition-opacity">
+                    ONCDEV<span class="text-neutral-500">.</span>
+                </a>
 
-            <nav class="hidden md:flex items-center gap-1 font-mono text-xs tracking-wider">
-                <a href="/new_site/main/index.html" class="px-4 py-1.5 rounded-full text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">HOME</a>
-                <a href="/new_site/timer/index.html" class="px-4 py-1.5 rounded-full text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">PROJECTS</a>
-                <a href="/new_site/vpn/index.html" class="px-4 py-1.5 rounded-full text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 font-bold shadow-inner">VPN LAB</a>
-                <a href="/new_site/wiki/index.html" class="px-4 py-1.5 rounded-full text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">DOCS</a>
-                <a href="/new_site/about/index.html" class="px-4 py-1.5 rounded-full text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">ABOUT</a>
-                <a href="/new_site/polisours/index.html" class="px-4 py-1.5 rounded-full text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">POLISOURS ↗</a>
-            </nav>
+                <nav class="hidden md:flex items-center gap-8 text-[11px] text-neutral-400">
+                    <a href="../main/index.html" class="py-1 hover:text-white transition-colors">HOME</a>
+                    <a href="../timer/index.html" class="py-1 hover:text-white transition-colors">PROJECTS</a>
+                    <a href="../vpn/index.html" class="relative py-1 text-white font-bold">
+                        VPN LAB
+                        <span class="absolute bottom-0 left-0 w-full h-[2px] bg-white"></span>
+                    </a>
+                    <a href="../wiki/index.html" class="py-1 hover:text-white transition-colors">DOCS</a>
+                    <a href="../about/index.html" class="py-1 hover:text-white transition-colors">ABOUT</a>
+                    <a href="../polisours/index.html" class="py-1 hover:text-white transition-colors">POLISOURS ↗</a>
+                </nav>
 
-            <div class="flex items-center gap-3">
-                <button class="cmd-trigger border border-slate-800 bg-slate-900/80 px-3.5 py-1.5 rounded-full text-xs text-slate-300 hover:border-cyan-500/40 hover:text-white transition-all cursor-pointer">
-                    <span>Поиск</span>
-                    <kbd class="font-mono text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400">⌘K</kbd>
-                </button>
+                <div class="flex items-center gap-4">
+                    <button class="cmd-trigger border border-[#222222] bg-[#0a0a0a] px-3 py-1.5 rounded text-neutral-300 hover:border-white hover:text-white transition-all cursor-pointer">
+                        <span>CMD</span>
+                        <kbd class="bg-[#181818] px-1.5 py-0.5 rounded text-[9px] text-neutral-400 font-mono">⌘K</kbd>
+                    </button>
+                </div>
             </div>
         </header>
 
-        <main class="mt-12 space-y-10">
+        <main class="p-8 lg:p-14 space-y-16 flex-1">
             
             <!-- Page Title & Status -->
-            <section class="space-y-4 text-center sm:text-left">
-                <div class="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-xs font-mono text-emerald-400">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>HIGH SPEED VLESS PROTOCOL • 12ms PING</span>
+            <section class="space-y-6 border-b border-[#1c1c1c] pb-10">
+                <div class="flex items-center gap-3 font-mono text-xs text-neutral-500 tracking-widest uppercase">
+                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                    <span>| HIGH SPEED VLESS PROTOCOL • 12ms PING</span>
                 </div>
-                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white">oncdev VPN<span class="text-cyan-400">.</span></h1>
-                <p class="text-base text-slate-400 max-w-xl leading-relaxed">Безопасный тоннель VLESS для iOS, Android, Windows и macOS без задержек и ограничения скорости.</p>
+                <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tighter text-white uppercase">oncdev VPN<span class="text-neutral-600">.</span></h1>
+                <p class="text-xs font-mono text-neutral-400 max-w-xl uppercase tracking-wider">Безопасный тоннель VLESS для iOS, Android, Windows и macOS без задержек и ограничения скорости.</p>
             </section>
 
             <!-- TAB CONTAINER WITH LOCAL SWITCHING -->
-            <div class="flex justify-center sm:justify-start">
-                <div class="inline-flex p-1 bg-slate-900/90 border border-slate-800 rounded-full font-mono text-xs">
-                    <button id="tab-btn-buy" class="nav-tab active px-6 py-2.5 rounded-full font-bold text-white bg-slate-800 shadow-md transition-all cursor-pointer" onclick="switchTab('buy')">01 / Оформить подписку</button>
-                    <button id="tab-btn-check" class="nav-tab px-6 py-2.5 rounded-full font-bold text-slate-400 hover:text-white transition-all cursor-pointer" onclick="switchTab('check')">02 / Забрать ключ</button>
+            <div class="flex justify-start">
+                <div class="inline-flex p-1 bg-[#0a0a0a] border border-[#1c1c1c] rounded font-mono text-xs">
+                    <button id="tab-btn-buy" class="nav-tab active px-6 py-2.5 font-bold text-black bg-white shadow-md transition-all cursor-pointer" onclick="switchTab('buy')">01 / Оформить подписку</button>
+                    <button id="tab-btn-check" class="nav-tab px-6 py-2.5 font-bold text-neutral-400 hover:text-white transition-all cursor-pointer" onclick="switchTab('check')">02 / Забрать ключ</button>
                 </div>
             </div>
 
             <!-- TAB 1: Buy / Renew -->
             <section id="tab-content-buy" class="tab-pane active animate-fade-in space-y-8">
-                <div class="p-8 sm:p-10 rounded-3xl bg-slate-950/80 border border-slate-800/80 space-y-8 shadow-2xl relative overflow-hidden">
+                <div class="p-8 lg:p-12 border border-[#1c1c1c] bg-[#080808] space-y-8 font-mono">
                     
                     <!-- Steps progress bar -->
-                    <div class="steps-progress flex items-center justify-between relative max-w-xl mx-auto my-6">
-                        <div id="progress-line" class="progress-line absolute top-4 left-4 right-4 h-0.5 bg-slate-800 -z-0"></div>
-                        <div class="step-dot active z-10 w-9 h-9 rounded-full border-2 border-cyan-400 bg-slate-950 flex items-center justify-center font-mono text-xs font-bold text-cyan-300 shadow-lg shadow-cyan-500/20" data-step="1">1<span class="absolute top-10 left-1/2 -translate-x-1/2 text-[11px] font-mono text-slate-400">ТАРИФ</span></div>
-                        <div class="step-dot z-10 w-9 h-9 rounded-full border-2 border-slate-800 bg-slate-950 flex items-center justify-center font-mono text-xs font-bold text-slate-500" data-step="2">2<span class="absolute top-10 left-1/2 -translate-x-1/2 text-[11px] font-mono text-slate-500">АККАУНТ</span></div>
-                        <div class="step-dot z-10 w-9 h-9 rounded-full border-2 border-slate-800 bg-slate-950 flex items-center justify-center font-mono text-xs font-bold text-slate-500" data-step="3">3<span class="absolute top-10 left-1/2 -translate-x-1/2 text-[11px] font-mono text-slate-500">ОПЛАТА</span></div>
-                        <div class="step-dot z-10 w-9 h-9 rounded-full border-2 border-slate-800 bg-slate-950 flex items-center justify-center font-mono text-xs font-bold text-slate-500" data-step="4">4<span class="absolute top-10 left-1/2 -translate-x-1/2 text-[11px] font-mono text-slate-500">ГОТОВО</span></div>
+                    <div class="steps-progress flex items-center justify-between relative max-w-xl mx-auto my-6 text-xs">
+                        <div id="progress-line" class="progress-line absolute top-4 left-4 right-4 h-0.5 bg-[#1c1c1c] -z-0"></div>
+                        <div class="step-dot active z-10 w-9 h-9 rounded-full border-2 border-white bg-[#050505] flex items-center justify-center font-mono text-xs font-bold text-white shadow-lg" data-step="1">1<span class="absolute top-10 left-1/2 -translate-x-1/2 text-[11px] font-mono text-neutral-400">ТАРИФ</span></div>
+                        <div class="step-dot z-10 w-9 h-9 rounded-full border-2 border-[#1c1c1c] bg-[#050505] flex items-center justify-center font-mono text-xs font-bold text-neutral-500" data-step="2">2<span class="absolute top-10 left-1/2 -translate-x-1/2 text-[11px] font-mono text-neutral-500">АККАУНТ</span></div>
+                        <div class="step-dot z-10 w-9 h-9 rounded-full border-2 border-[#1c1c1c] bg-[#050505] flex items-center justify-center font-mono text-xs font-bold text-neutral-500" data-step="3">3<span class="absolute top-10 left-1/2 -translate-x-1/2 text-[11px] font-mono text-neutral-500">ОПЛАТА</span></div>
+                        <div class="step-dot z-10 w-9 h-9 rounded-full border-2 border-[#1c1c1c] bg-[#050505] flex items-center justify-center font-mono text-xs font-bold text-neutral-500" data-step="4">4<span class="absolute top-10 left-1/2 -translate-x-1/2 text-[11px] font-mono text-neutral-500">ГОТОВО</span></div>
                     </div>
 
-                    <div class="pt-6 border-t border-slate-800/60">
+                    <div class="pt-6 border-t border-[#1c1c1c]">
                         <!-- Step 1: Select Plan -->
                         <div id="step-1" class="step-content active space-y-6">
                             <div class="space-y-1">
-                                <span class="font-mono text-xs text-cyan-400">ШАГ 1 ИЗ 4</span>
-                                <h3 class="text-2xl font-bold text-white">Выберите тарифный план:</h3>
+                                <span class="font-mono text-xs text-neutral-500">ШАГ 1 ИЗ 4</span>
+                                <h3 class="text-2xl font-bold text-white uppercase">Выберите тарифный план:</h3>
                             </div>
                             <div id="plans-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="plans-skeleton grid grid-cols-1 sm:grid-cols-2 gap-4 col-span-2">
-                                    <div class="h-28 bg-slate-900/60 animate-pulse rounded-2xl border border-slate-800"></div>
-                                    <div class="h-28 bg-slate-900/60 animate-pulse rounded-2xl border border-slate-800"></div>
+                                    <div class="h-28 bg-[#0a0a0a] animate-pulse border border-[#1c1c1c]"></div>
+                                    <div class="h-28 bg-[#0a0a0a] animate-pulse border border-[#1c1c1c]"></div>
                                 </div>
                             </div>
                             <div class="pt-4">
-                                <button id="btn-goto-step-2" class="w-full py-4 rounded-full border border-cyan-400/40 bg-gradient-to-r from-cyan-500 to-sky-600 text-slate-950 font-bold text-sm tracking-wider uppercase shadow-lg shadow-cyan-500/20 disabled:opacity-40 disabled:pointer-events-none hover:brightness-110 transition-all cursor-pointer" disabled onclick="goToStep(2)">
+                                <button id="btn-goto-step-2" class="w-full py-4 border border-white/30 bg-white text-black font-bold text-xs tracking-wider uppercase shadow-lg disabled:opacity-40 disabled:pointer-events-none hover:bg-neutral-200 transition-all cursor-pointer" disabled onclick="goToStep(2)">
                                     Продолжить к аккаунту →
                                 </button>
                             </div>
@@ -114,120 +118,120 @@
                         <!-- Step 2: Account details -->
                         <div id="step-2" class="step-content space-y-6">
                             <div class="space-y-1">
-                                <span class="font-mono text-xs text-cyan-400">ШАГ 2 ИЗ 4</span>
-                                <h3 class="text-2xl font-bold text-white">Укажите ваш Telegram аккаунт:</h3>
+                                <span class="font-mono text-xs text-neutral-500">ШАГ 2 ИЗ 4</span>
+                                <h3 class="text-2xl font-bold text-white uppercase">Укажите ваш Telegram аккаунт:</h3>
                             </div>
                             <div class="space-y-4 max-w-lg">
-                                <label for="buy-username" class="block text-sm font-medium text-slate-300">Юзернейм в Telegram:</label>
-                                <div class="flex items-center rounded-xl bg-slate-900 border border-slate-800 px-4 py-3 focus-within:border-cyan-500 transition-colors">
-                                    <span class="text-cyan-400 font-mono font-bold pr-1" id="username-prefix">@</span>
-                                    <input type="text" id="buy-username" placeholder="vobimngr" required autocomplete="off" oninput="validateStep2()" class="bg-transparent border-none outline-none text-white w-full text-sm font-mono" />
+                                <label for="buy-username" class="block text-xs font-mono text-neutral-400 uppercase">Юзернейм в Telegram:</label>
+                                <div class="flex items-center bg-[#0a0a0a] border border-[#1c1c1c] px-4 py-3 focus-within:border-white transition-colors">
+                                    <span class="text-white font-mono font-bold pr-1" id="username-prefix">@</span>
+                                    <input type="text" id="buy-username" placeholder="vobimngr" required autocomplete="off" oninput="validateStep2()" class="bg-transparent border-none outline-none text-white w-full text-sm font-mono uppercase" />
                                 </div>
                                 <div class="space-y-2 pt-1">
                                     <div class="flex items-center gap-2.5">
-                                        <input type="checkbox" id="no-username-checkbox" onchange="toggleUsernameField(this)" class="w-4 h-4 rounded bg-slate-900 border-slate-800 text-cyan-500 focus:ring-0 cursor-pointer" />
-                                        <label for="no-username-checkbox" class="text-xs text-slate-400 cursor-pointer select-none">У меня нет юзернейма в Telegram (нет @username)</label>
+                                        <input type="checkbox" id="no-username-checkbox" onchange="toggleUsernameField(this)" class="w-4 h-4 rounded bg-[#0a0a0a] border-[#1c1c1c] text-white focus:ring-0 cursor-pointer" />
+                                        <label for="no-username-checkbox" class="text-xs text-neutral-400 cursor-pointer select-none">У меня нет юзернейма в Telegram (нет @username)</label>
                                     </div>
                                     <div class="flex items-center gap-2.5">
-                                        <input type="checkbox" id="no-tg-access-checkbox" onchange="toggleNoTgAccessField(this)" class="w-4 h-4 rounded bg-slate-900 border-slate-800 text-cyan-500 focus:ring-0 cursor-pointer" />
+                                        <input type="checkbox" id="no-tg-access-checkbox" onchange="toggleNoTgAccessField(this)" class="w-4 h-4 rounded bg-[#0a0a0a] border-[#1c1c1c] text-white focus:ring-0 cursor-pointer" />
                                         <label for="no-tg-access-checkbox" class="text-xs text-amber-400 font-semibold cursor-pointer select-none">Telegram не работает / привязать ключ позже</label>
                                     </div>
                                 </div>
-                                <span class="block text-xs text-slate-500 font-mono" id="username-hint">Никнейм используется для привязки VPN-подписки.</span>
+                                <span class="block text-xs text-neutral-500 font-mono" id="username-hint">Никнейм используется для привязки VPN-подписки.</span>
                                 
-                                <div id="no-tg-warning" class="hidden p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs leading-relaxed font-mono">
+                                <div id="no-tg-warning" class="hidden p-4 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs leading-relaxed font-mono">
                                     <b>ВНИМАНИЕ:</b> Сохраните ваш 6-значный код заказа на 4-м шаге. Без Telegram забрать ваш VPN-ключ можно будет по этому коду на вкладке «Забрать ключ».
                                 </div>
                             </div>
 
                             <div class="space-y-3 max-w-lg pt-2">
-                                <label for="buy-promo" class="block text-sm font-medium text-slate-300">Промокод (если есть):</label>
+                                <label for="buy-promo" class="block text-xs font-mono text-neutral-400 uppercase">Промокод (если есть):</label>
                                 <div class="flex gap-2">
-                                    <input type="text" id="buy-promo" placeholder="Введите промокод" autocomplete="off" class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white font-mono outline-none focus:border-cyan-500 transition-colors uppercase" />
-                                    <button type="button" class="px-5 py-2.5 rounded-xl border border-slate-800 bg-slate-800 text-xs font-mono font-bold text-white hover:bg-slate-700 transition-colors cursor-pointer" onclick="applyPromoCode()">Применить</button>
+                                    <input type="text" id="buy-promo" placeholder="Введите промокод" autocomplete="off" class="flex-1 bg-[#0a0a0a] border border-[#1c1c1c] px-4 py-2.5 text-sm text-white font-mono outline-none focus:border-white transition-colors uppercase" />
+                                    <button type="button" class="px-5 py-2.5 border border-[#1c1c1c] bg-[#0a0a0a] text-xs font-mono font-bold text-white hover:border-white transition-colors cursor-pointer" onclick="applyPromoCode()">Применить</button>
                                 </div>
                                 <div id="promo-status" class="text-xs font-mono font-medium"></div>
                             </div>
 
-                            <div class="flex items-center justify-between gap-4 pt-6 border-t border-slate-800/60">
-                                <button class="px-6 py-3 rounded-full border border-slate-800 bg-slate-900 text-xs font-mono font-bold text-slate-300 hover:text-white transition-colors cursor-pointer" onclick="goToStep(1)">← Назад</button>
-                                <button id="btn-goto-step-3" class="px-8 py-3 rounded-full bg-cyan-500 text-slate-950 font-bold text-xs tracking-wider uppercase shadow-lg disabled:opacity-40 disabled:pointer-events-none transition-all cursor-pointer" disabled onclick="goToStep(3)">Далее к оплате →</button>
+                            <div class="flex items-center justify-between gap-4 pt-6 border-t border-[#1c1c1c]">
+                                <button class="px-6 py-3 border border-[#1c1c1c] bg-[#0a0a0a] text-xs font-mono font-bold text-neutral-300 hover:text-white transition-colors cursor-pointer" onclick="goToStep(1)">← Назад</button>
+                                <button id="btn-goto-step-3" class="px-8 py-3 border border-white/30 bg-white text-black font-bold text-xs tracking-wider uppercase shadow-lg disabled:opacity-40 disabled:pointer-events-none transition-all cursor-pointer" disabled onclick="goToStep(3)">Далее к оплате →</button>
                             </div>
                         </div>
 
                         <!-- Step 3: Payment details & File upload -->
                         <div id="step-3" class="step-content space-y-6">
                             <div class="space-y-1">
-                                <span class="font-mono text-xs text-cyan-400">ШАГ 3 ИЗ 4</span>
-                                <h3 class="text-2xl font-bold text-white">Совершите перевод и загрузите чек:</h3>
+                                <span class="font-mono text-xs text-neutral-500">ШАГ 3 ИЗ 4</span>
+                                <h3 class="text-2xl font-bold text-white uppercase">Совершите перевод и загрузите чек:</h3>
                             </div>
 
-                            <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-2">
-                                <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">Итого к оплате</span>
+                            <div class="p-6 bg-[#050505] border border-[#1c1c1c] space-y-2">
+                                <span class="text-xs font-mono text-neutral-400 uppercase tracking-widest">Итого к оплате</span>
                                 <div class="flex items-baseline gap-3">
-                                    <span id="summary-old-price" class="line-through text-slate-500 text-lg hidden">50 руб.</span>
+                                    <span id="summary-old-price" class="line-through text-neutral-500 text-lg hidden">50 руб.</span>
                                     <span id="summary-price" class="text-4xl font-extrabold text-white">50 руб.</span>
                                 </div>
-                                <p class="text-xs text-slate-400 font-mono">Тариф: <span id="summary-plan" class="font-bold text-white">1 месяц</span> • Аккаунт: <span id="summary-username" class="font-bold text-cyan-400">@vobimngr</span></p>
+                                <p class="text-xs text-neutral-400 font-mono">Тариф: <span id="summary-plan" class="font-bold text-white">1 месяц</span> • Аккаунт: <span id="summary-username" class="font-bold text-white">@vobimngr</span></p>
                             </div>
 
                             <div class="space-y-4">
-                                <h4 class="text-sm font-semibold text-slate-300 font-mono uppercase tracking-wider">Реквизиты для оплаты:</h4>
+                                <h4 class="text-xs font-semibold text-neutral-300 font-mono uppercase tracking-wider">Реквизиты для оплаты:</h4>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div class="p-5 rounded-2xl bg-slate-900/60 border border-amber-500/30 space-y-3">
-                                        <div class="text-xs font-mono text-slate-300 flex items-center justify-between">
-                                            <span><i class="fa-solid fa-phone text-cyan-400"></i> СБП</span>
-                                            <span id="req-receiver-sbp" class="text-cyan-300 font-bold">Платон П.</span>
+                                    <div class="p-5 bg-[#050505] border border-[#1c1c1c] space-y-3">
+                                        <div class="text-xs font-mono text-neutral-300 flex items-center justify-between">
+                                            <span><i class="fa-solid fa-phone text-white"></i> СБП</span>
+                                            <span id="req-receiver-sbp" class="text-white font-bold">Платон П.</span>
                                         </div>
-                                        <div class="flex items-center justify-between bg-slate-950 px-3 py-2 rounded-xl border border-slate-800">
-                                            <code id="req-phone" class="font-mono text-base font-bold text-cyan-300">+79525908980</code>
-                                            <button class="text-slate-400 hover:text-white p-1" onclick="copyText('req-phone')"><i class="fa-regular fa-copy"></i></button>
+                                        <div class="flex items-center justify-between bg-[#0a0a0a] px-3 py-2 border border-[#1c1c1c]">
+                                            <code id="req-phone" class="font-mono text-base font-bold text-white">+79525908980</code>
+                                            <button class="text-neutral-400 hover:text-white p-1" onclick="copyText('req-phone')"><i class="fa-regular fa-copy"></i></button>
                                         </div>
                                         <div class="text-xs text-amber-400 font-mono font-bold">ОЗОН БАНК (Ozon Bank)</div>
                                     </div>
 
-                                    <div class="p-5 rounded-2xl bg-slate-900/60 border border-amber-500/30 space-y-3">
-                                        <div class="text-xs font-mono text-slate-300 flex items-center justify-between">
-                                            <span><i class="fa-solid fa-credit-card text-cyan-400"></i> КАРТА</span>
-                                            <span id="req-receiver-card" class="text-cyan-300 font-bold">Платон П.</span>
+                                    <div class="p-5 bg-[#050505] border border-[#1c1c1c] space-y-3">
+                                        <div class="text-xs font-mono text-neutral-300 flex items-center justify-between">
+                                            <span><i class="fa-solid fa-credit-card text-white"></i> КАРТА</span>
+                                            <span id="req-receiver-card" class="text-white font-bold">Платон П.</span>
                                         </div>
-                                        <div class="flex items-center justify-between bg-slate-950 px-3 py-2 rounded-xl border border-slate-800">
-                                            <code id="req-card" class="font-mono text-base font-bold text-cyan-300">2204320380053084</code>
-                                            <button class="text-slate-400 hover:text-white p-1" onclick="copyText('req-card')"><i class="fa-regular fa-copy"></i></button>
+                                        <div class="flex items-center justify-between bg-[#0a0a0a] px-3 py-2 border border-[#1c1c1c]">
+                                            <code id="req-card" class="font-mono text-base font-bold text-white">2204320380053084</code>
+                                            <button class="text-neutral-400 hover:text-white p-1" onclick="copyText('req-card')"><i class="fa-regular fa-copy"></i></button>
                                         </div>
                                         <div class="text-xs text-amber-400 font-mono font-bold">ОЗОН БАНК (Ozon Bank)</div>
                                     </div>
                                 </div>
-                                <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono">
+                                <div class="p-3.5 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono">
                                     <b>ВНИМАНИЕ:</b> В комментарии к платежу <b>НИЧЕГО НЕ ПИШИТЕ</b> — оставьте поле пустым.
                                 </div>
                             </div>
 
                             <div class="space-y-3">
-                                <label class="block text-sm font-medium text-slate-300">Загрузите скриншот/квитанцию оплаты:</label>
-                                <div id="dropzone" class="border-2 border-dashed border-slate-800 hover:border-cyan-500/60 rounded-2xl p-8 text-center bg-slate-900/40 cursor-pointer transition-all space-y-2" onclick="triggerFileInput()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
-                                    <i class="fa-solid fa-cloud-arrow-up text-3xl text-cyan-400"></i>
-                                    <div class="text-sm font-medium text-slate-200">Нажмите или перетащите файл сюда</div>
-                                    <div class="text-xs text-slate-500 font-mono">PNG, JPG, PDF до 10 МБ</div>
+                                <label class="block text-xs font-mono text-neutral-400 uppercase">Загрузите скриншот/квитанцию оплаты:</label>
+                                <div id="dropzone" class="border border-dashed border-[#1c1c1c] hover:border-white p-8 text-center bg-[#050505] cursor-pointer transition-all space-y-2" onclick="triggerFileInput()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+                                    <i class="fa-solid fa-cloud-arrow-up text-3xl text-white"></i>
+                                    <div class="text-sm font-medium text-white uppercase">Нажмите или перетащите файл сюда</div>
+                                    <div class="text-xs text-neutral-500 font-mono">PNG, JPG, PDF до 10 МБ</div>
                                     <input type="file" id="receipt-file" accept="image/*,application/pdf" class="hidden" onchange="handleFileSelect(event)" />
                                 </div>
-                                <div id="file-preview-container" class="hidden flex items-center justify-between p-3.5 rounded-xl bg-slate-900 border border-slate-800">
+                                <div id="file-preview-container" class="hidden flex items-center justify-between p-3.5 bg-[#0a0a0a] border border-[#1c1c1c]">
                                     <div class="flex items-center gap-3">
-                                        <i class="fa-regular fa-image text-cyan-400"></i>
-                                        <span id="preview-filename" class="text-xs font-mono text-slate-200">receipt.jpg</span>
-                                        <span id="preview-filesize" class="text-xs font-mono text-slate-500">(1.2 MB)</span>
+                                        <i class="fa-regular fa-image text-white"></i>
+                                        <span id="preview-filename" class="text-xs font-mono text-white">receipt.jpg</span>
+                                        <span id="preview-filesize" class="text-xs font-mono text-neutral-500">(1.2 MB)</span>
                                     </div>
-                                    <button type="button" class="text-slate-500 hover:text-red-400" onclick="removeSelectedFile()"><i class="fa-solid fa-trash-can"></i></button>
+                                    <button type="button" class="text-neutral-500 hover:text-red-400" onclick="removeSelectedFile()"><i class="fa-solid fa-trash-can"></i></button>
                                 </div>
                             </div>
 
-                            <div id="submit-error" class="hidden p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono">
+                            <div id="submit-error" class="hidden p-4 bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono">
                                 <i class="fa-solid fa-circle-exclamation"></i> <span id="error-message-text">Ошибка при отправке</span>
                             </div>
 
-                            <div class="flex items-center justify-between gap-4 pt-6 border-t border-slate-800/60">
-                                <button class="px-6 py-3 rounded-full border border-slate-800 bg-slate-900 text-xs font-mono font-bold text-slate-300 hover:text-white transition-colors cursor-pointer" onclick="goToStep(2)">← Назад</button>
-                                <button id="btn-submit-order" class="px-8 py-3 rounded-full bg-cyan-500 text-slate-950 font-bold text-xs tracking-wider uppercase shadow-lg disabled:opacity-40 disabled:pointer-events-none transition-all cursor-pointer" disabled onclick="submitOrder()">
+                            <div class="flex items-center justify-between gap-4 pt-6 border-t border-[#1c1c1c]">
+                                <button class="px-6 py-3 border border-[#1c1c1c] bg-[#0a0a0a] text-xs font-mono font-bold text-neutral-300 hover:text-white transition-colors cursor-pointer" onclick="goToStep(2)">← Назад</button>
+                                <button id="btn-submit-order" class="px-8 py-3 border border-white/30 bg-white text-black font-bold text-xs tracking-wider uppercase shadow-lg disabled:opacity-40 disabled:pointer-events-none transition-all cursor-pointer" disabled onclick="submitOrder()">
                                     <span id="submit-btn-text">Отправить квитанцию →</span>
                                 </button>
                             </div>
@@ -235,26 +239,26 @@
 
                         <!-- Step 4: Finished success screen -->
                         <div id="step-4" class="step-content space-y-6 text-center">
-                            <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-400 text-2xl shadow-lg shadow-emerald-500/10">
+                            <div class="w-16 h-16 rounded-full border border-emerald-400/40 bg-emerald-500/10 flex items-center justify-center mx-auto text-emerald-400 text-2xl shadow-lg">
                                 <i class="fa-solid fa-circle-check"></i>
                             </div>
-                            <h3 class="text-3xl font-extrabold text-white">Заявка успешно отправлена!</h3>
-                            <p class="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
+                            <h3 class="text-3xl font-extrabold text-white uppercase">Заявка успешно отправлена!</h3>
+                            <p class="text-xs font-mono text-neutral-400 max-w-md mx-auto leading-relaxed uppercase">
                                 Ваша квитанция получена. Проверка обычно занимает <b>от 5 до 30 минут</b>.
                             </p>
-                            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 max-w-md mx-auto space-y-3">
-                                <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">Ваш код заказа:</span>
+                            <div class="p-6 bg-[#050505] border border-[#1c1c1c] max-w-md mx-auto space-y-3 font-mono">
+                                <span class="text-xs text-neutral-400 uppercase tracking-widest">Ваш код заказа:</span>
                                 <div class="flex items-center justify-center gap-3">
-                                    <code id="success-saved-code" class="font-mono text-3xl font-bold text-cyan-400 tracking-wider">XXXXXX</code>
-                                    <button class="text-slate-400 hover:text-white p-1" onclick="copyText('success-saved-code')"><i class="fa-regular fa-copy text-lg"></i></button>
+                                    <code id="success-saved-code" class="font-mono text-3xl font-bold text-white tracking-wider">XXXXXX</code>
+                                    <button class="text-neutral-400 hover:text-white p-1" onclick="copyText('success-saved-code')"><i class="fa-regular fa-copy text-lg"></i></button>
                                 </div>
                             </div>
-                            <div id="no-tg-success-notice" class="hidden p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono text-left leading-relaxed max-w-md mx-auto">
+                            <div id="no-tg-success-notice" class="hidden p-4 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono text-left leading-relaxed max-w-md mx-auto">
                                 <b>ОБЯЗАТЕЛЬНО СОХРАНИТЕ КОД:</b> Вы оформили заказ без Telegram. По коду выше вы сможете забрать VPN-ключ на вкладке «Забрать ключ».
                             </div>
-                            <div class="flex justify-center gap-4 pt-4">
-                                <button class="px-6 py-3 rounded-full bg-cyan-500 text-slate-950 font-mono font-bold text-xs tracking-wider uppercase shadow-lg cursor-pointer" onclick="goToCheckOrderTab()">Проверить готовность</button>
-                                <button class="px-6 py-3 rounded-full border border-slate-800 bg-slate-900 text-xs font-mono font-bold text-slate-300 hover:text-white cursor-pointer" onclick="resetForm()">Новый заказ</button>
+                            <div class="flex justify-center gap-4 pt-4 font-mono">
+                                <button class="px-6 py-3 border border-white/30 bg-white text-black font-bold text-xs tracking-wider uppercase shadow-lg cursor-pointer" onclick="goToCheckOrderTab()">Проверить готовность</button>
+                                <button class="px-6 py-3 border border-[#1c1c1c] bg-[#0a0a0a] text-xs font-bold text-neutral-300 hover:text-white cursor-pointer uppercase" onclick="resetForm()">Новый заказ</button>
                             </div>
                         </div>
                     </div>
@@ -262,24 +266,24 @@
             </section>
 
             <!-- TAB 2: Check Order Status -->
-            <section id="tab-content-check" class="tab-pane space-y-8">
-                <div class="p-8 sm:p-10 rounded-3xl bg-slate-950/80 border border-slate-800/80 space-y-8 shadow-2xl">
+            <section id="tab-content-check" class="tab-pane space-y-8 font-mono">
+                <div class="p-8 lg:p-12 border border-[#1c1c1c] bg-[#080808] space-y-8">
                     <div class="space-y-2">
-                        <span class="font-mono text-xs text-cyan-400">ПРОВЕРКА И ВЫДАЧА</span>
-                        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Забрать VPN ключ</h2>
-                        <p class="text-sm text-slate-400">Введите 6-значный код заказа, чтобы проверить статус оплаты и скопировать ссылку VLESS.</p>
+                        <span class="font-mono text-xs text-neutral-500 uppercase tracking-widest">ПРОВЕРКА И ВЫДАЧА</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase">Забрать VPN ключ</h2>
+                        <p class="text-xs text-neutral-400 uppercase">Введите 6-значный код заказа, чтобы проверить статус оплаты и скопировать ссылку VLESS.</p>
                     </div>
 
                     <form id="check-order-form" onsubmit="handleCheckOrder(event)" class="max-w-md space-y-4">
                         <div class="flex gap-2">
-                            <input type="text" id="check-order-code" placeholder="Например: A4F9X2" required autocomplete="off" style="text-transform: uppercase;" class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white font-mono outline-none focus:border-cyan-500 transition-colors uppercase" />
-                            <button type="submit" id="check-order-btn" class="px-6 py-3 rounded-xl bg-cyan-500 text-slate-950 font-mono font-bold text-xs tracking-wider uppercase shadow-lg hover:brightness-110 transition-all cursor-pointer">Проверить</button>
+                            <input type="text" id="check-order-code" placeholder="Например: A4F9X2" required autocomplete="off" style="text-transform: uppercase;" class="flex-1 bg-[#0a0a0a] border border-[#1c1c1c] px-4 py-3 text-xs text-white font-mono outline-none focus:border-white transition-colors uppercase" />
+                            <button type="submit" id="check-order-btn" class="px-6 py-3 border border-white/30 bg-white text-black font-mono font-bold text-xs tracking-wider uppercase shadow-lg hover:bg-neutral-200 transition-all cursor-pointer">Проверить</button>
                         </div>
                     </form>
 
                     <!-- Loading State -->
-                    <div id="check-loading" class="spinner-container hidden py-8 text-center space-y-3 font-mono text-xs text-slate-400">
-                        <div class="spinner border-2 border-cyan-500 border-t-transparent w-8 h-8 rounded-full animate-spin mx-auto"></div>
+                    <div id="check-loading" class="spinner-container hidden py-8 text-center space-y-3 font-mono text-xs text-neutral-400">
+                        <div class="spinner border-2 border-white border-t-transparent w-8 h-8 rounded-full animate-spin mx-auto"></div>
                         <p>Запрашиваем статус заказа...</p>
                     </div>
 
@@ -287,27 +291,27 @@
                     <div id="check-results" class="results-container hidden pt-4">
                         <!-- Approved -->
                         <div id="result-approved" class="result-block hidden space-y-6">
-                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono font-bold text-sm">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 border border-emerald-400/40 bg-emerald-500/10 text-emerald-400 font-mono font-bold text-xs uppercase">
                                 <i class="fa-solid fa-circle-check"></i> ОПЛАТА ПОДТВЕРЖДЕНА
                             </div>
-                            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 max-w-xl">
-                                <span class="text-xs font-mono text-slate-400">Ваша ссылка на подписку VLESS:</span>
-                                <div class="flex items-center justify-between gap-3 p-3.5 bg-slate-950 rounded-xl border border-slate-800">
-                                    <code id="vless-link" class="font-mono text-xs text-cyan-300 truncate">vless://...</code>
-                                    <button class="text-slate-400 hover:text-white p-1" onclick="copyVlessLink()"><i id="copy-icon" class="fa-regular fa-copy text-lg"></i></button>
+                            <div class="p-6 bg-[#050505] border border-[#1c1c1c] space-y-4 max-w-xl">
+                                <span class="text-xs font-mono text-neutral-400 uppercase">Ваша ссылка на подписку VLESS:</span>
+                                <div class="flex items-center justify-between gap-3 p-3.5 bg-[#0a0a0a] border border-[#1c1c1c]">
+                                    <code id="vless-link" class="font-mono text-xs text-white truncate">vless://...</code>
+                                    <button class="text-neutral-400 hover:text-white p-1" onclick="copyVlessLink()"><i id="copy-icon" class="fa-regular fa-copy text-lg"></i></button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Pending -->
-                        <div id="result-pending" class="pending-card hidden p-6 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs leading-relaxed space-y-2">
-                            <div class="font-bold text-sm"><i class="fa-solid fa-clock"></i> Платеж на проверке</div>
+                        <div id="result-pending" class="pending-card hidden p-6 bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs leading-relaxed space-y-2">
+                            <div class="font-bold text-sm uppercase"><i class="fa-solid fa-clock"></i> Платеж на проверке</div>
                             <p>Заказ <b><span id="pending-code">XXXXXX</span></b> находится на проверке у администраторов. Проверка занимает 5-30 минут.</p>
                         </div>
 
                         <!-- Declined -->
-                        <div id="result-declined" class="no-sub-card hidden p-6 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-300 font-mono text-xs leading-relaxed space-y-2">
-                            <div class="font-bold text-sm"><i class="fa-solid fa-circle-xmark"></i> Заказ отклонен</div>
+                        <div id="result-declined" class="no-sub-card hidden p-6 bg-red-500/10 border border-red-500/30 text-red-300 font-mono text-xs leading-relaxed space-y-2">
+                            <div class="font-bold text-sm uppercase"><i class="fa-solid fa-circle-xmark"></i> Заказ отклонен</div>
                             <p>Оплата по коду <b><span id="declined-code">XXXXXX</span></b> не подтверждена.</p>
                         </div>
                     </div>
@@ -315,18 +319,19 @@
             </section>
         </main>
 
-        <footer class="mt-32 pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-mono">
-            <p>© 2025–2026 oncdev. Разработка <a href="/new_site/polisours/index.html" class="text-slate-400 hover:text-white underline">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" class="text-slate-400 hover:text-white underline">Vobi</a>.</p>
+        <footer class="border-t border-[#1c1c1c] py-8 px-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-neutral-500">
+            <p>© 2025–2026 ONCDEV. Разработка <a href="../polisours/index.html" class="text-white underline">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" class="text-white underline">Vobi</a>.</p>
         </footer>
     </div>
 
     <!-- Notification Toast -->
-    <div id="toast" class="toast hidden fixed bottom-6 right-6 z-50 bg-slate-900 border border-cyan-500/40 text-cyan-300 px-4 py-3 rounded-xl shadow-2xl font-mono text-xs flex items-center gap-2">
-        <i class="fa-solid fa-circle-check"></i>
+    <div id="toast" class="toast hidden fixed bottom-6 right-6 z-50 bg-[#0a0a0a] border border-[#222222] text-white px-4 py-3 rounded shadow-2xl font-mono text-xs flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
         <span id="toast-message">Текст скопирован</span>
     </div>
 
     <script src="../resources/command-palette.js"></script>
+    <script src="../resources/3d-tilt.js"></script>
     <script src="app.js"></script>
 </body>
 

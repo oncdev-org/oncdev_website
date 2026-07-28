@@ -2,7 +2,7 @@
 export default {
   content: [
     "./index.html",
-    "./**/*.html",
+    "./{about,channel-summary,city,dots,main,maintenance,polisours,timer,vpn,wiki}/**/*.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",

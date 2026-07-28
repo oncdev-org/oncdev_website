@@ -5,22 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - oncdev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../resources/shared.css">
     <link rel="stylesheet" href="../wiki-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
-    <div class="page-shell">
-        <header class="site-header">
-            <a class="brand-link" href="/">
-                <span class="brand-mark">OC</span>
-                <span>oncdev</span>
-            </a>
-            <div class="social-links">
-                <a href="https://t.me/oncubedev" target="_blank" rel="noopener noreferrer">
-                    <img src="../../resources/tg.png" alt="Telegram">
+<body class="bg-[#050505] text-[#e5e5e5] font-sans antialiased selection:bg-white selection:text-black min-h-screen relative">
+
+    <!-- Technical Blueprint Grid Background -->
+    <div class="fixed inset-0 bg-[linear-gradient(to_right,#121212_1px,transparent_1px),linear-gradient(to_bottom,#121212_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10 opacity-70"></div>
+
+    <div class="max-w-[1400px] mx-auto min-h-screen border-x border-[#1c1c1c] flex flex-col justify-between">
+        <!-- KLTZQU Top HUD Bar -->
+        <header class="border-b border-[#1c1c1c] bg-[#050505]/95 backdrop-blur-md sticky top-0 z-40">
+            <div class="px-6 h-16 flex items-center justify-between text-xs font-mono tracking-widest uppercase">
+                <a href="../../main/index.html" class="font-extrabold text-lg tracking-tighter text-white hover:opacity-80 transition-opacity">
+                    ONCDEV<span class="text-neutral-500">.</span>
                 </a>
+
+                <nav class="hidden md:flex items-center gap-8 text-[11px] text-neutral-400">
+                    <a href="../../main/index.html" class="py-1 hover:text-white transition-colors">HOME</a>
+                    <a href="../../timer/index.html" class="py-1 hover:text-white transition-colors">PROJECTS</a>
+                    <a href="../../vpn/index.html" class="py-1 hover:text-white transition-colors">VPN LAB</a>
+                    <a href="../../wiki/index.html" class="relative py-1 text-white font-bold">
+                        DOCS
+                        <span class="absolute bottom-0 left-0 w-full h-[2px] bg-white"></span>
+                    </a>
+                    <a href="../../about/index.html" class="py-1 hover:text-white transition-colors">ABOUT</a>
+                    <a href="../../polisours/index.html" class="py-1 hover:text-white transition-colors">POLISOURS ↗</a>
+                </nav>
+
+                <div class="flex items-center gap-4">
+                    <button class="cmd-trigger border border-[#222222] bg-[#0a0a0a] px-3 py-1.5 rounded text-neutral-300 hover:border-white hover:text-white transition-all cursor-pointer">
+                        <span>CMD</span>
+                        <kbd class="bg-[#181818] px-1.5 py-0.5 rounded text-[9px] text-neutral-400 font-mono">⌘K</kbd>
+                    </button>
+                </div>
             </div>
         </header>
 

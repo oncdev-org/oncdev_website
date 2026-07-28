@@ -32,11 +32,11 @@ function switchTab(tab) {
     const prevContent = document.getElementById(`tab-content-${currentTab}`);
     const nextContent = document.getElementById(`tab-content-${tab}`);
 
-    if (prevBtn) prevBtn.classList.remove('active', 'bg-slate-800', 'text-white');
-    if (prevBtn) prevBtn.classList.add('text-slate-400');
+    if (prevBtn) prevBtn.classList.remove('active', 'bg-white', 'text-black');
+    if (prevBtn) prevBtn.classList.add('text-neutral-400');
     
-    if (nextBtn) nextBtn.classList.add('active', 'bg-slate-800', 'text-white');
-    if (nextBtn) nextBtn.classList.remove('text-slate-400');
+    if (nextBtn) nextBtn.classList.add('active', 'bg-white', 'text-black');
+    if (nextBtn) nextBtn.classList.remove('text-neutral-400');
 
     if (prevContent) prevContent.classList.remove('active');
     if (nextContent) nextContent.classList.add('active');
@@ -76,10 +76,10 @@ function renderPlans() {
     
     plans.forEach(plan => {
         const card = document.createElement('div');
-        card.className = `plan-card p-6 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+        card.className = `plan-card p-6 border transition-all cursor-pointer flex flex-col justify-between ${
             selectedPlanId === plan.id 
-                ? 'border-cyan-400 bg-cyan-500/10 shadow-lg shadow-cyan-500/10' 
-                : 'border-slate-800 bg-slate-900/60 hover:border-cyan-500/40 hover:bg-slate-900/80'
+                ? 'border-white bg-white/10' 
+                : 'border-[#1c1c1c] bg-[#050505] hover:border-white/40'
         }`;
         
         card.onclick = () => selectPlan(plan.id);
@@ -87,17 +87,17 @@ function renderPlans() {
         card.innerHTML = `
             <div class="space-y-2">
                 <div class="flex items-center justify-between">
-                    <span class="font-bold text-white text-base font-sans">${plan.name}</span>
-                    ${plan.badge ? `<span class="text-[10px] font-mono font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full">${plan.badge}</span>` : ''}
+                    <span class="font-bold text-white text-base font-mono uppercase">${plan.name}</span>
+                    ${plan.badge ? `<span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5">${plan.badge}</span>` : ''}
                 </div>
-                <div class="flex items-baseline gap-2 pt-2">
-                    ${plan.oldPrice ? `<span class="line-through text-slate-500 text-sm font-mono">${plan.oldPrice} руб.</span>` : ''}
-                    <span class="text-3xl font-extrabold text-cyan-400 font-mono">${plan.price} руб.</span>
+                <div class="flex items-baseline gap-3 pt-2 font-mono">
+                    ${plan.oldPrice ? `<span class="line-through text-neutral-500 text-sm">${plan.oldPrice} руб.</span>` : ''}
+                    <span class="text-3xl font-extrabold text-white">${plan.price} руб.</span>
                 </div>
             </div>
-            <div class="pt-4 flex items-center justify-between text-xs font-mono text-slate-400 border-t border-slate-800/60 mt-4">
+            <div class="pt-4 flex items-center justify-between text-xs font-mono text-neutral-400 border-t border-[#1c1c1c] mt-4">
                 <span>VLESS • UNLIMITED</span>
-                <span class="${selectedPlanId === plan.id ? 'text-cyan-400 font-bold' : 'text-slate-500'}">${selectedPlanId === plan.id ? 'ВЫБРАНО ✓' : 'ВЫБРАТЬ'}</span>
+                <span class="${selectedPlanId === plan.id ? 'text-white font-bold' : 'text-neutral-500'}">${selectedPlanId === plan.id ? 'ВЫБРАНО ✓' : 'ВЫБРАТЬ'}</span>
             </div>
         `;
 
