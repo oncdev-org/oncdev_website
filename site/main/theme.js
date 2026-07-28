@@ -13,18 +13,42 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('mousemove', (e) => {
             const x = e.clientX;
             const y = e.clientY;
-            
-            // Show blob on first movement
             interactiveBlob.style.opacity = '1';
-            
-            // Move blob with a slight delay effect (via CSS transition)
             interactiveBlob.style.left = `${x}px`;
             interactiveBlob.style.top = `${y}px`;
         });
 
-        // Hide blob when mouse leaves the window
         document.addEventListener('mouseleave', () => {
             interactiveBlob.style.opacity = '0';
         });
     }
+
+    // Bento Cards Spotlight Effect
+    const bentoCards = document.querySelectorAll('.bento-card, .glass-card');
+    bentoCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    // Code Terminal Tabs Switcher
+    const terminalTabs = document.querySelectorAll('.terminal-tab');
+    const terminalPanes = document.querySelectorAll('.terminal-code');
+    terminalTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const targetId = tab.getAttribute('data-target');
+            terminalTabs.forEach(t => t.classList.remove('active'));
+            terminalPanes.forEach(p => p.classList.add('hidden'));
+
+            tab.classList.add('active');
+            const targetPane = document.getElementById(targetId);
+            if (targetPane) {
+                targetPane.classList.remove('hidden');
+            }
+        });
+    });
 });

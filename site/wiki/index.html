@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>База знаний - oncdev</title>
+    <title>База знаний & Документация — oncdev studio</title>
     <link rel="stylesheet" href="../resources/shared.css">
     <link rel="stylesheet" href="wiki-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,15 +13,15 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 24px;
-            margin-top: 24px;
+            margin-top: 28px;
         }
 
         .portal-card {
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-lg);
             padding: 32px;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             text-decoration: none;
             display: flex;
             flex-direction: column;
@@ -29,24 +29,26 @@
         }
 
         .portal-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: var(--accent-cyan);
-            transform: translateY(-2px);
+            background: rgba(45, 212, 191, 0.05);
+            border-color: rgba(45, 212, 191, 0.35);
+            transform: translateY(-3px);
         }
 
-        .portal-card i {
-            font-size: 2.2rem;
+        .portal-card i.portal-icon {
+            font-size: 2.4rem;
             color: var(--accent-cyan);
         }
 
         .portal-card h3 {
-            font-size: 1.4rem;
-            color: var(--text);
+            font-family: var(--font-heading);
+            font-size: 1.45rem;
+            color: var(--text-primary);
             margin: 0;
+            font-weight: 700;
         }
 
         .portal-card p {
-            color: var(--muted);
+            color: var(--text-secondary);
             font-size: 0.95rem;
             line-height: 1.6;
             margin: 0;
@@ -56,21 +58,27 @@
             margin-top: 8px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .portal-link-item {
-            color: var(--text);
+            color: var(--text-primary);
             font-weight: 600;
             font-size: 0.95rem;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: color 0.15s;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.2s ease;
         }
 
         .portal-link-item:hover {
             color: var(--accent-cyan);
+            border-color: rgba(45, 212, 191, 0.3);
+            background: rgba(45, 212, 191, 0.08);
         }
 
         @media (max-width: 768px) {
@@ -91,25 +99,33 @@
 
     <div class="page-shell">
         <header class="site-header">
-            <a class="brand-link" href="/" aria-label="oncdev - главная страница">
+            <a class="brand-link" href="/" aria-label="oncdev главная">
                 <span class="brand-mark">OC</span>
                 <span>oncdev</span>
+                <span class="brand-tag">DOCS</span>
             </a>
 
             <nav class="main-nav" aria-label="Основная навигация">
                 <a href="/timer">Таймер</a>
                 <a href="/">Главная</a>
                 <a href="/vpn">VPN</a>
+                <a href="/wiki" class="active" aria-current="page">База знаний</a>
                 <a href="/about">О нас</a>
             </nav>
 
-            <div class="social-links" aria-label="Социальные ссылки">
-                <a href="https://t.me/oncubedev" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-                    <img src="../resources/tg.png" alt="">
-                </a>
-                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" aria-label="Boosty">
-                    <img src="../resources/boosty.png" alt="">
-                </a>
+            <div class="header-right">
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    <span>ONLINE</span>
+                </div>
+                <div class="social-links" aria-label="Социальные ссылки">
+                    <a href="https://t.me/oncubedev" target="_blank" rel="noopener noreferrer" title="Telegram">
+                        <img src="../resources/tg.png" alt="Telegram">
+                    </a>
+                    <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" title="Boosty">
+                        <img src="../resources/boosty.png" alt="Boosty">
+                    </a>
+                </div>
             </div>
         </header>
 
@@ -141,15 +157,15 @@
                 </aside>
 
                 <!-- Main Portal Content -->
-                <div class="wiki-card" style="backdrop-filter: blur(10px);">
+                <div class="wiki-card">
                     <h1>База знаний oncdev</h1>
-                    <p>Добро пожаловать в нашу базу знаний и документации. Здесь вы найдёте подробные пошаговые инструкции по настройке и использованию наших сервисов, а также юридические соглашения.</p>
+                    <p>Добро пожаловать в единую базу знаний и документации студии oncdev. Здесь собраны пошаговые интерактивные руководства по настройке VPN-сервиса на смартфонах и ПК, а также официальные документы.</p>
                     
                     <div class="wiki-portal-grid">
                         <div class="portal-card">
-                            <i class="fa-solid fa-square-rss"></i>
+                            <i class="fa-solid fa-square-rss portal-icon"></i>
                             <h3>Настройка VPN</h3>
-                            <p>Пошаговые руководства по подключению нашего VPN-сервиса к смартфонам и компьютерам.</p>
+                            <p>Пошаговые руководства по подключению нашего VLESS VPN-сервиса на iOS, Android и Windows.</p>
                             <div class="portal-links-list">
                                 <a href="v2ray/" class="portal-link-item">
                                     <i class="fa-solid fa-mobile-screen-button"></i> Подключение на смартфонах
@@ -161,9 +177,9 @@
                         </div>
 
                         <div class="portal-card">
-                            <i class="fa-solid fa-scale-balanced"></i>
-                            <h3>Документы</h3>
-                            <p>Правила использования нашего сервиса, политика конфиденциальности и условия возврата средств.</p>
+                            <i class="fa-solid fa-scale-balanced portal-icon"></i>
+                            <h3>Правовая документация</h3>
+                            <p>Правила использования сервиса, политика конфиденциальности и условия оферты возврата средств.</p>
                             <div class="portal-links-list">
                                 <a href="tos/" class="portal-link-item">
                                     <i class="fa-solid fa-file-contract"></i> Пользовательское соглашение
@@ -183,21 +199,14 @@
 
         <footer class="site-footer">
             <p>
-                Права на представленный контент принадлежат
-                <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>.
-                Сайт сделали
-                <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
-                и
-                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
-                с любовью.
+                Права на представленный контент принадлежат <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>. Разработано <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>.
             </p>
-            <p>
-                <a href="tos/" target="_blank">ToS (Условия)</a> •
-                <a href="refund/" target="_blank">Оферта и возврат</a> •
-                <a href="privacy/" target="_blank">Конфиденциальность</a>
-            </p>
-            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All
-                rights reserved.</p>
+            <div class="footer-links">
+                <a href="tos/">ToS (Условия)</a>
+                <a href="refund/">Оферта и возврат</a>
+                <a href="privacy/">Конфиденциальность</a>
+            </div>
+            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition.</p>
         </footer>
     </div>
 

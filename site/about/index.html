@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О создателях - oncdev</title>
+    <title>О создателях — oncdev studio</title>
     <link rel="stylesheet" href="../resources/shared.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="page-shell">
@@ -13,6 +14,7 @@
             <a class="brand-link" href="/" aria-label="oncdev">
                 <span class="brand-mark">OC</span>
                 <span>oncdev</span>
+                <span class="brand-tag">TEAM</span>
             </a>
 
             <nav class="main-nav" aria-label="Основная навигация">
@@ -23,29 +25,35 @@
                 <a href="/about" class="active" aria-current="page">О нас</a>
             </nav>
 
-            <div class="social-links" aria-label="Социальные ссылки">
-                <a href="https://t.me/polisour/68" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-                    <img src="../resources/tg.png" alt="">
-                </a>
-                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" aria-label="Boosty">
-                    <img src="../resources/boosty.png" alt="">
-                </a>
+            <div class="header-right">
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    <span>ONLINE</span>
+                </div>
+                <div class="social-links" aria-label="Социальные ссылки">
+                    <a href="https://t.me/polisour/68" target="_blank" rel="noopener noreferrer" title="Telegram">
+                        <img src="../resources/tg.png" alt="Telegram">
+                    </a>
+                    <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" title="Boosty">
+                        <img src="../resources/boosty.png" alt="Boosty">
+                    </a>
+                </div>
             </div>
         </header>
 
         <main>
             <section class="section creators-hero">
                 <div class="section-heading">
-                    <p class="eyebrow">Команда</p>
+                    <p class="eyebrow">STUDIO FOUNDERS</p>
                     <h1>О создателях</h1>
                 </div>
                 <p class="section-subtitle">
-                    Объединение oncdev было основано двумя разработчиками, объединившими свои усилия для создания экспериментальных проектов и инструментов.
+                    Объединение oncdev было основано двумя разработчиками, объединившими свои знания для создания экспериментальных веб-сервисов, инфраструктурных решений и полезных инструментов.
                 </p>
             </section>
 
             <section class="section creators-grid">
-                <article class="creator-card">
+                <article class="creator-card bento-card">
                     <div class="creator-header">
                         <div class="creator-avatar">
                             <img src="vobi-photo.jpg" alt="Vobi">
@@ -53,15 +61,22 @@
                         <div class="creator-title">
                             <h2>Vobi</h2>
                             <p class="aka">AKA sup, sunny / meforr</p>
+                            <div class="creator-tags">
+                                <span class="tech-pill highlight">Frontend Lead</span>
+                                <span class="tech-pill">Web Architecture</span>
+                                <span class="tech-pill">UI/UX Design</span>
+                            </div>
                         </div>
                     </div>
                     <div class="creator-body">
-                        <p>Основатель объединения oncdev. Специализируется на веб-разработке и прикладном ПО. Хорошо видит, что в интерфейсе выглядит некрасиво, и умеет это исправить. Больше IT-специалист, чем креативный человек.</p>
-                        <a href="https://vobi.bio.link" target="_blank" class="button secondary">Больше информации</a>
+                        <p>Основатель объединения oncdev. Специализируется на веб-разработке, интерфейсах и прикладном ПО. Отвечает за продуктовый дизайн, чистоту архитектуры и визуальное совершенство систем.</p>
+                        <a href="https://vobi.bio.link" target="_blank" rel="noopener noreferrer" class="button secondary">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Подробнее о Vobi
+                        </a>
                     </div>
                 </article>
 
-                <article class="creator-card">
+                <article class="creator-card bento-card">
                     <div class="creator-header">
                         <div class="creator-avatar">
                             <img src="polimer-photo.jpg" alt="Polimer">
@@ -69,11 +84,18 @@
                         <div class="creator-title">
                             <h2>Polimer</h2>
                             <p class="aka">AKA PolimerS / PoliSours</p>
+                            <div class="creator-tags">
+                                <span class="tech-pill highlight">Backend Lead</span>
+                                <span class="tech-pill">AI & Data</span>
+                                <span class="tech-pill">Applied Math</span>
+                            </div>
                         </div>
                     </div>
                     <div class="creator-body">
-                        <p>Основатель объединения oncdev. Контент-мейкер и главным образом backend разработчик. Специализируется на ИИ, данных и прикладной математике. Приносит уникальный взгляд на техническую составляющую проектов объединения.</p>
-                        <a href="https://t.me/polisour/68" target="_blank" class="button secondary">Больше информации</a>
+                        <p>Основатель объединения oncdev. Контент-мейкер и ведущий backend-разработчик. Специализируется на ИИ, обработке данных и математических моделях. Проектирует серверную составляющую проектов.</p>
+                        <a href="https://t.me/polisour/68" target="_blank" rel="noopener noreferrer" class="button secondary">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Подробнее о Polimer
+                        </a>
                     </div>
                 </article>
             </section>
@@ -81,13 +103,7 @@
 
         <footer class="site-footer">
             <p>
-                Права на представленный контент принадлежат
-                <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>.
-                Сайт сделали
-                <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
-                и
-                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
-                с любовью.
+                Права на представленный контент принадлежат <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>. Разработано <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>.
             </p>
             <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All rights reserved.</p>
         </footer>
