@@ -7,23 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Theme preference could not be saved.', error);
     }
 
-    // Interactive background blob
-    const interactiveBlob = document.getElementById('interactive-blob');
-    if (interactiveBlob) {
-        window.addEventListener('mousemove', (e) => {
-            const x = e.clientX;
-            const y = e.clientY;
-            interactiveBlob.style.opacity = '1';
-            interactiveBlob.style.left = `${x}px`;
-            interactiveBlob.style.top = `${y}px`;
-        });
-
-        document.addEventListener('mouseleave', () => {
-            interactiveBlob.style.opacity = '0';
-        });
-    }
-
-    // Bento Cards Spotlight Effect
+    // Bento Cards Spotlight Mouse Tracking
     const bentoCards = document.querySelectorAll('.bento-card, .glass-card');
     bentoCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -35,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Code Terminal Tabs Switcher
+    // Code Terminal Tabs Switcher with Smooth Animation
     const terminalTabs = document.querySelectorAll('.terminal-tab');
     const terminalPanes = document.querySelectorAll('.terminal-code');
     terminalTabs.forEach(tab => {
@@ -48,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetPane = document.getElementById(targetId);
             if (targetPane) {
                 targetPane.classList.remove('hidden');
+                targetPane.style.animation = 'none';
+                targetPane.offsetHeight; // trigger reflow
+                targetPane.style.animation = 'fadeIn 0.3s ease';
             }
         });
     });

@@ -1,4 +1,3 @@
-/* Background Blobs Disabled for Monochrome Linear Aesthetic */
 .bg-blobs {
     display: none;
 }
@@ -7,14 +6,21 @@ main {
     padding-top: 30px;
 }
 
-/* Hero Section (Linear / Vercel Aesthetic) */
+/* 2-Column Split Hero Layout (Text Left, Code Right) */
 .hero-section {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
     gap: 48px;
     align-items: center;
-    min-height: calc(85vh - 100px);
-    padding: 30px 0 60px;
+    min-height: calc(82vh - 80px);
+    padding: 30px 0 50px;
+}
+
+.hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
 }
 
 .studio-gradient-title {
@@ -44,33 +50,34 @@ main {
     margin-top: 32px;
 }
 
-/* Linear-style Code Terminal Component */
+/* Hero Terminal Box (Right Column) */
 .hero-terminal {
-    background: #09090b;
+    background: #09090c;
     border: 1px solid var(--border-medium);
     border-radius: var(--radius-lg);
-    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    text-align: left;
 }
 
 .terminal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 16px;
+    padding: 12px 18px;
     background: rgba(255, 255, 255, 0.02);
     border-bottom: 1px solid var(--border-subtle);
 }
 
 .terminal-controls {
     display: flex;
-    gap: 6px;
+    gap: 8px;
 }
 
 .control-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .terminal-tabs {
@@ -79,13 +86,13 @@ main {
 }
 
 .terminal-tab {
-    padding: 3px 10px;
+    padding: 4px 12px;
     border-radius: var(--radius-sm);
     background: transparent;
     border: 1px solid transparent;
     color: var(--text-muted);
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.15s ease;
@@ -96,19 +103,19 @@ main {
 }
 
 .terminal-tab.active {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--border-subtle);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.15);
     color: #ffffff;
 }
 
 .terminal-body {
-    padding: 20px 22px;
-    min-height: 210px;
+    padding: 24px;
+    min-height: 220px;
 }
 
 .terminal-code {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     line-height: 1.7;
     color: #e4e4e7;
     overflow-x: auto;
@@ -118,44 +125,44 @@ main {
     display: none;
 }
 
-.code-keyword { color: #f4f4f5; font-weight: 600; }
+.code-keyword { color: #ffffff; font-weight: 700; }
 .code-var { color: #a1a1aa; }
 .code-key { color: #e4e4e7; }
 .code-string { color: #a5f3fc; }
 
-/* Bento Grid Showcase Section */
+/* Bento Grid Section */
 .section {
     padding: 70px 0 0;
 }
 
 .section-heading {
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .section-heading h2 {
     font-family: var(--font-heading);
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-size: clamp(1.9rem, 3.8vw, 2.8rem);
     font-weight: 800;
     margin-top: 6px;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
     color: var(--text-primary);
 }
 
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: 16px;
+    gap: 20px;
 }
 
 .col-span-8 { grid-column: span 8; }
 .col-span-4 { grid-column: span 4; }
 
 .bento-card {
-    padding: 28px;
+    padding: 32px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: rgba(12, 12, 15, 0.7);
+    background: rgba(11, 11, 14, 0.75);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
 }
@@ -163,7 +170,7 @@ main {
 .bento-header-tag {
     display: flex;
     gap: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
     flex-wrap: wrap;
 }
 
@@ -175,29 +182,29 @@ main {
 
 .bento-card h3 {
     font-family: var(--font-heading);
-    font-size: 1.45rem;
+    font-size: 1.55rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 8px;
-    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
 }
 
 .bento-card p {
     color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.98rem;
+    line-height: 1.65;
 }
 
 .bento-actions {
     display: flex;
-    gap: 10px;
-    margin-top: 24px;
+    gap: 12px;
+    margin-top: 28px;
     flex-wrap: wrap;
 }
 
 .timer-preview-box {
-    margin-top: 20px;
-    padding: 12px 16px;
+    margin-top: 24px;
+    padding: 14px 18px;
     border-radius: var(--radius-md);
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid var(--border-subtle);
@@ -207,48 +214,48 @@ main {
 }
 
 .timer-preview-label {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
 }
 
 .timer-preview-value {
     font-family: var(--font-mono);
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     color: #ffffff;
     font-weight: 600;
 }
 
 .wiki-tag-list {
     display: flex;
-    gap: 6px;
-    margin-top: 18px;
+    gap: 8px;
+    margin-top: 20px;
     flex-wrap: wrap;
 }
 
 .bento-sublinks {
     display: flex;
-    gap: 8px;
-    margin-top: 18px;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .btn-sm {
-    min-height: 34px;
-    padding: 0 12px;
-    font-size: 0.8rem;
+    min-height: 36px;
+    padding: 0 14px;
+    font-size: 0.82rem;
 }
 
 /* Changelog & Updates Timeline */
 .changelog-container {
-    padding: 8px 28px;
-    background: rgba(12, 12, 15, 0.7);
+    padding: 10px 32px;
+    background: rgba(11, 11, 14, 0.75);
     border: 1px solid var(--border-subtle);
 }
 
 .changelog-item {
     display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 20px;
-    padding: 20px 0;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    padding: 24px 0;
     border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -259,27 +266,27 @@ main {
 .changelog-meta {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     align-items: flex-start;
 }
 
 .changelog-meta time {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     color: var(--text-muted);
 }
 
 .changelog-content h3 {
     font-family: var(--font-heading);
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--text-primary);
 }
 
 .changelog-content p {
-    margin-top: 4px;
+    margin-top: 6px;
     color: var(--text-secondary);
-    font-size: 0.92rem;
+    font-size: 0.95rem;
 }
 
 .changelog-content a {
@@ -308,12 +315,12 @@ main {
 
     .changelog-item {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 10px;
     }
 }
 
 @media (max-width: 640px) {
     .bento-card {
-        padding: 20px;
+        padding: 24px;
     }
 }
