@@ -21,8 +21,8 @@
 
             <nav class="main-nav" aria-label="Основная навигация">
                 <a href="/timer">Таймер</a>
-                <a href="/" class="active" aria-current="page">Главная</a>
                 <a href="/vpn">VPN</a>
+                <a href="/" class="active" aria-current="page">Главная</a>
                 <a href="/wiki">База знаний</a>
                 <a href="/about">О нас</a>
             </nav>
@@ -31,7 +31,7 @@
                 <button class="cmd-trigger-btn" onclick="openCmdPalette()" title="Поиск (Ctrl+K / Cmd+K)">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <span>Поиск</span>
-                    <kbd>⌘K</kbd>
+                    <kbd>Ctrl + K</kbd>
                 </button>
                 <div class="social-links" aria-label="Социальные ссылки">
                     <a href="https://t.me/OnCube_DEV/30" target="_blank" rel="noopener noreferrer" title="Telegram">
@@ -78,15 +78,21 @@
                 <!-- Interactive Dev Terminal (Right Column) -->
                 <div class="hero-terminal bento-card">
                     <div class="terminal-header">
-                        <div class="terminal-controls">
-                            <span class="control-dot"></span>
-                            <span class="control-dot"></span>
-                            <span class="control-dot"></span>
+                        <div class="terminal-left-group">
+                            <div class="terminal-controls">
+                                <span class="control-dot close" title="Закрыть"></span>
+                                <span class="control-dot minimize" title="Свернуть"></span>
+                                <span class="control-dot expand" title="Развернуть"></span>
+                            </div>
+                            <div class="terminal-window-title">
+                                <i class="fa-solid fa-terminal"></i>
+                                <span>oncdev ~ zsh</span>
+                            </div>
                         </div>
-                        <div class="terminal-tabs">
-                            <button class="terminal-tab active" data-target="pane-status">status.json</button>
-                            <button class="terminal-tab" data-target="pane-stack">stack.ts</button>
-                            <button class="terminal-tab" data-target="pane-metrics">metrics.ts</button>
+                        <div class="terminal-tabs" role="tablist">
+                            <button class="terminal-tab active" data-target="pane-status" role="tab"><i class="fa-solid fa-code"></i> status.json</button>
+                            <button class="terminal-tab" data-target="pane-stack" role="tab"><i class="fa-brands fa-js"></i> stack.ts</button>
+                            <button class="terminal-tab" data-target="pane-metrics" role="tab"><i class="fa-solid fa-chart-line"></i> metrics.ts</button>
                         </div>
                     </div>
                     <div class="terminal-body">
