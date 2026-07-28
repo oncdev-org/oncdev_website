@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
+<html lang="ru" class="dark scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О создателях — oncdev</title>
+    <title>О создателях — ONCDEV</title>
     <meta name="description" content="Основатели объединения oncdev: Vobi и Polimer. История, специализация и роли.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -23,102 +23,105 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" crossorigin href="../assets/shared-BNd13ojG-BNd13ojG.css">
+    <link rel="stylesheet" href="../resources/shared.css">
 </head>
 
-<body class="bg-[#070709] text-slate-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200 min-h-screen">
+<body class="bg-[#050505] text-[#e5e5e5] font-sans min-h-screen relative selection:bg-white selection:text-black">
 
-    <!-- Ambient Top Glow -->
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[400px] bg-gradient-to-b from-indigo-500/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+    <!-- Technical Blueprint Grid Background -->
+    <div class="fixed inset-0 bg-[linear-gradient(to_right,#121212_1px,transparent_1px),linear-gradient(to_bottom,#121212_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10 opacity-70"></div>
 
-    <div class="max-w-5xl mx-auto px-6 py-6">
-        <!-- Floating Glass Header -->
-        <header class="sticky top-4 z-50 backdrop-blur-xl bg-slate-950/70 border border-slate-800/60 rounded-full px-6 py-3 flex items-center justify-between shadow-2xl transition-all">
-            <a href="/new_site/main/" class="flex items-center gap-3 font-bold text-base tracking-tight hover:text-indigo-400 transition-colors">
-                <span class="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-500 to-sky-400 flex items-center justify-center text-xs font-mono font-bold text-white shadow-md shadow-indigo-500/30">OC</span>
-                <span>oncdev</span>
-            </a>
+    <div class="max-w-[1400px] mx-auto min-h-screen border-x border-[#1c1c1c] flex flex-col justify-between">
+        <!-- KLTZQU Top HUD Bar -->
+        <header class="border-b border-[#1c1c1c] bg-[#050505]/95 backdrop-blur-md sticky top-0 z-40">
+            <div class="px-6 h-16 flex items-center justify-between text-xs font-mono tracking-widest uppercase">
+                <a href="../main/index.html" class="font-extrabold text-lg tracking-tighter text-white hover:opacity-80 transition-opacity">
+                    ONCDEV<span class="text-neutral-500">.</span>
+                </a>
 
-            <nav class="hidden md:flex items-center gap-1">
-                <a href="/new_site/main/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">Главная</a>
-                <a href="/new_site/timer/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">Таймер</a>
-                <a href="/new_site/vpn/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">VPN</a>
-                <a href="/new_site/wiki/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">База знаний</a>
-                <a href="/new_site/about/" class="px-4 py-1.5 rounded-full text-sm font-medium bg-slate-800/60 text-white shadow-inner">О нас</a>
-            </nav>
+                <nav class="hidden md:flex items-center gap-8 text-[11px] text-neutral-400">
+                    <a href="../main/index.html" class="py-1 hover:text-white transition-colors">HOME</a>
+                    <a href="../timer/index.html" class="py-1 hover:text-white transition-colors">PROJECTS</a>
+                    <a href="../vpn/index.html" class="py-1 hover:text-white transition-colors">VPN LAB</a>
+                    <a href="../wiki/index.html" class="py-1 hover:text-white transition-colors">DOCS</a>
+                    <a href="../about/index.html" class="relative py-1 text-white font-bold">
+                        ABOUT
+                        <span class="absolute bottom-0 left-0 w-full h-[2px] bg-white"></span>
+                    </a>
+                    <a href="../polisours/index.html" class="py-1 hover:text-white transition-colors">POLISOURS ↗</a>
+                </nav>
 
-            <div class="flex items-center gap-3">
-                <button class="cmd-trigger inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900/60 text-xs text-slate-400 hover:text-white hover:border-slate-700 transition-all cursor-pointer">
-                    <span>Поиск</span>
-                    <kbd class="font-mono text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">⌘K</kbd>
-                </button>
+                <div class="flex items-center gap-4">
+                    <button class="cmd-trigger border border-[#222222] bg-[#0a0a0a] px-3 py-1.5 rounded text-neutral-300 hover:border-white hover:text-white transition-all cursor-pointer">
+                        <span>CMD</span>
+                        <kbd class="bg-[#181818] px-1.5 py-0.5 rounded text-[9px] text-neutral-400 font-mono">⌘K</kbd>
+                    </button>
+                </div>
             </div>
         </header>
 
-        <main class="mt-16 sm:mt-20 space-y-16">
+        <main class="p-8 lg:p-14 space-y-16 flex-1">
             <!-- Header Section -->
-            <section class="space-y-4">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-xs font-mono text-indigo-300">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    <span>CREATORS & FOUNDERS</span>
+            <section class="space-y-6 border-b border-[#1c1c1c] pb-10">
+                <div class="flex items-center gap-3 font-mono text-xs text-neutral-500 tracking-widest uppercase">
+                    <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
+                    <span>| FOUNDERS & CREATORS DIRECTORY</span>
                 </div>
-                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white">О создателях<span class="text-indigo-500">.</span></h1>
-                <p class="text-lg text-slate-400 max-w-xl">Объединение oncdev основано двумя разработчиками. Мы создаем экспериментальные инструменты, поддерживаем инфраструктуру и развиваем сообщество.</p>
+                <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tighter text-white uppercase">О создателях<span class="text-neutral-600">.</span></h1>
+                <p class="text-xs font-mono text-neutral-400 max-w-xl uppercase tracking-wider">Объединение oncdev основано двумя разработчиками. Мы создаем экспериментальные инструменты, поддерживаем инфраструктуру и развиваем сообщество.</p>
             </section>
 
-            <!-- Creators Section: Clean Horizontal Showcase -->
-            <section class="divide-y divide-slate-800/60 pt-4">
+            <!-- Creators List (KLTZQU Reference Showcase) -->
+            <section class="divide-y divide-[#1c1c1c]">
                 <!-- Creator 1: Vobi -->
-                <div class="py-10 grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
-                    <div class="flex items-center gap-4 md:flex-col md:items-start">
-                        <img src="../assets/vobi-photo-Ch4XHV3y-Ch4XHV3y.jpg" alt="Vobi" class="w-20 h-20 rounded-full object-cover border-2 border-indigo-500/30 shadow-xl">
-                        <div>
-                            <h2 class="text-2xl font-bold text-white">Vobi</h2>
-                            <p class="font-mono text-xs text-indigo-400 mt-1">AKA sup, sunny / meforr</p>
-                            <span class="inline-block mt-2 font-mono text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">FOUNDER</span>
+                <div class="py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-4 flex items-center gap-6">
+                        <img src="vobi-photo.jpg" alt="Vobi" class="w-24 h-24 rounded-full object-cover border border-neutral-700 filter grayscale hover:grayscale-0 transition-all">
+                        <div class="space-y-1 font-mono">
+                            <span class="text-[10px] border border-white/20 px-2.5 py-0.5 rounded text-white font-bold">FOUNDER</span>
+                            <h2 class="text-3xl font-extrabold text-white uppercase">Vobi</h2>
+                            <p class="text-xs text-neutral-500">AKA sup, sunny / meforr</p>
                         </div>
                     </div>
-                    <div class="md:col-span-3 space-y-4">
-                        <p class="text-base text-slate-300 leading-relaxed">
-                            Основатель объединения oncdev. Специализируется на веб-разработке и прикладном ПО. Внимание к деталям интерфейсов, удобству пользователей и аккуратному чистому коду.
+                    <div class="lg:col-span-8 space-y-6 font-mono">
+                        <p class="text-sm text-neutral-300 leading-relaxed uppercase">
+                            Основатель oncdev. Проектирование веб-сервисов, разработка прикладного ПО, проектирование пользовательского опыта и чистая архитектура.
                         </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-slate-900 border border-slate-800 text-slate-400">Web Dev</span>
-                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-slate-900 border border-slate-800 text-slate-400">Applied Software</span>
-                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-slate-900 border border-slate-800 text-slate-400">UI & UX Craft</span>
+                        <div class="flex flex-wrap gap-2 text-[10px]">
+                            <span class="border border-[#1f1f1f] px-3 py-1 bg-[#0a0a0a] text-neutral-400">WEB DEVELOPMENT</span>
+                            <span class="border border-[#1f1f1f] px-3 py-1 bg-[#0a0a0a] text-neutral-400">APPLIED SOFTWARE</span>
+                            <span class="border border-[#1f1f1f] px-3 py-1 bg-[#0a0a0a] text-neutral-400">UI & UX CRAFT</span>
                         </div>
-                        <div>
-                            <a href="https://vobi.bio.link" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition-colors">
-                                <span>Профиль Vobi</span>
-                                <span>↗</span>
+                        <div class="pt-2">
+                            <a href="https://vobi.bio.link" target="_blank" rel="noopener noreferrer" class="btn-kltzqu">
+                                <span>ПРОФИЛЬ VOBI ↗</span>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Creator 2: Polimer -->
-                <div class="py-10 grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
-                    <div class="flex items-center gap-4 md:flex-col md:items-start">
-                        <img src="../assets/polimer-photo-DVI27Cxj-DVI27Cxj.jpg" alt="Polimer" class="w-20 h-20 rounded-full object-cover border-2 border-indigo-500/30 shadow-xl">
-                        <div>
-                            <h2 class="text-2xl font-bold text-white">Polimer</h2>
-                            <p class="font-mono text-xs text-indigo-400 mt-1">AKA PolimerS / PoliSours</p>
-                            <span class="inline-block mt-2 font-mono text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">FOUNDER</span>
+                <div class="py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-4 flex items-center gap-6">
+                        <img src="polimer-photo.jpg" alt="Polimer" class="w-24 h-24 rounded-full object-cover border border-neutral-700 filter grayscale hover:grayscale-0 transition-all">
+                        <div class="space-y-1 font-mono">
+                            <span class="text-[10px] border border-white/20 px-2.5 py-0.5 rounded text-white font-bold">FOUNDER</span>
+                            <h2 class="text-3xl font-extrabold text-white uppercase">Polimer</h2>
+                            <p class="text-xs text-neutral-500">AKA PolimerS / PoliSours</p>
                         </div>
                     </div>
-                    <div class="md:col-span-3 space-y-4">
-                        <p class="text-base text-slate-300 leading-relaxed">
-                            Основатель объединения oncdev и автор YouTube-канала PolimerS. Backend-разработчик, специалист по ИИ, прикладной математике и анализу данных.
+                    <div class="lg:col-span-8 space-y-6 font-mono">
+                        <p class="text-sm text-neutral-300 leading-relaxed uppercase">
+                            Основатель oncdev и автор канала PolimerS. Backend-разработчик, специалист по искусственному интеллекту, прикладной математике и анализу данных.
                         </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-slate-900 border border-slate-800 text-slate-400">Backend System</span>
-                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-slate-900 border border-slate-800 text-slate-400">AI & Math</span>
-                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-slate-900 border border-slate-800 text-slate-400">Content Creator</span>
+                        <div class="flex flex-wrap gap-2 text-[10px]">
+                            <span class="border border-[#1f1f1f] px-3 py-1 bg-[#0a0a0a] text-neutral-400">BACKEND SYSTEMS</span>
+                            <span class="border border-[#1f1f1f] px-3 py-1 bg-[#0a0a0a] text-neutral-400">AI & MATHEMATICS</span>
+                            <span class="border border-[#1f1f1f] px-3 py-1 bg-[#0a0a0a] text-neutral-400">YOUTUBE CREATOR</span>
                         </div>
-                        <div>
-                            <a href="https://t.me/polisour/68" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition-colors">
-                                <span>Профиль Polimer</span>
-                                <span>↗</span>
+                        <div class="pt-2">
+                            <a href="https://t.me/polisour/68" target="_blank" rel="noopener noreferrer" class="btn-kltzqu">
+                                <span>ПРОФИЛЬ POLIMER ↗</span>
                             </a>
                         </div>
                     </div>
@@ -126,8 +129,9 @@
             </section>
         </main>
 
-        <footer class="mt-32 pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-            <p>© 2025–2026 oncdev. Разработка <a href="/new_site/polisours/" class="text-slate-400 hover:text-white underline">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" class="text-slate-400 hover:text-white underline">Vobi</a>.</p>
+        <!-- Footer -->
+        <footer class="border-t border-[#1c1c1c] py-8 px-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-neutral-500">
+            <p>© 2025–2026 ONCDEV. Разработка <a href="../polisours/index.html" class="text-white underline">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" class="text-white underline">Vobi</a>.</p>
         </footer>
     </div>
 

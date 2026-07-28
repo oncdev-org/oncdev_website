@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
+<html lang="ru" class="dark scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>База знаний — oncdev</title>
+    <title>База знаний — ONCDEV</title>
     <meta name="description" content="Инструкции по настройке VPN, пользовательские соглашения и официальная документация oncdev.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -23,112 +23,113 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../resources/shared.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" crossorigin href="../assets/shared-BNd13ojG-BNd13ojG.css">
 </head>
 
-<body class="bg-[#070709] text-slate-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200 min-h-screen">
+<body class="bg-[#050505] text-[#e5e5e5] font-sans min-h-screen relative selection:bg-white selection:text-black">
 
-    <!-- Ambient Top Glow -->
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[400px] bg-gradient-to-b from-indigo-500/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+    <!-- Technical Blueprint Grid Background -->
+    <div class="fixed inset-0 bg-[linear-gradient(to_right,#121212_1px,transparent_1px),linear-gradient(to_bottom,#121212_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10 opacity-70"></div>
 
-    <div class="max-w-5xl mx-auto px-6 py-6">
-        <!-- Floating Glass Header -->
-        <header class="sticky top-4 z-50 backdrop-blur-xl bg-slate-950/70 border border-slate-800/60 rounded-full px-6 py-3 flex items-center justify-between shadow-2xl transition-all">
-            <a href="/new_site/main/" class="flex items-center gap-3 font-bold text-base tracking-tight hover:text-indigo-400 transition-colors">
-                <span class="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-500 to-sky-400 flex items-center justify-center text-xs font-mono font-bold text-white shadow-md shadow-indigo-500/30">OC</span>
-                <span>oncdev</span>
-            </a>
+    <div class="max-w-[1400px] mx-auto min-h-screen border-x border-[#1c1c1c] flex flex-col justify-between">
+        <!-- KLTZQU Top HUD Bar -->
+        <header class="border-b border-[#1c1c1c] bg-[#050505]/95 backdrop-blur-md sticky top-0 z-40">
+            <div class="px-6 h-16 flex items-center justify-between text-xs font-mono tracking-widest uppercase">
+                <a href="../main/index.html" class="font-extrabold text-lg tracking-tighter text-white hover:opacity-80 transition-opacity">
+                    ONCDEV<span class="text-neutral-500">.</span>
+                </a>
 
-            <nav class="hidden md:flex items-center gap-1">
-                <a href="/new_site/main/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">Главная</a>
-                <a href="/new_site/timer/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">Таймер</a>
-                <a href="/new_site/vpn/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">VPN</a>
-                <a href="/new_site/wiki/" class="px-4 py-1.5 rounded-full text-sm font-medium bg-slate-800/60 text-white shadow-inner">База знаний</a>
-                <a href="/new_site/about/" class="px-4 py-1.5 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-all">О нас</a>
-            </nav>
+                <nav class="hidden md:flex items-center gap-8 text-[11px] text-neutral-400">
+                    <a href="../main/index.html" class="py-1 hover:text-white transition-colors">HOME</a>
+                    <a href="../timer/index.html" class="py-1 hover:text-white transition-colors">PROJECTS</a>
+                    <a href="../vpn/index.html" class="py-1 hover:text-white transition-colors">VPN LAB</a>
+                    <a href="../wiki/index.html" class="relative py-1 text-white font-bold">
+                        DOCS
+                        <span class="absolute bottom-0 left-0 w-full h-[2px] bg-white"></span>
+                    </a>
+                    <a href="../about/index.html" class="py-1 hover:text-white transition-colors">ABOUT</a>
+                    <a href="../polisours/index.html" class="py-1 hover:text-white transition-colors">POLISOURS ↗</a>
+                </nav>
 
-            <div class="flex items-center gap-3">
-                <button class="cmd-trigger inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900/60 text-xs text-slate-400 hover:text-white hover:border-slate-700 transition-all cursor-pointer">
-                    <span>Поиск</span>
-                    <kbd class="font-mono text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">⌘K</kbd>
-                </button>
+                <div class="flex items-center gap-4">
+                    <button class="cmd-trigger border border-[#222222] bg-[#0a0a0a] px-3 py-1.5 rounded text-neutral-300 hover:border-white hover:text-white transition-all cursor-pointer">
+                        <span>CMD</span>
+                        <kbd class="bg-[#181818] px-1.5 py-0.5 rounded text-[9px] text-neutral-400 font-mono">⌘K</kbd>
+                    </button>
+                </div>
             </div>
         </header>
 
-        <main class="mt-16 sm:mt-20 space-y-16">
+        <main class="p-8 lg:p-14 space-y-16 flex-1">
             <!-- Header Section -->
-            <section class="space-y-4">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-xs font-mono text-indigo-300">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    <span>DOCUMENTATION HUB</span>
+            <section class="space-y-6 border-b border-[#1c1c1c] pb-10">
+                <div class="flex items-center gap-3 font-mono text-xs text-neutral-500 tracking-widest uppercase">
+                    <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
+                    <span>| DOCUMENTATION HUB v2.0</span>
                 </div>
-                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white">База знаний<span class="text-indigo-500">.</span></h1>
-                <p class="text-lg text-slate-400 max-w-xl">Интерактивные пошаговые руководства по настройке VPN и официальная документация.</p>
+                <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tighter text-white uppercase">База знаний<span class="text-neutral-600">.</span></h1>
+                <p class="text-xs font-mono text-neutral-400 max-w-xl uppercase tracking-wider">Интерактивные руководства по настройке VLESS VPN и официальная документация oncdev.</p>
             </section>
 
-            <!-- Wiki Sections (Non-Blocky Horizontal Layout) -->
-            <section class="divide-y divide-slate-800/60 pt-4">
-                <!-- Section 1: VPN Guides -->
-                <div class="py-10 grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
-                    <div class="space-y-2">
-                        <span class="font-mono text-xs text-indigo-400">01 / ИНСТРУКЦИИ</span>
-                        <h2 class="text-2xl font-bold text-white">Настройка VPN</h2>
+            <!-- Wiki Sections (KLTZQU Split-Screen Layout) -->
+            <section class="divide-y divide-[#1c1c1c]">
+                <!-- Section 01: Setup Guides -->
+                <div class="py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-4 space-y-2 font-mono">
+                        <span class="text-xs text-neutral-500 tracking-widest">/01 INSTRUCTIONS</span>
+                        <h2 class="text-3xl font-extrabold text-white uppercase">Настройка VPN</h2>
                     </div>
-                    <div class="md:col-span-3 space-y-4">
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Руководства по подключению нашего VPN-сервиса к смартфонам и компьютерам.
-                        </p>
+                    <div class="lg:col-span-8 space-y-4 font-mono">
+                        <p class="text-xs text-neutral-400 uppercase">Пошаговые руководства по установке клиентов V2Ray / VLESS для любых платформ.</p>
                         <div class="space-y-3">
-                            <a href="v2ray/" class="group flex items-center justify-between p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/40 transition-all">
-                                <div class="flex items-center gap-3">
-                                    <i class="fa-solid fa-mobile-screen-button text-indigo-400 text-lg"></i>
-                                    <span class="text-sm font-semibold text-white group-hover:text-indigo-300 transition-colors">Смартфоны (iOS / Android)</span>
+                            <a href="v2ray/index.html" class="group flex items-center justify-between p-5 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all">
+                                <div class="flex items-center gap-4">
+                                    <i class="fa-solid fa-mobile-screen-button text-white text-lg"></i>
+                                    <span class="text-sm font-bold text-white uppercase group-hover:translate-x-1 transition-transform">Смартфоны (iOS / Android)</span>
                                 </div>
-                                <span class="text-slate-500 group-hover:text-white transition-colors">→</span>
+                                <span class="text-xs text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ↗</span>
                             </a>
-                            <a href="v2rayn/" class="group flex items-center justify-between p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/40 transition-all">
-                                <div class="flex items-center gap-3">
-                                    <i class="fa-solid fa-laptop text-indigo-400 text-lg"></i>
-                                    <span class="text-sm font-semibold text-white group-hover:text-indigo-300 transition-colors">Компьютеры (Windows / macOS)</span>
+                            <a href="v2rayn/index.html" class="group flex items-center justify-between p-5 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all">
+                                <div class="flex items-center gap-4">
+                                    <i class="fa-solid fa-laptop text-white text-lg"></i>
+                                    <span class="text-sm font-bold text-white uppercase group-hover:translate-x-1 transition-transform">Компьютеры (Windows / macOS)</span>
                                 </div>
-                                <span class="text-slate-500 group-hover:text-white transition-colors">→</span>
+                                <span class="text-xs text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ↗</span>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Section 2: Legal Documents -->
-                <div class="py-10 grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
-                    <div class="space-y-2">
-                        <span class="font-mono text-xs text-indigo-400">02 / ДОКУМЕНТЫ</span>
-                        <h2 class="text-2xl font-bold text-white">Юридические документы</h2>
+                <!-- Section 02: Legal Agreements -->
+                <div class="py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-4 space-y-2 font-mono">
+                        <span class="text-xs text-neutral-500 tracking-widest">/02 LEGAL DOCUMENTS</span>
+                        <h2 class="text-3xl font-extrabold text-white uppercase">Правовая информация</h2>
                     </div>
-                    <div class="md:col-span-3 space-y-4">
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Правила использования сервиса, политика конфиденциальности и условия возврата средств.
-                        </p>
+                    <div class="lg:col-span-8 space-y-4 font-mono">
+                        <p class="text-xs text-neutral-400 uppercase">Официальные соглашения, политика конфиденциальности и условия оферты.</p>
                         <div class="space-y-3">
-                            <a href="tos/" class="group flex items-center justify-between p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/40 transition-all">
-                                <div class="flex items-center gap-3">
-                                    <i class="fa-solid fa-file-contract text-indigo-400 text-lg"></i>
-                                    <span class="text-sm font-semibold text-white group-hover:text-indigo-300 transition-colors">Пользовательское соглашение (ToS)</span>
+                            <a href="tos/index.html" class="group flex items-center justify-between p-5 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all">
+                                <div class="flex items-center gap-4">
+                                    <i class="fa-solid fa-file-contract text-white text-lg"></i>
+                                    <span class="text-sm font-bold text-white uppercase group-hover:translate-x-1 transition-transform">Пользовательское соглашение (ToS)</span>
                                 </div>
-                                <span class="text-slate-500 group-hover:text-white transition-colors">→</span>
+                                <span class="text-xs text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ↗</span>
                             </a>
-                            <a href="privacy/" class="group flex items-center justify-between p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/40 transition-all">
-                                <div class="flex items-center gap-3">
-                                    <i class="fa-solid fa-shield-halved text-indigo-400 text-lg"></i>
-                                    <span class="text-sm font-semibold text-white group-hover:text-indigo-300 transition-colors">Политика конфиденциальности</span>
+                            <a href="privacy/index.html" class="group flex items-center justify-between p-5 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all">
+                                <div class="flex items-center gap-4">
+                                    <i class="fa-solid fa-shield-halved text-white text-lg"></i>
+                                    <span class="text-sm font-bold text-white uppercase group-hover:translate-x-1 transition-transform">Политика конфиденциальности</span>
                                 </div>
-                                <span class="text-slate-500 group-hover:text-white transition-colors">→</span>
+                                <span class="text-xs text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ↗</span>
                             </a>
-                            <a href="refund/" class="group flex items-center justify-between p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/40 transition-all">
-                                <div class="flex items-center gap-3">
-                                    <i class="fa-solid fa-file-invoice-dollar text-indigo-400 text-lg"></i>
-                                    <span class="text-sm font-semibold text-white group-hover:text-indigo-300 transition-colors">Публичная оферта и условия возврата</span>
+                            <a href="refund/index.html" class="group flex items-center justify-between p-5 border border-[#1c1c1c] bg-[#080808] hover:border-white transition-all">
+                                <div class="flex items-center gap-4">
+                                    <i class="fa-solid fa-file-invoice-dollar text-white text-lg"></i>
+                                    <span class="text-sm font-bold text-white uppercase group-hover:translate-x-1 transition-transform">Публичная оферта и возврат</span>
                                 </div>
-                                <span class="text-slate-500 group-hover:text-white transition-colors">→</span>
+                                <span class="text-xs text-neutral-500 group-hover:text-white transition-colors">ОТКРЫТЬ ↗</span>
                             </a>
                         </div>
                     </div>
@@ -136,8 +137,9 @@
             </section>
         </main>
 
-        <footer class="mt-32 pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-            <p>© 2025–2026 oncdev. Разработка <a href="/new_site/polisours/" class="text-slate-400 hover:text-white underline">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" class="text-slate-400 hover:text-white underline">Vobi</a>.</p>
+        <!-- Footer -->
+        <footer class="border-t border-[#1c1c1c] py-8 px-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-neutral-500">
+            <p>© 2025–2026 ONCDEV. Разработка <a href="../polisours/index.html" class="text-white underline">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" class="text-white underline">Vobi</a>.</p>
         </footer>
     </div>
 
