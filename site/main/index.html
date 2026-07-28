@@ -45,8 +45,10 @@
         </header>
 
         <main>
-            <!-- 2-Column Split Hero Section (Text Left, Code Right) -->
+            <!-- 2-Column Split Hero Section with Vercel Interactive Canvas Background -->
             <section class="hero-section" aria-labelledby="hero-title">
+                <canvas id="hero-interactive-canvas" class="hero-canvas-bg" aria-hidden="true"></canvas>
+
                 <div class="hero-copy">
                     <p class="eyebrow">NEXT-GEN SOFTWARE & EXPERIMENTAL SYSTEMS</p>
                     <h1 id="hero-title" class="studio-gradient-title">oncdev studio</h1>
@@ -63,6 +65,13 @@
                         <a class="button secondary" href="/wiki">
                             <i class="fa-solid fa-book-bookmark"></i> База знаний
                         </a>
+                    </div>
+
+                    <!-- Clean Single Mode Switcher Pill -->
+                    <div class="hero-canvas-toolbar" aria-label="Переключение режима фона">
+                        <button class="canvas-control-btn" onclick="toggleCanvasMode(this)" title="Сменить режим анимации">
+                            <i class="fa-solid fa-circle-nodes"></i> Сеть
+                        </button>
                     </div>
                 </div>
 
@@ -281,6 +290,7 @@
     </div>
 
     <script src="../resources/cmd-palette.js"></script>
+    <script src="hero-canvas.js"></script>
     <script src="theme.js"></script>
     <script src="../resources/legal-consent.js"></script>
 </body>

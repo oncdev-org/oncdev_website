@@ -8,19 +8,38 @@ main {
 
 /* 2-Column Split Hero Layout (Text Left, Code Right) */
 .hero-section {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
     gap: 48px;
     align-items: center;
     min-height: calc(82vh - 80px);
     padding: 30px 0 50px;
+    overflow: hidden;
+}
+
+/* Vercel Interactive Background Canvas */
+.hero-canvas-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: auto;
 }
 
 .hero-copy {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    pointer-events: none; /* Let clicks pass through to canvas except for buttons */
+}
+
+.hero-copy > * {
+    pointer-events: auto; /* Enable clicks on buttons, text, and toolbar */
 }
 
 .studio-gradient-title {
@@ -50,8 +69,51 @@ main {
     margin-top: 32px;
 }
 
+/* Vercel Canvas Interactive Control Toolbar */
+.hero-canvas-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    padding: 4px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    background: rgba(10, 10, 12, 0.7);
+    backdrop-filter: blur(12px);
+    width: fit-content;
+}
+
+.canvas-control-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.canvas-control-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.canvas-control-btn.active {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
 /* Hero Terminal Box (Right Column) */
 .hero-terminal {
+    position: relative;
+    z-index: 2;
     background: #09090c;
     border: 1px solid var(--border-medium);
     border-radius: var(--radius-lg);
@@ -316,6 +378,10 @@ main {
     .changelog-item {
         grid-template-columns: 1fr;
         gap: 10px;
+    }
+
+    .hero-canvas-toolbar {
+        flex-wrap: wrap;
     }
 }
 
