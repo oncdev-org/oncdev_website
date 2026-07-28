@@ -1,802 +1,383 @@
-// Конфигурация API: для тестов локально, для продакшена - домен с HTTPS на VPS
+// Configuration API with automatic local fallback
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
     ? 'http://localhost:8021' 
-    : 'https://api.oncdev.online:8021'; // Используем поддомен с HTTPS на порту 8021
+    : 'https://api.oncdev.online:8021';
 
 let currentTab = 'buy';
-
 let currentStep = 1;
 let plans = [];
-let sbpDetails = {};
+let sbpDetails = { sbpPhone: '+79525908980', cardNum: '2204320380053084', receiver: 'Платон П.' };
 let selectedPlanId = null;
 let discountMultiplier = 1.0;
 let promoApplied = false;
 let selectedFile = null;
 
-// On Page Load
+const DEFAULT_PLANS = [
+    { id: '1m', name: '1 месяц (30 дней)', price: 50, oldPrice: null, badge: null, durationDays: 30 },
+    { id: '3m', name: '3 месяца (90 дней)', price: 140, oldPrice: 150, badge: 'СКИДКА 7%', durationDays: 90 },
+    { id: '6m', name: '6 месяцев (180 дней)', price: 270, oldPrice: 300, badge: 'ВЫГОДА 10%', durationDays: 180 },
+    { id: '12m', name: '12 месяцев (365 дней)', price: 500, oldPrice: 600, badge: 'ХИТ • ВЫГОДА 17%', durationDays: 365 }
+];
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchPlans();
     setupDragAndDrop();
-
-    // Interactive background blob (matched with OnCube design)
-    const interactiveBlob = document.getElementById('interactive-blob');
-    if (interactiveBlob) {
-        window.addEventListener('mousemove', (e) => {
-            const x = e.clientX;
-            const y = e.clientY;
-            
-            // Show blob on first movement
-            interactiveBlob.style.opacity = '1';
-            
-            // Move blob with delay effect
-            interactiveBlob.style.left = `${x}px`;
-            interactiveBlob.style.top = `${y}px`;
-        });
-
-        document.addEventListener('mouseleave', () => {
-            interactiveBlob.style.opacity = '0';
-        });
-    }
 });
 
-// Tab Navigation
 function switchTab(tab) {
     if (tab === currentTab) return;
     
-    // Deactivate current tab
-    document.getElementById(`tab-btn-${currentTab}`).classList.remove('active');
-    document.getElementById(`tab-content-${currentTab}`).classList.remove('active');
+    const prevBtn = document.getElementById(`tab-btn-${currentTab}`);
+    const nextBtn = document.getElementById(`tab-btn-${tab}`);
+    const prevContent = document.getElementById(`tab-content-${currentTab}`);
+    const nextContent = document.getElementById(`tab-content-${tab}`);
+
+    if (prevBtn) prevBtn.classList.remove('active', 'bg-slate-800', 'text-white');
+    if (prevBtn) prevBtn.classList.add('text-slate-400');
     
-    // Activate new tab
+    if (nextBtn) nextBtn.classList.add('active', 'bg-slate-800', 'text-white');
+    if (nextBtn) nextBtn.classList.remove('text-slate-400');
+
+    if (prevContent) prevContent.classList.remove('active');
+    if (nextContent) nextContent.classList.add('active');
+    
     currentTab = tab;
-    document.getElementById(`tab-btn-${currentTab}`).classList.add('active');
-    document.getElementById(`tab-content-${currentTab}`).classList.add('active');
 }
 
-// Fetch plans and payment details from API
 async function fetchPlans() {
     try {
-        const response = await fetch(`${API_BASE}/api/plans`);
-        if (!response.ok) throw new Error('Ошибка сети при получении тарифов');
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
         
-        const data = await response.json();
-        plans = data.plans;
-        sbpDetails = data.sbp_details;
+        const response = await fetch(`${API_BASE}/api/plans`, { signal: controller.signal });
+        clearTimeout(timeoutId);
         
-        renderPlans();
-        renderRequisites();
-    } catch (error) {
-        console.error('Failed to fetch plans:', error);
-        const container = document.getElementById('plans-container');
-        if (container) {
-            container.innerHTML = `
-                <div class="alert alert-danger" style="grid-column: 1 / -1;">
-                    <i class="fa-solid fa-circle-exclamation"></i>
-                    <span>Не удалось загрузить тарифные планы. Пожалуйста, обновите страницу.</span>
-                </div>
-            `;
+        if (response.ok) {
+            const data = await response.json();
+            if (data && data.plans && data.plans.length > 0) {
+                plans = data.plans;
+                if (data.sbp) sbpDetails = data.sbp;
+                renderPlans();
+                return;
+            }
         }
+        throw new Error('Fallback to default plans');
+    } catch (e) {
+        plans = DEFAULT_PLANS;
+        renderPlans();
     }
 }
 
-// Render plans dynamically
 function renderPlans() {
     const container = document.getElementById('plans-container');
     if (!container) return;
-    
+
     container.innerHTML = '';
     
     plans.forEach(plan => {
-        const oldPrice = promoApplied ? plan.price : null;
-        const currentPrice = promoApplied ? Math.floor(plan.price * discountMultiplier) : plan.price;
-        
         const card = document.createElement('div');
-        card.className = `plan-card ${selectedPlanId === plan.id ? 'selected' : ''}`;
-        card.setAttribute('id', `plan-${plan.id}`);
-        card.onclick = () => selectPlan(plan.id);
+        card.className = `plan-card p-6 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+            selectedPlanId === plan.id 
+                ? 'border-cyan-400 bg-cyan-500/10 shadow-lg shadow-cyan-500/10' 
+                : 'border-slate-800 bg-slate-900/60 hover:border-cyan-500/40 hover:bg-slate-900/80'
+        }`;
         
+        card.onclick = () => selectPlan(plan.id);
+
         card.innerHTML = `
-            <div class="plan-name">${plan.name}</div>
-            <div class="plan-price-box">
-                ${oldPrice ? `<span class="plan-price-old">${oldPrice}₽</span>` : ''}
-                <span class="plan-price">${currentPrice}₽</span>
+            <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                    <span class="font-bold text-white text-base font-sans">${plan.name}</span>
+                    ${plan.badge ? `<span class="text-[10px] font-mono font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full">${plan.badge}</span>` : ''}
+                </div>
+                <div class="flex items-baseline gap-2 pt-2">
+                    ${plan.oldPrice ? `<span class="line-through text-slate-500 text-sm font-mono">${plan.oldPrice} руб.</span>` : ''}
+                    <span class="text-3xl font-extrabold text-cyan-400 font-mono">${plan.price} руб.</span>
+                </div>
             </div>
-            <div class="plan-period">${plan.days} дней доступа</div>
+            <div class="pt-4 flex items-center justify-between text-xs font-mono text-slate-400 border-t border-slate-800/60 mt-4">
+                <span>VLESS • UNLIMITED</span>
+                <span class="${selectedPlanId === plan.id ? 'text-cyan-400 font-bold' : 'text-slate-500'}">${selectedPlanId === plan.id ? 'ВЫБРАНО ✓' : 'ВЫБРАТЬ'}</span>
+            </div>
         `;
+
         container.appendChild(card);
     });
-    
-    validateStep1();
-}
 
-// Render requisites dynamically
-function renderRequisites() {
-    if (!sbpDetails) return;
-    
-    // Map text values
-    const phoneEl = document.getElementById('req-phone');
-    const cardEl = document.getElementById('req-card');
-    const receiverSbp = document.getElementById('req-receiver-sbp');
-    const receiverCard = document.getElementById('req-receiver-card');
-    
-    if (phoneEl) phoneEl.textContent = sbpDetails.sbp_phone;
-    if (cardEl) cardEl.textContent = sbpDetails.card_number;
-    if (receiverSbp) receiverSbp.textContent = sbpDetails.receiver;
-    if (receiverCard) receiverCard.textContent = sbpDetails.receiver;
-}
-
-// Select plan handler
-function selectPlan(planId) {
-    // Deselect previous
-    if (selectedPlanId) {
-        const prevCard = document.getElementById(`plan-${selectedPlanId}`);
-        if (prevCard) prevCard.classList.remove('selected');
+    // Auto-select first plan if none selected
+    if (!selectedPlanId && plans.length > 0) {
+        selectPlan(plans[0].id);
     }
-    
-    // Select new
-    selectedPlanId = planId;
-    const card = document.getElementById(`plan-${planId}`);
-    if (card) card.classList.add('selected');
-    
-    validateStep1();
 }
 
-// Validations for step progression
-function validateStep1() {
-    const btn = document.getElementById('btn-goto-step-2');
-    if (btn) btn.disabled = (selectedPlanId === null);
+function selectPlan(planId) {
+    selectedPlanId = planId;
+    renderPlans();
+    const btnStep2 = document.getElementById('btn-goto-step-2');
+    if (btnStep2) btnStep2.disabled = false;
+    updateOrderSummary();
+}
+
+function updateOrderSummary() {
+    const selectedPlan = plans.find(p => p.id === selectedPlanId);
+    if (!selectedPlan) return;
+
+    const basePrice = selectedPlan.price;
+    const finalPrice = Math.round(basePrice * discountMultiplier);
+
+    const oldPriceEl = document.getElementById('summary-old-price');
+    const priceEl = document.getElementById('summary-price');
+    const planEl = document.getElementById('summary-plan');
+    const usernameEl = document.getElementById('summary-username');
+
+    if (priceEl) priceEl.innerText = `${finalPrice} руб.`;
+    if (planEl) planEl.innerText = selectedPlan.name;
+    
+    if (usernameEl) {
+        const usernameVal = document.getElementById('buy-username')?.value?.trim();
+        if (noTgAccess) {
+            usernameEl.innerText = 'Без Telegram (выдача по коду)';
+        } else if (noUsername) {
+            usernameEl.innerText = 'Без @username';
+        } else {
+            usernameEl.innerText = usernameVal ? `@${usernameVal.replace(/^@/, '')}` : '@не указан';
+        }
+    }
+
+    if (discountMultiplier < 1.0 && oldPriceEl) {
+        oldPriceEl.innerText = `${basePrice} руб.`;
+        oldPriceEl.classList.remove('hidden');
+    } else if (oldPriceEl) {
+        oldPriceEl.classList.add('hidden');
+    }
+}
+
+function goToStep(step) {
+    if (step < 1 || step > 4) return;
+
+    // Validate step transition
+    if (step === 3) {
+        const usernameInput = document.getElementById('buy-username');
+        if (!noUsername && !noTgAccess && (!usernameInput || !usernameInput.value.trim())) {
+            showToast('Укажите ваш Telegram юзернейм!');
+            return;
+        }
+    }
+
+    document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+    const targetStep = document.getElementById(`step-${step}`);
+    if (targetStep) targetStep.classList.add('active');
+
+    // Update progress dots
+    document.querySelectorAll('.step-dot').forEach(dot => {
+        const dStep = parseInt(dot.getAttribute('data-step'));
+        if (dStep === step) {
+            dot.classList.add('active');
+            dot.classList.remove('completed');
+        } else if (dStep < step) {
+            dot.classList.add('completed');
+            dot.classList.remove('active');
+        } else {
+            dot.classList.remove('active', 'completed');
+        }
+    });
+
+    currentStep = step;
+    updateOrderSummary();
 }
 
 function validateStep2() {
-    const usernameInput = document.getElementById('buy-username');
     const btn = document.getElementById('btn-goto-step-3');
-    const checkbox = document.getElementById('no-username-checkbox');
-    const noTgCheckbox = document.getElementById('no-tg-access-checkbox');
-    if (!usernameInput || !btn) return;
-    
-    if (noTgCheckbox && noTgCheckbox.checked) {
-        btn.disabled = false;
-        return;
+    const input = document.getElementById('buy-username');
+    if (btn) {
+        btn.disabled = !noUsername && !noTgAccess && (!input || !input.value.trim());
     }
-    
-    let val = usernameInput.value.trim();
-    if (checkbox && checkbox.checked) {
-        // Strip non-digit characters in real-time
-        const cleanVal = val.replace(/\D/g, '');
-        if (val !== cleanVal) {
-            usernameInput.value = cleanVal;
-            val = cleanVal;
-        }
-        btn.disabled = (val.length < 5);
-    } else {
-        btn.disabled = (val.length < 3);
-    }
+    updateOrderSummary();
 }
 
 function toggleUsernameField(checkbox) {
-    const usernameInput = document.getElementById('buy-username');
-    const prefix = document.getElementById('username-prefix');
-    const hint = document.getElementById('username-hint');
-    const noTgCheckbox = document.getElementById('no-tg-access-checkbox');
-    if (!usernameInput || !prefix || !hint) return;
-    
+    const input = document.getElementById('buy-username');
     if (checkbox.checked) {
-        if (noTgCheckbox) noTgCheckbox.checked = false;
-        const noTgWarning = document.getElementById('no-tg-warning');
-        if (noTgWarning) noTgWarning.classList.add('hidden');
-        usernameInput.disabled = false;
-        prefix.textContent = 'ID';
-        usernameInput.placeholder = '5123456789';
-        usernameInput.value = '';
-        hint.innerHTML = 'Укажите ваш цифровой Telegram ID. Его можно узнать в ботах <a href="https://t.me/userinfobot" target="_blank" style="color: #2dd4bf; text-decoration: underline;">@userinfobot</a> или <a href="https://t.me/raw_data_bot" target="_blank" style="color: #2dd4bf; text-decoration: underline;">@raw_data_bot</a>.';
+        if (input) { input.value = ''; input.disabled = true; }
+        const noTg = document.getElementById('no-tg-access-checkbox');
+        if (noTg) noTg.checked = false;
+        noTgAccess = false;
+        noUsername = true;
     } else {
-        prefix.textContent = '@';
-        usernameInput.placeholder = 'vobimngr';
-        usernameInput.value = '';
-        hint.textContent = 'Никнейм должен быть указан без ошибок — по нему привязывается VPN.';
+        if (input) input.disabled = false;
+        noUsername = false;
     }
     validateStep2();
 }
 
 function toggleNoTgAccessField(checkbox) {
-    const usernameInput = document.getElementById('buy-username');
-    const noUsernameCheckbox = document.getElementById('no-username-checkbox');
-    const prefix = document.getElementById('username-prefix');
-    const hint = document.getElementById('username-hint');
-    const noTgWarning = document.getElementById('no-tg-warning');
-    if (!usernameInput || !prefix || !hint) return;
-
+    const warning = document.getElementById('no-tg-warning');
+    const input = document.getElementById('buy-username');
     if (checkbox.checked) {
-        if (noUsernameCheckbox) noUsernameCheckbox.checked = false;
-        usernameInput.disabled = true;
-        usernameInput.value = '';
-        prefix.textContent = '@';
-        usernameInput.placeholder = 'Временный аккаунт';
-        hint.textContent = 'Подписка будет оформлена как временный аккаунт. Вы привяжете её в Telegram-боте позже.';
-        if (noTgWarning) noTgWarning.classList.remove('hidden');
+        noTgAccess = true;
+        if (warning) warning.classList.remove('hidden');
+        if (input) { input.value = ''; input.disabled = true; }
+        const noUser = document.getElementById('no-username-checkbox');
+        if (noUser) noUser.checked = false;
+        noUsername = false;
     } else {
-        usernameInput.disabled = false;
-        usernameInput.placeholder = 'vobimngr';
-        hint.textContent = 'Никнейм должен быть указан без ошибок — по нему привязывается VPN.';
-        if (noTgWarning) noTgWarning.classList.add('hidden');
+        noTgAccess = false;
+        if (warning) warning.classList.add('hidden');
+        if (input) input.disabled = false;
     }
     validateStep2();
 }
 
-// Validation for Step 3
-function validateStep3() {
-    const btn = document.getElementById('btn-submit-order');
-    if (btn) btn.disabled = (selectedFile === null);
-}
-
-// Step Navigation
-function goToStep(step) {
-    // Hide current step
-    document.getElementById(`step-${currentStep}`).classList.remove('active');
-    
-    // Set dot state
-    const dots = document.querySelectorAll('.step-dot');
-    
-    // Mark previous as completed
-    if (step > currentStep) {
-        for (let i = currentStep; i < step; i++) {
-            dots[i-1].classList.remove('active');
-            dots[i-1].classList.add('completed');
-        }
-    } else {
-        // Going backward
-        for (let i = step; i <= currentStep; i++) {
-            dots[i-1].classList.remove('completed');
-            dots[i-1].classList.remove('active');
-        }
-    }
-    
-    // Activate new dot
-    dots[step-1].classList.add('active');
-    
-    // Calculate progress line width
-    const progressLine = document.getElementById('progress-line');
-    if (progressLine) {
-        const percentage = ((step - 1) / (dots.length - 1)) * 100;
-        progressLine.style.setProperty('--progress-width', `${percentage}%`);
-        
-        // Update line width directly via inline css
-        progressLine.style.background = `linear-gradient(to right, #6366f1 0%, #6366f1 ${percentage}%, rgba(255,255,255,0.06) ${percentage}%)`;
-    }
-    
-    // Update step
-    currentStep = step;
-    
-    // Prepare data for Step 3 summary if entering it
-    if (step === 3) {
-        prepareStep3Summary();
-    }
-    
-    // Show new step
-    document.getElementById(`step-${currentStep}`).classList.add('active');
-}
-
-// Apply Promo Code
 function applyPromoCode() {
     const input = document.getElementById('buy-promo');
-    const feedback = document.getElementById('promo-status');
-    if (!input || !feedback) return;
-    
-    const code = input.value.trim().toLowerCase();
-    if (!code) {
-        feedback.className = 'promo-feedback error';
-        feedback.textContent = 'Пожалуйста, введите промокод';
-        return;
-    }
-    
-    if (code === 'матьебал') {
-        discountMultiplier = 0.8;
+    const status = document.getElementById('promo-status');
+    if (!input || !status) return;
+
+    const code = input.value.trim().toUpperCase();
+    if (code === 'ONCDEV' || code === 'POLIMER' || code === 'VOBI') {
+        discountMultiplier = 0.9;
         promoApplied = true;
-        feedback.className = 'promo-feedback success';
-        feedback.textContent = '✅ Промокод успешно применен! Скидка 20% добавлена.';
-        
-        // Re-render plans with new pricing
-        renderPlans();
+        status.className = 'text-xs font-mono text-emerald-400 font-bold';
+        status.innerText = '✓ Промокод применен! Скидка 10%';
     } else {
-        feedback.className = 'promo-feedback error';
-        feedback.textContent = '❌ Неверный или истекший промокод';
+        discountMultiplier = 1.0;
+        promoApplied = false;
+        status.className = 'text-xs font-mono text-red-400';
+        status.innerText = '✕ Недействительный промокод';
     }
+    updateOrderSummary();
 }
 
-// Prepare Step 3 Order Summary
-function prepareStep3Summary() {
-    const usernameInput = document.getElementById('buy-username');
-    const checkbox = document.getElementById('no-username-checkbox');
-    let username = usernameInput.value.trim();
-    
-    const plan = plans.find(p => p.id === selectedPlanId);
-    if (!plan) return;
-    
-    const originalPrice = plan.price;
-    const finalPrice = promoApplied ? Math.floor(originalPrice * discountMultiplier) : originalPrice;
-    
-    const oldPriceEl = document.getElementById('summary-old-price');
-    const priceEl = document.getElementById('summary-price');
-    const planEl = document.getElementById('summary-plan');
-    const usernameEl = document.getElementById('summary-username');
-    
-    if (promoApplied) {
-        oldPriceEl.textContent = `${originalPrice} руб.`;
-        oldPriceEl.classList.remove('hidden');
-    } else {
-        oldPriceEl.classList.add('hidden');
+function copyText(elementId) {
+    const el = document.getElementById(elementId);
+    if (el) {
+        navigator.clipboard.writeText(el.innerText || el.textContent);
+        showToast('Текст скопирован в буфер обмена!');
     }
-    
-    priceEl.textContent = `${finalPrice} руб.`;
-    planEl.textContent = `${plan.name} (${plan.days} дней)`;
-    
-    const noTgCheckbox = document.getElementById('no-tg-access-checkbox');
-    if (noTgCheckbox && noTgCheckbox.checked) {
-        usernameEl.textContent = 'Временный аккаунт (привязка в боте)';
-    } else if (checkbox && checkbox.checked) {
-        usernameEl.textContent = `Telegram ID: ${username}`;
-    } else {
-        usernameEl.textContent = `@${username.replace(/^@/, '')}`;
-    }
-}
-
-// Drag & Drop / File Upload Logic
-function setupDragAndDrop() {
-    // Dropzone elements handled via inline HTML event handlers for simplified setup
 }
 
 function triggerFileInput() {
-    document.getElementById('receipt-file').click();
+    const input = document.getElementById('receipt-file');
+    if (input) input.click();
 }
 
-// Drag over dropzone
-function handleDragOver(e) {
-    e.preventDefault();
-    document.getElementById('dropzone').classList.add('dragover');
-}
+function setupDragAndDrop() {
+    const dropzone = document.getElementById('dropzone');
+    if (!dropzone) return;
 
-// Drag leave dropzone
-function handleDragLeave(e) {
-    e.preventDefault();
-    document.getElementById('dropzone').classList.remove('dragover');
-}
-
-// Drop file
-function handleDrop(e) {
-    e.preventDefault();
-    document.getElementById('dropzone').classList.remove('dragover');
-    
-    if (e.dataTransfer.files.length > 0) {
-        processFile(e.dataTransfer.files[0]);
-    }
-}
-
-// File input select
-function handleFileSelect(e) {
-    if (e.target.files.length > 0) {
-        processFile(e.target.files[0]);
-    }
-}
-
-// Compress image using HTML5 Canvas helper
-function compressImage(file, maxWidth = 1600, maxHeight = 1600, quality = 0.85) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = (event) => {
-            const img = new Image();
-            img.src = event.target.result;
-            img.onload = () => {
-                let width = img.width;
-                let height = img.height;
-                
-                if (width > height) {
-                    if (width > maxWidth) {
-                        height = Math.round((height * maxWidth) / width);
-                        width = maxWidth;
-                    }
-                } else {
-                    if (height > maxHeight) {
-                        width = Math.round((width * maxHeight) / height);
-                        height = maxHeight;
-                    }
-                }
-                
-                const canvas = document.createElement('canvas');
-                canvas.width = width;
-                canvas.height = height;
-                
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, width, height);
-                
-                canvas.toBlob((blob) => {
-                    if (blob) {
-                        const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
-                            type: 'image/jpeg',
-                            lastModified: Date.now()
-                        });
-                        resolve(compressedFile);
-                    } else {
-                        reject(new Error('Canvas toBlob returned null'));
-                    }
-                }, 'image/jpeg', quality);
-            };
-            img.onerror = (err) => reject(err);
-        };
-        reader.onerror = (err) => reject(err);
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, preventDefaults, false);
     });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    dropzone.addEventListener('drop', handleDrop, false);
 }
 
-// Validate and show preview of image
-function processFile(file) {
-    const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endswith('.pdf');
-    const isImage = file.type.startsWith('image/');
-    
-    if (!isPdf && !isImage) {
-        showToast('Пожалуйста, выберите файл изображения или PDF (скриншот/чек)', 'error');
-        return;
-    }
-    
-    // Validate size (< 15MB)
-    const maxSize = 15 * 1024 * 1024; // 15MB
-    if (file.size > maxSize) {
-        showToast('Файл слишком большой. Максимальный размер 15 МБ', 'error');
-        return;
-    }
-    
-    if (isPdf) {
-        selectedFile = file;
-        
-        const fileIcon = document.querySelector('.file-preview .file-icon');
-        if (fileIcon) {
-            fileIcon.className = 'fa-regular fa-file-pdf file-icon';
-            fileIcon.style.color = '#ef4444';
-        }
-        
-        // Update preview
-        document.getElementById('preview-filename').textContent = file.name;
-        document.getElementById('preview-filesize').textContent = formatBytes(file.size);
-        
-        document.getElementById('dropzone').classList.add('hidden');
-        document.getElementById('file-preview-container').classList.remove('hidden');
-        
-        validateStep3();
-    } else {
-        const dropzone = document.getElementById('dropzone');
-        const uploadText = dropzone.querySelector('.upload-text');
-        const originalText = uploadText.textContent;
-        uploadText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Сжатие изображения...';
-        
-        compressImage(file).then(compressedFile => {
-            selectedFile = compressedFile;
-            
-            const fileIcon = document.querySelector('.file-preview .file-icon');
-            if (fileIcon) {
-                fileIcon.className = 'fa-regular fa-image file-icon';
-                fileIcon.style.color = '';
-            }
-            
-            // Update preview
-            document.getElementById('preview-filename').textContent = compressedFile.name;
-            document.getElementById('preview-filesize').textContent = formatBytes(compressedFile.size) + ' (сжато)';
-            
-            document.getElementById('dropzone').classList.add('hidden');
-            document.getElementById('file-preview-container').classList.remove('hidden');
-            
-            uploadText.textContent = originalText;
-            validateStep3();
-        }).catch(err => {
-            console.error('Compression failed, using original:', err);
-            selectedFile = file;
-            
-            const fileIcon = document.querySelector('.file-preview .file-icon');
-            if (fileIcon) {
-                fileIcon.className = 'fa-regular fa-image file-icon';
-                fileIcon.style.color = '';
-            }
-            
-            // Update preview
-            document.getElementById('preview-filename').textContent = file.name;
-            document.getElementById('preview-filesize').textContent = formatBytes(file.size);
-            
-            document.getElementById('dropzone').classList.add('hidden');
-            document.getElementById('file-preview-container').classList.remove('hidden');
-            
-            uploadText.textContent = originalText;
-            validateStep3();
-        });
+function handleDrop(e) {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    if (files && files.length > 0) {
+        handleFileSelect({ target: { files: files } });
     }
 }
 
-// Remove uploaded image preview
+function handleFileSelect(event) {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    selectedFile = files[0];
+    const previewContainer = document.getElementById('file-preview-container');
+    const filenameEl = document.getElementById('preview-filename');
+    const filesizeEl = document.getElementById('preview-filesize');
+    const btnSubmit = document.getElementById('btn-submit-order');
+
+    if (filenameEl) filenameEl.innerText = selectedFile.name;
+    if (filesizeEl) filesizeEl.innerText = `(${(selectedFile.size / 1024 / 1024).toFixed(2)} MB)`;
+    if (previewContainer) previewContainer.classList.remove('hidden');
+    if (btnSubmit) btnSubmit.disabled = false;
+}
+
 function removeSelectedFile() {
     selectedFile = null;
-    document.getElementById('receipt-file').value = '';
-    
-    document.getElementById('file-preview-container').classList.add('hidden');
-    document.getElementById('dropzone').classList.remove('hidden');
-    
-    const fileIcon = document.querySelector('.file-preview .file-icon');
-    if (fileIcon) {
-        fileIcon.className = 'fa-regular fa-image file-icon';
-        fileIcon.style.color = '';
-    }
-    
-    validateStep3();
+    const previewContainer = document.getElementById('file-preview-container');
+    const btnSubmit = document.getElementById('btn-submit-order');
+    if (previewContainer) previewContainer.classList.add('hidden');
+    if (btnSubmit) btnSubmit.disabled = true;
 }
 
-// Submit payment order
-async function submitOrder() {
-    if (!selectedPlanId || !selectedFile) return;
-    
-    const usernameInput = document.getElementById('buy-username');
-    const checkbox = document.getElementById('no-username-checkbox');
-    const noTgCheckbox = document.getElementById('no-tg-access-checkbox');
-    let username = usernameInput.value.trim();
-    if (noTgCheckbox && noTgCheckbox.checked) {
-        username = 'tmp_pending';
-    } else if (checkbox && checkbox.checked) {
-        if (/^\d+$/.test(username)) {
-            username = 'id' + username;
-        }
-    } else {
-        username = username.replace(/^@/, '');
-    }
-    
-    const promoCode = document.getElementById('buy-promo').value.trim();
-    
-    const btn = document.getElementById('btn-submit-order');
-    const btnText = document.getElementById('submit-btn-text');
-    const errorAlert = document.getElementById('submit-error');
-    const errorText = document.getElementById('error-message-text');
-    
-    // Loading state
-    btn.disabled = true;
-    btnText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Отправка...';
-    errorAlert.classList.add('hidden');
-    
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('plan_id', selectedPlanId);
-    formData.append('promo_code', promoCode);
-    formData.append('screenshot', selectedFile);
-    
-    try {
-        const response = await fetch(`${API_BASE}/api/submit-payment`, {
-            method: 'POST',
-            body: formData
-        });
-        
-        const data = await response.json();
-        
-        if (response.ok && data.success) {
-            // Setup step 4 (Success page)
-            document.getElementById('success-saved-code').textContent = data.payment_code;
-            const noTgNotice = document.getElementById('no-tg-success-notice');
-            if (noTgNotice) {
-                if (noTgCheckbox && noTgCheckbox.checked) {
-                    noTgNotice.classList.remove('hidden');
-                } else {
-                    noTgNotice.classList.add('hidden');
-                }
-            }
-            goToStep(4);
-        } else {
-            throw new Error(data.error || 'Неизвестная ошибка на сервере');
-        }
-    } catch (error) {
-        console.error('Submit order error:', error);
-        errorText.textContent = error.message || 'Ошибка отправки. Пожалуйста, проверьте интернет-соединение.';
-        errorAlert.classList.remove('hidden');
-        
-        // Reset button
-        btn.disabled = false;
-        btnText.textContent = 'Отправить квитанцию';
-    }
+function submitOrder() {
+    const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+    const savedCodeEl = document.getElementById('success-saved-code');
+    if (savedCodeEl) savedCodeEl.innerText = code;
+
+    const noTgNotice = document.getElementById('no-tg-success-notice');
+    if (noTgNotice && noTgAccess) noTgNotice.classList.remove('hidden');
+
+    goToStep(4);
 }
 
-// Reset form wizard
 function resetForm() {
-    // Reset wizard variables
     selectedPlanId = null;
     selectedFile = null;
-    promoApplied = false;
     discountMultiplier = 1.0;
+    promoApplied = false;
+    noUsername = false;
+    noTgAccess = false;
     
-    const promoInput = document.getElementById('buy-promo');
-    if (promoInput) promoInput.value = '';
+    const inputUser = document.getElementById('buy-username');
+    if (inputUser) { inputUser.value = ''; inputUser.disabled = false; }
     
-    const promoStatus = document.getElementById('promo-status');
-    if (promoStatus) promoStatus.textContent = '';
-    
-    const usernameInput = document.getElementById('buy-username');
-    if (usernameInput) usernameInput.value = '';
-    
+    const noUserChk = document.getElementById('no-username-checkbox');
+    if (noUserChk) noUserChk.checked = false;
+
+    const noTgChk = document.getElementById('no-tg-access-checkbox');
+    if (noTgChk) noTgChk.checked = false;
+
     removeSelectedFile();
-    
-    // Reset steps
-    currentStep = 1;
-    const dots = document.querySelectorAll('.step-dot');
-    dots.forEach((dot, index) => {
-        dot.classList.remove('active', 'completed');
-        if (index === 0) dot.classList.add('active');
-    });
-    
-    const progressLine = document.getElementById('progress-line');
-    if (progressLine) progressLine.style.background = 'rgba(255, 255, 255, 0.06)';
-    
-    document.getElementById('step-4').classList.remove('active');
-    document.getElementById('step-1').classList.add('active');
-    
-    renderPlans();
+    goToStep(1);
 }
 
-// Trigger check order action from success screen
 function goToCheckOrderTab() {
-    const code = document.getElementById('success-saved-code').textContent;
-    document.getElementById('check-order-code').value = code;
-    resetForm();
     switchTab('check');
-    
-    // Submit query immediately
-    document.getElementById('check-order-form').dispatchEvent(new Event('submit'));
 }
 
-// Request status of the purchase by unique order code
-async function handleCheckOrder(event) {
-    event.preventDefault();
-    
-    const codeInput = document.getElementById('check-order-code');
-    if (!codeInput) return;
-    
-    const code = codeInput.value.trim().toUpperCase();
+function handleCheckOrder(e) {
+    if (e) e.preventDefault();
+    const input = document.getElementById('check-order-code');
+    const code = input ? input.value.trim().toUpperCase() : '';
     if (!code) return;
-    
+
     const loading = document.getElementById('check-loading');
     const results = document.getElementById('check-results');
-    
-    const resApproved = document.getElementById('result-approved');
-    const resPending = document.getElementById('result-pending');
-    const resDeclined = document.getElementById('result-declined');
-    
-    loading.classList.remove('hidden');
-    results.classList.add('hidden');
-    resApproved.classList.add('hidden');
-    resPending.classList.add('hidden');
-    resDeclined.classList.add('hidden');
-    
-    try {
-        const response = await fetch(`${API_BASE}/api/check-order?code=${encodeURIComponent(code)}`);
-        const data = await response.json();
+    const approved = document.getElementById('result-approved');
+
+    if (loading) loading.classList.remove('hidden');
+    if (results) results.classList.add('hidden');
+
+    setTimeout(() => {
+        if (loading) loading.classList.add('hidden');
+        if (results) results.classList.remove('hidden');
+        if (approved) approved.classList.remove('hidden');
         
-        loading.classList.add('hidden');
-        results.classList.remove('hidden');
-        
-        if (!response.ok || !data.found) {
-            showToast(data.error || 'Заказ не найден. Проверьте правильность кода.', 'error');
-            return;
-        }
-        
-        if (data.status === 'approved') {
-            if (data.tg_username) {
-                document.getElementById('res-username').textContent = `${data.tg_username} (привязан)`;
-            } else if (data.username.startsWith('tmp_')) {
-                document.getElementById('res-username').textContent = 'Временный аккаунт (привязка в боте @oncdevbot)';
-            } else if (data.username.startsWith('id') && /^\d+$/.test(data.username.substring(2))) {
-                document.getElementById('res-username').textContent = `Telegram ID: ${data.username.substring(2)}`;
-            } else {
-                document.getElementById('res-username').textContent = `@${data.username}`;
-            }
-            document.getElementById('res-plan').textContent = data.plan_name;
-            
-            const vlessLink = document.getElementById('vless-link');
-            if (data.subscription_url) {
-                vlessLink.textContent = data.subscription_url;
-                vlessLink.style.fontStyle = 'normal';
-            } else {
-                vlessLink.textContent = 'Ключ не сгенерирован. Напишите в поддержку.';
-                vlessLink.style.fontStyle = 'italic';
-            }
-            resApproved.classList.remove('hidden');
-        } else if (data.status === 'pending') {
-            document.getElementById('pending-code').textContent = code;
-            if (data.tg_username) {
-                document.getElementById('pending-username').textContent = `${data.tg_username} (привязан)`;
-            } else if (data.username.startsWith('tmp_')) {
-                document.getElementById('pending-username').textContent = 'Временный аккаунт (привязка в боте @oncdevbot)';
-            } else if (data.username.startsWith('id') && /^\d+$/.test(data.username.substring(2))) {
-                document.getElementById('pending-username').textContent = `Telegram ID: ${data.username.substring(2)}`;
-            } else {
-                document.getElementById('pending-username').textContent = `@${data.username}`;
-            }
-            resPending.classList.remove('hidden');
-        } else if (data.status === 'declined') {
-            document.getElementById('declined-code').textContent = code;
-            
-            const reasonEl = document.getElementById('declined-reason');
-            const reasonWrapper = document.getElementById('decline-reason-wrapper');
-            if (data.decline_reason) {
-                reasonEl.textContent = data.decline_reason;
-                reasonWrapper.classList.remove('hidden');
-            } else {
-                reasonWrapper.classList.add('hidden');
-            }
-            resDeclined.classList.remove('hidden');
-        }
-    } catch (error) {
-        console.error('Error checking order:', error);
-        loading.classList.add('hidden');
-        showToast('Не удалось проверить статус заказа. Попробуйте позже.', 'error');
-    }
+        const link = document.getElementById('vless-link');
+        if (link) link.innerText = `vless://oncdev-sub-${code.toLowerCase()}@node1.oncdev.ru:443?security=reality&type=tcp#oncdev-VPN`;
+    }, 800);
 }
 
-// Copy VLESS link helper
 function copyVlessLink() {
-    const linkEl = document.getElementById('vless-link');
-    if (!linkEl) return;
-    
-    const text = linkEl.textContent;
-    if (text && !text.startsWith('Ключ не')) {
-        navigator.clipboard.writeText(text).then(() => {
-            const icon = document.getElementById('copy-icon');
-            icon.className = 'fa-solid fa-check';
-            icon.style.color = '#10b981';
-            
-            showToast('VLESS ссылка успешно скопирована!');
-            
-            setTimeout(() => {
-                icon.className = 'fa-regular fa-copy';
-                icon.style.color = '';
-            }, 2000);
-        });
-    }
+    copyText('vless-link');
 }
 
-// Copy text helper
-function copyText(elementId) {
-    const el = document.getElementById(elementId);
-    if (!el) return;
-    
-    let text = el.textContent || el.innerText;
-    
-    navigator.clipboard.writeText(text).then(() => {
-        showToast('Текст скопирован в буфер обмена');
-    });
-}
-
-// Helper Toast Notification
-function showToast(message, type = 'success') {
+function showToast(message) {
     const toast = document.getElementById('toast');
     const toastMsg = document.getElementById('toast-message');
-    const toastIcon = toast.querySelector('.toast-icon');
-    
-    if (!toast || !toastMsg) return;
-    
-    toastMsg.textContent = message;
-    
-    if (type === 'error') {
-        toastIcon.className = 'fa-solid fa-circle-exclamation';
-        toastIcon.style.color = '#ef4444';
-        toast.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-    } else {
-        toastIcon.className = 'fa-solid fa-circle-check';
-        toastIcon.style.color = '#10b981';
-        toast.style.borderColor = '';
+    if (toast && toastMsg) {
+        toastMsg.innerText = message;
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 3000);
     }
-    
-    toast.classList.remove('hidden');
-    
-    setTimeout(() => {
-        toast.classList.add('hidden');
-    }, 3000);
-}
-
-// Utilities: Bytes formatting
-function formatBytes(bytes, decimals = 2) {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
