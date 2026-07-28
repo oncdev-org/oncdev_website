@@ -55,7 +55,7 @@ main {
 }
 
 .hero-subtitle {
-    max-width: 600px;
+    max-width: 720px;
     margin-top: 18px;
     color: var(--text-secondary);
     font-size: clamp(1rem, 1.6vw, 1.2rem);
@@ -110,7 +110,7 @@ main {
     color: #ffffff;
 }
 
-/* Hero Terminal Box (Right Column) */
+/* Hero Terminal Box (Right Column) - Dynamic & Adaptive */
 .hero-terminal {
     position: relative;
     z-index: 2;
@@ -119,6 +119,8 @@ main {
     border-radius: var(--radius-lg);
     box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     text-align: left;
+    width: 100%;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .terminal-header {
@@ -172,7 +174,9 @@ main {
 
 .terminal-body {
     padding: 24px;
-    min-height: 220px;
+    box-sizing: border-box;
+    transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
 }
 
 .terminal-code {
@@ -180,6 +184,8 @@ main {
     font-size: 0.88rem;
     line-height: 1.7;
     color: #e4e4e7;
+    white-space: pre-wrap;
+    word-break: break-word;
     overflow-x: auto;
 }
 

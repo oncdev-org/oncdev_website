@@ -19,9 +19,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Code Terminal Tabs Switcher with Smooth Animation
+    // Code Terminal Dynamic Height Auto-Adjustment & Tabs Switcher
+    const terminalBody = document.querySelector('.terminal-body');
+    const updateTerminalHeight = (activePane) => {
+        if (terminalBody && activePane) {
+            const paneHeight = activePane.scrollHeight;
+            terminalBody.style.height = `${paneHeight + 48}px`; // 48px padding (24px top + 24px bottom)
+        }
+    };
+
     const terminalTabs = document.querySelectorAll('.terminal-tab');
     const terminalPanes = document.querySelectorAll('.terminal-code');
+    
+    // Initial height calculation
+    const initialPane = document.querySelector('.terminal-code:not(.hidden)');
+    if (initialPane) {
+        // Wait a tick for DOM rendering
+        setTimeout(() => updateTerminalHeight(initialPane), 50);
+    }
+
     terminalTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const targetId = tab.getAttribute('data-target');
@@ -32,10 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetPane = document.getElementById(targetId);
             if (targetPane) {
                 targetPane.classList.remove('hidden');
+                updateTerminalHeight(targetPane);
                 targetPane.style.animation = 'none';
                 targetPane.offsetHeight; // trigger reflow
                 targetPane.style.animation = 'fadeIn 0.3s ease';
             }
         });
+    });
+
+    window.addEventListener('resize', () => {
+        const activePane = document.querySelector('.terminal-code:not(.hidden)');
+        if (activePane) {
+            updateTerminalHeight(activePane);
+        }
     });
 });
