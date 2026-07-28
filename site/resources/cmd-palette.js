@@ -128,10 +128,19 @@
             });
         }
 
-        // Event listener for opening Command Palette
+        // Event listener for opening Command Palette (Alt+K, Ctrl+Shift+K, or '/')
         window.addEventListener('keydown', (e) => {
-            // Prevent Google default Ctrl+K or Cmd+K
-            if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+            const isInputActive = ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName) || document.activeElement.isContentEditable;
+            
+            // Alt + K (Alt + Л), Ctrl + Shift + K, or '/' when not typing
+            const isAltK = e.altKey && (e.code === 'KeyK' || e.key === 'k' || e.key === 'K' || e.key === 'л' || e.key === 'Л');
+            const isCtrlShiftK = e.ctrlKey && e.shiftKey && (e.code === 'KeyK' || e.key === 'k' || e.key === 'K' || e.key === 'л' || e.key === 'Л');
+            const isSlash = e.key === '/' && !isInputActive;
+
+            // Fallback for Ctrl+K / Cmd+K preventing browser URL bar focus
+            const isCtrlK = (e.ctrlKey || e.metaKey) && (e.code === 'KeyK' || e.key === 'k' || e.key === 'K' || e.key === 'л' || e.key === 'Л');
+
+            if (isAltK || isCtrlShiftK || isSlash || isCtrlK) {
                 e.preventDefault();
                 e.stopPropagation();
                 if (backdrop.classList.contains('open')) {
