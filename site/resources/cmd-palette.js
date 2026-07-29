@@ -193,11 +193,11 @@
         });
     }
 
-    // 4. Smooth 3D Parallax Tilt Engine (Applied strictly to Project Cards)
+    // 4. Smooth 3D Parallax Tilt Engine (Applied strictly to Project Cards - 50% softer intensity)
     function setup3DTiltEffect() {
         // Target strictly Project Showcase Cards
         const projectCards = document.querySelectorAll('.bento-section .bento-card, .project-card');
-        const MAX_TILT_DEGREE = 5.5; // Subtle, elegant tilt angle
+        const MAX_TILT_DEGREE = 2.75; // 50% softer tilt angle
 
         projectCards.forEach(card => {
             let reqId = null;
@@ -226,24 +226,24 @@
                 const rotateX = -1 * normY * MAX_TILT_DEGREE;
                 const rotateY = normX * MAX_TILT_DEGREE;
 
-                const popX = normX * 6;
-                const popY = normY * 6;
+                const popX = normX * 3;
+                const popY = normY * 3;
 
                 if (reqId) cancelAnimationFrame(reqId);
                 reqId = requestAnimationFrame(() => {
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.015, 1.015, 1.015)`;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.008, 1.008, 1.008)`;
 
                     popElements.forEach(el => {
                         const isTitle = el.tagName === 'H2' || el.tagName === 'H3';
                         const isPrimary = el.classList.contains('button');
-                        const depthMultiplier = isPrimary ? 1.4 : (isTitle ? 1.1 : 0.8);
+                        const depthMultiplier = isPrimary ? 1.3 : (isTitle ? 1.0 : 0.7);
 
                         const shiftX = (popX * depthMultiplier).toFixed(1);
                         const shiftY = (popY * depthMultiplier).toFixed(1);
 
-                        el.style.transform = `translate3d(${shiftX}px, ${shiftY}px, 20px) scale(1.02)`;
+                        el.style.transform = `translate3d(${shiftX}px, ${shiftY}px, 10px) scale(1.01)`;
                         if (isTitle || el.tagName === 'P') {
-                            el.style.textShadow = `0 ${(8 + Math.abs(popY)).toFixed(0)}px 16px rgba(0, 0, 0, 0.85)`;
+                            el.style.textShadow = `0 ${(4 + Math.abs(popY)).toFixed(0)}px 10px rgba(0, 0, 0, 0.65)`;
                         }
                     });
                 });
