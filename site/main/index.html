@@ -4,196 +4,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная - oncdev</title>
+    <title>oncdev — Студия разработки и сервисы</title>
     <link rel="stylesheet" href="../resources/shared.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="bg-blobs" aria-hidden="true">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-        <div class="blob-interactive" id="interactive-blob"></div>
-    </div>
-
     <div class="page-shell">
+        <!-- Full-Width Studio Navigation Header -->
         <header class="site-header">
-            <a class="brand-link" href="/" aria-label="oncdev - главная страница">
+            <a class="brand-link" href="/" aria-label="oncdev главная">
                 <span class="brand-mark">OC</span>
                 <span>oncdev</span>
             </a>
 
             <nav class="main-nav" aria-label="Основная навигация">
                 <a href="/timer">Таймер</a>
-                <a href="/" class="active" aria-current="page">Главная</a>
                 <a href="/vpn">VPN</a>
+                <a href="/" class="active" aria-current="page">Главная</a>
                 <a href="/wiki">База знаний</a>
                 <a href="/about">О нас</a>
             </nav>
 
-            <div class="social-links" aria-label="Социальные ссылки">
-                <a href="https://t.me/OnCube_DEV/30" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-                    <img src="../resources/tg.png" alt="">
-                </a>
-                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" aria-label="Boosty">
-                    <img src="../resources/boosty.png" alt="">
-                </a>
+            <div class="header-right">
+                <button class="cmd-trigger-btn" onclick="openCmdPalette()" title="Поиск (Alt+K / /)">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Поиск</span>
+                    <kbd>Alt + K</kbd>
+                </button>
+                <div class="social-links" aria-label="Социальные ссылки">
+                    <a href="https://t.me/OnCube_DEV/30" target="_blank" rel="noopener noreferrer" title="Telegram">
+                        <img src="../resources/tg.png" alt="Telegram">
+                    </a>
+                    <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" title="Boosty">
+                        <img src="../resources/boosty.png" alt="Boosty">
+                    </a>
+                </div>
             </div>
         </header>
 
         <main>
+            <!-- 2-Column Split Hero Section with Vercel Interactive Canvas Background -->
             <section class="hero-section" aria-labelledby="hero-title">
+                <canvas id="hero-interactive-canvas" class="hero-canvas-bg" aria-hidden="true"></canvas>
+
                 <div class="hero-copy">
-                    <p class="eyebrow">Команда разработчиков и экспериментальных проектов</p>
-                    <h1 id="hero-title">oncdev</h1>
+                    <p class="eyebrow">NEXT-GEN SOFTWARE & EXPERIMENTAL SYSTEMS</p>
+                    <h1 id="hero-title" class="studio-gradient-title">oncdev studio</h1>
                     <p class="hero-subtitle">
-                        Делаем небольшие, но живые веб-проекты: от таймеров и визуализаций до инструментов для
-                        сообщества PolimerS.
+                        Объединение разработчиков. Создаём высокопроизводительные веб-сервисы, VPN-инфраструктуру, интерактивные инструменты и экосистему для сообщества.
                     </p>
                     <div class="hero-actions">
-                        <a class="button primary" href="/timer">Открыть таймер</a>
-                        <a class="button secondary" href="/about">Познакомиться с командой</a>
+                        <a class="button primary" href="/vpn">
+                            <i class="fa-solid fa-shield-halved"></i> Подключить VPN
+                        </a>
+                        <a class="button secondary" href="/timer">
+                            <i class="fa-solid fa-clock"></i> Открыть таймер
+                        </a>
+                        <a class="button secondary" href="/wiki">
+                            <i class="fa-solid fa-book-bookmark"></i> База знаний
+                        </a>
+                    </div>
+
+                    <!-- Clean Single Mode Switcher Pill -->
+                    <div class="hero-canvas-toolbar" aria-label="Переключение режима фона">
+                        <button class="canvas-control-btn" onclick="toggleCanvasMode(this)" title="Сменить режим анимации">
+                            <i class="fa-solid fa-circle-nodes"></i> Сеть
+                        </button>
                     </div>
                 </div>
 
-                <div class="hero-panel" aria-label="Кратко о проектах oncdev">
-                    <div class="status-card">
-                        <span class="status-dot"></span>
-                        <span>Экспериментальная главная</span>
-                    </div>
-                    <div class="hero-metrics">
-                        <article>
-                            <strong>4</strong>
-                            <span>активных раздела</span>
-                        </article>
-                        <article>
-                            <strong>2026</strong>
-                            <span>актуальные обновления</span>
-                        </article>
-                    </div>
-                    <div class="preview-card">
-                        <div>
-                            <span>Свежий контент</span>
-                            <p>Таймеры и сводки помогают следить за активностью канала без лишней суеты.</p>
+                <!-- Interactive Dev Terminal (Right Column) -->
+                <div class="hero-terminal bento-card">
+                    <div class="terminal-header">
+                        <div class="terminal-left-group">
+                            <div class="terminal-controls">
+                                <span class="control-dot close" title="Закрыть"></span>
+                                <span class="control-dot minimize" title="Свернуть"></span>
+                                <span class="control-dot expand" title="Развернуть"></span>
+                            </div>
+                            <div class="terminal-window-title">
+                                <i class="fa-solid fa-terminal"></i>
+                                <span>oncdev ~ zsh</span>
+                            </div>
                         </div>
-                        <img src="../resources/plat-photo.png" alt="Сообщение о выходе видео PolimerS">
+                        <div class="terminal-tabs" role="tablist">
+                            <button class="terminal-tab active" data-target="pane-status" role="tab"><i class="fa-solid fa-code"></i> status.json</button>
+                            <button class="terminal-tab" data-target="pane-stack" role="tab"><i class="fa-brands fa-js"></i> stack.ts</button>
+                            <button class="terminal-tab" data-target="pane-metrics" role="tab"><i class="fa-solid fa-chart-line"></i> metrics.ts</button>
+                        </div>
+                    </div>
+                    <div class="terminal-body">
+                        <pre id="pane-status" class="terminal-code"><code><span class="code-keyword">const</span> <span class="code-var">oncdev</span> = {
+  <span class="code-key">"studio"</span>: <span class="code-string">"oncdev"</span>,
+  <span class="code-key">"status"</span>: <span class="code-string">"● OPERATIONAL"</span>,
+  <span class="code-key">"systems"</span>: [<span class="code-string">"VPN"</span>, <span class="code-string">"Timer"</span>, <span class="code-string">"Wiki"</span>, <span class="code-string">"Summary"</span>],
+  <span class="code-key">"uptime"</span>: <span class="code-string">"99.98%"</span>,
+  <span class="code-key">"founders"</span>: [<span class="code-string">"Vobi"</span>, <span class="code-string">"Polimer"</span>]
+};</code></pre>
+                        <pre id="pane-stack" class="terminal-code hidden"><code><span class="code-keyword">export const</span> <span class="code-var">TechStack</span> = {
+  <span class="code-key">frontend</span>: [<span class="code-string">"HTML5"</span>, <span class="code-string">"Monochrome CSS Tokens"</span>, <span class="code-string">"TypeScript"</span>],
+  <span class="code-key">infrastructure</span>: [<span class="code-string">"VLESS / Reality"</span>, <span class="code-string">"V2Ray"</span>],
+  <span class="code-key">backend</span>: [<span class="code-string">"Python"</span>, <span class="code-string">"YouTube Data API v3"</span>]
+};</code></pre>
+                        <pre id="pane-metrics" class="terminal-code hidden"><code><span class="code-keyword">export const</span> <span class="code-var">Telemetry</span> = {
+  <span class="code-key">vpn_nodes</span>: <span class="code-string">"High Speed Gigabit"</span>,
+  <span class="code-key">community</span>: <span class="code-string">"PolimerS Community"</span>,
+  <span class="code-key">latest_release</span>: <span class="code-string">"2026-07-02"</span>
+};</code></pre>
                     </div>
                 </div>
             </section>
 
-            <section class="section projects-section" aria-labelledby="projects-title">
+            <!-- Bento Grid Showcase -->
+            <section class="section bento-section" aria-labelledby="bento-title">
                 <div class="section-heading">
-                    <p class="eyebrow">Проекты</p>
-                    <h2 id="projects-title">Что уже можно открыть</h2>
+                    <div>
+                        <p class="eyebrow">SYSTEMS & ARCHITECTURE</p>
+                        <h2 id="bento-title">Инженерные проекты & сервисы</h2>
+                    </div>
                 </div>
 
-                <div class="projects-grid">
-                    <a class="project-card featured" href="/timer">
-                        <h3>Таймер</h3>
-                        <p>Показывает, сколько времени прошло с момента последнего видео, и хранит маленькую историю
-                            ожидания.</p>
+                <div class="bento-grid">
+                    <!-- Bento Item 1: VPN (Span 8) -->
+                    <div class="bento-card bento-vpn col-span-8">
+                        <div class="bento-card-body">
+                            <div class="bento-header-tag">
+                                <span class="tech-pill"><i class="fa-solid fa-shield-halved"></i> VLESS / REALITY PROTOCOL</span>
+                                <span class="tech-pill highlight">99.9% UPTIME</span>
+                            </div>
+                            <h3>VPN-сервис oncdev</h3>
+                            <p>Защищённый и высокоскоростной интернет-доступ с нулевым логированием. Мгновенная выдача VLESS подписок, автоматическая проверка оплаты и пошаговые гайды.</p>
+                            <div class="bento-actions">
+                                <a href="/vpn" class="button primary">Оформить подписку <i class="fa-solid fa-arrow-right"></i></a>
+                                <a href="/wiki/v2ray" class="button secondary">Инструкции по настройке</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Animated SVG Vector Security Node Visual -->
+                        <div class="bento-svg-graphic" aria-hidden="true">
+                            <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100px; margin-top: 16px;">
+                                <path d="M 40 60 L 160 60 L 280 60 L 360 60" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-dasharray="4 4" />
+                                <circle cx="40" cy="60" r="14" fill="#0d0d11" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
+                                <text x="40" y="64" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">DEV</text>
+
+                                <circle cx="160" cy="60" r="18" fill="#121216" stroke="#fff" stroke-width="2" />
+                                <path d="M 155 60 L 165 60 M 160 55 L 160 65" stroke="#fff" stroke-width="2" />
+
+                                <circle cx="280" cy="60" r="14" fill="#0d0d11" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
+                                <text x="280" y="64" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">NODE</text>
+
+                                <circle cx="360" cy="60" r="14" fill="#0d0d11" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
+                                <text x="360" y="64" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">WEB</text>
+
+                                <circle cx="40" cy="60" r="4" fill="#ffffff">
+                                    <animate attributeName="cx" values="40;160;280;360;40" dur="4s" repeatCount="indefinite" />
+                                </circle>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Bento Item 2: Timer (Span 4) -->
+                    <a href="/timer" class="bento-card bento-timer col-span-4">
+                        <div class="bento-card-body">
+                            <div class="bento-header-tag">
+                                <span class="tech-pill"><i class="fa-solid fa-stopwatch"></i> TELEMETRY</span>
+                            </div>
+                            <h3>Таймер PolimerS</h3>
+                            <p>Мониторинг интервала с момента последнего видео и обратный отсчёт ожидания.</p>
+                            <div class="timer-preview-box">
+                                <span class="timer-preview-label">Выход видео:</span>
+                                <span class="timer-preview-value">● Live API Sync</span>
+                            </div>
+                        </div>
                     </a>
 
-                    <a class="project-card" href="/about">
-                        <h3>О нас</h3>
-                        <p>Кто стоит за oncdev, чем занимается каждый участник и куда ведут личные ссылки.</p>
-                    </a>
-                    <a class="project-card" href="/vpn">
-                        <h3>VPN-сервис</h3>
-                        <p>Стабильный и быстрый VPN-сервис для доступа в интернет!</p>
+                    <!-- Bento Item 3: Wiki / KB (Span 4) -->
+                    <a href="/wiki" class="bento-card bento-wiki col-span-4">
+                        <div class="bento-card-body">
+                            <div class="bento-header-tag">
+                                <span class="tech-pill"><i class="fa-solid fa-book"></i> KNOWLEDGE BASE</span>
+                            </div>
+                            <h3>База знаний & Wiki</h3>
+                            <p>Инструкции по настройке VLESS на iOS, Android и Windows, а также юридические соглашения.</p>
+                            <div class="wiki-tag-list">
+                                <span class="tech-pill">v2rayTun</span>
+                                <span class="tech-pill">v2rayN</span>
+                                <span class="tech-pill">V2Box</span>
+                            </div>
+                        </div>
                     </a>
 
-                    <a class="project-card" href="/wiki">
-                        <h3>База знаний</h3>
-                        <p>Пошаговые интерактивные инструкции по подключению VPN и официальные документы проекта.</p>
+                    <!-- Bento Item 4: Channel Summary (Span 4) -->
+                    <a href="/channel-summary" class="bento-card bento-summary col-span-4">
+                        <div class="bento-card-body">
+                            <div class="bento-header-tag">
+                                <span class="tech-pill"><i class="fa-solid fa-chart-simple"></i> DASHBOARD</span>
+                            </div>
+                            <h3>Сводка Канала</h3>
+                            <p>Интерактивный дашборд ключевых показателей подписчиков и просмотров YouTube.</p>
+                        </div>
                     </a>
 
-                    <a class="project-card" href="/channel-summary">
-                        <h3>Сводка канала</h3>
-                        <p>Компактная витрина с основными показателями и последним видео PolimerS.</p>
-                    </a>
+                    <!-- Bento Item 5: Experiments (Span 4) -->
+                    <div class="bento-card bento-experiments col-span-4">
+                        <div class="bento-card-body">
+                            <div class="bento-header-tag">
+                                <span class="tech-pill"><i class="fa-solid fa-flask"></i> CANVAS DEMOS</span>
+                            </div>
+                            <h3>Интерактивные проекты</h3>
+                            <p>Экспериментальные веб-приложения и графические симуляции.</p>
+                            <div class="bento-sublinks">
+                                <a href="/city" class="button secondary btn-sm"><i class="fa-solid fa-city"></i> City</a>
+                                <a href="/dots" class="button secondary btn-sm"><i class="fa-solid fa-circle-nodes"></i> Dots</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            <!-- Changelog & Engineering Journal -->
             <section class="section news-section" aria-labelledby="news-title">
                 <div class="section-heading">
-                    <p class="eyebrow">Журнал</p>
-                    <h2 id="news-title">Последние новости</h2>
+                    <div>
+                        <p class="eyebrow">ENGINEERING LOG</p>
+                        <h2 id="news-title">Последние обновления & Журнал</h2>
+                    </div>
                 </div>
 
-                <div class="news-list">
-                    <article class="news-item">
-                        <time datetime="2026-07-02">02-07-2026</time>
-                        <div>
-                            <h3>База знаний и инструкции</h3>
-                            <p>
-                                Запущена полноценная <a href="/wiki">База знаний</a> с детальными интерактивными руководствами по настройке VPN для смартфонов и компьютеров.
-                            </p>
+                <div class="changelog-container bento-card">
+                    <article class="changelog-item">
+                        <div class="changelog-meta">
+                            <time datetime="2026-07-02">02-07-2026</time>
+                            <span class="tech-pill highlight">RELEASE</span>
+                        </div>
+                        <div class="changelog-content">
+                            <h3>База знаний и пошаговые руководства</h3>
+                            <p>Запущена полноценная <a href="/wiki">База знаний</a> с детальными интерактивными руководствами по настройке VPN для смартфонов и ПК.</p>
                         </div>
                     </article>
 
-                    <article class="news-item">
-                        <time datetime="2026-06-07">07-06-2026</time>
-                        <div>
-                            <h3>Документация</h3>
-                            <p>
-                                Было добавлено <a href="/wiki/tos">пользовательское соглашение</a>, <a
-                                    href="/wiki/privacy">политика конфиденциальности</a> и <a
-                                    href="/wiki/refund">публичная оферта</a>.
-                            </p>
+                    <article class="changelog-item">
+                        <div class="changelog-meta">
+                            <time datetime="2026-06-07">07-06-2026</time>
+                            <span class="tech-pill">LEGAL</span>
+                        </div>
+                        <div class="changelog-content">
+                            <h3>Правовая документация</h3>
+                            <p>Опубликованы <a href="/wiki/tos">пользовательское соглашение</a>, <a href="/wiki/privacy">политика конфиденциальности</a> и <a href="/wiki/refund">публичная оферта</a>.</p>
                         </div>
                     </article>
 
-                    <article class="news-item">
-                        <time datetime="2026-05-04">04-05-2026</time>
-                        <div>
-                            <h3>Новое видео!</h3>
-                            <p>
-                                А вот и новое видео! Те самые <= ~5 дней прошли, и вот оно. <a
-                                    href="https://youtu.be/uMNjDHgnnH0" target="_blank" rel="noopener noreferrer">
-                                    Смотреть</a>
-                            </p>
+                    <article class="changelog-item">
+                        <div class="changelog-meta">
+                            <time datetime="2026-05-04">04-05-2026</time>
+                            <span class="tech-pill">MEDIA</span>
+                        </div>
+                        <div class="changelog-content">
+                            <h3>Новый видеовыпуск PolimerS</h3>
+                            <p>Опубликовано новое видео на канале PolimerS! <a href="https://youtu.be/uMNjDHgnnH0" target="_blank" rel="noopener noreferrer">Смотреть на YouTube</a></p>
                         </div>
                     </article>
 
-                    <article class="news-item">
-                        <time datetime="2026-04-29">29-04-2026</time>
-                        <div>
-                            <h3>VPN-сервис</h3>
-                            <p>
-                                Запущен собственный VPN-сервис!
-                                Узнай больше в нашем <a href="https://t.me/oncubedev" target="_blank"
-                                    rel="noopener noreferrer">VPN Telegram-канале</a>
-                            </p>
+                    <article class="changelog-item">
+                        <div class="changelog-meta">
+                            <time datetime="2026-04-29">29-04-2026</time>
+                            <span class="tech-pill highlight">LAUNCH</span>
+                        </div>
+                        <div class="changelog-content">
+                            <h3>Запуск VPN-инфраструктуры</h3>
+                            <p>Запущен собственный VPN-сервис! Узнайте больше в нашем <a href="https://t.me/oncubedev" target="_blank" rel="noopener noreferrer">Telegram-канале</a>.</p>
                         </div>
                     </article>
-
                 </div>
             </section>
         </main>
 
+        <!-- Studio Footer -->
         <footer class="site-footer">
             <p>
-                Права на представленный контент принадлежат
-                <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>.
-                Сайт сделали
-                <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
-                и
-                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
-                с любовью.
+                Права на представленный контент принадлежат <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>. Разработано <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>.
             </p>
-            <p>
-                <a href="/wiki/tos/" target="_blank">ToS (Условия)</a> •
-                <a href="/wiki/refund/" target="_blank">Оферта и возврат</a> •
-                <a href="/wiki/privacy/" target="_blank">Конфиденциальность</a>
-            </p>
-            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All
-                rights reserved.</p>
+            <div class="footer-links">
+                <a href="/wiki/tos/">ToS (Условия)</a>
+                <a href="/wiki/refund/">Оферта и возврат</a>
+                <a href="/wiki/privacy/">Конфиденциальность</a>
+            </div>
+            <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition.</p>
         </footer>
     </div>
 
-
+    <script src="../resources/cmd-palette.js"></script>
+    <script src="hero-canvas.js"></script>
     <script src="theme.js"></script>
     <script src="../resources/legal-consent.js"></script>
 </body>

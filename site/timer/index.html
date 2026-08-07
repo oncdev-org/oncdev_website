@@ -15,23 +15,35 @@
             <a class="brand-link" href="/" aria-label="oncdev">
                 <span class="brand-mark">OC</span>
                 <span>oncdev</span>
+                <span class="brand-tag">TIMER</span>
             </a>
 
             <nav class="main-nav" aria-label="Основная навигация">
                 <a href="/timer" class="active" aria-current="page">Таймер</a>
-                <a href="/">Главная</a>
                 <a href="/vpn">VPN</a>
+                <a href="/">Главная</a>
                 <a href="/wiki">База знаний</a>
                 <a href="/about">О нас</a>
             </nav>
 
-            <div class="social-links" aria-label="Social links">
-                <a href="https://t.me/polisour/68" target="_blank" rel="noopener noreferrer">
-                    <img src="../resources/tg.png" alt="Telegram">
-                </a>
-                <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer">
-                    <img src="../resources/boosty.png" alt="Boosty">
-                </a>
+            <div class="header-right">
+                <button class="cmd-trigger-btn" onclick="openCmdPalette()" title="Поиск (Alt+K / /)">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Поиск</span>
+                    <kbd>Alt + K</kbd>
+                </button>
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    <span>ONLINE</span>
+                </div>
+                <div class="social-links" aria-label="Social links">
+                    <a href="https://t.me/polisour/68" target="_blank" rel="noopener noreferrer" title="Telegram">
+                        <img src="../resources/tg.png" alt="Telegram">
+                    </a>
+                    <a href="https://boosty.to/polimers" target="_blank" rel="noopener noreferrer" title="Boosty">
+                        <img src="../resources/boosty.png" alt="Boosty">
+                    </a>
+                </div>
             </div>
         </header>
 
@@ -82,6 +94,7 @@
         </footer>
     </div>
 
+    <script src="../resources/cmd-palette.js"></script>
     <script src="info_script.js"></script>
     <script>
         let startDate = null;
