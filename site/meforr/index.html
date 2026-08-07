@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark-ember">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>about meforr</title>
+  <meta name="description" content="Personal site of meforr (vobi / Aleksandr): Full-stack development, GameDev, oncdev projects, services, and software maintenance." />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✌️</text></svg>" />
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- SVG Background Noise -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Background Orbs -->
+  <div class="bg-glow-orb-1" aria-hidden="true"></div>
+  <div class="bg-glow-orb-2" aria-hidden="true"></div>
+
+  <!-- Sticky Header Nav -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#top" class="brand-logo" aria-label="meforr home">
+        <span class="logo-text">meforr</span>
+        <span class="logo-dot"></span>
+        <span class="logo-aka">vobi</span>
+      </a>
+
+      <div class="controls-group">
+        <!-- Status Pill -->
+        <div class="status-badge" title="Active status">
+          <span class="status-dot"></span>
+          <span data-i18n="statusText">Building</span>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle-btn" class="control-btn" type="button" aria-label="Toggle Color Theme">
+          <span>🎨</span>
+          <span id="theme-name-label">Ember</span>
+        </button>
+
+        <!-- Language Toggle Button -->
+        <button id="lang-toggle-btn" class="control-btn" type="button" aria-label="Switch Language">
+          <span>🌐</span>
+          <span id="lang-label" class="active-indicator">EN</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area with Vertical Spine -->
+  <main id="top" class="main-wrapper">
+    <!-- Continuous Vertical Spine -->
+    <div class="vertical-spine" aria-hidden="true"></div>
+
+    <!-- HERO SECTION -->
+    <section class="vertical-section hero-section" id="hero">
+      <div class="section-node" aria-hidden="true"></div>
+      
+      <div class="hero-header">
+        <div class="hero-name-row">
+          <h1 class="hero-main-title">meforr<span>.</span></h1>
+          <span class="hero-aka-tag" data-i18n="akaTag">AKA vobi • Aleksandr</span>
+        </div>
+        
+        <p class="hero-tagline" data-i18n="tagline">Being happy — making happiness</p>
+      </div>
+
+      <!-- Roles Chips -->
+      <div class="hero-roles-container">
+        <span class="role-pill" data-i18n="roleFullstack">Full-stack Dev</span>
+        <span class="role-pill" data-i18n="roleGamedev">GameDev</span>
+        <span class="role-pill" data-i18n="roleProductOwner">Product Owner</span>
+        <span class="role-pill" data-i18n="roleTester">QA / Tester</span>
+        <span class="role-pill" data-i18n="roleMaintainer">Maintainer</span>
+      </div>
+
+      <p class="hero-bio" data-i18n="heroBio">
+        Building independent web services, game prototypes, and maintaining core projects.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#projects" class="primary-btn">
+          <span data-i18n="btnProjects">Explore Projects ↓</span>
+        </a>
+        <a href="#contacts" class="secondary-btn">
+          <span data-i18n="btnContact">Get in Touch</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 01: ABOUT -->
+    <section class="vertical-section" id="about">
+      <div class="section-node" aria-hidden="true"></div>
+      
+      <div class="section-label" data-i18n="secAboutLabel">01 / ABOUT</div>
+      <h2 class="section-title" data-i18n="secAboutTitle">Building things that work, because it's cool.</h2>
+      
+      <div class="project-card">
+        <p class="project-desc" style="margin-bottom: 12px;" data-i18n="aboutP1">
+          I develop web applications, game systems, independent services, and tools under the oncdev ecosystem. I like getting deep into how complex systems work under the hood and assembling them into intuitive products.
+        </p>
+        <p class="project-desc" style="margin: 0;" data-i18n="aboutP2">
+          Focusing on full-cycle development — from concept design and architectural decisions to coding, testing, and long-term maintenance.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 02: FEATURED PROJECTS (Priority 1) -->
+    <section class="vertical-section" id="projects">
+      <div class="section-node" aria-hidden="true"></div>
+      
+      <div class="section-label" data-i18n="secProjectsLabel">02 / FEATURED PROJECTS</div>
+      <h2 class="section-title" data-i18n="secProjectsTitle">Core products & active development.</h2>
+
+      <div class="vertical-card-stack">
+        <!-- 01: OncDev VPN -->
+        <a class="project-card project-card-featured" href="https://oncdev.ru/vpn" target="_blank" rel="noreferrer">
+          <div class="card-top-row">
+            <span class="project-number">01</span>
+            <span class="project-status live">● <span data-i18n="p1Status">Online</span></span>
+          </div>
+          <div class="project-title-group">
+            <h3 class="project-name">
+              <span data-i18n="p1Name">OncDev VPN</span>
+              <span class="link-arrow">↗</span>
+            </h3>
+          </div>
+          <p class="project-desc" data-i18n="p1Desc">Fast, minimal, hassle-free personal VPN service built for stability.</p>
+          <div class="project-tags">
+            <span class="tech-tag">Network</span>
+            <span class="tech-tag">VPN</span>
+            <span class="tech-tag">Service</span>
+            <span class="tech-tag">oncdev</span>
+          </div>
+        </a>
+
+        <!-- 02: oncdev -->
+        <a class="project-card" href="https://oncdev.ru" target="_blank" rel="noreferrer">
+          <div class="card-top-row">
+            <span class="project-number">02</span>
+            <span class="project-status live">● <span data-i18n="p2Status">Online</span></span>
+          </div>
+          <div class="project-title-group">
+            <h3 class="project-name">
+              <span data-i18n="p2Name">oncdev</span>
+              <span class="link-arrow">↗</span>
+            </h3>
+          </div>
+          <p class="project-desc" data-i18n="p2Desc">Main platform & digital ecosystem for independent projects and development.</p>
+          <div class="project-tags">
+            <span class="tech-tag">Web Ecosystem</span>
+            <span class="tech-tag">Full-stack</span>
+            <span class="tech-tag">Platform</span>
+          </div>
+        </a>
+
+        <!-- 03: SpaceCargo -->
+        <div class="project-card">
+          <div class="card-top-row">
+            <span class="project-number">03</span>
+            <span class="project-status building">🛠 <span data-i18n="p3Status">In Progress</span></span>
+          </div>
+          <div class="project-title-group">
+            <h3 class="project-name" data-i18n="p3Name">SpaceCargo</h3>
+          </div>
+          <p class="project-desc" data-i18n="p3Desc">Details are classified. Something is cooking.</p>
+          <div class="project-tags">
+            <span class="tech-tag">GameDev</span>
+            <span class="tech-tag">Project</span>
+            <span class="tech-tag">Classified</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 03: OTHER LABS (Priority 2) -->
+    <section class="vertical-section" id="labs">
+      <div class="section-node" aria-hidden="true"></div>
+      
+      <div class="section-label" data-i18n="secLabsLabel">03 / OTHER LABS</div>
+      <h2 class="section-title" data-i18n="secLabsTitle">Experiments, apps & guides.</h2>
+
+      <div class="vertical-card-stack">
+        <!-- 04: LMes -->
+        <a class="project-card" href="https://oncdev.online" target="_blank" rel="noreferrer">
+          <div class="card-top-row">
+            <span class="project-number">04</span>
+            <span class="project-status live">● <span data-i18n="p4Status">Online</span></span>
+          </div>
+          <div class="project-title-group">
+            <h3 class="project-name">
+              <span data-i18n="p4Name">LMes</span>
+              <span class="link-arrow">↗</span>
+            </h3>
+          </div>
+          <p class="project-desc" data-i18n="p4Desc">Custom messenger project built with privacy and simplicity in mind.</p>
+          <div class="project-tags">
+            <span class="tech-tag">Messenger</span>
+            <span class="tech-tag">Web App</span>
+            <span class="tech-tag">Realtime</span>
+          </div>
+        </a>
+
+        <!-- 05: pc guide -->
+        <a class="project-card" href="https://github.com/meforr/pc-guide" target="_blank" rel="noreferrer">
+          <div class="card-top-row">
+            <span class="project-number">05</span>
+            <span class="project-status building">🛠 <span data-i18n="p5Status">In Progress</span></span>
+          </div>
+          <div class="project-title-group">
+            <h3 class="project-name">
+              <span data-i18n="p5Name">pc guide</span>
+              <span class="link-arrow">↗</span>
+            </h3>
+          </div>
+          <p class="project-desc" data-i18n="p5Desc">A beginner-friendly guide for new PC users to easily master essential computer features and capabilities.</p>
+          <div class="project-tags">
+            <span class="tech-tag">Hardware</span>
+            <span class="tech-tag">Documentation</span>
+            <span class="tech-tag">Open Source</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 04: SKILLS & TECH -->
+    <section class="vertical-section" id="skills">
+      <div class="section-node" aria-hidden="true"></div>
+      
+      <div class="section-label" data-i18n="secSkillsLabel">04 / SKILLS & TECH</div>
+      <h2 class="section-title" data-i18n="secSkillsTitle">What I work with daily.</h2>
+
+      <div class="skills-vertical-grid">
+        <!-- Card 1 -->
+        <div class="skill-category-card">
+          <div class="skill-category-title">
+            <span>⚡</span>
+            <span data-i18n="skillCore">Development</span>
+          </div>
+          <div class="skill-list">
+            <span class="tech-tag">HTML5 / CSS3</span>
+            <span class="tech-tag">JavaScript / ES6+</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">REST APIs</span>
+            <span class="tech-tag">Git</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="skill-category-card">
+          <div class="skill-category-title">
+            <span>🎮</span>
+            <span data-i18n="skillGames">Game Engines</span>
+          </div>
+          <div class="skill-list">
+            <span class="tech-tag">Unity</span>
+            <span class="tech-tag">C#</span>
+            <span class="tech-tag">Unreal Engine</span>
+            <span class="tech-tag">Game Design</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="skill-category-card">
+          <div class="skill-category-title">
+            <span>🛠</span>
+            <span data-i18n="skillOps">Management & QA</span>
+          </div>
+          <div class="skill-list">
+            <span class="tech-tag">Product Ownership</span>
+            <span class="tech-tag">Testing / QA</span>
+            <span class="tech-tag">System Maintenance</span>
+            <span class="tech-tag">Architecture</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 05: CONTACTS -->
+    <section class="vertical-section" id="contacts">
+      <div class="section-node" aria-hidden="true"></div>
+      
+      <div class="section-label" data-i18n="secContactLabel">05 / CONTACTS</div>
+      <h2 class="section-title" data-i18n="secContactTitle">Let's connect.</h2>
+      <p class="hero-bio" style="margin-bottom: 24px;" data-i18n="contactSub">Have an idea, collaboration proposal, or just want to chat?</p>
+
+      <div class="contacts-stack">
+        <!-- Telegram -->
+        <a class="contact-card" href="https://t.me/vobimngr" target="_blank" rel="noreferrer">
+          <div class="contact-info">
+            <span class="contact-platform">Telegram</span>
+            <span class="contact-handle">@vobimngr</span>
+          </div>
+          <span class="contact-icon-arrow">↗</span>
+        </a>
+
+        <!-- GitHub -->
+        <a class="contact-card" href="https://github.com/meforr" target="_blank" rel="noreferrer">
+          <div class="contact-info">
+            <span class="contact-platform">GitHub</span>
+            <span class="contact-handle">@meforr</span>
+          </div>
+          <span class="contact-icon-arrow">↗</span>
+        </a>
+
+        <!-- Discord -->
+        <button class="contact-card" type="button" data-copy="meforr" style="width: 100%; text-align: left;">
+          <div class="contact-info">
+            <span class="contact-platform">Discord</span>
+            <span class="contact-handle">meforr</span>
+          </div>
+          <span class="contact-icon-arrow">📋</span>
+        </button>
+
+        <!-- Email -->
+        <a class="contact-card" href="mailto:meforr@oncdev.ru">
+          <div class="contact-info">
+            <span class="contact-platform">Email</span>
+            <span class="contact-handle">meforr@oncdev.ru</span>
+          </div>
+          <span class="contact-icon-arrow">✉️</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-copy">
+      © <span id="year">2026</span> <span>meforr</span>
+    </div>
+    <a href="#top" class="back-to-top" data-i18n="backToTop">Back to top ↑</a>
+  </footer>
+
+  <!-- Toast Notification element -->
+  <div id="toast-notification" class="toast-notification" aria-live="polite">Copied to clipboard!</div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
