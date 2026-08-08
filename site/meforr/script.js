@@ -12,7 +12,6 @@ const translations = {
   en: {
     akaTag: "AKA vobi • Aleksandr",
     tagline: "Being happy — making happiness",
-    statusText: "Building",
     
     // Roles
     roleFullstack: "Full-stack Dev",
@@ -77,7 +76,6 @@ const translations = {
   ru: {
     akaTag: "AKA vobi • Александр",
     tagline: "Цена времени — жизнь",
-    statusText: "В процессе",
     
     // Roles
     roleFullstack: "Full-stack Разработчик",
