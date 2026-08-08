@@ -71,10 +71,6 @@
 
                 <div class="timer-container main-timer">
                     <div class="timer-topline">
-                        <span id="sourceBadge" class="source-badge" data-state="loading">
-                            <span class="source-dot" aria-hidden="true"></span>
-                            <span id="sourceStatus">Проверяем дату выпуска</span>
-                        </span>
                         <span class="timer-kicker">Время без нового видео</span>
                     </div>
 
@@ -143,7 +139,6 @@
 
         async function fetchLastVideoDate() {
             if (!config.apiKey || !config.channelId) {
-                setSourceState('fallback', 'Дата из архива');
                 return;
             }
 
@@ -165,19 +160,12 @@
                 if (video && video.snippet && video.snippet.publishedAt) {
                     startDate = new Date(video.snippet.publishedAt);
                     if (Number.isNaN(startDate.getTime())) throw new Error('Invalid publication date');
-                    setSourceState('live', 'Синхронизировано с YouTube');
                 } else {
                     throw new Error('Video publication date is missing');
                 }
             } catch (e) {
                 startDate = new Date(fallbackPublishedAt);
-                setSourceState('fallback', 'Дата из архива');
             }
-        }
-
-        function setSourceState(state, text) {
-            document.getElementById('sourceBadge').dataset.state = state;
-            document.getElementById('sourceStatus').textContent = text;
         }
 
         function plural(n, one, two, five) {

@@ -408,9 +408,6 @@
         flex-direction: column;
     }
 
-    .timer-kicker {
-        display: none;
-    }
 
     .timer-label {
         margin-top: 42px;
