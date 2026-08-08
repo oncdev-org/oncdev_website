@@ -120,6 +120,7 @@ img {
     font-family: var(--font-mono);
     font-size: 0.82rem;
     font-weight: 700;
+    object-fit: cover;
 }
 
 .main-nav {

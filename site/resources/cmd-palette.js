@@ -37,7 +37,7 @@
                     <a href="/about" class="cmd-item">
                         <div class="cmd-item-left">
                             <i class="fa-solid fa-users"></i>
-                            <span>О создателях (Vobi & Polimer)</span>
+                            <span>О создателях (meforr & PoliSours)</span>
                         </div>
                         <kbd>↵</kbd>
                     </a>

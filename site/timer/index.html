@@ -13,7 +13,7 @@
     <div class="page-shell">
         <header class="site-header">
             <a class="brand-link" href="/" aria-label="oncdev">
-                <span class="brand-mark">OC</span>
+                <img src="../resources/avatar.png" alt="oncdev" class="brand-mark">
                 <span>oncdev</span>
                 <span class="brand-tag">TIMER</span>
             </a>
@@ -61,19 +61,10 @@
             </section>
 
             <section class="section secondary-content">
-                <div class="timer-panel secondary-timer">
-                    <div class="panel-info">
-                        <p class="eyebrow">Ожидаемая дата</p>
-                        <h3>До 2 июля 2026 осталось:</h3>
-                        <div id="secondary-timer" class="timer-display secondary">Загрузка...</div>
-                        <p class="panel-note">«Я говорил примерно» — PolimerS</p>
-                    </div>
-
-                    <div class="panel-visual">
-                        <div class="photo-card">
-                            <img src="../resources/plat-photo.png" alt="PolimerS Photo">
-                            <span class="photo-date">Фото от 7 января 2026</span>
-                        </div>
+                <div class="panel-visual">
+                    <div class="photo-card">
+                        <img src="../resources/plat-photo.png" alt="PolimerS Photo">
+                        <span class="photo-date">Фото от 7 января 2026</span>
                     </div>
                 </div>
             </section>
@@ -86,7 +77,7 @@
                 Сайт сделали
                 <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a>
                 и
-                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">Vobi</a>
+                <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">meforr</a>
                 с любовью.
             </p>
             <p>[2025-2026] © Source available project licensed under Business Source License 1.1 — Modified Edition. All
@@ -98,8 +89,6 @@
     <script src="info_script.js"></script>
     <script>
         let startDate = null;
-        const secondaryEndDate = new Date('2026-07-02T14:00:00Z');
-        let secondaryInterval = null;
 
         async function fetchLastVideoDate() {
             try {
@@ -151,14 +140,6 @@
             if (startDate) {
                 const diff = Math.max(0, now - startDate);
                 document.getElementById('timer').innerHTML = formatTime(diff);
-            }
-
-            // Secondary timer
-            const secDiff = secondaryEndDate - now;
-            if (secDiff <= 0) {
-                document.getElementById('secondary-timer').innerHTML = "Время вышло!";
-            } else {
-                document.getElementById('secondary-timer').innerHTML = formatTime(secDiff);
             }
         }
 
