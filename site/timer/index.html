@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Таймер PolimerS - oncdev</title>
+    <meta name="description" content="Сколько времени прошло с выхода последнего видео PolimerS.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../resources/shared.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -52,11 +54,48 @@
                 <div class="section-heading">
                     <p class="eyebrow">Видео PolimerS</p>
                     <h1>Таймер ожидания</h1>
+                    <p class="hero-copy">Считаем каждую секунду до нового выпуска.</p>
                 </div>
 
                 <div class="timer-container main-timer">
-                    <p class="timer-label">С момента выхода последнего видео прошло:</p>
-                    <div id="timer" class="timer-display">Загрузка...</div>
+                    <div class="timer-topline">
+                        <span id="sourceBadge" class="source-badge" data-state="loading">
+                            <span class="source-dot" aria-hidden="true"></span>
+                            <span id="sourceStatus">Проверяем дату выпуска</span>
+                        </span>
+                        <span class="timer-kicker">Время без нового видео</span>
+                    </div>
+
+                    <p class="timer-label">С момента выхода последнего видео прошло</p>
+                    <div id="timer" class="timer-display" role="timer" aria-label="Таймер с момента последнего видео">
+                        <div class="time-unit">
+                            <span id="days" class="time-value">—</span>
+                            <span id="daysLabel" class="time-label">дней</span>
+                        </div>
+                        <span class="time-separator" aria-hidden="true">:</span>
+                        <div class="time-unit">
+                            <span id="hours" class="time-value">—</span>
+                            <span id="hoursLabel" class="time-label">часов</span>
+                        </div>
+                        <span class="time-separator" aria-hidden="true">:</span>
+                        <div class="time-unit">
+                            <span id="minutes" class="time-value">—</span>
+                            <span id="minutesLabel" class="time-label">минут</span>
+                        </div>
+                        <span class="time-separator" aria-hidden="true">:</span>
+                        <div class="time-unit">
+                            <span id="seconds" class="time-value">—</span>
+                            <span id="secondsLabel" class="time-label">секунд</span>
+                        </div>
+                    </div>
+
+                    <div class="timer-footer">
+                        <p>Последний выпуск: <time id="videoDate">загрузка…</time></p>
+                        <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">
+                            Канал PolimerS <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="timer-scanline" aria-hidden="true"></div>
                 </div>
             </section>
 
@@ -64,7 +103,10 @@
                 <div class="panel-visual">
                     <div class="photo-card">
                         <img src="../resources/plat-photo.png" alt="PolimerS Photo">
-                        <span class="photo-date">Фото от 7 января 2026</span>
+                        <div class="photo-overlay">
+                            <span class="photo-index">ARCHIVE / 001</span>
+                            <span class="photo-date">7 января 2026</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -88,23 +130,54 @@
     <script src="../resources/cmd-palette.js"></script>
     <script src="info_script.js"></script>
     <script>
-        let startDate = null;
+        const config = window.TIMER_CONFIG || {};
+        const fallbackPublishedAt = config.fallbackPublishedAt || '2025-12-23T12:00:00Z';
+        const units = {
+            days: document.getElementById('days'),
+            hours: document.getElementById('hours'),
+            minutes: document.getElementById('minutes'),
+            seconds: document.getElementById('seconds')
+        };
+        let startDate = new Date(fallbackPublishedAt);
+        let tickTimeout = null;
 
         async function fetchLastVideoDate() {
+            if (!config.apiKey || !config.channelId) {
+                setSourceState('fallback', 'Дата из архива');
+                return;
+            }
+
             try {
-                const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`;
+                const params = new URLSearchParams({
+                    key: config.apiKey,
+                    channelId: config.channelId,
+                    part: 'snippet,id',
+                    order: 'date',
+                    maxResults: '1',
+                    type: 'video'
+                });
+                const apiUrl = `https://www.googleapis.com/youtube/v3/search?${params}`;
                 const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`YouTube API: ${response.status}`);
                 const data = await response.json();
 
                 const video = data.items && data.items[0];
                 if (video && video.snippet && video.snippet.publishedAt) {
                     startDate = new Date(video.snippet.publishedAt);
+                    if (Number.isNaN(startDate.getTime())) throw new Error('Invalid publication date');
+                    setSourceState('live', 'Синхронизировано с YouTube');
                 } else {
-                    throw new Error('Fallback');
+                    throw new Error('Video publication date is missing');
                 }
             } catch (e) {
-                startDate = new Date('2025-12-23T12:00:00Z');
+                startDate = new Date(fallbackPublishedAt);
+                setSourceState('fallback', 'Дата из архива');
             }
+        }
+
+        function setSourceState(state, text) {
+            document.getElementById('sourceBadge').dataset.state = state;
+            document.getElementById('sourceStatus').textContent = text;
         }
 
         function plural(n, one, two, five) {
@@ -116,7 +189,7 @@
             return five;
         }
 
-        function formatTime(diff) {
+        function getTimeParts(diff) {
             let seconds = Math.floor(diff / 1000);
             const days = Math.floor(seconds / (24 * 3600));
             seconds %= 24 * 3600;
@@ -125,28 +198,56 @@
             const minutes = Math.floor(seconds / 60);
             seconds %= 60;
 
-            const d = plural(days, 'день', 'дня', 'дней');
-            const h = plural(hours, 'час', 'часа', 'часов');
-            const m = plural(minutes, 'минута', 'минуты', 'минут');
-            const s = plural(seconds, 'секунда', 'секунды', 'секунд');
-
-            return `<span>${days}</span> ${d} <span>${hours}</span> ${h} <span>${minutes}</span> ${m} <span>${seconds}</span> ${s}`;
+            return { days, hours, minutes, seconds };
         }
 
-        function updateTimers() {
-            const now = new Date();
+        function updateTimer() {
+            const diff = Math.max(0, Date.now() - startDate.getTime());
+            const values = getTimeParts(diff);
 
-            // Main timer
-            if (startDate) {
-                const diff = Math.max(0, now - startDate);
-                document.getElementById('timer').innerHTML = formatTime(diff);
+            Object.entries(values).forEach(([name, value]) => {
+                units[name].textContent = name === 'days' ? value : String(value).padStart(2, '0');
+            });
+
+            document.getElementById('daysLabel').textContent = plural(values.days, 'день', 'дня', 'дней');
+            document.getElementById('hoursLabel').textContent = plural(values.hours, 'час', 'часа', 'часов');
+            document.getElementById('minutesLabel').textContent = plural(values.minutes, 'минута', 'минуты', 'минут');
+            document.getElementById('secondsLabel').textContent = plural(values.seconds, 'секунда', 'секунды', 'секунд');
+            document.getElementById('timer').setAttribute(
+                'aria-label',
+                `${values.days} ${document.getElementById('daysLabel').textContent}, ${values.hours} ${document.getElementById('hoursLabel').textContent}, ${values.minutes} ${document.getElementById('minutesLabel').textContent}, ${values.seconds} ${document.getElementById('secondsLabel').textContent}`
+            );
+        }
+
+        function scheduleTick() {
+            window.clearTimeout(tickTimeout);
+            updateTimer();
+            tickTimeout = window.setTimeout(scheduleTick, 1010 - (Date.now() % 1000));
+        }
+
+        function renderPublicationDate() {
+            document.getElementById('videoDate').dateTime = startDate.toISOString();
+            document.getElementById('videoDate').textContent = new Intl.DateTimeFormat('ru-RU', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            }).format(startDate);
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                window.clearTimeout(tickTimeout);
+            } else {
+                scheduleTick();
             }
-        }
+        });
 
         async function init() {
             await fetchLastVideoDate();
-            updateTimers();
-            setInterval(updateTimers, 1000);
+            renderPublicationDate();
+            scheduleTick();
         }
 
         init();
