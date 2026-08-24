@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VPN - oncdev</title>
     <link rel="stylesheet" href="../resources/shared.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2.2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -210,9 +210,9 @@
                                 ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)"
                                 ondrop="handleDrop(event)">
                                 <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
-                                <span class="upload-text">Нажмите или перетащите скриншот/PDF сюда</span>
-                                <span class="upload-subtext">PNG, JPG, JPEG, PDF до 10 МБ</span>
-                                <input type="file" id="receipt-file" accept="image/*,application/pdf" class="hidden"
+                                <span class="upload-text">Нажмите, перетащите или вставьте (Ctrl+V) скриншот/PDF</span>
+                                <span class="upload-subtext">PNG, JPG, JPEG, WEBP, PDF до 15 МБ</span>
+                                <input type="file" id="receipt-file" accept="image/*,.pdf,application/pdf" class="hidden"
                                     onchange="handleFileSelect(event)" />
                             </div>
                             <div id="file-preview-container" class="file-preview hidden">
@@ -371,7 +371,7 @@
                                 администраторов.<br>
                                 Проверка обычно занимает от 5 до 30 минут. Как только оплата подтвердится, здесь
                                 появится ссылка на ваш VPN-ключ. Если проверка занимает большее количество времени,
-                                напишите нам для разъяснения:@polisours, @vobimngr, contact@oncdev.ru
+                                напишите нам для разъяснения:@polisours, @vobimngr, contact@oncdev.net
                             </p>
                         </div>
 
@@ -386,7 +386,7 @@
                                 <span id="decline-reason-wrapper" class="hidden">Причина: <b
                                         id="declined-reason">Неверная сумма</b><br></span>
                                 Пожалуйста, обратитесь в поддержку за разъяснениями: <b>@polisours, @vobimngr,
-                                    support@oncdev.ru</b>
+                                    support@oncdev.net</b>
                             </p>
                         </div>
                     </div>
@@ -418,7 +418,7 @@
 
     <!-- Custom Scripts -->
     <script src="../resources/cmd-palette.js"></script>
-    <script src="app.js"></script>
+    <script src="app.js?v=2.2"></script>
 </body>
 
 </html>

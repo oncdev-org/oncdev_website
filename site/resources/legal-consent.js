@@ -10,9 +10,9 @@
         description: isRu ? 
             "Для использования ресурсов и сервисов oncdev вам необходимо ознакомиться и согласиться со следующими условиями:" :
             "To use the resources and services of oncdev, you must read and agree to the following terms:",
-        tos: isRu ? "Я принимаю <a href='https://oncdev.ru/wiki/tos/' target='_blank'>Условия использования</a>" : "I accept the <a href='https://oncdev.ru/wiki/tos/' target='_blank'>Terms of Service</a>",
-        refund: isRu ? "Я принимаю <a href='https://oncdev.ru/wiki/refund/' target='_blank'>Публичную оферту и правила возврата</a>" : "I accept the <a href='https://oncdev.ru/wiki/refund/' target='_blank'>Refund Policy</a>",
-        privacy: isRu ? "Я даю согласие на обработку персональных данных в соответствии с <a href='https://oncdev.ru/wiki/privacy/' target='_blank'>Политикой конфиденциальности</a>" : "I agree to the processing of personal data in accordance with the <a href='https://oncdev.ru/wiki/privacy/' target='_blank'>Privacy Policy</a>",
+        tos: isRu ? "Я принимаю <a href='https://oncdev.net/wiki/tos/' target='_blank'>Условия использования</a>" : "I accept the <a href='https://oncdev.net/wiki/tos/' target='_blank'>Terms of Service</a>",
+        refund: isRu ? "Я принимаю <a href='https://oncdev.net/wiki/refund/' target='_blank'>Публичную оферту и правила возврата</a>" : "I accept the <a href='https://oncdev.net/wiki/refund/' target='_blank'>Refund Policy</a>",
+        privacy: isRu ? "Я даю согласие на обработку персональных данных в соответствии с <a href='https://oncdev.net/wiki/privacy/' target='_blank'>Политикой конфиденциальности</a>" : "I agree to the processing of personal data in accordance with the <a href='https://oncdev.net/wiki/privacy/' target='_blank'>Privacy Policy</a>",
         confirm: isRu ? "Подтвердить и продолжить" : "Confirm and Continue"
     };
 

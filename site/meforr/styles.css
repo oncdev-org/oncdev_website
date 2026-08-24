@@ -1,14 +1,12 @@
 /* 
   meforr portfolio styles
-  Dual Color Schemes:
-  1. Dark Ember: bg #0D1117, accent #FF6B35, warm #E8621A / #1C0A00
-  2. Espresso Champagne: bg #2C1810, accent #F7E7CE
+  Theme: Dark Ember (bg #0D1117, accent #FF6B35, warm #E8621A / #1C0A00)
 */
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800;900&display=swap');
 
 :root {
-  /* Default: Dark Ember Theme */
+  /* Dark Ember Theme */
   --bg-primary: #0D1117;
   --bg-secondary: #161B22;
   --bg-card: rgba(22, 27, 34, 0.75);
@@ -40,30 +38,6 @@
   --shadow-glow: 0 10px 30px -10px rgba(255, 107, 53, 0.3);
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-medium: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Theme 2: Espresso Champagne */
-[data-theme="espresso-champagne"] {
-  --bg-primary: #2C1810;
-  --bg-secondary: #3B2219;
-  --bg-card: rgba(59, 34, 25, 0.85);
-  --bg-card-hover: rgba(74, 44, 33, 0.95);
-  --bg-pill: rgba(247, 231, 206, 0.12);
-  --bg-pill-hover: rgba(247, 231, 206, 0.22);
-  
-  --accent: #F7E7CE;
-  --accent-alt: #E6D2B5;
-  --accent-dark: #1F100A;
-  --accent-glow: rgba(247, 231, 206, 0.25);
-  
-  --text-primary: #FAF3E0;
-  --text-secondary: #C8B8A6;
-  --text-muted: #9E8E7C;
-  --border-color: rgba(247, 231, 206, 0.15);
-  --border-hover: rgba(247, 231, 206, 0.6);
-  
-  --spine-color: rgba(247, 231, 206, 0.35);
-  --shadow-glow: 0 10px 30px -10px rgba(247, 231, 206, 0.25);
 }
 
 /* Global resets */
@@ -155,10 +129,6 @@ button {
   transition: background var(--transition-medium), border-color var(--transition-medium);
 }
 
-[data-theme="espresso-champagne"] .header {
-  background: rgba(44, 24, 16, 0.75);
-}
-
 .header-container {
   max-width: 900px;
   margin: 0 auto;
@@ -171,7 +141,7 @@ button {
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 1.25rem;
@@ -186,15 +156,6 @@ button {
 .brand-logo .logo-text {
   color: var(--text-primary);
   text-transform: lowercase; /* meforr strictly lowercase */
-}
-
-.brand-logo .logo-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 10px var(--accent);
-  display: inline-block;
 }
 
 .brand-logo .logo-aka {
@@ -414,32 +375,6 @@ button {
   font-style: italic;
 }
 
-.hero-roles-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 28px;
-}
-
-.role-pill {
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-  transition: all var(--transition-fast);
-}
-
-.role-pill:hover {
-  color: var(--text-primary);
-  border-color: var(--border-hover);
-  background: var(--bg-pill);
-  transform: translateY(-2px);
-}
-
 .hero-bio {
   max-width: 680px;
   font-size: 1.05rem;
@@ -540,10 +475,6 @@ button {
   background: linear-gradient(135deg, var(--bg-card) 0%, rgba(255, 107, 53, 0.05) 100%);
 }
 
-[data-theme="espresso-champagne"] .project-card-featured {
-  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(247, 231, 206, 0.05) 100%);
-}
-
 .card-top-row {
   display: flex;
   align-items: center;
@@ -562,7 +493,6 @@ button {
 .project-status {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   padding: 3px 10px;
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
@@ -617,74 +547,181 @@ button {
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.6;
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.tech-tag {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.04);
-  padding: 2px 8px;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* Skills Grid */
-.skills-vertical-grid {
+/* Roles Cards Grid */
+.roles-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
+  margin-bottom: 20px;
 }
 
-.skill-category-card {
+.role-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 20px;
+  padding: 22px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
 }
 
-.skill-category-card:hover {
+.role-card:hover {
   border-color: var(--border-hover);
+  background: var(--bg-card-hover);
   transform: translateY(-2px);
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.4);
 }
 
-.skill-category-title {
+.role-card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.role-card-index {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.role-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.role-card-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* Core Tech Stack Section */
+.tech-stack-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color var(--transition-fast);
+}
+
+.tech-stack-container:hover {
+  border-color: var(--border-hover);
+}
+
+.tech-stack-header {
+  margin-bottom: 14px;
+}
+
+.tech-stack-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--accent);
   text-transform: uppercase;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  letter-spacing: 0.06em;
 }
 
-.skill-list {
+.tech-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.stack-badge {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  flex-direction: column;
+  padding: 12px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.stack-badge:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-pill);
+  transform: translateY(-2px);
+}
+
+.stack-badge-title {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.stack-badge-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
 }
 
 /* Contacts Layout */
+.contacts-layout-container {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+}
+
 .contacts-stack {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 14px;
 }
 
+/* Russian Localization Only Element */
+.ru-only-element {
+  display: none !important;
+}
+
+[lang="ru"] .ru-only-element {
+  display: flex !important;
+}
+
+.contacts-meme-card {
+  width: 170px;
+  min-width: 150px;
+  max-width: 190px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  overflow: hidden;
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.5);
+  transition: all var(--transition-fast);
+  align-items: center;
+  justify-content: center;
+}
+
+.contacts-meme-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: 0 12px 30px -8px var(--accent-glow);
+}
+
+.contacts-meme-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .contact-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 16px 20px;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -720,17 +757,6 @@ button {
 
 .contact-card:hover .contact-handle {
   color: var(--accent);
-}
-
-.contact-icon-arrow {
-  font-size: 1.2rem;
-  color: var(--text-muted);
-  transition: transform var(--transition-fast), color var(--transition-fast);
-}
-
-.contact-card:hover .contact-icon-arrow {
-  color: var(--accent);
-  transform: translate(3px, -3px);
 }
 
 /* Copy Toast Notification */
@@ -800,4 +826,26 @@ button {
 
 .vertical-section {
   animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (max-width: 768px) {
+  .contacts-layout-container {
+    flex-direction: column;
+  }
+
+  .contacts-meme-card {
+    width: 100%;
+    max-width: 220px;
+    margin: 10px auto 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .roles-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tech-stack-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

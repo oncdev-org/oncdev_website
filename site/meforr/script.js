@@ -2,9 +2,8 @@
  * meforr Portfolio Script
  * Handles:
  * 1. EN / RU Language Switcher
- * 2. Theme Switcher (Dark Ember ↔ Espresso Champagne)
- * 3. Copy-to-clipboard for Discord / Email with Toast
- * 4. Scroll Spine Animation
+ * 2. Copy-to-clipboard for Discord / Email with Toast
+ * 3. Scroll Spine Animation
  */
 
 // I18n Translations Dictionary
@@ -12,13 +11,6 @@ const translations = {
   en: {
     akaTag: "AKA vobi • Aleksandr",
     tagline: "Being happy — making happiness",
-    
-    // Roles
-    roleFullstack: "Full-stack Dev",
-    roleGamedev: "GameDev",
-    roleProductOwner: "Product Owner",
-    roleTester: "QA / Tester",
-    roleMaintainer: "Maintainer",
 
     // Bio
     heroBio: "Building independent web services, game prototypes, and maintaining core projects.",
@@ -57,12 +49,16 @@ const translations = {
     p5Desc: "A beginner-friendly guide for new PC users to easily master essential computer features and capabilities.",
     p5Status: "In Progress",
 
-    // Skills
-    secSkillsLabel: "04 / SKILLS & TECH",
-    secSkillsTitle: "What I work with daily.",
-    skillCore: "Development",
-    skillGames: "Game Engines",
-    skillOps: "Management & QA",
+    // Section 04: Focus & Stack
+    secSkillsLabel: "04 / FOCUS & STACK",
+    secSkillsTitle: "What I do & what I build with.",
+    roleDevTitle: "Developer",
+    roleDevDesc: "Full-stack web services, game logic, system architecture, and scripting.",
+    rolePoTitle: "Product Ownership",
+    rolePoDesc: "Product vision, ecosystem planning, feature prioritization, and project lifecycle.",
+    roleQaTitle: "QA",
+    roleQaDesc: "Comprehensive testing, stability analysis, edge case verification, and quality assurance.",
+    stackLabel: "Tech Stack",
 
     // Contacts
     secContactLabel: "05 / CONTACTS",
@@ -76,13 +72,6 @@ const translations = {
   ru: {
     akaTag: "AKA vobi • Александр",
     tagline: "Цена времени — жизнь",
-    
-    // Roles
-    roleFullstack: "Full-stack Разработчик",
-    roleGamedev: "GameDev",
-    roleProductOwner: "Product Owner",
-    roleTester: "Тестировщик / QA",
-    roleMaintainer: "Мейнтейнер",
 
     // Bio
     heroBio: "Создаю веб-сервисы, разрабатываю игры и поддерживаю экосистему oncdev.",
@@ -121,16 +110,20 @@ const translations = {
     p5Desc: "Понятное руководство для тех, кто недавно начал осваивать ПК и хочет быстро разобраться в его функциях.",
     p5Status: "В разработке",
 
-    // Skills
-    secSkillsLabel: "04 / НАВЫКИ И СТЕК",
-    secSkillsTitle: "Технологии и инструменты.",
-    skillCore: "Разработка",
-    skillGames: "Игровые движки",
-    skillOps: "Менеджмент и QA",
+    // Section 04: Focus & Stack
+    secSkillsLabel: "04 / НАПРАВЛЕНИЯ И СТЕК",
+    secSkillsTitle: "Чем занимаюсь и на чём пишу.",
+    roleDevTitle: "Разработка",
+    roleDevDesc: "Веб-сервисы, архитектура, игровая логика и скрипты.",
+    rolePoTitle: "Product Ownership",
+    rolePoDesc: "Видение продукта, планирование экосистемы, приоритизация задач и жизненный цикл проектов.",
+    roleQaTitle: "QA / Тестирование",
+    roleQaDesc: "Комплексное тестирование, поиск багов, проверка пограничных сценариев и контроль стабильности.",
+    stackLabel: "Стек технологий",
 
     // Contacts
     secContactLabel: "05 / КОНТАКТЫ",
-    secContactTitle: "На связи.",
+    secContactTitle: "Связь.",
     contactSub: "Есть идея, предложение по сотрудничеству или просто хотите написать?",
     copiedToast: "Скопировано в буфер обмена!",
 
@@ -140,37 +133,13 @@ const translations = {
 };
 
 let currentLang = localStorage.getItem('meforr_lang') || 'en';
-let currentTheme = localStorage.getItem('meforr_theme') || 'dark-ember';
 
 document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
+  document.documentElement.setAttribute('data-theme', 'dark-ember');
   initLanguage();
   initCopyButtons();
   initSpineObserver();
 });
-
-/* Theme Switcher */
-function initTheme() {
-  setTheme(currentTheme);
-  const themeBtn = document.getElementById('theme-toggle-btn');
-  if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-      const nextTheme = currentTheme === 'dark-ember' ? 'espresso-champagne' : 'dark-ember';
-      setTheme(nextTheme);
-    });
-  }
-}
-
-function setTheme(theme) {
-  currentTheme = theme;
-  localStorage.setItem('meforr_theme', theme);
-  document.documentElement.setAttribute('data-theme', theme);
-  
-  const themeNameLabel = document.getElementById('theme-name-label');
-  if (themeNameLabel) {
-    themeNameLabel.textContent = theme === 'dark-ember' ? 'Ember' : 'Espresso';
-  }
-}
 
 /* Language Switcher */
 function initLanguage() {
@@ -187,6 +156,7 @@ function initLanguage() {
 function setLanguage(lang) {
   currentLang = lang;
   localStorage.setItem('meforr_lang', lang);
+  document.documentElement.setAttribute('lang', lang);
   
   const langLabel = document.getElementById('lang-label');
   if (langLabel) {

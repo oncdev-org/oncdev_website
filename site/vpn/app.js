@@ -340,47 +340,126 @@ function prepareStep3Summary() {
     }
 }
 
-// Drag & Drop / File Upload Logic
+// Drag & Drop / File Upload / Clipboard Paste Logic
 function setupDragAndDrop() {
-    // Dropzone elements handled via inline HTML event handlers for simplified setup
+    // Global Clipboard Paste Listener (Ctrl+V / Paste)
+    window.addEventListener('paste', (e) => {
+        // If user is actively typing in a text field without clipboard files, allow default text paste
+        const activeTag = document.activeElement ? document.activeElement.tagName : '';
+        const activeType = document.activeElement ? document.activeElement.type : '';
+        const isTextInput = activeTag === 'TEXTAREA' || (activeTag === 'INPUT' && activeType !== 'file' && activeType !== 'checkbox' && activeType !== 'radio');
+
+        const clipboardFiles = e.clipboardData ? e.clipboardData.files : null;
+        const clipboardItems = e.clipboardData ? e.clipboardData.items : null;
+
+        let fileToProcess = null;
+
+        if (clipboardFiles && clipboardFiles.length > 0) {
+            fileToProcess = clipboardFiles[0];
+        } else if (clipboardItems && clipboardItems.length > 0) {
+            for (let i = 0; i < clipboardItems.length; i++) {
+                const item = clipboardItems[i];
+                if (item.kind === 'file' || item.type.startsWith('image/') || item.type === 'application/pdf') {
+                    const blob = item.getAsFile();
+                    if (blob) {
+                        const ext = (blob.type && blob.type.includes('/')) ? blob.type.split('/')[1] : 'png';
+                        fileToProcess = new File([blob], `screenshot_${Date.now()}.${ext}`, {
+                            type: blob.type || 'image/png',
+                            lastModified: Date.now()
+                        });
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (fileToProcess) {
+            // If user is currently on another step, switch to step 3
+            if (currentTab === 'buy' && currentStep < 3) {
+                if (!selectedPlanId && plans.length > 0) {
+                    selectPlan(plans[0].id);
+                }
+                goToStep(3);
+            }
+            processFile(fileToProcess);
+            showToast('Скриншот успешно вставлен из буфера обмена!');
+            e.preventDefault();
+        }
+    });
+
+    const dropzone = document.getElementById('dropzone');
+    if (dropzone) {
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropzone.classList.add('dragover');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropzone.classList.remove('dragover');
+            }, false);
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            if (dt && dt.files && dt.files.length > 0) {
+                processFile(dt.files[0]);
+            }
+        }, false);
+    }
 }
 
 function triggerFileInput() {
-    document.getElementById('receipt-file').click();
+    const fileInput = document.getElementById('receipt-file');
+    if (fileInput) fileInput.click();
 }
 
 // Drag over dropzone
 function handleDragOver(e) {
     e.preventDefault();
-    document.getElementById('dropzone').classList.add('dragover');
+    const dropzone = document.getElementById('dropzone');
+    if (dropzone) dropzone.classList.add('dragover');
 }
 
 // Drag leave dropzone
 function handleDragLeave(e) {
     e.preventDefault();
-    document.getElementById('dropzone').classList.remove('dragover');
+    const dropzone = document.getElementById('dropzone');
+    if (dropzone) dropzone.classList.remove('dragover');
 }
 
 // Drop file
 function handleDrop(e) {
     e.preventDefault();
-    document.getElementById('dropzone').classList.remove('dragover');
+    const dropzone = document.getElementById('dropzone');
+    if (dropzone) dropzone.classList.remove('dragover');
     
-    if (e.dataTransfer.files.length > 0) {
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
         processFile(e.dataTransfer.files[0]);
     }
 }
 
 // File input select
 function handleFileSelect(e) {
-    if (e.target.files.length > 0) {
+    if (e.target && e.target.files && e.target.files.length > 0) {
         processFile(e.target.files[0]);
     }
 }
 
 // Compress image using HTML5 Canvas helper
 function compressImage(file, maxWidth = 1600, maxHeight = 1600, quality = 0.85) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
+        // Only attempt canvas compression on raster images
+        const fileType = (file.type || '').toLowerCase();
+        if (!fileType.startsWith('image/') || fileType === 'image/svg+xml' || fileType === 'image/gif') {
+            return resolve(file);
+        }
+
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = (event) => {
@@ -390,6 +469,10 @@ function compressImage(file, maxWidth = 1600, maxHeight = 1600, quality = 0.85) 
                 let width = img.width;
                 let height = img.height;
                 
+                if (!width || !height) {
+                    return resolve(file);
+                }
+
                 if (width > height) {
                     if (width > maxWidth) {
                         height = Math.round((height * maxWidth) / width);
@@ -410,30 +493,38 @@ function compressImage(file, maxWidth = 1600, maxHeight = 1600, quality = 0.85) 
                 ctx.drawImage(img, 0, 0, width, height);
                 
                 canvas.toBlob((blob) => {
-                    if (blob) {
-                        const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+                    if (blob && blob.size < file.size) {
+                        const originalName = file.name || `screenshot_${Date.now()}.png`;
+                        const newName = originalName.replace(/\.[^/.]+$/, "") + ".jpg";
+                        const compressedFile = new File([blob], newName, {
                             type: 'image/jpeg',
                             lastModified: Date.now()
                         });
                         resolve(compressedFile);
                     } else {
-                        reject(new Error('Canvas toBlob returned null'));
+                        resolve(file);
                     }
                 }, 'image/jpeg', quality);
             };
-            img.onerror = (err) => reject(err);
+            img.onerror = () => resolve(file);
         };
-        reader.onerror = (err) => reject(err);
+        reader.onerror = () => resolve(file);
     });
 }
 
-// Validate and show preview of image
+// Validate and show preview of image / file
 function processFile(file) {
-    const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endswith('.pdf');
-    const isImage = file.type.startsWith('image/');
+    if (!file) return;
+
+    const fileName = file.name || `screenshot_${Date.now()}.png`;
+    const fileExt = fileName.includes('.') ? fileName.split('.').pop().toLowerCase() : '';
+    const fileType = (file.type || '').toLowerCase();
+    
+    const isPdf = fileType === 'application/pdf' || fileExt === 'pdf';
+    const isImage = fileType.startsWith('image/') || ['png', 'jpg', 'jpeg', 'webp', 'gif', 'bmp', 'svg', 'heic', 'heif', 'avif'].includes(fileExt);
     
     if (!isPdf && !isImage) {
-        showToast('Пожалуйста, выберите файл изображения или PDF (скриншот/чек)', 'error');
+        showToast('Пожалуйста, выберите файл изображения (PNG, JPG, WEBP и др.) или PDF', 'error');
         return;
     }
     
@@ -454,18 +545,24 @@ function processFile(file) {
         }
         
         // Update preview
-        document.getElementById('preview-filename').textContent = file.name;
-        document.getElementById('preview-filesize').textContent = formatBytes(file.size);
+        const fnEl = document.getElementById('preview-filename');
+        const fsEl = document.getElementById('preview-filesize');
+        if (fnEl) fnEl.textContent = fileName;
+        if (fsEl) fsEl.textContent = formatBytes(file.size);
         
-        document.getElementById('dropzone').classList.add('hidden');
-        document.getElementById('file-preview-container').classList.remove('hidden');
+        const dropzone = document.getElementById('dropzone');
+        const previewContainer = document.getElementById('file-preview-container');
+        if (dropzone) dropzone.classList.add('hidden');
+        if (previewContainer) previewContainer.classList.remove('hidden');
         
         validateStep3();
     } else {
         const dropzone = document.getElementById('dropzone');
-        const uploadText = dropzone.querySelector('.upload-text');
-        const originalText = uploadText.textContent;
-        uploadText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Сжатие изображения...';
+        const uploadText = dropzone ? dropzone.querySelector('.upload-text') : null;
+        const originalText = uploadText ? uploadText.textContent : 'Нажмите или перетащите скриншот/PDF сюда';
+        if (uploadText) {
+            uploadText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Обработка...';
+        }
         
         compressImage(file).then(compressedFile => {
             selectedFile = compressedFile;
@@ -473,36 +570,42 @@ function processFile(file) {
             const fileIcon = document.querySelector('.file-preview .file-icon');
             if (fileIcon) {
                 fileIcon.className = 'fa-regular fa-image file-icon';
-                fileIcon.style.color = '';
+                fileIcon.style.color = '#2dd4bf';
             }
             
             // Update preview
-            document.getElementById('preview-filename').textContent = compressedFile.name;
-            document.getElementById('preview-filesize').textContent = formatBytes(compressedFile.size) + ' (сжато)';
+            const fnEl = document.getElementById('preview-filename');
+            const fsEl = document.getElementById('preview-filesize');
+            if (fnEl) fnEl.textContent = compressedFile.name || fileName;
+            if (fsEl) fsEl.textContent = formatBytes(compressedFile.size) + (compressedFile.size < file.size ? ' (оптимизировано)' : '');
             
-            document.getElementById('dropzone').classList.add('hidden');
-            document.getElementById('file-preview-container').classList.remove('hidden');
+            const previewContainer = document.getElementById('file-preview-container');
+            if (dropzone) dropzone.classList.add('hidden');
+            if (previewContainer) previewContainer.classList.remove('hidden');
             
-            uploadText.textContent = originalText;
+            if (uploadText) uploadText.textContent = originalText;
             validateStep3();
         }).catch(err => {
-            console.error('Compression failed, using original:', err);
+            console.warn('Compression bypassed, using original file:', err);
             selectedFile = file;
             
             const fileIcon = document.querySelector('.file-preview .file-icon');
             if (fileIcon) {
                 fileIcon.className = 'fa-regular fa-image file-icon';
-                fileIcon.style.color = '';
+                fileIcon.style.color = '#2dd4bf';
             }
             
             // Update preview
-            document.getElementById('preview-filename').textContent = file.name;
-            document.getElementById('preview-filesize').textContent = formatBytes(file.size);
+            const fnEl = document.getElementById('preview-filename');
+            const fsEl = document.getElementById('preview-filesize');
+            if (fnEl) fnEl.textContent = fileName;
+            if (fsEl) fsEl.textContent = formatBytes(file.size);
             
-            document.getElementById('dropzone').classList.add('hidden');
-            document.getElementById('file-preview-container').classList.remove('hidden');
+            const previewContainer = document.getElementById('file-preview-container');
+            if (dropzone) dropzone.classList.add('hidden');
+            if (previewContainer) previewContainer.classList.remove('hidden');
             
-            uploadText.textContent = originalText;
+            if (uploadText) uploadText.textContent = originalText;
             validateStep3();
         });
     }
@@ -511,10 +614,13 @@ function processFile(file) {
 // Remove uploaded image preview
 function removeSelectedFile() {
     selectedFile = null;
-    document.getElementById('receipt-file').value = '';
+    const fileInput = document.getElementById('receipt-file');
+    if (fileInput) fileInput.value = '';
     
-    document.getElementById('file-preview-container').classList.add('hidden');
-    document.getElementById('dropzone').classList.remove('hidden');
+    const previewContainer = document.getElementById('file-preview-container');
+    const dropzone = document.getElementById('dropzone');
+    if (previewContainer) previewContainer.classList.add('hidden');
+    if (dropzone) dropzone.classList.remove('hidden');
     
     const fileIcon = document.querySelector('.file-preview .file-icon');
     if (fileIcon) {
