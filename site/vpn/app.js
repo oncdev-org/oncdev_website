@@ -1,7 +1,7 @@
 // Конфигурация API: для тестов локально, для продакшена - домен с HTTPS на VPS
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
     ? 'http://localhost:8021' 
-    : 'https://api.oncdev.online:8021'; // Используем поддомен с HTTPS на порту 8021
+    : 'https://oncdev.duckdns.org:8021'; // Используем рабочий домен с действующим SSL-сертификатом
 
 let currentTab = 'buy';
 
