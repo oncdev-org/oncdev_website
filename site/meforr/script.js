@@ -9,123 +9,123 @@
 // I18n Translations Dictionary
 const translations = {
   en: {
-    akaTag: "AKA vobi • Aleksandr",
+    akaTag: "vobi / Aleksandr",
     tagline: "Being happy — making happiness",
 
     // Bio
-    heroBio: "Building independent web services, game prototypes, and maintaining core projects.",
-    btnProjects: "Explore Projects ↓",
-    btnContact: "Get in Touch",
+    heroBio: "I build web services, make games in Unity, and work on oncdev projects.",
+    btnProjects: "Projects ↓",
+    btnContact: "Contacts",
 
     // Section Labels & Titles
-    secAboutLabel: "01 / ABOUT",
-    secAboutTitle: "Building things that work, because it's cool.",
-    aboutP1: "I develop web applications, game systems, independent services, and tools under the oncdev ecosystem. I like getting deep into how complex systems work under the hood and assembling them into intuitive products.",
-    aboutP2: "Focusing on full-cycle development — from concept design and architectural decisions to coding, testing, and long-term maintenance.",
+    secAboutLabel: "ABOUT",
+    secAboutTitle: "Making things that work.",
+    aboutP1: "I build websites, web apps, game mechanics, and internal services at oncdev. I like figuring out how complex things work and turning them into straightforward projects.",
+    aboutP2: "I take projects from initial idea and code through testing, release, and ongoing support.",
 
-    secProjectsLabel: "02 / FEATURED PROJECTS",
-    secProjectsTitle: "Core products & active development.",
-    secLabsLabel: "03 / OTHER LABS",
-    secLabsTitle: "Experiments, apps & guides.",
+    secProjectsLabel: "PROJECTS",
+    secProjectsTitle: "Main projects.",
+    secLabsLabel: "OTHER",
+    secLabsTitle: "Other work and guides.",
 
     // Project Cards
     p1Name: "OncDev VPN",
-    p1Desc: "Fast, minimal, hassle-free personal VPN service built for stability.",
+    p1Desc: "Fast, stable personal VPN without unnecessary setup.",
     p1Status: "Online",
 
     p2Name: "oncdev",
-    p2Desc: "Main platform & digital ecosystem for independent projects and development.",
+    p2Desc: "Main website for our team's services and projects.",
     p2Status: "Online",
 
     p3Name: "SpaceCargo",
-    p3Desc: "Details are classified. Something is cooking.",
+    p3Desc: "A space game currently in closed development.",
     p3Status: "In Progress",
 
     p4Name: "LMes",
-    p4Desc: "Custom messenger project built with privacy and simplicity in mind.",
+    p4Desc: "A lightweight custom web messenger without the bloat.",
     p4Status: "Online",
 
     p5Name: "pc guide",
-    p5Desc: "A beginner-friendly guide for new PC users to easily master essential computer features and capabilities.",
+    p5Desc: "A straightforward PC guide for beginners covering the essentials.",
     p5Status: "In Progress",
 
     // Section 04: Focus & Stack
-    secSkillsLabel: "04 / FOCUS & STACK",
-    secSkillsTitle: "What I do & what I build with.",
-    roleDevTitle: "Developer",
-    roleDevDesc: "Full-stack web services, game logic, system architecture, and scripting.",
-    rolePoTitle: "Product Ownership",
-    rolePoDesc: "Product vision, ecosystem planning, feature prioritization, and project lifecycle.",
-    roleQaTitle: "QA",
-    roleQaDesc: "Comprehensive testing, stability analysis, edge case verification, and quality assurance.",
-    stackLabel: "Tech Stack",
+    secSkillsLabel: "ROLES & STACK",
+    secSkillsTitle: "What I do and what I use.",
+    roleDevTitle: "Development",
+    roleDevDesc: "Web apps, backend services, Unity game logic, and scripting.",
+    rolePoTitle: "Product",
+    rolePoDesc: "Planning project structure, priorities, and how things work for users.",
+    roleQaTitle: "QA & Testing",
+    roleQaDesc: "Testing builds and services before release, hunting down bugs and edge cases.",
+    stackLabel: "Tools & Languages",
 
     // Contacts
-    secContactLabel: "05 / CONTACTS",
-    secContactTitle: "Let's connect.",
-    contactSub: "Have an idea, collaboration proposal, or just want to chat?",
-    copiedToast: "Copied to clipboard!",
+    secContactLabel: "CONTACTS",
+    secContactTitle: "Get in touch.",
+    contactSub: "For project ideas, questions, or just to say hi:",
+    copiedToast: "Copied to clipboard",
 
     // Footer
     backToTop: "Back to top ↑"
   },
   ru: {
-    akaTag: "AKA vobi • Александр",
+    akaTag: "vobi / Александр",
     tagline: "Цена времени — жизнь",
 
     // Bio
-    heroBio: "Создаю веб-сервисы, разрабатываю игры и поддерживаю экосистему oncdev.",
-    btnProjects: "Смотреть проекты ↓",
-    btnContact: "Написать мне",
+    heroBio: "Пишу веб-сервисы, делаю игры на Unity и занимаюсь проектами в oncdev.",
+    btnProjects: "Проекты ↓",
+    btnContact: "Контакты",
 
     // Section Labels & Titles
-    secAboutLabel: "01 / ОБО МНЕ",
-    secAboutTitle: "Создаю то, что работает, так как это круто.",
-    aboutP1: "Разрабатываю веб-сервисы, игры, инструменты и решения в рамках проекта oncdev. Мне нравится разбираться, как устроены сложные системы изнутри, и превращать их в готовые продукты.",
-    aboutP2: "Занимаюсь полным циклом: от идеи и проектирования архитектуры до написания кода, тестирования и поддержки.",
+    secAboutLabel: "ОБО МНЕ",
+    secAboutTitle: "Делаю вещи, которые работают.",
+    aboutP1: "Разрабатываю сайты, веб-приложения, игровые механики и внутренние сервисы в oncdev. Люблю разбираться, как устроены сложные штуки, и собирать их в простые и понятные проекты.",
+    aboutP2: "Веду задачи от задумки и кода до тестов, запуска и дальнейшей поддержки.",
 
-    secProjectsLabel: "02 / ГЛАВНЫЕ ПРОЕКТЫ",
-    secProjectsTitle: "Основная разработка и релизы.",
-    secLabsLabel: "03 / ДРУГИЕ ПРОЕКТЫ",
-    secLabsTitle: "Эксперименты, мессенджеры и гайды.",
+    secProjectsLabel: "ПРОЕКТЫ",
+    secProjectsTitle: "Основные проекты.",
+    secLabsLabel: "ЕЩЁ",
+    secLabsTitle: "Другие разработки и гайды.",
 
     // Project Cards
     p1Name: "OncDev VPN",
-    p1Desc: "Быстрый, стабильный и простой VPN-сервис без лишних трудностей.",
-    p1Status: "Online",
+    p1Desc: "Быстрый и стабильный личный VPN без лишних настроек.",
+    p1Status: "Работает",
 
     p2Name: "oncdev",
-    p2Desc: "Главный сайт и экосистема независимых IT-проектов и разработки.",
-    p2Status: "Online",
+    p2Desc: "Основной сайт нашего объединения со всеми сервисами и проектами.",
+    p2Status: "Работает",
 
     p3Name: "SpaceCargo",
-    p3Desc: "Подробности засекречены. Что-то готовится.",
-    p3Status: "В разработке",
+    p3Desc: "Космическая игра. Пока в закрытой разработке.",
+    p3Status: "В работе",
 
     p4Name: "LMes",
-    p4Desc: "Кастомный мессенджер, создаваемый с фокусом на удобство и лаконичность.",
-    p4Status: "Online",
+    p4Desc: "Собственный лёгкий веб-мессенджер без лишнего перегруза.",
+    p4Status: "Работает",
 
     p5Name: "pc guide",
-    p5Desc: "Понятное руководство для тех, кто недавно начал осваивать ПК и хочет быстро разобраться в его функциях.",
-    p5Status: "В разработке",
+    p5Desc: "Гайд по ПК для новичков — просто и по делу о том, как всё устроено.",
+    p5Status: "В работе",
 
     // Section 04: Focus & Stack
-    secSkillsLabel: "04 / НАПРАВЛЕНИЯ И СТЕК",
+    secSkillsLabel: "СТЕК И РОЛИ",
     secSkillsTitle: "Чем занимаюсь и на чём пишу.",
     roleDevTitle: "Разработка",
-    roleDevDesc: "Веб-сервисы, архитектура, игровая логика и скрипты.",
-    rolePoTitle: "Product Ownership",
-    rolePoDesc: "Видение продукта, планирование экосистемы, приоритизация задач и жизненный цикл проектов.",
-    roleQaTitle: "QA / Тестирование",
-    roleQaDesc: "Комплексное тестирование, поиск багов, проверка пограничных сценариев и контроль стабильности.",
-    stackLabel: "Стек технологий",
+    roleDevDesc: "Веб-приложения, бэкенд, логика для игр на Unity и автоматизация.",
+    rolePoTitle: "Продукт",
+    rolePoDesc: "Продумываю структуру проектов, задачи и то, как всё должно работать для людей.",
+    roleQaTitle: "Тестирование",
+    roleQaDesc: "Проверяю сервисы и билды перед релизом, ищу баги и узкие места.",
+    stackLabel: "Инструменты",
 
     // Contacts
-    secContactLabel: "05 / КОНТАКТЫ",
+    secContactLabel: "КОНТАКТЫ",
     secContactTitle: "Связь.",
-    contactSub: "Есть идея, предложение по сотрудничеству или просто хотите написать?",
-    copiedToast: "Скопировано в буфер обмена!",
+    contactSub: "По делу, с идеей или просто поздороваться:",
+    copiedToast: "Скопировано в буфер обмена",
 
     // Footer
     backToTop: "Наверх ↑"
@@ -135,10 +135,10 @@ const translations = {
 let currentLang = localStorage.getItem('meforr_lang') || 'en';
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.documentElement.setAttribute('data-theme', 'dark-ember');
   initLanguage();
   initCopyButtons();
-  initSpineObserver();
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
 
 /* Language Switcher */
@@ -198,24 +198,4 @@ function showToast(message) {
   setTimeout(() => {
     toast.classList.remove('visible');
   }, 2500);
-}
-
-/* Scroll Spine Node Observer */
-function initSpineObserver() {
-  const sections = document.querySelectorAll('.vertical-section');
-  const observerOptions = {
-    root: null,
-    rootMargin: '-20% 0px -40% 0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active-section');
-      }
-    });
-  }, observerOptions);
-
-  sections.forEach(sec => observer.observe(sec));
 }

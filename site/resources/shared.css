@@ -123,6 +123,22 @@ img {
     object-fit: cover;
 }
 
+.brand-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 2px 7px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.bg-blobs,
+.status-pill {
+    display: none;
+}
+
 .main-nav {
     justify-self: center;
     display: flex;
@@ -231,18 +247,12 @@ kbd {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-}
-
-.eyebrow::before {
-    content: "✦";
-    font-size: 0.7rem;
-    color: var(--text-muted);
 }
 
 /* Buttons (Linear & Raycast Pill Style) */
@@ -258,25 +268,19 @@ kbd {
     font-size: 0.92rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
     border: 1px solid transparent;
-}
-
-.button:hover {
-    transform: translateY(-1px);
 }
 
 .button.primary {
     background: #ffffff;
     color: #000000;
     border: 1px solid #ffffff;
-    box-shadow: 0 4px 25px rgba(255, 255, 255, 0.2);
 }
 
 .button.primary:hover {
     background: #e4e4e7;
     border-color: #e4e4e7;
-    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.35);
 }
 
 .button.secondary {
@@ -287,7 +291,7 @@ kbd {
 
 .button.secondary:hover {
     border-color: var(--border-strong);
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Sleek Bento & Glass Cards */
@@ -296,37 +300,14 @@ kbd {
     position: relative;
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
-    background: rgba(11, 11, 14, 0.75);
-    backdrop-filter: blur(20px);
+    background: rgba(11, 11, 14, 0.85);
+    backdrop-filter: blur(16px);
     overflow: hidden;
-    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Spotlight Border Hover Effect */
-.bento-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(
-        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(255, 255, 255, 0.06),
-        transparent 40%
-    );
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.bento-card:hover::before {
-    opacity: 1;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .bento-card:hover {
     border-color: var(--border-medium);
-    transform: translateY(-2px);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(255, 255, 255, 0.12);
 }
 
 .tech-pill {
@@ -566,30 +547,4 @@ pre {
     max-width: 100%;
     white-space: pre-wrap;
     word-break: break-word;
-}
-
-/* ==========================================================================
-   3D PARALLAX TILT & SPATIAL FLOATING ELEVATION SYSTEM (PROJECTS ONLY)
-   ========================================================================== */
-.bento-section .bento-card,
-.project-card {
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    will-change: transform;
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.bento-section .bento-card h2,
-.bento-section .bento-card h3,
-.bento-section .bento-card p,
-.bento-section .bento-card .button,
-.bento-section .bento-card .bento-header-tag,
-.bento-section .bento-card .tech-pill,
-.bento-section .bento-card .timer-preview-box,
-.bento-section .bento-card .wiki-tag-list,
-.bento-section .bento-card .bento-sublinks,
-.project-card h2,
-.project-card p {
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.45s ease, filter 0.45s ease;
-    will-change: transform;
 }

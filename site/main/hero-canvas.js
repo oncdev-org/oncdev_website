@@ -157,18 +157,6 @@
             p.draw();
         });
 
-        // Draw mouse telemetry laser indicator
-        if (mouse.x !== null && mouse.y !== null) {
-            ctx.save();
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-            ctx.lineWidth = 1;
-            ctx.setLineDash([4, 4]);
-            ctx.beginPath();
-            ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.restore();
-        }
-
         requestAnimationFrame(animate);
     }
 
@@ -194,12 +182,12 @@
         shockwaves.push(new Shockwave(clickX, clickY));
     });
 
-    // Clean Toggle Mode Function: 'Сеть' vs 'Кванты'
+    // Clean Toggle Mode Function
     window.toggleCanvasMode = function (btn) {
-        currentMode = currentMode === 'mesh' ? 'quantum' : 'mesh';
+        currentMode = currentMode === 'mesh' ? 'dots' : 'mesh';
         btn.innerHTML = currentMode === 'mesh'
             ? '<i class="fa-solid fa-circle-nodes"></i> Сеть'
-            : '<i class="fa-solid fa-atom"></i> Кванты';
+            : '<i class="fa-solid fa-braille"></i> Точки';
     };
 
     resize();

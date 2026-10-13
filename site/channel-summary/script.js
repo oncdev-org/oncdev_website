@@ -134,6 +134,7 @@ function createDynamicGradients() {
         document.getElementById("gradient2"),
         document.getElementById("gradient3")
     ];
+    if (!gradients[0]) return;
 
     const isMobile = window.innerWidth <= 768;
     if (isMobile) {

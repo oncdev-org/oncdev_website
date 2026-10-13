@@ -207,19 +207,6 @@
     font-size: 0.7rem;
 }
 
-.timer-scanline {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -25%;
-    width: 18%;
-    opacity: 0.25;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
-    transform: skewX(-18deg);
-    animation: timer-scan 8s ease-in-out infinite;
-    pointer-events: none;
-}
-
 .secondary-content {
     max-width: 1180px;
     margin: 0 auto;
@@ -270,7 +257,7 @@
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     display: flex;
     flex-direction: column;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+    transition: border-color 0.25s ease;
 }
 
 .photo-card img {
@@ -279,15 +266,13 @@
     aspect-ratio: 512 / 118;
     display: block;
     object-fit: cover;
-    opacity: 0.9;
-    filter: saturate(0.88) contrast(1.03);
-    transition: opacity 0.35s ease, filter 0.35s ease;
+    opacity: 0.92;
+    filter: saturate(0.92) contrast(1.02);
+    transition: opacity 0.25s ease, filter 0.25s ease;
 }
 
 .photo-card:hover {
-    transform: translateY(-3px);
     border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.58), 0 0 35px rgba(104, 224, 119, 0.06);
 }
 
 .photo-card:hover img {

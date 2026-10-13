@@ -50,10 +50,10 @@
                 <canvas id="hero-interactive-canvas" class="hero-canvas-bg" aria-hidden="true"></canvas>
 
                 <div class="hero-copy">
-                    <p class="eyebrow">NEXT-GEN SOFTWARE & EXPERIMENTAL SYSTEMS</p>
-                    <h1 id="hero-title" class="studio-gradient-title">oncdev studio</h1>
+                    <p class="eyebrow">ПРОЕКТЫ И СЕРВИСЫ</p>
+                    <h1 id="hero-title" class="studio-gradient-title">oncdev</h1>
                     <p class="hero-subtitle">
-                        Объединение разработчиков. Создаём высокопроизводительные веб-сервисы, VPN-инфраструктуру, интерактивные инструменты и экосистему для сообщества.
+                        Объединение разработчиков meforr и PoliSours. Делаем свои веб-сервисы, поддерживаем быстрый VPN, пишем игры и собираем инструменты для комьюнити.
                     </p>
                     <div class="hero-actions">
                         <a class="button primary" href="/vpn">
@@ -90,28 +90,27 @@
                             </div>
                         </div>
                         <div class="terminal-tabs" role="tablist">
-                            <button class="terminal-tab active" data-target="pane-status" role="tab"><i class="fa-solid fa-code"></i> status.json</button>
-                            <button class="terminal-tab" data-target="pane-stack" role="tab"><i class="fa-brands fa-js"></i> stack.ts</button>
-                            <button class="terminal-tab" data-target="pane-metrics" role="tab"><i class="fa-solid fa-chart-line"></i> metrics.ts</button>
+                            <button class="terminal-tab active" data-target="pane-status" role="tab"><i class="fa-solid fa-code"></i> info.js</button>
+                            <button class="terminal-tab" data-target="pane-stack" role="tab"><i class="fa-brands fa-js"></i> stack.js</button>
+                            <button class="terminal-tab" data-target="pane-metrics" role="tab"><i class="fa-solid fa-link"></i> links.js</button>
                         </div>
                     </div>
                     <div class="terminal-body">
                         <pre id="pane-status" class="terminal-code"><code><span class="code-keyword">const</span> <span class="code-var">oncdev</span> = {
-  <span class="code-key">"studio"</span>: <span class="code-string">"oncdev"</span>,
-  <span class="code-key">"status"</span>: <span class="code-string">"OPERATIONAL"</span>,
-  <span class="code-key">"systems"</span>: [<span class="code-string">"VPN"</span>, <span class="code-string">"Timer"</span>, <span class="code-string">"Wiki"</span>, <span class="code-string">"Summary"</span>],
-  <span class="code-key">"uptime"</span>: <span class="code-string">"99.98%"</span>,
-  <span class="code-key">"founders"</span>: [<span class="code-string">"meforr"</span>, <span class="code-string">"PoliSours"</span>]
+  <span class="code-key">"project"</span>: <span class="code-string">"oncdev"</span>,
+  <span class="code-key">"founders"</span>: [<span class="code-string">"meforr"</span>, <span class="code-string">"PoliSours"</span>],
+  <span class="code-key">"services"</span>: [<span class="code-string">"VPN"</span>, <span class="code-string">"Timer"</span>, <span class="code-string">"Wiki"</span>, <span class="code-string">"Summary"</span>],
+  <span class="code-key">"domain"</span>: <span class="code-string">"oncdev.net"</span>
 };</code></pre>
                         <pre id="pane-stack" class="terminal-code hidden"><code><span class="code-keyword">export const</span> <span class="code-var">TechStack</span> = {
-  <span class="code-key">frontend</span>: [<span class="code-string">"HTML5"</span>, <span class="code-string">"Monochrome CSS Tokens"</span>, <span class="code-string">"TypeScript"</span>],
-  <span class="code-key">infrastructure</span>: [<span class="code-string">"VLESS / Reality"</span>, <span class="code-string">"V2Ray"</span>],
-  <span class="code-key">backend</span>: [<span class="code-string">"Python"</span>, <span class="code-string">"YouTube Data API v3"</span>]
+  <span class="code-key">web</span>: [<span class="code-string">"JavaScript"</span>, <span class="code-string">"HTML / CSS"</span>, <span class="code-string">"Three.js"</span>],
+  <span class="code-key">network</span>: [<span class="code-string">"VLESS / Reality"</span>, <span class="code-string">"V2Ray"</span>],
+  <span class="code-key">backend</span>: [<span class="code-string">"Python"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"YouTube API"</span>]
 };</code></pre>
-                        <pre id="pane-metrics" class="terminal-code hidden"><code><span class="code-keyword">export const</span> <span class="code-var">Telemetry</span> = {
-  <span class="code-key">vpn_nodes</span>: <span class="code-string">"High Speed Gigabit"</span>,
-  <span class="code-key">community</span>: <span class="code-string">"PolimerS Community"</span>,
-  <span class="code-key">latest_release</span>: <span class="code-string">"2026-07-02"</span>
+                        <pre id="pane-metrics" class="terminal-code hidden"><code><span class="code-keyword">export const</span> <span class="code-var">Links</span> = {
+  <span class="code-key">discord</span>: <span class="code-string">"discord.gg/cMbSrrZvCj"</span>,
+  <span class="code-key">youtube</span>: <span class="code-string">"@PolimerS"</span>,
+  <span class="code-key">github</span>: <span class="code-string">"github.com/oncdev-org"</span>
 };</code></pre>
                     </div>
                 </div>
@@ -121,8 +120,8 @@
             <section class="section bento-section" aria-labelledby="bento-title">
                 <div class="section-heading">
                     <div>
-                        <p class="eyebrow">SYSTEMS & ARCHITECTURE</p>
-                        <h2 id="bento-title">Инженерные проекты & сервисы</h2>
+                        <p class="eyebrow">РАЗДЕЛЫ</p>
+                        <h2 id="bento-title">Сервисы и разработки</h2>
                     </div>
                 </div>
 
@@ -131,37 +130,14 @@
                     <div class="bento-card bento-vpn col-span-8">
                         <div class="bento-card-body">
                             <div class="bento-header-tag">
-                                <span class="tech-pill"><i class="fa-solid fa-shield-halved"></i> VLESS / REALITY PROTOCOL</span>
-                                <span class="tech-pill highlight">99.9% UPTIME</span>
+                                <span class="tech-pill"><i class="fa-solid fa-shield-halved"></i> VLESS / Reality</span>
                             </div>
                             <h3>VPN-сервис oncdev</h3>
-                            <p>Защищённый и высокоскоростной интернет-доступ с нулевым логированием. Мгновенная выдача VLESS подписок, автоматическая проверка оплаты и пошаговые гайды.</p>
+                            <p>Стабильный доступ к сети без ограничений скорости. Быстрая выдача VLESS-подписок для телефонов и ПК, простые и понятные инструкции по подключению.</p>
                             <div class="bento-actions">
                                 <a href="/vpn" class="button primary">Оформить подписку <i class="fa-solid fa-arrow-right"></i></a>
                                 <a href="/wiki/v2ray" class="button secondary">Инструкции по настройке</a>
                             </div>
-                        </div>
-                        
-                        <!-- Animated SVG Vector Security Node Visual -->
-                        <div class="bento-svg-graphic" aria-hidden="true">
-                            <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100px; margin-top: 16px;">
-                                <path d="M 40 60 L 160 60 L 280 60 L 360 60" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-dasharray="4 4" />
-                                <circle cx="40" cy="60" r="14" fill="#0d0d11" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
-                                <text x="40" y="64" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">DEV</text>
-
-                                <circle cx="160" cy="60" r="18" fill="#121216" stroke="#fff" stroke-width="2" />
-                                <path d="M 155 60 L 165 60 M 160 55 L 160 65" stroke="#fff" stroke-width="2" />
-
-                                <circle cx="280" cy="60" r="14" fill="#0d0d11" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
-                                <text x="280" y="64" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">NODE</text>
-
-                                <circle cx="360" cy="60" r="14" fill="#0d0d11" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
-                                <text x="360" y="64" text-anchor="middle" fill="#fff" font-size="10" font-family="monospace">WEB</text>
-
-                                <circle cx="40" cy="60" r="4" fill="#ffffff">
-                                    <animate attributeName="cx" values="40;160;280;360;40" dur="4s" repeatCount="indefinite" />
-                                </circle>
-                            </svg>
                         </div>
                     </div>
 
@@ -169,13 +145,13 @@
                     <a href="/timer" class="bento-card bento-timer col-span-4">
                         <div class="bento-card-body">
                             <div class="bento-header-tag">
-                                <span class="tech-pill"><i class="fa-solid fa-stopwatch"></i> TELEMETRY</span>
+                                <span class="tech-pill"><i class="fa-solid fa-stopwatch"></i> YouTube</span>
                             </div>
                             <h3>Таймер PolimerS</h3>
-                            <p>Мониторинг интервала с момента последнего видео и обратный отсчёт ожидания.</p>
+                            <p>Счётчик времени, прошедшего с момента выхода последнего видео на канале.</p>
                             <div class="timer-preview-box">
-                                <span class="timer-preview-label">Выход видео:</span>
-                                <span class="timer-preview-value">● Live API Sync</span>
+                                <span class="timer-preview-label">Данные:</span>
+                                <span class="timer-preview-value">YouTube API</span>
                             </div>
                         </div>
                     </a>
@@ -184,10 +160,10 @@
                     <a href="/wiki" class="bento-card bento-wiki col-span-4">
                         <div class="bento-card-body">
                             <div class="bento-header-tag">
-                                <span class="tech-pill"><i class="fa-solid fa-book"></i> KNOWLEDGE BASE</span>
+                                <span class="tech-pill"><i class="fa-solid fa-book"></i> Инструкции</span>
                             </div>
-                            <h3>База знаний & Wiki</h3>
-                            <p>Инструкции по настройке VLESS на iOS, Android и Windows, а также юридические соглашения.</p>
+                            <h3>База знаний</h3>
+                            <p>Руководства по настройке VLESS на iOS, Android и Windows, а также правовая информация сервиса.</p>
                             <div class="wiki-tag-list">
                                 <span class="tech-pill">v2rayTun</span>
                                 <span class="tech-pill">v2rayN</span>
@@ -200,10 +176,10 @@
                     <a href="/channel-summary" class="bento-card bento-summary col-span-4">
                         <div class="bento-card-body">
                             <div class="bento-header-tag">
-                                <span class="tech-pill"><i class="fa-solid fa-chart-simple"></i> DASHBOARD</span>
+                                <span class="tech-pill"><i class="fa-solid fa-chart-simple"></i> Статистика</span>
                             </div>
-                            <h3>Сводка Канала</h3>
-                            <p>Интерактивный дашборд ключевых показателей подписчиков и просмотров YouTube.</p>
+                            <h3>Сводка канала</h3>
+                            <p>Текущее количество подписчиков, просмотров и последний вышедший ролик PolimerS.</p>
                         </div>
                     </a>
 
@@ -211,10 +187,10 @@
                     <div class="bento-card bento-experiments col-span-4">
                         <div class="bento-card-body">
                             <div class="bento-header-tag">
-                                <span class="tech-pill"><i class="fa-solid fa-flask"></i> CANVAS DEMOS</span>
+                                <span class="tech-pill"><i class="fa-solid fa-flask"></i> Демо</span>
                             </div>
                             <h3>Интерактивные проекты</h3>
-                            <p>Экспериментальные веб-приложения и графические симуляции.</p>
+                            <p>Небольшие веб-эксперименты и графические сцены в браузере.</p>
                             <div class="bento-sublinks">
                                 <a href="/city" class="button secondary btn-sm"><i class="fa-solid fa-city"></i> City</a>
                                 <a href="/dots" class="button secondary btn-sm"><i class="fa-solid fa-circle-nodes"></i> Dots</a>
@@ -228,8 +204,8 @@
             <section class="section news-section" aria-labelledby="news-title">
                 <div class="section-heading">
                     <div>
-                        <p class="eyebrow">ENGINEERING LOG</p>
-                        <h2 id="news-title">Последние обновления & Журнал</h2>
+                        <p class="eyebrow">ОБНОВЛЕНИЯ</p>
+                        <h2 id="news-title">Новости и изменения</h2>
                     </div>
                 </div>
 
@@ -237,11 +213,11 @@
                     <article class="changelog-item">
                         <div class="changelog-meta">
                             <time datetime="2026-08-09">09-08-2026</time>
-                            <span class="tech-pill highlight">REDESIGN</span>
+                            <span class="tech-pill highlight">САЙТ</span>
                         </div>
                         <div class="changelog-content">
-                            <h3>Глобальный редизайн сайта</h3>
-                            <p>Представляем обновленный интерфейс сайта oncdev: современный дизайн, удобная навигация и новый Discord-сервер комьюнити.</p>
+                            <h3>Обновление сайта</h3>
+                            <p>Переработали оформление и навигацию сайта oncdev, открыли общий Discord-сервер сообщества.</p>
                         </div>
                     </article>
 
@@ -252,25 +228,25 @@
                         </div>
                         <div class="changelog-content">
                             <h3>Важные новости OncDev VPN</h3>
-                            <p>Прочитайте важные новости и обновления о работе сервиса OncDev VPN в нашем <a href="https://t.me/oncubedev/27" target="_blank" rel="noopener noreferrer">Telegram-посте</a>.</p>
+                            <p>Подробности и обновления о работе сервиса OncDev VPN в нашем <a href="https://t.me/oncubedev/27" target="_blank" rel="noopener noreferrer">Telegram-посте</a>.</p>
                         </div>
                     </article>
 
                     <article class="changelog-item">
                         <div class="changelog-meta">
                             <time datetime="2026-07-02">02-07-2026</time>
-                            <span class="tech-pill">RELEASE</span>
+                            <span class="tech-pill">WIKI</span>
                         </div>
                         <div class="changelog-content">
-                            <h3>База знаний и пошаговые руководства</h3>
-                            <p>Запущена полноценная <a href="/wiki">База знаний</a> с детальными интерактивными руководствами по настройке VPN для смартфонов и ПК.</p>
+                            <h3>База знаний и инструкции</h3>
+                            <p>Добавили раздел <a href="/wiki">База знаний</a> с пошаговыми руководствами по настройке VPN для смартфонов и ПК.</p>
                         </div>
                     </article>
 
                     <article class="changelog-item">
                         <div class="changelog-meta">
                             <time datetime="2026-06-07">07-06-2026</time>
-                            <span class="tech-pill">LEGAL</span>
+                            <span class="tech-pill">ДОКУМЕНТЫ</span>
                         </div>
                         <div class="changelog-content">
                             <h3>Правовая документация</h3>
@@ -284,7 +260,7 @@
         <!-- Studio Footer -->
         <footer class="site-footer">
             <p>
-                Права на представленный контент принадлежат <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>. Разработано <a href="https://youtube.com/@PolimerS" target="_blank" rel="noopener noreferrer">PoliSours</a> и <a href="https://vobi.bio.link/" target="_blank" rel="noopener noreferrer">meforr</a>.
+                Права на представленный контент принадлежат <a href="https://github.com/oncdev-org" target="_blank" rel="noopener noreferrer">oncdev</a>. Разработано <a href="https://polisours.oncdev.net" target="_blank" rel="noopener noreferrer">PoliSours</a> и <a href="https://meforr.oncdev.net" target="_blank" rel="noopener noreferrer">meforr</a>.
             </p>
             <div class="footer-links">
                 <a href="/wiki/tos/">ToS (Условия)</a>

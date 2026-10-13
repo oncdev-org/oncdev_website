@@ -7,18 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Theme preference could not be saved.', error);
     }
 
-    // Bento Cards Spotlight Mouse Tracking
-    const bentoCards = document.querySelectorAll('.bento-card, .glass-card');
-    bentoCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        });
-    });
-
     // Code Terminal Dynamic Height Auto-Adjustment & Interactive Typewriter Switcher
     const terminalBody = document.querySelector('.terminal-body');
     const updateTerminalHeight = (activePane) => {

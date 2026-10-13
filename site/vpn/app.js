@@ -293,13 +293,13 @@ function applyPromoCode() {
         discountMultiplier = 0.8;
         promoApplied = true;
         feedback.className = 'promo-feedback success';
-        feedback.textContent = '✅ Промокод успешно применен! Скидка 20% добавлена.';
+        feedback.textContent = 'Промокод применен — скидка 20% добавлена.';
         
         // Re-render plans with new pricing
         renderPlans();
     } else {
         feedback.className = 'promo-feedback error';
-        feedback.textContent = '❌ Неверный или истекший промокод';
+        feedback.textContent = 'Неверный или истекший промокод';
     }
 }
 

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark-ember">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>about meforr</title>
-  <meta name="description" content="Personal site of meforr (vobi / Aleksandr): Full-stack development, GameDev, oncdev projects, services, and software maintenance." />
+  <meta name="description" content="Personal site of meforr (vobi / Aleksandr): web services, Unity games, and oncdev projects." />
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2242%22 fill=%22%23FF6B35%22/><text x=%2250%22 y=%2262%22 font-size=%2244%22 font-family=%22sans-serif%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%230D1117%22>m</text></svg>" />
@@ -15,12 +15,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- SVG Background Noise -->
   <div class="noise-overlay" aria-hidden="true"></div>
-
-  <!-- Background Orbs -->
-  <div class="bg-glow-orb-1" aria-hidden="true"></div>
-  <div class="bg-glow-orb-2" aria-hidden="true"></div>
 
   <!-- Sticky Header Nav -->
   <header class="header">
@@ -39,218 +34,169 @@
     </div>
   </header>
 
-  <!-- Main Content Area with Vertical Spine -->
   <main id="top" class="main-wrapper">
-    <!-- Continuous Vertical Spine -->
-    <div class="vertical-spine" aria-hidden="true"></div>
-
     <!-- HERO SECTION -->
     <section class="vertical-section hero-section" id="hero">
-      <div class="section-node" aria-hidden="true"></div>
-      
       <div class="hero-header">
         <div class="hero-name-row">
           <h1 class="hero-main-title">meforr</h1>
-          <span class="hero-aka-tag" data-i18n="akaTag">AKA vobi • Aleksandr</span>
+          <span class="hero-aka-tag" data-i18n="akaTag">vobi / Aleksandr</span>
         </div>
         
         <p class="hero-tagline" data-i18n="tagline">Being happy — making happiness</p>
       </div>
 
       <p class="hero-bio" data-i18n="heroBio">
-        Building independent web services, game prototypes, and maintaining core projects.
+        I build web services, make games in Unity, and work on oncdev projects.
       </p>
 
       <div class="hero-cta-group">
         <a href="#projects" class="primary-btn">
-          <span data-i18n="btnProjects">Explore Projects ↓</span>
+          <span data-i18n="btnProjects">Projects ↓</span>
         </a>
         <a href="#contacts" class="secondary-btn">
-          <span data-i18n="btnContact">Get in Touch</span>
+          <span data-i18n="btnContact">Contacts</span>
         </a>
       </div>
     </section>
 
-    <!-- SECTION 01: ABOUT -->
+    <!-- SECTION: ABOUT -->
     <section class="vertical-section" id="about">
-      <div class="section-node" aria-hidden="true"></div>
+      <div class="section-label" data-i18n="secAboutLabel">ABOUT</div>
+      <h2 class="section-title" data-i18n="secAboutTitle">Making things that work.</h2>
       
-      <div class="section-label" data-i18n="secAboutLabel">01 / ABOUT</div>
-      <h2 class="section-title" data-i18n="secAboutTitle">Building things that work, because it's cool.</h2>
-      
-      <div class="project-card">
-        <p class="project-desc" style="margin-bottom: 12px;" data-i18n="aboutP1">
-          I develop web applications, game systems, independent services, and tools under the oncdev ecosystem. I like getting deep into how complex systems work under the hood and assembling them into intuitive products.
+      <div class="about-body">
+        <p class="about-text" data-i18n="aboutP1">
+          I build websites, web apps, game mechanics, and internal services at oncdev. I like figuring out how complex things work and turning them into straightforward projects.
         </p>
-        <p class="project-desc" style="margin: 0;" data-i18n="aboutP2">
-          Focusing on full-cycle development — from concept design and architectural decisions to coding, testing, and long-term maintenance.
+        <p class="about-text" data-i18n="aboutP2">
+          I take projects from initial idea and code through testing, release, and ongoing support.
         </p>
       </div>
     </section>
 
-    <!-- SECTION 02: FEATURED PROJECTS (Priority 1) -->
+    <!-- SECTION: FEATURED PROJECTS -->
     <section class="vertical-section" id="projects">
-      <div class="section-node" aria-hidden="true"></div>
-      
-      <div class="section-label" data-i18n="secProjectsLabel">02 / FEATURED PROJECTS</div>
-      <h2 class="section-title" data-i18n="secProjectsTitle">Core products & active development.</h2>
+      <div class="section-label" data-i18n="secProjectsLabel">PROJECTS</div>
+      <h2 class="section-title" data-i18n="secProjectsTitle">Main projects.</h2>
 
       <div class="vertical-card-stack">
-        <!-- 01: OncDev VPN -->
-        <a class="project-card project-card-featured" href="https://oncdev.net/vpn" target="_blank" rel="noreferrer">
+        <!-- OncDev VPN -->
+        <a class="project-card" href="https://oncdev.net/vpn" target="_blank" rel="noreferrer">
           <div class="card-top-row">
-            <span class="project-number">01</span>
-            <span class="project-status live"><span data-i18n="p1Status">Online</span></span>
-          </div>
-          <div class="project-title-group">
             <h3 class="project-name">
               <span data-i18n="p1Name">OncDev VPN</span>
               <span class="link-arrow">↗</span>
             </h3>
+            <span class="project-status live"><span data-i18n="p1Status">Online</span></span>
           </div>
-          <p class="project-desc" data-i18n="p1Desc">Fast, minimal, hassle-free personal VPN service built for stability.</p>
+          <p class="project-desc" data-i18n="p1Desc">Fast, stable personal VPN without unnecessary setup.</p>
         </a>
 
-        <!-- 02: oncdev -->
+        <!-- oncdev -->
         <a class="project-card" href="https://oncdev.net" target="_blank" rel="noreferrer">
           <div class="card-top-row">
-            <span class="project-number">02</span>
-            <span class="project-status live"><span data-i18n="p2Status">Online</span></span>
-          </div>
-          <div class="project-title-group">
             <h3 class="project-name">
               <span data-i18n="p2Name">oncdev</span>
               <span class="link-arrow">↗</span>
             </h3>
+            <span class="project-status live"><span data-i18n="p2Status">Online</span></span>
           </div>
-          <p class="project-desc" data-i18n="p2Desc">Main platform & digital ecosystem for independent projects and development.</p>
+          <p class="project-desc" data-i18n="p2Desc">Main website for our team's services and projects.</p>
         </a>
 
-        <!-- 03: SpaceCargo -->
+        <!-- SpaceCargo -->
         <div class="project-card">
           <div class="card-top-row">
-            <span class="project-number">03</span>
+            <h3 class="project-name" data-i18n="p3Name">SpaceCargo</h3>
             <span class="project-status building"><span data-i18n="p3Status">In Progress</span></span>
           </div>
-          <div class="project-title-group">
-            <h3 class="project-name" data-i18n="p3Name">SpaceCargo</h3>
-          </div>
-          <p class="project-desc" data-i18n="p3Desc">Details are classified. Something is cooking.</p>
+          <p class="project-desc" data-i18n="p3Desc">A space game currently in closed development.</p>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 03: OTHER LABS (Priority 2) -->
+    <!-- SECTION: OTHER -->
     <section class="vertical-section" id="labs">
-      <div class="section-node" aria-hidden="true"></div>
-      
-      <div class="section-label" data-i18n="secLabsLabel">03 / OTHER LABS</div>
-      <h2 class="section-title" data-i18n="secLabsTitle">Experiments, apps & guides.</h2>
+      <div class="section-label" data-i18n="secLabsLabel">OTHER</div>
+      <h2 class="section-title" data-i18n="secLabsTitle">Other work and guides.</h2>
 
       <div class="vertical-card-stack">
-        <!-- 04: LMes -->
+        <!-- LMes -->
         <a class="project-card" href="https://oncdev.online" target="_blank" rel="noreferrer">
           <div class="card-top-row">
-            <span class="project-number">04</span>
-            <span class="project-status live"><span data-i18n="p4Status">Online</span></span>
-          </div>
-          <div class="project-title-group">
             <h3 class="project-name">
               <span data-i18n="p4Name">LMes</span>
               <span class="link-arrow">↗</span>
             </h3>
+            <span class="project-status live"><span data-i18n="p4Status">Online</span></span>
           </div>
-          <p class="project-desc" data-i18n="p4Desc">Custom messenger project built with privacy and simplicity in mind.</p>
+          <p class="project-desc" data-i18n="p4Desc">A lightweight custom web messenger without the bloat.</p>
         </a>
 
-        <!-- 05: pc guide -->
+        <!-- pc guide -->
         <a class="project-card" href="https://github.com/meforr/pc-guide" target="_blank" rel="noreferrer">
           <div class="card-top-row">
-            <span class="project-number">05</span>
-            <span class="project-status building"><span data-i18n="p5Status">In Progress</span></span>
-          </div>
-          <div class="project-title-group">
             <h3 class="project-name">
               <span data-i18n="p5Name">pc guide</span>
               <span class="link-arrow">↗</span>
             </h3>
+            <span class="project-status building"><span data-i18n="p5Status">In Progress</span></span>
           </div>
-          <p class="project-desc" data-i18n="p5Desc">A beginner-friendly guide for new PC users to easily master essential computer features and capabilities.</p>
+          <p class="project-desc" data-i18n="p5Desc">A straightforward PC guide for beginners covering the essentials.</p>
         </a>
       </div>
     </section>
 
-    <!-- SECTION 04: ROLES & TECH STACK -->
+    <!-- SECTION: ROLES & TECH STACK -->
     <section class="vertical-section" id="skills">
-      <div class="section-node" aria-hidden="true"></div>
-      
-      <div class="section-label" data-i18n="secSkillsLabel">04 / FOCUS & STACK</div>
-      <h2 class="section-title" data-i18n="secSkillsTitle">What I do & what I build with.</h2>
+      <div class="section-label" data-i18n="secSkillsLabel">ROLES & STACK</div>
+      <h2 class="section-title" data-i18n="secSkillsTitle">What I do and what I use.</h2>
 
       <!-- Roles / Work Areas Grid -->
       <div class="roles-cards-grid">
         <div class="role-card">
           <div class="role-card-header">
-            <span class="role-card-index">01</span>
-            <h3 class="role-card-title" data-i18n="roleDevTitle">Developer</h3>
+            <h3 class="role-card-title" data-i18n="roleDevTitle">Development</h3>
           </div>
-          <p class="role-card-desc" data-i18n="roleDevDesc">Full-stack web services, game logic, system architecture, and scripting.</p>
+          <p class="role-card-desc" data-i18n="roleDevDesc">Web apps, backend services, Unity game logic, and scripting.</p>
         </div>
 
         <div class="role-card">
           <div class="role-card-header">
-            <span class="role-card-index">02</span>
-            <h3 class="role-card-title" data-i18n="rolePoTitle">Product Ownership</h3>
+            <h3 class="role-card-title" data-i18n="rolePoTitle">Product</h3>
           </div>
-          <p class="role-card-desc" data-i18n="rolePoDesc">Product vision, ecosystem planning, feature prioritization, and project lifecycle.</p>
+          <p class="role-card-desc" data-i18n="rolePoDesc">Planning project structure, priorities, and how things work for users.</p>
         </div>
 
         <div class="role-card">
           <div class="role-card-header">
-            <span class="role-card-index">03</span>
-            <h3 class="role-card-title" data-i18n="roleQaTitle">QA</h3>
+            <h3 class="role-card-title" data-i18n="roleQaTitle">QA & Testing</h3>
           </div>
-          <p class="role-card-desc" data-i18n="roleQaDesc">Comprehensive testing, stability analysis, edge case verification, and quality assurance.</p>
+          <p class="role-card-desc" data-i18n="roleQaDesc">Testing builds and services before release, hunting down bugs and edge cases.</p>
         </div>
       </div>
 
       <!-- Core Tech Stack Showcase -->
       <div class="tech-stack-container">
         <div class="tech-stack-header">
-          <span class="tech-stack-label" data-i18n="stackLabel">Tech Stack</span>
+          <span class="tech-stack-label" data-i18n="stackLabel">Tools & Languages</span>
         </div>
         <div class="tech-stack-grid">
-          <div class="stack-badge">
-            <span class="stack-badge-title">JavaScript</span>
-            <span class="stack-badge-sub">ES6+</span>
-          </div>
-          <div class="stack-badge">
-            <span class="stack-badge-title">Node.js</span>
-            <span class="stack-badge-sub">Backend & APIs</span>
-          </div>
-          <div class="stack-badge">
-            <span class="stack-badge-title">HTML / CSS</span>
-            <span class="stack-badge-sub">Responsive Web</span>
-          </div>
-          <div class="stack-badge">
-            <span class="stack-badge-title">C#</span>
-            <span class="stack-badge-sub">Unity Engine</span>
-          </div>
-          <div class="stack-badge">
-            <span class="stack-badge-title">Python</span>
-            <span class="stack-badge-sub">Scripts & Automation</span>
-          </div>
+          <span class="stack-badge">JavaScript</span>
+          <span class="stack-badge">Node.js</span>
+          <span class="stack-badge">HTML / CSS</span>
+          <span class="stack-badge">C# / Unity</span>
+          <span class="stack-badge">Python</span>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 05: CONTACTS -->
+    <!-- SECTION: CONTACTS -->
     <section class="vertical-section" id="contacts">
-      <div class="section-node" aria-hidden="true"></div>
-      
-      <div class="section-label" data-i18n="secContactLabel">05 / CONTACTS</div>
-      <h2 class="section-title" data-i18n="secContactTitle">Let's connect.</h2>
-      <p class="hero-bio" style="margin-bottom: 24px;" data-i18n="contactSub">Have an idea, collaboration proposal, or just want to chat?</p>
+      <div class="section-label" data-i18n="secContactLabel">CONTACTS</div>
+      <h2 class="section-title" data-i18n="secContactTitle">Get in touch.</h2>
+      <p class="contact-sub" data-i18n="contactSub">For project ideas, questions, or just to say hi:</p>
 
       <div class="contacts-layout-container">
         <div class="contacts-stack">

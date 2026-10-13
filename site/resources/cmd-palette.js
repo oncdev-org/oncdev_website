@@ -30,14 +30,14 @@
                     <a href="/wiki" class="cmd-item">
                         <div class="cmd-item-left">
                             <i class="fa-solid fa-book"></i>
-                            <span>База знаний & Документация</span>
+                            <span>База знаний и документация</span>
                         </div>
                         <kbd>↵</kbd>
                     </a>
                     <a href="/about" class="cmd-item">
                         <div class="cmd-item-left">
                             <i class="fa-solid fa-users"></i>
-                            <span>О создателях (meforr & PoliSours)</span>
+                            <span>О создателях (meforr и PoliSours)</span>
                         </div>
                         <kbd>↵</kbd>
                     </a>
@@ -82,7 +82,7 @@
                     </a>
                 </div>
                 <div class="cmd-footer">
-                    <span>oncdev studio command palette</span>
+                    <span>oncdev</span>
                     <div class="cmd-footer-keys">
                         <span><kbd>↑</kbd> <kbd>↓</kbd> Навигация</span>
                         <span><kbd>ESC</kbd> Закрыть</span>
@@ -193,81 +193,9 @@
         });
     }
 
-    // 4. Smooth 3D Parallax Tilt Engine (Applied strictly to Project Cards - 50% softer intensity)
-    function setup3DTiltEffect() {
-        // Target strictly Project Showcase Cards
-        const projectCards = document.querySelectorAll('.bento-section .bento-card, .project-card');
-        const MAX_TILT_DEGREE = 2.75; // 50% softer tilt angle
-
-        projectCards.forEach(card => {
-            let reqId = null;
-            const popElements = card.querySelectorAll('h2, h3, p, .button, .tech-pill, .bento-header-tag, .timer-preview-box, .bento-sublinks, .bento-svg-graphic');
-
-            card.addEventListener('mouseenter', () => {
-                card.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease';
-                popElements.forEach(el => {
-                    el.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.45s ease, filter 0.45s ease';
-                });
-            });
-
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const normX = (x - centerX) / centerX;
-                const normY = (y - centerY) / centerY;
-
-                const rotateX = -1 * normY * MAX_TILT_DEGREE;
-                const rotateY = normX * MAX_TILT_DEGREE;
-
-                const popX = normX * 3;
-                const popY = normY * 3;
-
-                if (reqId) cancelAnimationFrame(reqId);
-                reqId = requestAnimationFrame(() => {
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.008, 1.008, 1.008)`;
-
-                    popElements.forEach(el => {
-                        const isTitle = el.tagName === 'H2' || el.tagName === 'H3';
-                        const isPrimary = el.classList.contains('button');
-                        const depthMultiplier = isPrimary ? 1.3 : (isTitle ? 1.0 : 0.7);
-
-                        const shiftX = (popX * depthMultiplier).toFixed(1);
-                        const shiftY = (popY * depthMultiplier).toFixed(1);
-
-                        el.style.transform = `translate3d(${shiftX}px, ${shiftY}px, 10px) scale(1.01)`;
-                        if (isTitle || el.tagName === 'P') {
-                            el.style.textShadow = `0 ${(4 + Math.abs(popY)).toFixed(0)}px 10px rgba(0, 0, 0, 0.65)`;
-                        }
-                    });
-                });
-            });
-
-            card.addEventListener('mouseleave', () => {
-                if (reqId) cancelAnimationFrame(reqId);
-                // Ultra-smooth return transition
-                card.style.transition = 'transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease';
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-
-                popElements.forEach(el => {
-                    el.style.transition = 'transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.75s ease, filter 0.75s ease';
-                    el.style.transform = `translate3d(0px, 0px, 0px) scale(1)`;
-                    el.style.textShadow = 'none';
-                });
-            });
-        });
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
         injectCommandPaletteHTML();
         setupCommandPalette();
         setupScrollReveal();
-        setup3DTiltEffect();
     });
 })();
